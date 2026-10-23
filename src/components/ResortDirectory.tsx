@@ -269,9 +269,14 @@ export default function ResortDirectory() {
                       </div>
                     </div>
 
-                    {/* Peak Elevation Badge */}
-                    <div className="absolute bottom-2.5 right-3 rounded-md bg-charcoal/85 px-2 py-0.5 text-[11px] font-semibold text-snow-muted backdrop-blur-sm">
-                      Peak {resort.elevation.top}m
+                    {/* Peak Elevation & Multi-Map Badge */}
+                    <div className="absolute inset-x-3 bottom-2.5 flex items-center justify-between gap-2">
+                      <span className="rounded-md bg-charcoal/85 px-2 py-0.5 text-[11px] font-semibold text-ice backdrop-blur-sm">
+                        🗺️ {resort.mapGallery.length} HD Maps & Photos
+                      </span>
+                      <span className="rounded-md bg-charcoal/85 px-2 py-0.5 text-[11px] font-semibold text-snow-muted backdrop-blur-sm">
+                        Peak {resort.elevation.top}m
+                      </span>
                     </div>
                   </Link>
 
@@ -337,6 +342,16 @@ export default function ResortDirectory() {
                         </dd>
                       </div>
                     </dl>
+
+                    {/* Hours & Rental Quick Strip */}
+                    <div className="mt-3 flex flex-wrap items-center justify-between gap-1 rounded-lg bg-charcoal/60 px-2.5 py-1.5 text-[11px] text-snow-muted">
+                      <span>
+                        🕒 <strong className="text-snow">{resort.operatingHours.dayHours.split(" (")[0]}</strong>
+                      </span>
+                      <span>
+                        🏂 Rental <strong className="text-snow">¥{resort.pricing.fullBoardRentalDayYen.toLocaleString()}</strong>
+                      </span>
+                    </div>
 
                     {/* Terrain Breakdown Bar */}
                     <div className="mt-3">

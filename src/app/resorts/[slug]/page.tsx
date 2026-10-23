@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import FavoriteButton from "@/components/FavoriteButton";
-import MountainMapDiagram from "@/components/MountainMapDiagram";
+import ResortDetailTabs from "@/components/ResortDetailTabs";
 import { RESORTS, getResortBySlug } from "@/data/resorts";
 
 export function generateStaticParams() {
@@ -148,18 +148,20 @@ export default async function ResortDetailPage({
               <dd className="mt-1 text-2xl font-extrabold text-ice">
                 ¥{resort.dayPassYen.toLocaleString()}
               </dd>
-              <p className="mt-0.5 text-xs text-snow-muted">1-day adult rate</p>
+              <p className="mt-0.5 text-xs text-snow-muted">
+                Rental set: ¥{resort.pricing.fullBoardRentalDayYen.toLocaleString()}
+              </p>
             </div>
 
             <div className="rounded-xl bg-charcoal p-4">
               <dt className="text-xs uppercase text-snow-muted">
-                Runs & Lifts
+                Lift Hours
               </dt>
-              <dd className="mt-1 text-2xl font-extrabold text-snow">
-                {resort.terrain.runs} runs
+              <dd className="mt-1 text-lg font-extrabold text-snow sm:text-xl">
+                {resort.operatingHours.dayHours.split(" (")[0]}
               </dd>
-              <p className="mt-0.5 text-xs text-snow-muted">
-                {resort.terrain.lifts} lifts operating
+              <p className="mt-0.5 truncate text-xs text-snow-muted">
+                {resort.operatingHours.seasonWindow}
               </p>
             </div>
 
@@ -174,36 +176,22 @@ export default async function ResortDetailPage({
             </div>
           </dl>
 
-          {/* Mountain Map & Signature Runs Diagram */}
-          <div className="mt-6">
-            <MountainMapDiagram resort={resort} />
-          </div>
-
-          {/* Access & Transit Box */}
-          <div className="mt-6 rounded-xl border border-charcoal-light bg-charcoal p-5">
-            <h2 className="text-sm font-bold uppercase tracking-wider text-snow">
-              🚅 How to Get There from Tokyo
-            </h2>
-            <p className="mt-2 text-sm text-snow">{resort.fromTokyo.summary}</p>
-            <p className="mt-1 text-xs text-snow-muted">
-              Nearest hub: {resort.fromTokyo.station} (approx.{" "}
-              {resort.fromTokyo.durationMinutes} mins total transit)
-            </p>
-          </div>
+          {/* Interactive 4-Tab Section: Trail Maps, Live Weather, Tickets/Rentals & Hours */}
+          <ResortDetailTabs resort={resort} />
 
           {/* Actions */}
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 border-t border-charcoal-light pt-6 sm:flex-row">
             <Link
               href="/conditions"
               className="inline-flex flex-1 items-center justify-center rounded-xl bg-ice-deep px-5 py-3 text-sm font-semibold text-charcoal transition hover:bg-ice"
             >
-              Check Live Snow Forecast
+              Compare All Resorts Snow Leaderboard
             </Link>
             <Link
               href="/planner"
               className="inline-flex flex-1 items-center justify-center rounded-xl border border-charcoal-light bg-charcoal px-5 py-3 text-sm font-semibold text-snow transition hover:border-ice hover:text-ice"
             >
-              Plan a Trip Here
+              Plan a Trip & Budget Here
             </Link>
             <a
               href={resort.officialUrl}

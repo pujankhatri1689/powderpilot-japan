@@ -1,25 +1,69 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { Resort } from "@/data/resorts";
 
 /**
- * Displays the actual official resort trail/course map image with a
- * full-screen lightbox zoom view + signature run callouts.
+ * Multi-image touch-swipeable HD Trail Map & Mountain Photo Gallery
+ * with prev/next arrows, dot indicators, thumbnail strip, and full-screen zoom.
  */
 export default function MountainMapDiagram({ resort }: { resort: Resort }) {
+  const slides =
+    resort.mapGallery.length > 0
+      ? resort.mapGallery
+      : [
+          {
+            title: `${resort.name} Official Trail Map`,
+            caption: "Official course map.",
+            imageUrl: resort.trailMapImage,
+            badge: "Official HD Map",
+          },
+        ];
+
+  const [activeIndex, setActiveIndex] = useState(0);
   const [zoomed, setZoomed] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+
+  const currentSlide = slides[activeIndex] ?? slides[0];
+
+  function prevSlide() {
+    setActiveIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  }
+
+  function nextSlide() {
+    setActiveIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  }
+
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0]?.clientX ?? null;
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStartX.current === null) return;
+    const endX = e.changedTouches[0]?.clientX ?? touchStartX.current;
+    const deltaX = endX - touchStartX.current;
+    if (Math.abs(deltaX) > 40) {
+      if (deltaX < 0) nextSlide();
+      else prevSlide();
+    }
+    touchStartX.current = null;
+  }
 
   return (
     <div className="overflow-hidden rounded-2xl border border-charcoal-light bg-charcoal p-5 sm:p-6">
+      {/* Header Row */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-ice">
-            Official Resort Trail & Course Map
+            HD Trail Maps & Mountain Gallery ({activeIndex + 1} of{" "}
+            {slides.length})
           </p>
           <h2 className="mt-0.5 text-lg font-bold text-snow">
-            {resort.name} Gelande Map & Signature Runs
+            {currentSlide.title}
           </h2>
+          <p className="mt-0.5 text-xs text-snow-muted">
+            {currentSlide.caption}
+          </p>
         </div>
 
         <div className="flex flex-wrap gap-2">
@@ -28,7 +72,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
             onClick={() => setZoomed(true)}
             className="inline-flex items-center gap-1.5 rounded-xl bg-ice-deep px-3.5 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice"
           >
-            <span>🔍 Tap to Zoom Full Map</span>
+            <span>🔍 Full-Res Zoom</span>
           </button>
           <a
             href={resort.trailMapUrl}
@@ -36,30 +80,95 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-3.5 py-2 text-xs font-semibold text-snow transition hover:border-ice hover:text-ice"
           >
-            <span>Official Resort Page</span>
+            <span>Official Map Page</span>
             <span aria-hidden>↗</span>
           </a>
         </div>
       </div>
 
-      {/* Actual Official Trail Map Image */}
-      <div className="mt-4 overflow-hidden rounded-xl border border-charcoal-light bg-charcoal-dark">
+      {/* Main Swipeable Carousel Viewport */}
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="relative mt-4 overflow-hidden rounded-xl border border-charcoal-light bg-charcoal-dark"
+      >
         <button
           type="button"
           onClick={() => setZoomed(true)}
           className="group relative block w-full cursor-zoom-in overflow-hidden"
-          title="Click to enlarge trail map"
+          title="Click to inspect full-resolution image"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={resort.trailMapImage}
-            alt={`${resort.name} official ski trail and course map`}
-            className="max-h-[620px] w-full object-contain bg-charcoal-dark transition duration-300 group-hover:scale-[1.01]"
+            key={currentSlide.imageUrl}
+            src={currentSlide.imageUrl}
+            alt={currentSlide.title}
+            className="max-h-[640px] w-full bg-charcoal-dark object-contain transition duration-300"
           />
+
+          {currentSlide.badge && (
+            <span className="absolute left-3 top-3 rounded-lg bg-charcoal/90 px-3 py-1 text-xs font-bold text-ice shadow-md backdrop-blur-sm">
+              {currentSlide.badge}
+            </span>
+          )}
+
           <span className="absolute bottom-3 right-3 rounded-lg bg-charcoal/90 px-3 py-1.5 text-xs font-semibold text-ice shadow-lg backdrop-blur-sm">
-            🔍 Click map to view full screen
+            🔍 Tap to open full-screen HD
           </span>
         </button>
+
+        {/* Left / Right Swipe Arrows if multiple maps */}
+        {slides.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={prevSlide}
+              aria-label="Previous map"
+              className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-charcoal-light bg-charcoal/90 text-base font-bold text-snow shadow-lg backdrop-blur-sm transition hover:border-ice hover:text-ice"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              onClick={nextSlide}
+              aria-label="Next map"
+              className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-charcoal-light bg-charcoal/90 text-base font-bold text-snow shadow-lg backdrop-blur-sm transition hover:border-ice hover:text-ice"
+            >
+              ›
+            </button>
+          </>
+        )}
+
+        {/* Thumbnail / Slide Selector Strip */}
+        {slides.length > 1 && (
+          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-charcoal-light bg-charcoal/90 px-4 py-3">
+            <div className="flex flex-wrap gap-2">
+              {slides.map((slide, idx) => {
+                const active = idx === activeIndex;
+                return (
+                  <button
+                    key={slide.title}
+                    type="button"
+                    onClick={() => setActiveIndex(idx)}
+                    className={`flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold transition ${
+                      active
+                        ? "border-ice bg-ice-deep/20 text-ice"
+                        : "border-charcoal-light bg-charcoal text-snow-muted hover:text-snow"
+                    }`}
+                  >
+                    <span>Map {idx + 1}:</span>
+                    <span className="max-w-[180px] truncate">
+                      {slide.badge ?? slide.title}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <span className="text-[11px] text-snow-muted">
+              Swipe left/right or tap buttons to switch maps
+            </span>
+          </div>
+        )}
 
         {/* Legend / Stats Footer */}
         <div className="flex flex-wrap items-center justify-between gap-2 border-t border-charcoal-light bg-charcoal px-4 py-3 text-xs text-snow-muted">
@@ -118,23 +227,50 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={`${resort.name} full trail map`}
+          aria-label={`${currentSlide.title} full screen`}
           onClick={() => setZoomed(false)}
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-charcoal-dark/95 p-4 backdrop-blur-md"
         >
-          <div className="mb-3 flex w-full max-w-6xl items-center justify-between">
-            <p className="text-sm font-bold text-snow">
-              {resort.name} — Official Trail & Course Map
-            </p>
+          <div className="mb-3 flex w-full max-w-6xl flex-wrap items-center justify-between gap-2">
+            <div>
+              <p className="text-sm font-bold text-snow">
+                {currentSlide.title}
+              </p>
+              <p className="text-xs text-snow-muted">{currentSlide.caption}</p>
+            </div>
             <div className="flex items-center gap-2">
+              {slides.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      prevSlide();
+                    }}
+                    className="rounded-xl border border-charcoal-light bg-charcoal px-3 py-1.5 text-xs font-semibold text-snow hover:border-ice"
+                  >
+                    ‹ Prev Map
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      nextSlide();
+                    }}
+                    className="rounded-xl border border-charcoal-light bg-charcoal px-3 py-1.5 text-xs font-semibold text-snow hover:border-ice"
+                  >
+                    Next Map ›
+                  </button>
+                </>
+              )}
               <a
-                href={resort.trailMapImage}
+                href={currentSlide.imageUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 className="rounded-xl border border-charcoal-light bg-charcoal px-3 py-1.5 text-xs font-semibold text-ice hover:border-ice"
               >
-                Open Raw Image ↗
+                Open Raw Full-Res ↗
               </a>
               <button
                 type="button"
@@ -152,9 +288,9 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={resort.trailMapImage}
-              alt={`${resort.name} official trail map zoomed`}
-              className="mx-auto h-auto max-w-full"
+              src={currentSlide.imageUrl}
+              alt={currentSlide.title}
+              className="mx-auto h-auto max-w-none sm:max-w-full"
             />
           </div>
         </div>
