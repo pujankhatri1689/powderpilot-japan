@@ -1,21 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { useFavorites } from "@/context/FavoritesContext";
 import { REGIONS, RESORTS, type Region } from "@/data/resorts";
 
 type SortKey = "vertical" | "travel" | "price" | "topElevation";
 
 export default function ResortDirectory() {
+  const searchParams = useSearchParams();
+  const { isFavorite, toggleFavorite, favoritesCount } = useFavorites();
+
   const [selectedRegion, setSelectedRegion] = useState<Region | "All">("All");
   const [treeRunsOnly, setTreeRunsOnly] = useState(false);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortKey>("vertical");
+
+  useEffect(() => {
+    if (searchParams.get("favorites") === "true") {
+      setShowFavoritesOnly(true);
+    }
+  }, [searchParams]);
 
   const filteredResorts = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
 
     return RESORTS.filter((resort) => {
+      if (showFavoritesOnly && !isFavorite(resort.slug)) {
+        return false;
+      }
       if (selectedRegion !== "All" && resort.region !== selectedRegion) {
         return false;
       }
@@ -42,7 +57,7 @@ export default function ResortDirectory() {
           return a.dayPassYen - b.dayPassYen;
       }
     });
-  }, [selectedRegion, treeRunsOnly, searchQuery, sortBy]);
+  }, [showFavoritesOnly, isFavorite, selectedRegion, treeRunsOnly, searchQuery, sortBy]);
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
@@ -108,18 +123,34 @@ export default function ResortDirectory() {
             })}
           </div>
 
-          {/* Tree Runs Toggle */}
-          <button
-            type="button"
-            onClick={() => setTreeRunsOnly((v) => !v)}
-            className={`inline-flex items-center justify-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
-              treeRunsOnly
-                ? "border-ice bg-ice/15 text-ice"
-                : "border-charcoal-light bg-charcoal text-snow-muted hover:text-snow"
-            }`}
-          >
-            <span aria-hidden>🌲</span> Tree Runs Allowed
-          </button>
+          {/* Right toggle actions (Favorites & Tree runs) */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setShowFavoritesOnly((v) => !v)}
+              className={`inline-flex items-center justify-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
+                showFavoritesOnly
+                  ? "border-rose-500 bg-rose-500/20 text-rose-300"
+                  : "border-charcoal-light bg-charcoal text-snow-muted hover:text-snow"
+              }`}
+            >
+              <span>{showFavoritesOnly ? "❤️" : "🤍"}</span>
+              <span>Liked ({favoritesCount})</span>
+            </button>
+
+            {/* Tree Runs Toggle */}
+            <button
+              type="button"
+              onClick={() => setTreeRunsOnly((v) => !v)}
+              className={`inline-flex items-center justify-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
+                treeRunsOnly
+                  ? "border-ice bg-ice/15 text-ice"
+                  : "border-charcoal-light bg-charcoal text-snow-muted hover:text-snow"
+              }`}
+            >
+              <span aria-hidden>🌲</span> Tree Runs Allowed
+            </button>
+          </div>
         </div>
 
         {/* Search + Sort Row */}
@@ -210,14 +241,32 @@ export default function ResortDirectory() {
                       <span className="rounded-full bg-charcoal/85 px-3 py-1 text-xs font-semibold text-ice backdrop-blur-sm">
                         {resort.region} · {resort.area}
                       </span>
-                      {resort.terrain.treeRunsAllowed && (
-                        <span
-                          title="Official tree riding zones"
-                          className="rounded-full bg-charcoal/85 px-2.5 py-1 text-xs font-medium text-snow backdrop-blur-sm"
+                      
+                      <div className="flex items-center gap-1.5">
+                        {resort.terrain.treeRunsAllowed && (
+                          <span
+                            title="Official tree riding zones"
+                            className="rounded-full bg-charcoal/85 px-2.5 py-1 text-xs font-medium text-snow backdrop-blur-sm"
+                          >
+                            🌲 Trees OK
+                          </span>
+                        )}
+                        {/* Quick Heart Button */}
+                        <button
+                          type="button"
+                          onClick={(e) => toggleFavorite(resort.slug, e)}
+                          title={isFavorite(resort.slug) ? "Remove from Favorites" : "Add to Favorites"}
+                          className={`flex h-7 w-7 items-center justify-center rounded-full backdrop-blur-sm transition active:scale-90 ${
+                            isFavorite(resort.slug)
+                              ? "bg-rose-500 text-white shadow-md shadow-rose-500/30"
+                              : "bg-charcoal/85 text-snow/70 hover:bg-charcoal hover:text-rose-400"
+                          }`}
                         >
-                          🌲 Trees OK
-                        </span>
-                      )}
+                          <span className="text-xs">
+                            {isFavorite(resort.slug) ? "❤️" : "🤍"}
+                          </span>
+                        </button>
+                      </div>
                     </div>
 
                     {/* Peak Elevation Badge */}

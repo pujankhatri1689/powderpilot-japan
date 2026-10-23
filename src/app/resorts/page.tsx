@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ResortDirectory from "@/components/ResortDirectory";
 
 export const metadata: Metadata = {
@@ -8,5 +9,9 @@ export const metadata: Metadata = {
 };
 
 export default function ResortsPage() {
-  return <ResortDirectory />;
+  return (
+    <Suspense fallback={<div className="p-12 text-center text-snow-muted">Loading resorts...</div>}>
+      <ResortDirectory />
+    </Suspense>
+  );
 }

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useFavorites } from "@/context/FavoritesContext";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -12,6 +13,7 @@ const navLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { favoritesCount } = useFavorites();
   const isHome = pathname === "/";
 
   // Compute a sensible parent back-link based on current URL
@@ -47,7 +49,7 @@ export default function Navbar() {
         </div>
 
         <div className="flex items-center justify-between gap-2">
-          <ul className="flex flex-wrap gap-1 text-sm font-medium">
+          <ul className="flex flex-wrap items-center gap-1 text-sm font-medium">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
@@ -70,6 +72,21 @@ export default function Navbar() {
                 </li>
               );
             })}
+            {/* Quick favorites indicator */}
+            <li>
+              <Link
+                href="/resorts?favorites=true"
+                className={`inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold transition ${
+                  favoritesCount > 0
+                    ? "text-rose-400 bg-rose-500/10 hover:bg-rose-500/20"
+                    : "text-snow-muted hover:bg-charcoal-light hover:text-snow"
+                }`}
+                title="View your saved / favorited resorts"
+              >
+                <span>❤️</span>
+                <span>{favoritesCount}</span>
+              </Link>
+            </li>
           </ul>
 
           {/* Desktop contextual back pill when on inner pages */}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import FavoriteButton from "@/components/FavoriteButton";
 import MountainMapDiagram from "@/components/MountainMapDiagram";
 import { RESORTS, getResortBySlug } from "@/data/resorts";
 
@@ -87,7 +88,8 @@ export default async function ResortDetailPage({
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <FavoriteButton slug={resort.slug} name={resort.name} />
               {resort.terrain.treeRunsAllowed ? (
                 <span className="rounded-xl border border-ice/40 bg-charcoal/85 px-3 py-1.5 text-xs font-semibold text-ice backdrop-blur-sm">
                   🌲 Tree Runs Allowed
