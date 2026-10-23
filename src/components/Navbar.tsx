@@ -1,38 +1,87 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
+  { href: "/", label: "Home" },
   { href: "/resorts", label: "Resorts" },
   { href: "/conditions", label: "Conditions" },
   { href: "/planner", label: "Planner" },
 ];
 
 export default function Navbar() {
-  return (
-    <header className="sticky top-0 z-50 border-b border-charcoal-light bg-charcoal/80 backdrop-blur-md">
-      {/* Mobile: brand on top, links below. Desktop (sm+): one row. */}
-      <nav className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-lg font-bold tracking-tight text-snow"
-        >
-          <span aria-hidden className="text-ice">
-            ❄
-          </span>
-          Powder<span className="text-ice">Pilot</span>
-        </Link>
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
-        <ul className="flex gap-1 text-sm font-medium">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="rounded-lg px-3 py-2 text-snow-muted transition-colors hover:bg-charcoal-light hover:text-ice"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+  // Compute a sensible parent back-link based on current URL
+  const backLink = pathname.startsWith("/resorts/")
+    ? { href: "/resorts", label: "All Resorts" }
+    : { href: "/", label: "Back to Home" };
+
+  return (
+    <header className="sticky top-0 z-50 border-b border-charcoal-light bg-charcoal/85 backdrop-blur-md">
+      <nav className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <div className="flex items-center justify-between">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-lg font-bold tracking-tight text-snow transition hover:opacity-90"
+          >
+            <span aria-hidden className="text-ice">
+              ❄
+            </span>
+            <span>
+              Powder<span className="text-ice">Pilot</span>
+            </span>
+          </Link>
+
+          {/* Quick mobile back button whenever not on the homepage */}
+          {!isHome && (
+            <Link
+              href={backLink.href}
+              className="inline-flex items-center gap-1 rounded-lg border border-charcoal-light bg-charcoal-light/60 px-2.5 py-1 text-xs font-medium text-ice transition hover:border-ice sm:hidden"
+            >
+              <span aria-hidden>←</span> {backLink.label}
+            </Link>
+          )}
+        </div>
+
+        <div className="flex items-center justify-between gap-2">
+          <ul className="flex flex-wrap gap-1 text-sm font-medium">
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname === link.href ||
+                    pathname.startsWith(`${link.href}/`);
+
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`rounded-lg px-3 py-1.5 transition-colors ${
+                      isActive
+                        ? "bg-ice-deep/20 text-ice font-semibold"
+                        : "text-snow-muted hover:bg-charcoal-light hover:text-snow"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Desktop contextual back pill when on inner pages */}
+          {!isHome && (
+            <Link
+              href={backLink.href}
+              className="hidden items-center gap-1.5 rounded-lg border border-charcoal-light bg-charcoal-light/50 px-3 py-1.5 text-xs font-medium text-snow-muted transition hover:border-ice hover:text-ice sm:inline-flex"
+            >
+              <span aria-hidden>←</span> {backLink.label}
+            </Link>
+          )}
+        </div>
       </nav>
     </header>
   );
