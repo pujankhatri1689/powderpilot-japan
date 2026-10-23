@@ -90,8 +90,8 @@ export const UI_TEXT = {
       titleHighlight: "Japow",
       titleLine2: "Know every mountain.",
       subtitle:
-        "Instant access to HD trail maps, lift ticket & rental prices, snowboarder terrain intel, live mountain webcams, weather forecasts, and village onsen guides across Nagano, Niigata & Gunma.",
-      browseBtn: "🏔️ Browse All 10 Resorts",
+        "Instant access to HD trail maps, lift ticket & rental prices, snowboarder terrain intel, live mountain webcams, weather forecasts, and village onsen guides for snowboard resorts across Japan.",
+      browseBtn: "🏔️ Browse All Resorts",
       radarBtn: "❄️ Live Snow & Powder Radar",
       quickSurfTitle: "⚡ Quick-Surf Resort Directory",
       quickSurfSubtitle:
@@ -341,8 +341,8 @@ export const UI_TEXT = {
       titleHighlight: "JAPOW（極上パウダースノー）",
       titleLine2: "を追いかけよう。",
       subtitle:
-        "長野・新潟・群馬の主要10スキー場の高画質コースマップ、リフト券＆レンタル料金、スノーボーダー向けゲレンデ情報、ライブカメラ、天気予報、周辺温泉＆グルメをワンクリックでチェック。",
-      browseBtn: "🏔️ 全10スキー場を詳しく見る",
+        "日本各地の主要スキー場の高画質コースマップ、リフト券＆レンタル料金、スノーボーダー向けゲレンデ情報、ライブカメラ、天気予報、周辺温泉＆グルメをワンクリックでチェック。",
+      browseBtn: "🏔️ すべてのスキー場を見る",
       radarBtn: "❄️ リアルタイム降雪・パウダーレーダー",
       quickSurfTitle: "⚡ クイック・スキー場ジャンプ",
       quickSurfSubtitle:
@@ -591,8 +591,8 @@ export const UI_TEXT = {
       titleHighlight: "日本粉雪 (Japow)",
       titleLine2: "掌握每一座雪山。",
       subtitle:
-        "一键查看长野、新潟、群马10大顶级滑雪场的高清雪道图、缆车票与雪具租赁价格、单板滑手专属攻略、山顶实时摄像头、7天降雪预报以及温泉美食导航。",
-      browseBtn: "🏔️ 浏览全部 10 大滑雪场",
+        "一键查看日本各地热门滑雪场的高清雪道图、缆车票与雪具租赁价格、单板滑手专属攻略、山顶实时摄像头、7天降雪预报以及温泉美食导航。",
+      browseBtn: "🏔️ 浏览全部滑雪场",
       radarBtn: "❄️ 实时降雪 & 粉雪雷达",
       quickSurfTitle: "⚡ 快速直达滑雪场目录",
       quickSurfSubtitle:
