@@ -78,16 +78,6 @@ export default function ResortDirectory() {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-      {/* Top breadcrumb / Back to Home */}
-      <div className="mb-6 flex items-center justify-between">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-snow-muted transition hover:text-ice"
-        >
-          <span aria-hidden>←</span> {t.directory.backToHome}
-        </Link>
-      </div>
-
       {/* Page Header */}
       <div className="mb-8">
         <p className="text-xs font-semibold uppercase tracking-widest text-ice">

@@ -10,7 +10,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const { favoritesCount } = useFavorites();
   const { lang, setLang, t } = useLanguage();
-  const isHome = pathname === "/";
 
   const navLinks = [
     { href: "/", label: t.nav.home },
@@ -18,15 +17,10 @@ export default function Navbar() {
     { href: "/conditions", label: t.nav.conditions },
   ];
 
-  // Compute a sensible parent back-link based on current URL
-  const backLink = pathname.startsWith("/resorts/")
-    ? { href: "/resorts", label: t.nav.allResorts }
-    : { href: "/", label: t.nav.backToHome };
-
   return (
     <header className="sticky top-0 z-50 border-b border-charcoal-light bg-charcoal/90 backdrop-blur-md">
       <nav className="mx-auto flex max-w-6xl flex-col gap-2.5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        {/* Left: Brand Logo + Mobile Back & Language Controls */}
+        {/* Left: Brand Logo + Mobile Language Controls */}
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5">
             <Link
@@ -40,15 +34,6 @@ export default function Navbar() {
                 Powder<span className="text-ice">Pilot</span>
               </span>
             </Link>
-
-            {!isHome && (
-              <Link
-                href={backLink.href}
-                className="inline-flex items-center gap-1 rounded-lg border border-charcoal-light bg-charcoal-light/60 px-2.5 py-1 text-xs font-medium text-ice transition hover:border-ice sm:hidden"
-              >
-                <span aria-hidden>←</span> {backLink.label}
-              </Link>
-            )}
           </div>
 
           {/* Mobile Top-Right Language Switcher */}
@@ -104,7 +89,7 @@ export default function Navbar() {
               );
             })}
 
-            {/* Quick favorites indicator */}
+            {/* Quick saved-resorts shortcut */}
             <li>
               <Link
                 href="/resorts?favorites=true"
@@ -115,21 +100,10 @@ export default function Navbar() {
                 }`}
                 title={t.nav.savedTooltip}
               >
-                <span>❤️</span>
-                <span>{favoritesCount}</span>
+                <span>{t.directory.likedBtn(favoritesCount)}</span>
               </Link>
             </li>
           </ul>
-
-          {/* Desktop contextual back pill when on inner pages */}
-          {!isHome && (
-            <Link
-              href={backLink.href}
-              className="hidden items-center gap-1.5 rounded-lg border border-charcoal-light bg-charcoal-light/50 px-3 py-1.5 text-xs font-medium text-snow-muted transition hover:border-ice hover:text-ice lg:inline-flex"
-            >
-              <span aria-hidden>←</span> {backLink.label}
-            </Link>
-          )}
 
           {/* Desktop Top-Right Language Switcher (EN · 日本語 · 中文) */}
           <div
