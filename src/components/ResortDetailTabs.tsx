@@ -6,7 +6,7 @@ import FavoriteButton from "@/components/FavoriteButton";
 import MountainMapDiagram from "@/components/MountainMapDiagram";
 import ResortWeatherWidget from "@/components/ResortWeatherWidget";
 import { useLanguage } from "@/context/LanguageContext";
-import { RESORTS, type Resort } from "@/data/resorts";
+import { type Resort } from "@/data/resorts";
 
 type DetailTab = "overview" | "tickets" | "maps" | "weather" | "onsen";
 
@@ -108,31 +108,6 @@ export default function ResortDetailTabs({
           </div>
         )}
       </div>
-
-      {/* Horizontal Quick-Surf Resort Switcher Strip */}
-      <div className="mb-5 flex items-center gap-1.5 overflow-x-auto rounded-xl border border-charcoal-light bg-charcoal-light/25 p-2">
-        <span className="px-2 text-[11px] font-bold uppercase tracking-wider text-snow-muted whitespace-nowrap">
-          {t.detail.surfLabel}
-        </span>
-        {RESORTS.map((r) => {
-          const locR = localizeResort(r);
-          const isCurrent = r.slug === resort.slug;
-          return (
-            <Link
-              key={r.slug}
-              href={`/resorts/${r.slug}`}
-              className={`whitespace-nowrap rounded-lg px-2.5 py-1 text-xs font-semibold transition ${
-                isCurrent
-                  ? "bg-ice-deep text-charcoal shadow-sm"
-                  : "text-snow-muted hover:bg-charcoal hover:text-snow"
-              }`}
-            >
-              {locR.name.split(/\s*\(/)[0]}
-            </Link>
-          );
-        })}
-      </div>
-
       {/* Clean Hero Banner */}
       <div className="overflow-hidden rounded-2xl border border-charcoal-light bg-charcoal-light/40">
         <div className="relative h-56 w-full sm:h-72">

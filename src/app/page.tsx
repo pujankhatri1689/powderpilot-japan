@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
-import { REGIONS, RESORTS } from "@/data/resorts";
 
 export default function Home() {
-  const { t, localizeResort, localizeRegion } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section className="relative flex flex-1 flex-col overflow-hidden bg-charcoal">
@@ -43,73 +42,6 @@ export default function Home() {
           >
             {t.home.radarBtn}
           </Link>
-        </div>
-
-        {/* Super-Surfable Instant Resort Jumper */}
-        <div className="mt-14 w-full text-left">
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <h2 className="text-sm font-bold uppercase tracking-wider text-ice">
-                {t.home.quickSurfTitle}
-              </h2>
-              <p className="text-xs text-snow-muted">
-                {t.home.quickSurfSubtitle}
-              </p>
-            </div>
-            <Link
-              href="/resorts"
-              className="text-xs font-semibold text-ice transition hover:underline"
-            >
-              {t.home.filterCompareLink}
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {REGIONS.map((region) => {
-              const prefResorts = RESORTS.filter(
-                (r) => r.region === region
-              ).map((r) => localizeResort(r));
-
-              return (
-                <div
-                  key={region}
-                  className="rounded-2xl border border-charcoal-light bg-charcoal-light/25 p-4"
-                >
-                  <div className="mb-3 flex items-center justify-between border-b border-charcoal-light/70 pb-2.5">
-                    <span className="text-sm font-bold text-snow">
-                      📍 {localizeRegion(region, true)}
-                    </span>
-                  </div>
-                  <ul className="space-y-2">
-                    {prefResorts.map((resort) => (
-                      <li key={resort.slug}>
-                        <Link
-                          href={`/resorts/${resort.slug}`}
-                          className="group flex items-center justify-between rounded-xl border border-charcoal-light/60 bg-charcoal/60 px-3 py-2.5 transition hover:border-ice/50 hover:bg-charcoal"
-                        >
-                          <div className="min-w-0 pr-2">
-                            <p className="truncate text-sm font-semibold text-snow group-hover:text-ice">
-                              {resort.name}
-                            </p>
-                            <p className="truncate text-[11px] text-snow-muted">
-                              {t.home.cardMeta(
-                                resort.elevation.vertical,
-                                resort.dayPassYen.toLocaleString(),
-                                resort.fromTokyo.durationMinutes
-                              )}
-                            </p>
-                          </div>
-                          <span className="shrink-0 text-xs font-semibold text-snow-muted transition group-hover:translate-x-0.5 group-hover:text-ice">
-                            →
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              );
-            })}
-          </div>
         </div>
       </div>
     </section>

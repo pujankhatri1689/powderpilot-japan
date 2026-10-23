@@ -142,13 +142,7 @@ export const UI_TEXT = {
         "Instant access to HD trail maps, lift ticket & rental prices, snowboarder terrain intel, live mountain webcams, weather forecasts, and village onsen guides for snowboard resorts across Japan.",
       browseBtn: "🏔️ Browse All Resorts",
       radarBtn: "❄️ Live Snow & Powder Radar",
-      quickSurfTitle: "⚡ Quick-Surf Resort Directory",
-      quickSurfSubtitle:
-        "Jump straight into any resort's Overview, Tickets, HD Trail Maps, Weather, or Onsen Guide",
-      filterCompareLink: "Filter & compare all resorts →",
       resortsCount: (n: number) => `${n} resorts`,
-      cardMeta: (vert: number, price: string, mins: number) =>
-        `${vert}m vert · ¥${price} · ${mins}m from Tokyo`,
     },
     directory: {
       backToHome: "Back to Home",
@@ -186,7 +180,6 @@ export const UI_TEXT = {
     detail: {
       allResorts: "All Resorts",
       home: "Home",
-      surfLabel: "Surf:",
       treeRunsAllowed: "🌲 Tree Runs Allowed",
       onPisteFocus: "On-Piste / Alpine Focus",
       verifiedSeason: "2025–2026 Winter Season Verified",
@@ -393,13 +386,7 @@ export const UI_TEXT = {
         "日本各地の主要スキー場の高画質コースマップ、リフト券＆レンタル料金、スノーボーダー向けゲレンデ情報、ライブカメラ、天気予報、周辺温泉＆グルメをワンクリックでチェック。",
       browseBtn: "🏔️ すべてのスキー場を見る",
       radarBtn: "❄️ リアルタイム降雪・パウダーレーダー",
-      quickSurfTitle: "⚡ クイック・スキー場ジャンプ",
-      quickSurfSubtitle:
-        "各スキー場の概要・リフト料金・高画質マップ・天気・温泉ガイドへ直接アクセス",
-      filterCompareLink: "条件で絞り込み・比較する →",
       resortsCount: (n: number) => `${n} スキー場`,
-      cardMeta: (vert: number, price: string, mins: number) =>
-        `標高差 ${vert}m · 1日券 ¥${price} · 東京から約${mins}分`,
     },
     directory: {
       backToHome: "ホームへ戻る",
@@ -437,7 +424,6 @@ export const UI_TEXT = {
     detail: {
       allResorts: "スキー場一覧",
       home: "ホーム",
-      surfLabel: "スキー場切替:",
       treeRunsAllowed: "🌲 ツリーラン開放エリアあり",
       onPisteFocus: "圧雪・アルペンバーン中心",
       verifiedSeason: "2025–2026 冬季シーズン確認済み",
@@ -643,13 +629,7 @@ export const UI_TEXT = {
         "一键查看日本各地热门滑雪场的高清雪道图、缆车票与雪具租赁价格、单板滑手专属攻略、山顶实时摄像头、7天降雪预报以及温泉美食导航。",
       browseBtn: "🏔️ 浏览全部滑雪场",
       radarBtn: "❄️ 实时降雪 & 粉雪雷达",
-      quickSurfTitle: "⚡ 快速直达滑雪场目录",
-      quickSurfSubtitle:
-        "点击任意雪场，立即查看概况、票价、高清雪道图、实时天气或温泉指南",
-      filterCompareLink: "筛选并对比全部滑雪场 →",
       resortsCount: (n: number) => `${n} 家滑雪场`,
-      cardMeta: (vert: number, price: string, mins: number) =>
-        `落差 ${vert}m · 一日券 ¥${price} · 距东京约 ${mins}分钟`,
     },
     directory: {
       backToHome: "返回首页",
@@ -687,7 +667,6 @@ export const UI_TEXT = {
     detail: {
       allResorts: "全部滑雪场",
       home: "首页",
-      surfLabel: "快速切换:",
       treeRunsAllowed: "🌲 开放树林野雪区",
       onPisteFocus: "机压雪道 / 高山雪碗为主",
       verifiedSeason: "2025–2026 冬季雪季已核实",
