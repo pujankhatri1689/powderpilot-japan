@@ -140,6 +140,7 @@ export const UI_TEXT = {
       surfLabel: "Surf:",
       treeRunsAllowed: "🌲 Tree Runs Allowed",
       onPisteFocus: "On-Piste / Alpine Focus",
+      verifiedSeason: "2025–2026 Winter Season Verified",
       googleMapsBtn: "📍 Google Maps",
       prevResort: "← Previous Resort",
       nextResort: "Next Resort →",
@@ -154,7 +155,7 @@ export const UI_TEXT = {
         maps: "🗺️ Trail Maps & Runs",
         mapsBadge: (n: number) => `${n} HD`,
         weather: "❄️ Weather & Webcams",
-        weatherBadge: "Live",
+        weatherBadge: "Forecast",
         onsen: "♨️ Onsen, Village & Access",
         onsenBadge: (n: number) => `${n} Spots`,
       },
@@ -215,8 +216,8 @@ export const UI_TEXT = {
         seniorPass: "Senior / Master",
         oneDayDiscounted: "1-Day discounted",
         seasonPassHeading: "🏆 Season Pass Option",
-        breaksEven: (days: number, usd: number) =>
-          `Breaks even in ${days} riding days (~$${usd} USD)`,
+        breaksEven: (days: number) =>
+          `Breaks even in ${days} riding days`,
         rentalsHeading: "🏂 Snowboard & Wear Rentals (1-Day)",
         boardSet: "Snowboard + Boots + Bindings Set",
         wearSet: "Jacket + Pants Outer Wear",
@@ -259,13 +260,13 @@ export const UI_TEXT = {
     },
     weather: {
       eyebrow: (lat: number, lon: number) =>
-        `Live JMA / Open-Meteo Telemetry · GPS ${lat}°N, ${lon}°E`,
+        `High-Resolution Model Forecast · Open-Meteo / JMA MSM · GPS ${lat}°N, ${lon}°E`,
       title: (name: string) => `${name} Weather & 7-Day Snow Forecast`,
       peakBtn: (m: number) => `Peak (${m}m)`,
       baseBtn: (m: number) => `Base (${m}m)`,
       stormDemoOn: "🌨️ Jan Storm Demo ON",
       stormDemoOff: "Preview Jan Storm",
-      loading: (name: string) => `Loading live weather telemetry for ${name}...`,
+      loading: (name: string) => `Loading high-resolution forecast for ${name}...`,
       conditionLabel: "Condition",
       atElevation: (m: number) => `At ${m}m`,
       tempLabel: "Temperature",
@@ -287,7 +288,7 @@ export const UI_TEXT = {
       peakBaseBadge: (cm: number) => `Peak Base Depth: ~${cm} cm`,
       months: ["Dec", "Jan", "Feb", "Mar", "Apr"],
       sourceNote:
-        "Source: Open-Meteo High-Resolution JMA MSM / GFS Weather Models",
+        "Forecast source: Open-Meteo high-resolution numerical weather models (JMA MSM / GFS). Not an official resort snow report.",
       watchWebcams: "📹 Watch Live Mountain Webcams",
       checkGoogleWeather: "🌤️ Check on Google Weather",
       codes: {
@@ -304,11 +305,11 @@ export const UI_TEXT = {
     conditionsPage: {
       backToHome: "Back to Home",
       simLabel: "Peak Jan Storm Simulation",
-      liveLabel: "Live Open-Meteo Summit Telemetry",
+      liveLabel: "High-Resolution Model Forecast · Open-Meteo / JMA MSM",
       eyebrow: "7-Day Summit Forecast · Ranked by Snowfall",
       title: "Powder Radar & Conditions",
       subtitle:
-        "Real-time weather pulled at each resort's peak elevation so you know where the coldest, deepest snow is landing this week.",
+        "High-resolution model forecasts at each resort's peak elevation, ranked by expected snowfall over the next seven days.",
       stormBtnOn: "Showing Jan Storm Demo (Switch to Live)",
       stormBtnOff: "Preview Peak-Season Storm Mode",
       preSeasonTitle: "Late-October Pre-Season Note:",
@@ -316,7 +317,7 @@ export const UI_TEXT = {
         "Live summit temperatures are cooling down across Nagano, Niigata, and Gunma, with 0cm snowfall in the immediate 7-day window. Want to see how the radar ranks a real Sea of Japan storm?",
       simulateBtn: "Simulate January Dump ❄️",
       peakLabel: (m: number) => `Peak ${m}m`,
-      fetching: "Fetching summit telemetry...",
+      fetching: "Fetching high-resolution summit forecast...",
       sevenDaySnow: "7-Day Snow",
       next24h: "Next 24h",
       peakTemp: "Peak Temp",
@@ -390,6 +391,7 @@ export const UI_TEXT = {
       surfLabel: "スキー場切替:",
       treeRunsAllowed: "🌲 ツリーラン開放エリアあり",
       onPisteFocus: "圧雪・アルペンバーン中心",
+      verifiedSeason: "2025–2026 冬季シーズン確認済み",
       googleMapsBtn: "📍 Googleマップ",
       prevResort: "← 前のスキー場",
       nextResort: "次のスキー場 →",
@@ -404,7 +406,7 @@ export const UI_TEXT = {
         maps: "🗺️ コースマップ・名物コース",
         mapsBadge: (n: number) => `${n}枚`,
         weather: "❄️ 天気・降雪・ライブカメラ",
-        weatherBadge: "ライブ",
+        weatherBadge: "予報",
         onsen: "♨️ 温泉・周辺グルメ・アクセス",
         onsenBadge: (n: number) => `${n}スポット`,
       },
@@ -466,8 +468,7 @@ export const UI_TEXT = {
         seniorPass: "シニア・マスター券",
         oneDayDiscounted: "シニア割引1日券",
         seasonPassHeading: "🏆 シーズンパス（シーズン券）",
-        breaksEven: (days: number, usd: number) =>
-          `${days}日以上の滑走で元が取れます（約$${usd} USD）`,
+        breaksEven: (days: number) => `${days}日以上の滑走で元が取れます`,
         rentalsHeading: "🏂 スノーボード＆ウェア1日レンタル料金",
         boardSet: "スノーボード3点セット（板・ブーツ・バイン）",
         wearSet: "上下スノーボードウェアセット",
@@ -510,8 +511,8 @@ export const UI_TEXT = {
     },
     weather: {
       eyebrow: (lat: number, lon: number) =>
-        `気象庁(JMA) / Open-Meteo ライブ気象データ · 北緯${lat}° 東経${lon}°`,
-      title: (name: string) => `${name} リアルタイム天気＆週間降雪予報`,
+        `高解像度数値予報 · Open-Meteo / 気象庁 JMA MSM · 北緯${lat}° 東経${lon}°`,
+      title: (name: string) => `${name} 天気・週間降雪予報`,
       peakBtn: (m: number) => `山頂エリア (${m}m)`,
       baseBtn: (m: number) => `山麓ベース (${m}m)`,
       stormDemoOn: "🌨️ 1月大雪デモ表示中",
@@ -537,7 +538,7 @@ export const UI_TEXT = {
       peakBaseBadge: (cm: number) => `ピーク時最大積雪深: 約${cm} cm`,
       months: ["12月", "1月", "2月", "3月", "4月"],
       sourceNote:
-        "データ出典: Open-Meteo 高解像度 気象庁(JMA MSM) / GFS 気象モデル",
+        "予報データ: Open-Meteo 高解像度数値気象モデル（気象庁 JMA MSM / GFS）。スキー場公式の積雪情報ではありません。",
       watchWebcams: "📹 公式ライブカメラを見る",
       checkGoogleWeather: "🌤️ Google天気予報で確認",
       codes: {
@@ -554,16 +555,16 @@ export const UI_TEXT = {
     conditionsPage: {
       backToHome: "ホームへ戻る",
       simLabel: "1月寒波・大雪シミュレーション中",
-      liveLabel: "Open-Meteo 山頂リアルタイム気象",
+      liveLabel: "高解像度数値予報 · Open-Meteo / 気象庁 JMA MSM",
       eyebrow: "山頂7日間降雪予報 · 降雪量ランキング",
       title: "パウダーレーダー ＆ 積雪コンディション",
       subtitle:
-        "各スキー場の山頂標高ピンポイントの気象データを取得し、今週もっとも深く冷たい雪が降る山をランキング表示します。",
+        "各スキー場の山頂標高における高解像度数値予報をもとに、今後7日間の予想降雪量をランキング表示します。",
       stormBtnOn: "1月大雪デモ表示中（ライブに戻す）",
       stormBtnOff: "ハイシーズン大雪モードをプレビュー",
       preSeasonTitle: "プレシーズン（10月下旬）のお知らせ:",
       preSeasonBody:
-        "現在オフシーズン終盤のため直近7日間の実測降雪量は0cmです。日本海側の冬型寒波が来た際のパウダーランキングを見るには右のボタンを押してください！",
+        "現在オフシーズン終盤のため、数値予報では直近7日間の降雪量が0cmです。日本海側の冬型寒波が来た際のパウダーランキングを見るには右のボタンを押してください！",
       simulateBtn: "1月のドカ雪をシミュレート ❄️",
       peakLabel: (m: number) => `山頂 ${m}m`,
       fetching: "山頂の気象データを取得中...",
@@ -640,6 +641,7 @@ export const UI_TEXT = {
       surfLabel: "快速切换:",
       treeRunsAllowed: "🌲 开放树林野雪区",
       onPisteFocus: "机压雪道 / 高山雪碗为主",
+      verifiedSeason: "2025–2026 冬季雪季已核实",
       googleMapsBtn: "📍 Google 地图",
       prevResort: "← 上一家滑雪场",
       nextResort: "下一家滑雪场 →",
@@ -654,7 +656,7 @@ export const UI_TEXT = {
         maps: "🗺️ 高清雪道图与名道",
         mapsBadge: (n: number) => `${n}张高清`,
         weather: "❄️ 天气预报与实时监控",
-        weatherBadge: "实时",
+        weatherBadge: "预报",
         onsen: "♨️ 温泉、美食街与交通",
         onsenBadge: (n: number) => `${n}个地点`,
       },
@@ -715,8 +717,7 @@ export const UI_TEXT = {
         seniorPass: "长者优惠券 (Senior)",
         oneDayDiscounted: "长者一日优惠价",
         seasonPassHeading: "🏆 全季卡 (Season Pass)",
-        breaksEven: (days: number, usd: number) =>
-          `滑满 ${days} 天即可回本（约 $${usd} 美元）`,
+        breaksEven: (days: number) => `滑满 ${days} 天即可回本`,
         rentalsHeading: "🏂 单板雪具 & 滑雪服租赁（1日）",
         boardSet: "单板全套（雪板 + 雪鞋 + 固定器）",
         wearSet: "滑雪服套装（上衣 + 雪裤）",
@@ -759,8 +760,8 @@ export const UI_TEXT = {
     },
     weather: {
       eyebrow: (lat: number, lon: number) =>
-        `日本气象厅 (JMA) / Open-Meteo 实时气象 · 北纬${lat}° 东经${lon}°`,
-      title: (name: string) => `${name} 实时天气与未来 7 天降雪预报`,
+        `高分辨率数值预报 · Open-Meteo / 日本气象厅 JMA MSM · 北纬${lat}° 东经${lon}°`,
+      title: (name: string) => `${name} 天气与未来 7 天降雪预报`,
       peakBtn: (m: number) => `山顶海拔 (${m}m)`,
       baseBtn: (m: number) => `山脚基地 (${m}m)`,
       stormDemoOn: "🌨️ 1月暴雪演示已开启",
@@ -786,7 +787,7 @@ export const UI_TEXT = {
       peakBaseBadge: (cm: number) => `深冬巅峰积雪厚度: 约 ${cm} cm`,
       months: ["12月", "1月", "2月", "3月", "4月"],
       sourceNote:
-        "数据来源: Open-Meteo 高精度日本气象厅 (JMA MSM) / GFS 气象模型",
+        "预报来源：Open-Meteo 高分辨率数值天气模型（日本气象厅 JMA MSM / GFS）。并非雪场官方雪况报告。",
       watchWebcams: "📹 查看山顶实时摄像头 (Webcams)",
       checkGoogleWeather: "🌤️ 在 Google 天气中查看",
       codes: {
@@ -803,16 +804,16 @@ export const UI_TEXT = {
     conditionsPage: {
       backToHome: "返回首页",
       simLabel: "1月深冬暴雪模拟模式",
-      liveLabel: "Open-Meteo 山顶实时气象",
+      liveLabel: "高分辨率数值预报 · Open-Meteo / 日本气象厅 JMA MSM",
       eyebrow: "山顶未来7天降雪预报 · 按降雪量排名",
       title: "粉雪雷达 & 实时雪况排行榜",
       subtitle:
-        "实时拉取各大滑雪场山顶海拔的气象与降雪数据，一眼锁定本周日本哪里下雪最大、温度最低。",
+        "基于各大滑雪场山顶海拔的高分辨率数值预报，按未来7天预期降雪量进行排名。",
       stormBtnOn: "正在显示1月暴雪演示（切回实时）",
       stormBtnOff: "预览1月深冬暴雪模式",
       preSeasonTitle: "10月下旬开板前提示：",
       preSeasonBody:
-        "目前正值雪季开始前夕，长野、新潟、群马山顶正在降温，未来7天实时降雪为 0cm。想看看日本海寒流暴雪来袭时的排行榜效果吗？",
+        "目前正值雪季开始前夕；数值预报显示长野、新潟、群马山顶未来7天降雪为 0cm。想看看日本海寒流暴雪来袭时的排行榜效果吗？",
       simulateBtn: "模拟1月日本海大暴雪 ❄️",
       peakLabel: (m: number) => `山顶 ${m}m`,
       fetching: "正在获取山顶气象数据...",

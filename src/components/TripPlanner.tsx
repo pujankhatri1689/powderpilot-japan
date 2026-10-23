@@ -168,7 +168,6 @@ export default function TripPlanner() {
       transit,
       food,
       grandTotalYen,
-      approxUsd: Math.round(grandTotalYen / 150),
       totalVertical,
     };
   }, [days]);
@@ -231,9 +230,6 @@ export default function TripPlanner() {
           <dd className="mt-1 text-2xl font-extrabold text-ice">
             ¥{totals.grandTotalYen.toLocaleString()}
           </dd>
-          <p className="mt-0.5 text-xs text-snow-muted">
-            ~${totals.approxUsd.toLocaleString()} USD
-          </p>
         </div>
 
         <div className="rounded-2xl border border-charcoal-light bg-charcoal-light/40 p-4">

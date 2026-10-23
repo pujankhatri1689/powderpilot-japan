@@ -150,6 +150,14 @@ export default function ResortDetailTabs({
             </span>
 
             <div className="flex flex-wrap items-center gap-2">
+              <a
+                href={resort.officialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-emerald-400/50 bg-charcoal/85 px-3 py-1 text-xs font-bold text-emerald-300 backdrop-blur-sm transition hover:border-emerald-300 hover:text-emerald-200"
+              >
+                {t.detail.verifiedSeason} <span aria-hidden>↗</span>
+              </a>
               {resort.terrain.treeRunsAllowed ? (
                 <span className="rounded-full border border-ice/40 bg-charcoal/85 px-3 py-1 text-xs font-semibold text-ice backdrop-blur-sm">
                   {t.detail.treeRunsAllowed}
@@ -565,9 +573,6 @@ export default function ResortDetailTabs({
                   <dd className="mt-1 text-2xl font-extrabold text-snow">
                     ¥{resort.pricing.oneDayAdultYen.toLocaleString()}
                   </dd>
-                  <p className="mt-0.5 text-xs text-snow-muted">
-                    ~${Math.round(resort.pricing.oneDayAdultYen / 150)} USD
-                  </p>
                 </div>
 
                 <div className="rounded-xl border border-charcoal-light bg-charcoal-light/35 p-4">
@@ -653,8 +658,7 @@ export default function ResortDetailTabs({
                     Math.ceil(
                       resort.pricing.seasonPassYen /
                         resort.pricing.oneDayAdultYen
-                    ),
-                    Math.round(resort.pricing.seasonPassYen / 150)
+                    )
                   )}
                 </p>
               </div>
