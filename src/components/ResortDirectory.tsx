@@ -90,9 +90,6 @@ export default function ResortDirectory() {
         >
           <span aria-hidden>←</span> {t.directory.backToHome}
         </Link>
-        <span className="text-xs font-medium uppercase tracking-wider text-snow-muted">
-          {t.directory.resortsShowing(filteredResorts.length, RESORTS.length)}
-        </span>
       </div>
 
       {/* Page Header */}
@@ -115,10 +112,6 @@ export default function ResortDirectory() {
           <div className="flex flex-wrap items-center gap-2">
             {(["All", ...REGIONS] as const).map((region) => {
               const active = selectedRegion === region;
-              const count =
-                region === "All"
-                  ? RESORTS.length
-                  : RESORTS.filter((r) => r.region === region).length;
               return (
                 <button
                   key={region}
@@ -130,14 +123,7 @@ export default function ResortDirectory() {
                       : "bg-charcoal text-snow-muted hover:text-snow"
                   }`}
                 >
-                  {localizeRegion(region)}{" "}
-                  <span
-                    className={`ml-1 text-xs ${
-                      active ? "text-charcoal/80" : "text-snow-muted"
-                    }`}
-                  >
-                    ({count})
-                  </span>
+                  {localizeRegion(region)}
                 </button>
               );
             })}

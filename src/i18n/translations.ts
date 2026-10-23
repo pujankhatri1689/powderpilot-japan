@@ -105,7 +105,7 @@ export const UI_TEXT = {
       backToHome: "Back to Home",
       resortsShowing: (shown: number, total: number) =>
         `${shown} of ${total} resorts`,
-      regionsHeader: "Nagano · Niigata · Gunma",
+      regionsHeader: "Snowboard Resorts Across Japan",
       title: "Japan Resort Directory",
       subtitle:
         "Filter by prefecture, tree-riding access, travel time from Tokyo, or vertical drop to pick your next powder mission.",
@@ -356,7 +356,7 @@ export const UI_TEXT = {
       backToHome: "ホームへ戻る",
       resortsShowing: (shown: number, total: number) =>
         `全${total}件中 ${shown}件を表示`,
-      regionsHeader: "長野 · 新潟 · 群馬",
+      regionsHeader: "日本全国のスノーボード・スキー場",
       title: "日本スノーボード・スキー場一覧",
       subtitle:
         "エリア（県）、ツリーラン可否、東京からのアクセス時間、標高差やリフト券料金で比較・検索できます。",
@@ -606,7 +606,7 @@ export const UI_TEXT = {
       backToHome: "返回首页",
       resortsShowing: (shown: number, total: number) =>
         `显示 ${shown} / 共 ${total} 家滑雪场`,
-      regionsHeader: "长野 · 新潟 · 群马",
+      regionsHeader: "日本全国单板滑雪场",
       title: "日本滑雪场大全与对比",
       subtitle:
         "按地区（县）、是否开放树林野雪、从东京出发交通时间、垂直落差或缆车票价进行筛选。",

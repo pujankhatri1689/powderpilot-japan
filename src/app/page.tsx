@@ -79,9 +79,6 @@ export default function Home() {
                     <span className="text-sm font-bold text-snow">
                       📍 {localizeRegion(region, true)}
                     </span>
-                    <span className="rounded-full bg-charcoal px-2.5 py-0.5 text-[11px] font-semibold text-ice">
-                      {t.home.resortsCount(prefResorts.length)}
-                    </span>
                   </div>
                   <ul className="space-y-2">
                     {prefResorts.map((resort) => (
