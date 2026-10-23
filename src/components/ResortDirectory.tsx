@@ -252,7 +252,7 @@ export default function ResortDirectory() {
                           onClick={(e) => toggleFavorite(resort.slug, e)}
                           className={`flex h-7 w-7 items-center justify-center rounded-full backdrop-blur-sm transition active:scale-90 ${
                             isFavorite(resort.slug)
-                              ? "bg-rose-500 text-white shadow-md shadow-rose-500/30"
+                              ? "bg-white text-rose-500 shadow-md shadow-charcoal/30"
                               : "bg-charcoal/85 text-snow/70 hover:bg-charcoal hover:text-rose-400"
                           }`}
                         >
