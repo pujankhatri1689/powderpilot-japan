@@ -1,13 +1,22 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 import type { Resort } from "@/data/resorts";
+import { translateLevel } from "@/i18n/translations";
 
 /**
  * Multi-image touch-swipeable HD Trail Map & Mountain Photo Gallery
  * with prev/next arrows, dot indicators, thumbnail strip, and full-screen zoom.
  */
-export default function MountainMapDiagram({ resort }: { resort: Resort }) {
+export default function MountainMapDiagram({
+  resort: rawResort,
+}: {
+  resort: Resort;
+}) {
+  const { lang, t, localizeResort } = useLanguage();
+  const resort = localizeResort(rawResort);
+
   const slides =
     resort.mapGallery.length > 0
       ? resort.mapGallery
@@ -55,8 +64,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-ice">
-            HD Trail Maps & Mountain Gallery ({activeIndex + 1} of{" "}
-            {slides.length})
+            {t.maps.galleryEyebrow(activeIndex + 1, slides.length)}
           </p>
           <h2 className="mt-0.5 text-lg font-bold text-snow">
             {currentSlide.title}
@@ -72,7 +80,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
             onClick={() => setZoomed(true)}
             className="inline-flex items-center gap-1.5 rounded-xl bg-ice-deep px-3.5 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice"
           >
-            <span>🔍 Full-Res Zoom</span>
+            <span>{t.maps.fullResZoom}</span>
           </button>
           <a
             href={resort.trailMapUrl}
@@ -80,7 +88,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-3.5 py-2 text-xs font-semibold text-snow transition hover:border-ice hover:text-ice"
           >
-            <span>Official Map Page</span>
+            <span>{t.maps.officialMapPage}</span>
             <span aria-hidden>↗</span>
           </a>
         </div>
@@ -96,7 +104,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
           type="button"
           onClick={() => setZoomed(true)}
           className="group relative block w-full cursor-zoom-in overflow-hidden"
-          title="Click to inspect full-resolution image"
+          title={t.maps.tapFullScreen}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -113,7 +121,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
           )}
 
           <span className="absolute bottom-3 right-3 rounded-lg bg-charcoal/90 px-3 py-1.5 text-xs font-semibold text-ice shadow-lg backdrop-blur-sm">
-            🔍 Tap to open full-screen HD
+            {t.maps.tapFullScreen}
           </span>
         </button>
 
@@ -147,7 +155,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
                 const active = idx === activeIndex;
                 return (
                   <button
-                    key={slide.title}
+                    key={slide.imageUrl}
                     type="button"
                     onClick={() => setActiveIndex(idx)}
                     className={`flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold transition ${
@@ -156,7 +164,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
                         : "border-charcoal-light bg-charcoal text-snow-muted hover:text-snow"
                     }`}
                   >
-                    <span>Map {idx + 1}:</span>
+                    <span>{t.maps.mapIndex(idx + 1)}</span>
                     <span className="max-w-[180px] truncate">
                       {slide.badge ?? slide.title}
                     </span>
@@ -165,7 +173,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
               })}
             </div>
             <span className="text-[11px] text-snow-muted">
-              Swipe left/right or tap buttons to switch maps
+              {t.maps.swipeHint}
             </span>
           </div>
         )}
@@ -175,20 +183,24 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
           <div className="flex flex-wrap items-center gap-4">
             <span className="inline-flex items-center gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-              Beginner ({resort.terrain.beginner}%)
+              {t.maps.beginnerLegend(resort.terrain.beginner)}
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full bg-ice-deep" />
-              Intermediate ({resort.terrain.intermediate}%)
+              {t.maps.intermediateLegend(resort.terrain.intermediate)}
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full bg-rose-500" />
-              Advanced / Powder ({resort.terrain.advanced}%)
+              {t.maps.advancedLegend(resort.terrain.advanced)}
             </span>
           </div>
           <span>
-            Base {resort.elevation.base}m → Peak {resort.elevation.top}m (
-            {resort.elevation.vertical}m vertical) · {resort.terrain.runs} runs
+            {t.maps.elevationFooter(
+              resort.elevation.base,
+              resort.elevation.top,
+              resort.elevation.vertical,
+              resort.terrain.runs
+            )}
           </span>
         </div>
       </div>
@@ -211,7 +223,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
               <span
                 className={`inline-block rounded-md border px-2 py-0.5 text-[11px] font-semibold ${badgeStyle}`}
               >
-                {run.level}
+                {translateLevel(run.level, lang)}
               </span>
               <h3 className="mt-2 text-sm font-bold text-snow">{run.name}</h3>
               <p className="mt-1 text-xs leading-relaxed text-snow-muted">
@@ -249,7 +261,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
                     }}
                     className="rounded-xl border border-charcoal-light bg-charcoal px-3 py-1.5 text-xs font-semibold text-snow hover:border-ice"
                   >
-                    ‹ Prev Map
+                    {t.maps.prevMap}
                   </button>
                   <button
                     type="button"
@@ -259,7 +271,7 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
                     }}
                     className="rounded-xl border border-charcoal-light bg-charcoal px-3 py-1.5 text-xs font-semibold text-snow hover:border-ice"
                   >
-                    Next Map ›
+                    {t.maps.nextMap}
                   </button>
                 </>
               )}
@@ -270,14 +282,14 @@ export default function MountainMapDiagram({ resort }: { resort: Resort }) {
                 onClick={(e) => e.stopPropagation()}
                 className="rounded-xl border border-charcoal-light bg-charcoal px-3 py-1.5 text-xs font-semibold text-ice hover:border-ice"
               >
-                Open Raw Full-Res ↗
+                {t.maps.openRaw}
               </a>
               <button
                 type="button"
                 onClick={() => setZoomed(false)}
                 className="rounded-xl bg-ice-deep px-3.5 py-1.5 text-xs font-bold text-charcoal hover:bg-ice"
               >
-                ✕ Close
+                {t.maps.close}
               </button>
             </div>
           </div>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 import { REGIONS, RESORTS, type Region, type Resort } from "@/data/resorts";
 
 interface DailySnow {
@@ -68,11 +69,6 @@ function parseSingleForecast(
   };
 }
 
-/**
- * Because it's October (pre-season), live snowfall is often 0cm across Japan.
- * We include a "Peak Jan Storm Simulation" toggle so you can preview how the
- * leaderboard looks during a real mid-winter Sea of Japan dump!
- */
 function buildStormSimulation(resort: Resort, index: number): ResortWeather {
   const baseDump =
     resort.region === "Niigata" ? 18 : resort.region === "Nagano" ? 15 : 13;
@@ -108,11 +104,15 @@ function buildStormSimulation(resort: Resort, index: number): ResortWeather {
 }
 
 export default function ConditionsDashboard() {
+  const { lang, t, localizeResort, localizeRegion } = useLanguage();
   const [liveData, setLiveData] = useState<Record<string, ResortWeather>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<Region | "All">("All");
   const [stormPreviewMode, setStormPreviewMode] = useState(false);
+
+  const localeCode =
+    lang === "ja" ? "ja-JP" : lang === "zh" ? "zh-CN" : "en-US";
 
   useEffect(() => {
     let cancelled = false;
@@ -180,7 +180,7 @@ export default function ConditionsDashboard() {
       (r) => selectedRegion === "All" || r.region === selectedRegion
     )
       .map((resort) => ({
-        resort,
+        resort: localizeResort(resort),
         weather: weatherBySlug[resort.slug],
       }))
       .sort((a, b) => {
@@ -191,7 +191,7 @@ export default function ConditionsDashboard() {
           (a.weather?.currentTempC ?? 99) - (b.weather?.currentTempC ?? 99)
         );
       });
-  }, [selectedRegion, weatherBySlug]);
+  }, [selectedRegion, weatherBySlug, localizeResort]);
 
   const totalLiveSnow = useMemo(() => {
     return Object.values(liveData).reduce(
@@ -208,12 +208,12 @@ export default function ConditionsDashboard() {
           href="/"
           className="inline-flex items-center gap-2 text-sm font-medium text-snow-muted transition hover:text-ice"
         >
-          <span aria-hidden>←</span> Back to Home
+          <span aria-hidden>←</span> {t.conditionsPage.backToHome}
         </Link>
         <span className="text-xs font-medium uppercase tracking-wider text-snow-muted">
           {stormPreviewMode
-            ? "Peak Jan Storm Simulation"
-            : "Live Open-Meteo Summit Telemetry"}
+            ? t.conditionsPage.simLabel
+            : t.conditionsPage.liveLabel}
         </span>
       </div>
 
@@ -221,18 +221,17 @@ export default function ConditionsDashboard() {
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-ice">
-            7-Day Summit Forecast · Ranked by Snowfall
+            {t.conditionsPage.eyebrow}
           </p>
           <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-snow sm:text-4xl">
-            Powder Radar & Conditions
+            {t.conditionsPage.title}
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-snow-muted sm:text-base">
-            Real-time weather pulled at each resort&apos;s peak elevation so you
-            know where the coldest, deepest snow is landing this week.
+            {t.conditionsPage.subtitle}
           </p>
         </div>
 
-        {/* Storm Simulation Toggle (super useful in October pre-season!) */}
+        {/* Storm Simulation Toggle */}
         <button
           type="button"
           onClick={() => setStormPreviewMode((v) => !v)}
@@ -244,8 +243,8 @@ export default function ConditionsDashboard() {
         >
           <span aria-hidden>🌨️</span>
           {stormPreviewMode
-            ? "Showing Jan Storm Demo (Switch to Live)"
-            : "Preview Peak-Season Storm Mode"}
+            ? t.conditionsPage.stormBtnOn
+            : t.conditionsPage.stormBtnOff}
         </button>
       </div>
 
@@ -253,17 +252,17 @@ export default function ConditionsDashboard() {
       {!loading && !stormPreviewMode && totalLiveSnow === 0 && (
         <div className="mb-6 flex flex-col items-start justify-between gap-3 rounded-2xl border border-ice/30 bg-ice-deep/10 p-4 sm:flex-row sm:items-center">
           <p className="text-xs text-snow sm:text-sm">
-            <strong className="text-ice">Late-October Pre-Season Note:</strong>{" "}
-            Live summit temperatures are cooling down across Nagano, Niigata,
-            and Gunma, with 0cm snowfall in the immediate 7-day window. Want to
-            see how the radar ranks a real Sea of Japan storm?
+            <strong className="text-ice">
+              {t.conditionsPage.preSeasonTitle}
+            </strong>{" "}
+            {t.conditionsPage.preSeasonBody}
           </p>
           <button
             type="button"
             onClick={() => setStormPreviewMode(true)}
             className="shrink-0 rounded-xl bg-ice-deep px-3.5 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice"
           >
-            Simulate January Dump ❄️
+            {t.conditionsPage.simulateBtn}
           </button>
         </div>
       )}
@@ -283,7 +282,7 @@ export default function ConditionsDashboard() {
                   : "border border-charcoal-light bg-charcoal-light/40 text-snow-muted hover:text-snow"
               }`}
             >
-              {region}
+              {localizeRegion(region)}
             </button>
           );
         })}
@@ -291,8 +290,7 @@ export default function ConditionsDashboard() {
 
       {error && (
         <div className="mb-6 rounded-2xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-200">
-          Could not reach Open-Meteo live feed ({error}). Toggle &ldquo;Preview
-          Peak-Season Storm Mode&rdquo; above to inspect the dashboard.
+          {error}
         </div>
       )}
 
@@ -324,10 +322,10 @@ export default function ConditionsDashboard() {
                         {resort.name}
                       </Link>
                       <span className="rounded-full bg-ice-deep/15 px-2.5 py-0.5 text-xs font-semibold text-ice">
-                        {resort.region}
+                        {localizeRegion(resort.region)}
                       </span>
                       <span className="text-xs text-snow-muted">
-                        Peak {resort.elevation.top}m
+                        {t.conditionsPage.peakLabel(resort.elevation.top)}
                       </span>
                     </div>
                     <p className="mt-1 text-xs text-snow-muted">
@@ -339,13 +337,13 @@ export default function ConditionsDashboard() {
                 {/* Middle: Current Telemetry Pills */}
                 {loading && !weather ? (
                   <div className="text-xs text-snow-muted">
-                    Fetching summit telemetry...
+                    {t.conditionsPage.fetching}
                   </div>
                 ) : weather ? (
                   <dl className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                     <div className="rounded-xl bg-charcoal px-3.5 py-2 text-center">
                       <dt className="text-[10px] uppercase text-snow-muted">
-                        7-Day Snow
+                        {t.conditionsPage.sevenDaySnow}
                       </dt>
                       <dd className="mt-0.5 text-base font-extrabold text-ice">
                         {weather.sevenDaySnowCm} cm
@@ -353,7 +351,7 @@ export default function ConditionsDashboard() {
                     </div>
                     <div className="rounded-xl bg-charcoal px-3.5 py-2 text-center">
                       <dt className="text-[10px] uppercase text-snow-muted">
-                        Next 24h
+                        {t.conditionsPage.next24h}
                       </dt>
                       <dd className="mt-0.5 text-base font-bold text-snow">
                         {weather.next24hSnowCm} cm
@@ -361,7 +359,7 @@ export default function ConditionsDashboard() {
                     </div>
                     <div className="rounded-xl bg-charcoal px-3.5 py-2 text-center">
                       <dt className="text-[10px] uppercase text-snow-muted">
-                        Peak Temp
+                        {t.conditionsPage.peakTemp}
                       </dt>
                       <dd className="mt-0.5 text-base font-bold text-snow">
                         {weather.currentTempC}°C
@@ -369,7 +367,7 @@ export default function ConditionsDashboard() {
                     </div>
                     <div className="rounded-xl bg-charcoal px-3.5 py-2 text-center">
                       <dt className="text-[10px] uppercase text-snow-muted">
-                        Freezing Level
+                        {t.conditionsPage.freezingLevel}
                       </dt>
                       <dd className="mt-0.5 text-base font-bold text-snow">
                         {weather.freezingLevelM}m
@@ -390,7 +388,7 @@ export default function ConditionsDashboard() {
                       );
                       const dayLabel = new Date(
                         `${day.date}T00:00:00`
-                      ).toLocaleDateString("en-US", { weekday: "short" });
+                      ).toLocaleDateString(localeCode, { weekday: "short" });
 
                       return (
                         <div

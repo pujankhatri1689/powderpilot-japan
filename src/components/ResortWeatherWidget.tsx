@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 import type { Resort } from "@/data/resorts";
 
 interface DailyForecast {
@@ -24,18 +25,14 @@ interface LiveResortWeather {
   daily: DailyForecast[];
 }
 
-function describeWeatherCode(code: number): { label: string; icon: string } {
-  if (code === 0) return { label: "Bluebird Clear", icon: "☀️" };
-  if (code <= 3) return { label: "Partly Cloudy", icon: "⛅" };
-  if (code === 45 || code === 48) return { label: "Mountain Fog", icon: "🌫️" };
-  if (code >= 71 && code <= 77) return { label: "Snowing", icon: "❄️" };
-  if (code === 85 || code === 86) return { label: "Heavy Snow Showers", icon: "🌨️" };
-  if (code >= 51 && code <= 67) return { label: "Rain / Mixed", icon: "🌧️" };
-  if (code >= 80 && code <= 82) return { label: "Rain Showers", icon: "🌦️" };
-  return { label: "Alpine Clouds", icon: "☁️" };
-}
+export default function ResortWeatherWidget({
+  resort: rawResort,
+}: {
+  resort: Resort;
+}) {
+  const { lang, t, localizeResort } = useLanguage();
+  const resort = localizeResort(rawResort);
 
-export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
   const [elevationMode, setElevationMode] = useState<"top" | "base">("top");
   const [stormDemo, setStormDemo] = useState(false);
   const [data, setData] = useState<LiveResortWeather | null>(null);
@@ -43,6 +40,25 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
 
   const targetElevation =
     elevationMode === "top" ? resort.elevation.top : resort.elevation.base;
+
+  const localeCode =
+    lang === "ja" ? "ja-JP" : lang === "zh" ? "zh-CN" : "en-US";
+
+  function describeWeatherCode(code: number): { label: string; icon: string } {
+    if (code === 0) return { label: t.weather.codes.clear, icon: "☀️" };
+    if (code <= 3) return { label: t.weather.codes.partlyCloudy, icon: "⛅" };
+    if (code === 45 || code === 48)
+      return { label: t.weather.codes.fog, icon: "🌫️" };
+    if (code >= 71 && code <= 77)
+      return { label: t.weather.codes.snowing, icon: "❄️" };
+    if (code === 85 || code === 86)
+      return { label: t.weather.codes.heavySnow, icon: "🌨️" };
+    if (code >= 51 && code <= 67)
+      return { label: t.weather.codes.rainMixed, icon: "🌧️" };
+    if (code >= 80 && code <= 82)
+      return { label: t.weather.codes.rainShowers, icon: "🌦️" };
+    return { label: t.weather.codes.clouds, icon: "☁️" };
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -109,7 +125,8 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
           const snow = [32, 45, 18, 28, 12, 5, 24][i] ?? 20;
           return {
             date: d.toISOString().split("T")[0] ?? "",
-            snowfallCm: elevationMode === "top" ? snow : Math.round(snow * 0.7),
+            snowfallCm:
+              elevationMode === "top" ? snow : Math.round(snow * 0.7),
             precipMm: snow,
             tempMaxC: (elevationMode === "top" ? -5 : -1) - (i % 3),
             tempMinC: (elevationMode === "top" ? -12 : -6) - (i % 3),
@@ -125,8 +142,16 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
   const condition = describeWeatherCode(displayData?.weatherCode ?? 1);
 
   const googleWeatherSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(
-    `${resort.name} ${resort.region} Japan weather snow forecast`
+    `${rawResort.name} ${rawResort.region} Japan weather snow forecast`
   )}`;
+
+  const monthlyValues = [
+    resort.monthlySnowfallCm.dec,
+    resort.monthlySnowfallCm.jan,
+    resort.monthlySnowfallCm.feb,
+    resort.monthlySnowfallCm.mar,
+    resort.monthlySnowfallCm.apr,
+  ];
 
   return (
     <div className="space-y-5 rounded-2xl border border-charcoal-light bg-charcoal p-5 sm:p-6">
@@ -134,11 +159,10 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-ice">
-            Live JMA / Open-Meteo Telemetry · GPS {resort.coordinates.lat}°N,{" "}
-            {resort.coordinates.lon}°E
+            {t.weather.eyebrow(resort.coordinates.lat, resort.coordinates.lon)}
           </p>
           <h2 className="mt-0.5 text-xl font-bold text-snow">
-            {resort.name} Weather & 7-Day Snow Forecast
+            {t.weather.title(resort.name)}
           </h2>
         </div>
 
@@ -154,7 +178,7 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
                   : "text-snow-muted hover:text-snow"
               }`}
             >
-              Peak ({resort.elevation.top}m)
+              {t.weather.peakBtn(resort.elevation.top)}
             </button>
             <button
               type="button"
@@ -165,7 +189,7 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
                   : "text-snow-muted hover:text-snow"
               }`}
             >
-              Base ({resort.elevation.base}m)
+              {t.weather.baseBtn(resort.elevation.base)}
             </button>
           </div>
 
@@ -178,78 +202,80 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
                 : "border-charcoal-light bg-charcoal-light/50 text-snow-muted hover:text-snow"
             }`}
           >
-            {stormDemo ? "🌨️ Jan Storm Demo ON" : "Preview Jan Storm"}
+            {stormDemo ? t.weather.stormDemoOn : t.weather.stormDemoOff}
           </button>
         </div>
       </div>
 
       {loading && !displayData ? (
         <div className="rounded-xl bg-charcoal-light/30 p-8 text-center text-sm text-snow-muted">
-          Loading live weather telemetry for {resort.name}...
+          {t.weather.loading(resort.name)}
         </div>
       ) : displayData ? (
         <>
           {/* Current Weather Cards */}
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
             <div className="rounded-xl border border-charcoal-light bg-charcoal-light/35 p-3.5">
-              <p className="text-[11px] uppercase text-snow-muted">Condition</p>
+              <p className="text-[11px] uppercase text-snow-muted">
+                {t.weather.conditionLabel}
+              </p>
               <p className="mt-1 text-lg font-extrabold text-snow">
                 {condition.icon} {condition.label}
               </p>
               <p className="mt-0.5 text-xs text-snow-muted">
-                At {targetElevation}m
+                {t.weather.atElevation(targetElevation)}
               </p>
             </div>
 
             <div className="rounded-xl border border-charcoal-light bg-charcoal-light/35 p-3.5">
               <p className="text-[11px] uppercase text-snow-muted">
-                Temperature
+                {t.weather.tempLabel}
               </p>
               <p className="mt-1 text-2xl font-extrabold text-snow">
                 {displayData.currentTempC}°C
               </p>
               <p className="mt-0.5 text-xs text-snow-muted">
-                Feels like {displayData.feelsLikeC}°C
+                {t.weather.feelsLike(displayData.feelsLikeC)}
               </p>
             </div>
 
             <div className="rounded-xl border border-charcoal-light bg-charcoal-light/35 p-3.5">
               <p className="text-[11px] uppercase text-snow-muted">
-                7-Day Snowfall
+                {t.weather.sevenDaySnowLabel}
               </p>
               <p className="mt-1 text-2xl font-extrabold text-ice">
                 {Math.round(sevenDaySnow * 10) / 10} cm
               </p>
               <p className="mt-0.5 text-xs text-snow-muted">
-                Base depth: {displayData.snowDepthCm} cm
+                {t.weather.baseDepth(displayData.snowDepthCm)}
               </p>
             </div>
 
             <div className="rounded-xl border border-charcoal-light bg-charcoal-light/35 p-3.5">
               <p className="text-[11px] uppercase text-snow-muted">
-                Freezing Level
+                {t.weather.freezingLevelLabel}
               </p>
               <p className="mt-1 text-2xl font-extrabold text-snow">
                 {displayData.freezingLevelM}m
               </p>
               <p className="mt-0.5 text-xs text-snow-muted">
                 {displayData.freezingLevelM < resort.elevation.base
-                  ? "All-mountain snow"
+                  ? t.weather.allMountainSnow
                   : displayData.freezingLevelM < resort.elevation.top
-                  ? "Snow at upper peak"
-                  : "Warm pre-season air"}
+                  ? t.weather.upperPeakSnow
+                  : t.weather.warmPreSeason}
               </p>
             </div>
 
             <div className="col-span-2 rounded-xl border border-charcoal-light bg-charcoal-light/35 p-3.5 sm:col-span-1">
               <p className="text-[11px] uppercase text-snow-muted">
-                Wind & Humidity
+                {t.weather.windHumidityLabel}
               </p>
               <p className="mt-1 text-2xl font-extrabold text-snow">
                 {displayData.windSpeedKmh} km/h
               </p>
               <p className="mt-0.5 text-xs text-snow-muted">
-                Humidity {displayData.humidityPct}%
+                {t.weather.humidity(displayData.humidityPct)}
               </p>
             </div>
           </div>
@@ -257,13 +283,13 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
           {/* 7-Day Daily Table / Cards */}
           <div>
             <h3 className="mb-2.5 text-xs font-bold uppercase tracking-wider text-snow-muted">
-              7-Day Daily Breakdown ({elevationMode === "top" ? "Summit" : "Base"} {targetElevation}m)
+              {t.weather.dailyBreakdownHeading(elevationMode, targetElevation)}
             </h3>
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-7">
               {displayData.daily.map((day) => {
                 const dayName = new Date(
                   `${day.date}T00:00:00`
-                ).toLocaleDateString("en-US", {
+                ).toLocaleDateString(localeCode, {
                   weekday: "short",
                   month: "short",
                   day: "numeric",
@@ -288,7 +314,7 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
                           : "bg-charcoal-dark text-snow-muted"
                       }`}
                     >
-                      {day.snowfallCm} cm snow
+                      {day.snowfallCm} {t.weather.snowUnit}
                     </span>
                     <span className="mt-1.5 text-xs font-semibold text-snow">
                       {day.tempMinC}° / {day.tempMaxC}°C
@@ -307,36 +333,27 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
                 <h3 className="text-xs font-bold uppercase tracking-wider text-ice">
-                  📊 Historical Monthly Snowfall Averages (10-Year Mean)
+                  {t.weather.monthlyTitle}
                 </h3>
                 <p className="mt-0.5 text-xs text-snow-muted">
-                  Average fresh snowfall per month & typical mid-winter peak base depth
+                  {t.weather.monthlySub}
                 </p>
               </div>
               <span className="rounded-lg bg-ice-deep/15 px-3 py-1 text-xs font-extrabold text-ice">
-                Peak Base Depth: ~{resort.monthlySnowfallCm.peakBaseCm} cm
+                {t.weather.peakBaseBadge(resort.monthlySnowfallCm.peakBaseCm)}
               </span>
             </div>
 
             <div className="mt-4 grid grid-cols-5 gap-2.5 text-center">
-              {(
-                [
-                  { label: "Dec", cm: resort.monthlySnowfallCm.dec },
-                  { label: "Jan", cm: resort.monthlySnowfallCm.jan },
-                  { label: "Feb", cm: resort.monthlySnowfallCm.feb },
-                  { label: "Mar", cm: resort.monthlySnowfallCm.mar },
-                  { label: "Apr", cm: resort.monthlySnowfallCm.apr },
-                ] as const
-              ).map((m) => {
-                const pct = Math.min(100, Math.round((m.cm / 500) * 100));
+              {t.weather.months.map((label, idx) => {
+                const cm = monthlyValues[idx] ?? 0;
+                const pct = Math.min(100, Math.round((cm / 500) * 100));
                 return (
                   <div
-                    key={m.label}
+                    key={label}
                     className="flex flex-col items-center rounded-xl border border-charcoal-light bg-charcoal p-3"
                   >
-                    <span className="text-xs font-bold text-snow">
-                      {m.label}
-                    </span>
+                    <span className="text-xs font-bold text-snow">{label}</span>
                     <div className="my-2 flex h-20 w-6 items-end overflow-hidden rounded-full bg-charcoal-dark p-0.5">
                       <div
                         style={{ height: `${pct}%` }}
@@ -344,10 +361,10 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
                       />
                     </div>
                     <span className="text-xs font-extrabold text-ice">
-                      {m.cm}cm
+                      {cm}cm
                     </span>
                     <span className="text-[10px] text-snow-muted">
-                      ~{(m.cm / 100).toFixed(1)}m
+                      ~{(cm / 100).toFixed(1)}m
                     </span>
                   </div>
                 );
@@ -359,9 +376,7 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
 
       {/* Live Webcams & Google Weather Action Bar */}
       <div className="flex flex-col gap-3 border-t border-charcoal-light pt-4 sm:flex-row sm:items-center sm:justify-between">
-        <span className="text-xs text-snow-muted">
-          Source: Open-Meteo High-Resolution JMA MSM / GFS Weather Models
-        </span>
+        <span className="text-xs text-snow-muted">{t.weather.sourceNote}</span>
         <div className="flex flex-wrap gap-2.5">
           <a
             href={resort.webcamUrl}
@@ -369,7 +384,7 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-xl bg-ice-deep px-4 py-2 text-xs font-bold text-charcoal transition hover:bg-ice"
           >
-            <span>📹 Watch Live Mountain Webcams</span>
+            <span>{t.weather.watchWebcams}</span>
             <span aria-hidden>↗</span>
           </a>
           <a
@@ -378,7 +393,7 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-4 py-2 text-xs font-semibold text-ice transition hover:border-ice"
           >
-            <span>🌤️ Check on Google Weather</span>
+            <span>{t.weather.checkGoogleWeather}</span>
             <span aria-hidden>↗</span>
           </a>
         </div>

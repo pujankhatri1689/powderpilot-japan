@@ -4,13 +4,16 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useFavorites } from "@/context/FavoritesContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { REGIONS, RESORTS, type Region } from "@/data/resorts";
+import { getLocalizedResort } from "@/i18n/resortTranslations";
 
 type SortKey = "vertical" | "travel" | "price" | "topElevation";
 
 export default function ResortDirectory() {
   const searchParams = useSearchParams();
   const { isFavorite, toggleFavorite, favoritesCount } = useFavorites();
+  const { t, localizeResort, localizeRegion } = useLanguage();
 
   const [selectedRegion, setSelectedRegion] = useState<Region | "All">("All");
   const [treeRunsOnly, setTreeRunsOnly] = useState(false);
@@ -39,11 +42,22 @@ export default function ResortDirectory() {
       }
       if (!query) return true;
 
+      // Match search query against English, Japanese, and Chinese resort data!
+      const jaResort = getLocalizedResort(resort, "ja");
+      const zhResort = getLocalizedResort(resort, "zh");
+
       return (
         resort.name.toLowerCase().includes(query) ||
+        resort.japaneseName.toLowerCase().includes(query) ||
         resort.area.toLowerCase().includes(query) ||
         resort.region.toLowerCase().includes(query) ||
-        resort.vibeTags.some((t) => t.toLowerCase().includes(query))
+        resort.vibeTags.some((tag) => tag.toLowerCase().includes(query)) ||
+        jaResort.name.toLowerCase().includes(query) ||
+        jaResort.area.toLowerCase().includes(query) ||
+        jaResort.vibeTags.some((tag) => tag.toLowerCase().includes(query)) ||
+        zhResort.name.toLowerCase().includes(query) ||
+        zhResort.area.toLowerCase().includes(query) ||
+        zhResort.vibeTags.some((tag) => tag.toLowerCase().includes(query))
       );
     }).sort((a, b) => {
       switch (sortBy) {
@@ -57,7 +71,14 @@ export default function ResortDirectory() {
           return a.dayPassYen - b.dayPassYen;
       }
     });
-  }, [showFavoritesOnly, isFavorite, selectedRegion, treeRunsOnly, searchQuery, sortBy]);
+  }, [
+    showFavoritesOnly,
+    isFavorite,
+    selectedRegion,
+    treeRunsOnly,
+    searchQuery,
+    sortBy,
+  ]);
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
@@ -67,24 +88,23 @@ export default function ResortDirectory() {
           href="/"
           className="inline-flex items-center gap-2 text-sm font-medium text-snow-muted transition hover:text-ice"
         >
-          <span aria-hidden>←</span> Back to Home
+          <span aria-hidden>←</span> {t.directory.backToHome}
         </Link>
         <span className="text-xs font-medium uppercase tracking-wider text-snow-muted">
-          {filteredResorts.length} of {RESORTS.length} resorts
+          {t.directory.resortsShowing(filteredResorts.length, RESORTS.length)}
         </span>
       </div>
 
       {/* Page Header */}
       <div className="mb-8">
         <p className="text-xs font-semibold uppercase tracking-widest text-ice">
-          Nagano · Niigata · Gunma
+          {t.directory.regionsHeader}
         </p>
         <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-snow sm:text-4xl">
-          Japan Resort Directory
+          {t.directory.title}
         </h1>
         <p className="mt-2 max-w-2xl text-sm text-snow-muted sm:text-base">
-          Filter by prefecture, tree-riding access, travel time from Tokyo, or
-          vertical drop to pick your next powder mission.
+          {t.directory.subtitle}
         </p>
       </div>
 
@@ -110,7 +130,7 @@ export default function ResortDirectory() {
                       : "bg-charcoal text-snow-muted hover:text-snow"
                   }`}
                 >
-                  {region}{" "}
+                  {localizeRegion(region)}{" "}
                   <span
                     className={`ml-1 text-xs ${
                       active ? "text-charcoal/80" : "text-snow-muted"
@@ -135,7 +155,7 @@ export default function ResortDirectory() {
               }`}
             >
               <span>{showFavoritesOnly ? "❤️" : "🤍"}</span>
-              <span>Liked ({favoritesCount})</span>
+              <span>{t.directory.likedBtn(favoritesCount)}</span>
             </button>
 
             {/* Tree Runs Toggle */}
@@ -148,7 +168,7 @@ export default function ResortDirectory() {
                   : "border-charcoal-light bg-charcoal text-snow-muted hover:text-snow"
               }`}
             >
-              <span aria-hidden>🌲</span> Tree Runs Allowed
+              <span aria-hidden>🌲</span> {t.directory.treeRunsBtn}
             </button>
           </div>
         </div>
@@ -160,7 +180,7 @@ export default function ResortDirectory() {
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search resort, area (e.g. Hakuba, Yuzawa), or vibe..."
+              placeholder={t.directory.searchPlaceholder}
               className="w-full rounded-xl border border-charcoal-light bg-charcoal px-4 py-2.5 text-sm text-snow placeholder-snow-muted focus:border-ice focus:outline-none"
             />
           </div>
@@ -170,7 +190,7 @@ export default function ResortDirectory() {
               htmlFor="sort-resorts"
               className="whitespace-nowrap text-xs font-medium text-snow-muted"
             >
-              Sort by:
+              {t.directory.sortByLabel}
             </label>
             <select
               id="sort-resorts"
@@ -178,10 +198,12 @@ export default function ResortDirectory() {
               onChange={(e) => setSortBy(e.target.value as SortKey)}
               className="w-full rounded-xl border border-charcoal-light bg-charcoal px-3 py-2.5 text-sm text-snow focus:border-ice focus:outline-none sm:w-auto"
             >
-              <option value="vertical">Biggest Vertical (m)</option>
-              <option value="topElevation">Highest Peak (m)</option>
-              <option value="travel">Fastest from Tokyo</option>
-              <option value="price">Cheapest Day Pass (¥)</option>
+              <option value="vertical">{t.directory.sortVertical}</option>
+              <option value="topElevation">
+                {t.directory.sortTopElevation}
+              </option>
+              <option value="travel">{t.directory.sortTravel}</option>
+              <option value="price">{t.directory.sortPrice}</option>
             </select>
           </div>
         </div>
@@ -191,30 +213,34 @@ export default function ResortDirectory() {
       {filteredResorts.length === 0 ? (
         <div className="rounded-2xl border border-charcoal-light bg-charcoal-light/20 p-12 text-center">
           <p className="text-base font-semibold text-snow">
-            No resorts match your filters.
+            {t.directory.noMatchTitle}
           </p>
           <p className="mt-1 text-sm text-snow-muted">
-            Try clearing your search or switching regions.
+            {t.directory.noMatchSub}
           </p>
           <button
             type="button"
             onClick={() => {
               setSelectedRegion("All");
               setTreeRunsOnly(false);
+              setShowFavoritesOnly(false);
               setSearchQuery("");
             }}
             className="mt-4 rounded-xl bg-ice-deep px-4 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice"
           >
-            Reset Filters
+            {t.directory.resetFilters}
           </button>
         </div>
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredResorts.map((resort) => {
+          {filteredResorts.map((rawResort) => {
+            const resort = localizeResort(rawResort);
             const hours = Math.floor(resort.fromTokyo.durationMinutes / 60);
             const mins = resort.fromTokyo.durationMinutes % 60;
             const durationLabel =
-              hours > 0 ? `${hours}h ${mins > 0 ? `${mins}m` : ""}` : `${mins}m`;
+              hours > 0
+                ? `${hours}h ${mins > 0 ? `${mins}m` : ""}`
+                : `${mins}m`;
 
             return (
               <article
@@ -239,23 +265,19 @@ export default function ResortDirectory() {
                     {/* Top Overlay Badges */}
                     <div className="absolute inset-x-3 top-3 flex items-center justify-between gap-2">
                       <span className="rounded-full bg-charcoal/85 px-3 py-1 text-xs font-semibold text-ice backdrop-blur-sm">
-                        {resort.region} · {resort.area}
+                        {localizeRegion(resort.region)} · {resort.area}
                       </span>
-                      
+
                       <div className="flex items-center gap-1.5">
                         {resort.terrain.treeRunsAllowed && (
-                          <span
-                            title="Official tree riding zones"
-                            className="rounded-full bg-charcoal/85 px-2.5 py-1 text-xs font-medium text-snow backdrop-blur-sm"
-                          >
-                            🌲 Trees OK
+                          <span className="rounded-full bg-charcoal/85 px-2.5 py-1 text-xs font-medium text-snow backdrop-blur-sm">
+                            {t.directory.treesOkBadge}
                           </span>
                         )}
                         {/* Quick Heart Button */}
                         <button
                           type="button"
                           onClick={(e) => toggleFavorite(resort.slug, e)}
-                          title={isFavorite(resort.slug) ? "Remove from Favorites" : "Add to Favorites"}
                           className={`flex h-7 w-7 items-center justify-center rounded-full backdrop-blur-sm transition active:scale-90 ${
                             isFavorite(resort.slug)
                               ? "bg-rose-500 text-white shadow-md shadow-rose-500/30"
@@ -272,10 +294,10 @@ export default function ResortDirectory() {
                     {/* Peak Elevation & Multi-Map Badge */}
                     <div className="absolute inset-x-3 bottom-2.5 flex items-center justify-between gap-2">
                       <span className="rounded-md bg-charcoal/85 px-2 py-0.5 text-[11px] font-semibold text-ice backdrop-blur-sm">
-                        🗺️ {resort.mapGallery.length} HD Maps & Photos
+                        {t.directory.hdMapsBadge(resort.mapGallery.length)}
                       </span>
                       <span className="rounded-md bg-charcoal/85 px-2 py-0.5 text-[11px] font-semibold text-snow-muted backdrop-blur-sm">
-                        Peak {resort.elevation.top}m
+                        {t.directory.peakBadge(resort.elevation.top)}
                       </span>
                     </div>
                   </Link>
@@ -319,7 +341,7 @@ export default function ResortDirectory() {
                     <dl className="grid grid-cols-3 gap-2 text-center">
                       <div className="rounded-lg bg-charcoal/70 p-2">
                         <dt className="text-[11px] uppercase text-snow-muted">
-                          Vertical
+                          {t.directory.verticalStat}
                         </dt>
                         <dd className="mt-0.5 text-sm font-bold text-snow">
                           {resort.elevation.vertical}m
@@ -327,7 +349,7 @@ export default function ResortDirectory() {
                       </div>
                       <div className="rounded-lg bg-charcoal/70 p-2">
                         <dt className="text-[11px] uppercase text-snow-muted">
-                          From Tokyo
+                          {t.directory.fromTokyoStat}
                         </dt>
                         <dd className="mt-0.5 text-sm font-bold text-snow">
                           ~{durationLabel}
@@ -335,7 +357,7 @@ export default function ResortDirectory() {
                       </div>
                       <div className="rounded-lg bg-charcoal/70 p-2">
                         <dt className="text-[11px] uppercase text-snow-muted">
-                          Day Pass
+                          {t.directory.dayPassStat}
                         </dt>
                         <dd className="mt-0.5 text-sm font-bold text-ice">
                           ¥{resort.dayPassYen.toLocaleString()}
@@ -346,19 +368,31 @@ export default function ResortDirectory() {
                     {/* Hours & Rental Quick Strip */}
                     <div className="mt-3 flex flex-wrap items-center justify-between gap-1 rounded-lg bg-charcoal/60 px-2.5 py-1.5 text-[11px] text-snow-muted">
                       <span>
-                        🕒 <strong className="text-snow">{resort.operatingHours.dayHours.split(" (")[0]}</strong>
+                        🕒{" "}
+                        <strong className="text-snow">
+                          {resort.operatingHours.dayHours.split(/[(（]/)[0]}
+                        </strong>
                       </span>
                       <span>
-                        🏂 Rental <strong className="text-snow">¥{resort.pricing.fullBoardRentalDayYen.toLocaleString()}</strong>
+                        🏂 {t.directory.rentalLabel}{" "}
+                        <strong className="text-snow">
+                          ¥{resort.pricing.fullBoardRentalDayYen.toLocaleString()}
+                        </strong>
                       </span>
                     </div>
 
                     {/* Terrain Breakdown Bar */}
                     <div className="mt-3">
                       <div className="flex justify-between text-[11px] text-snow-muted">
-                        <span>Beg {resort.terrain.beginner}%</span>
-                        <span>Int {resort.terrain.intermediate}%</span>
-                        <span>Adv {resort.terrain.advanced}%</span>
+                        <span>
+                          {t.directory.begShort} {resort.terrain.beginner}%
+                        </span>
+                        <span>
+                          {t.directory.intShort} {resort.terrain.intermediate}%
+                        </span>
+                        <span>
+                          {t.directory.advShort} {resort.terrain.advanced}%
+                        </span>
                       </div>
                       <div className="mt-1 flex h-1.5 overflow-hidden rounded-full bg-charcoal">
                         <div
@@ -382,13 +416,13 @@ export default function ResortDirectory() {
                         href={`/resorts/${resort.slug}`}
                         className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-charcoal px-4 py-2.5 text-xs font-semibold text-snow transition group-hover:bg-ice-deep group-hover:text-charcoal"
                       >
-                        Trail Map & Guide <span aria-hidden>→</span>
+                        {t.directory.cardCta} <span aria-hidden>→</span>
                       </Link>
                       <a
                         href={resort.trailMapUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        title="Open official trail map"
+                        title={t.directory.openOfficialMap}
                         className="inline-flex items-center justify-center rounded-xl border border-charcoal-light bg-charcoal px-3 py-2.5 text-xs font-semibold text-ice transition hover:border-ice"
                       >
                         🗺️
