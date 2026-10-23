@@ -178,7 +178,7 @@ export default function ResortDirectory() {
           </button>
         </div>
       ) : (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {filteredResorts.map((resort) => {
             const hours = Math.floor(resort.fromTokyo.durationMinutes / 60);
             const mins = resort.fromTokyo.durationMinutes % 60;
@@ -188,114 +188,149 @@ export default function ResortDirectory() {
             return (
               <article
                 key={resort.slug}
-                className="group flex flex-col justify-between rounded-2xl border border-charcoal-light bg-charcoal-light/35 p-5 transition hover:border-ice/60 hover:bg-charcoal-light/55"
+                className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-charcoal-light bg-charcoal-light/35 transition hover:border-ice/60 hover:bg-charcoal-light/55"
               >
                 <div>
-                  {/* Top Badge Row */}
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="rounded-full bg-ice-deep/15 px-3 py-1 text-xs font-semibold text-ice">
-                      {resort.region} · {resort.area}
-                    </span>
-                    {resort.terrain.treeRunsAllowed && (
-                      <span
-                        title="Official tree riding zones"
-                        className="rounded-full bg-charcoal px-2.5 py-1 text-xs font-medium text-snow-muted"
-                      >
-                        🌲 Trees OK
-                      </span>
-                    )}
-                  </div>
+                  {/* Resort Photo Header */}
+                  <Link
+                    href={`/resorts/${resort.slug}`}
+                    className="relative block h-44 w-full overflow-hidden bg-charcoal-dark"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={resort.heroImage}
+                      alt={`${resort.name} snow mountain view`}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/30 to-transparent" />
 
-                  {/* Resort Name */}
-                  <div className="mt-3">
-                    <Link
-                      href={`/resorts/${resort.slug}`}
-                      className="block text-xl font-bold text-snow transition group-hover:text-ice"
-                    >
-                      {resort.name}
-                    </Link>
-                    <p className="text-xs text-snow-muted">
-                      {resort.japaneseName}
+                    {/* Top Overlay Badges */}
+                    <div className="absolute inset-x-3 top-3 flex items-center justify-between gap-2">
+                      <span className="rounded-full bg-charcoal/85 px-3 py-1 text-xs font-semibold text-ice backdrop-blur-sm">
+                        {resort.region} · {resort.area}
+                      </span>
+                      {resort.terrain.treeRunsAllowed && (
+                        <span
+                          title="Official tree riding zones"
+                          className="rounded-full bg-charcoal/85 px-2.5 py-1 text-xs font-medium text-snow backdrop-blur-sm"
+                        >
+                          🌲 Trees OK
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Peak Elevation Badge */}
+                    <div className="absolute bottom-2.5 right-3 rounded-md bg-charcoal/85 px-2 py-0.5 text-[11px] font-semibold text-snow-muted backdrop-blur-sm">
+                      Peak {resort.elevation.top}m
+                    </div>
+                  </Link>
+
+                  <div className="p-5 pb-0">
+                    {/* Resort Name */}
+                    <div>
+                      <Link
+                        href={`/resorts/${resort.slug}`}
+                        className="block text-xl font-bold text-snow transition group-hover:text-ice"
+                      >
+                        {resort.name}
+                      </Link>
+                      <p className="text-xs text-snow-muted">
+                        {resort.japaneseName}
+                      </p>
+                    </div>
+
+                    {/* Description */}
+                    <p className="mt-2.5 line-clamp-2 text-sm leading-relaxed text-snow-muted">
+                      {resort.description}
                     </p>
-                  </div>
 
-                  {/* Description */}
-                  <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-snow-muted">
-                    {resort.description}
-                  </p>
-
-                  {/* Vibe Tags */}
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {resort.vibeTags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md bg-charcoal px-2.5 py-1 text-xs font-medium text-snow"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    {/* Vibe Tags */}
+                    <div className="mt-3.5 flex flex-wrap gap-1.5">
+                      {resort.vibeTags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-md bg-charcoal px-2.5 py-1 text-xs font-medium text-snow"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
-                <div className="mt-5 border-t border-charcoal-light pt-4">
-                  {/* Key Stats Grid */}
-                  <dl className="grid grid-cols-3 gap-2 text-center">
-                    <div className="rounded-lg bg-charcoal/70 p-2">
-                      <dt className="text-[11px] uppercase text-snow-muted">
-                        Vertical
-                      </dt>
-                      <dd className="mt-0.5 text-sm font-bold text-snow">
-                        {resort.elevation.vertical}m
-                      </dd>
-                    </div>
-                    <div className="rounded-lg bg-charcoal/70 p-2">
-                      <dt className="text-[11px] uppercase text-snow-muted">
-                        From Tokyo
-                      </dt>
-                      <dd className="mt-0.5 text-sm font-bold text-snow">
-                        ~{durationLabel}
-                      </dd>
-                    </div>
-                    <div className="rounded-lg bg-charcoal/70 p-2">
-                      <dt className="text-[11px] uppercase text-snow-muted">
-                        Day Pass
-                      </dt>
-                      <dd className="mt-0.5 text-sm font-bold text-ice">
-                        ¥{resort.dayPassYen.toLocaleString()}
-                      </dd>
-                    </div>
-                  </dl>
+                <div className="p-5 pt-4">
+                  <div className="border-t border-charcoal-light pt-4">
+                    {/* Key Stats Grid */}
+                    <dl className="grid grid-cols-3 gap-2 text-center">
+                      <div className="rounded-lg bg-charcoal/70 p-2">
+                        <dt className="text-[11px] uppercase text-snow-muted">
+                          Vertical
+                        </dt>
+                        <dd className="mt-0.5 text-sm font-bold text-snow">
+                          {resort.elevation.vertical}m
+                        </dd>
+                      </div>
+                      <div className="rounded-lg bg-charcoal/70 p-2">
+                        <dt className="text-[11px] uppercase text-snow-muted">
+                          From Tokyo
+                        </dt>
+                        <dd className="mt-0.5 text-sm font-bold text-snow">
+                          ~{durationLabel}
+                        </dd>
+                      </div>
+                      <div className="rounded-lg bg-charcoal/70 p-2">
+                        <dt className="text-[11px] uppercase text-snow-muted">
+                          Day Pass
+                        </dt>
+                        <dd className="mt-0.5 text-sm font-bold text-ice">
+                          ¥{resort.dayPassYen.toLocaleString()}
+                        </dd>
+                      </div>
+                    </dl>
 
-                  {/* Terrain Breakdown Bar */}
-                  <div className="mt-3">
-                    <div className="flex justify-between text-[11px] text-snow-muted">
-                      <span>Beg {resort.terrain.beginner}%</span>
-                      <span>Int {resort.terrain.intermediate}%</span>
-                      <span>Adv {resort.terrain.advanced}%</span>
+                    {/* Terrain Breakdown Bar */}
+                    <div className="mt-3">
+                      <div className="flex justify-between text-[11px] text-snow-muted">
+                        <span>Beg {resort.terrain.beginner}%</span>
+                        <span>Int {resort.terrain.intermediate}%</span>
+                        <span>Adv {resort.terrain.advanced}%</span>
+                      </div>
+                      <div className="mt-1 flex h-1.5 overflow-hidden rounded-full bg-charcoal">
+                        <div
+                          style={{ width: `${resort.terrain.beginner}%` }}
+                          className="bg-emerald-400"
+                        />
+                        <div
+                          style={{ width: `${resort.terrain.intermediate}%` }}
+                          className="bg-ice-deep"
+                        />
+                        <div
+                          style={{ width: `${resort.terrain.advanced}%` }}
+                          className="bg-rose-500"
+                        />
+                      </div>
                     </div>
-                    <div className="mt-1 flex h-1.5 overflow-hidden rounded-full bg-charcoal">
-                      <div
-                        style={{ width: `${resort.terrain.beginner}%` }}
-                        className="bg-emerald-400"
-                      />
-                      <div
-                        style={{ width: `${resort.terrain.intermediate}%` }}
-                        className="bg-ice-deep"
-                      />
-                      <div
-                        style={{ width: `${resort.terrain.advanced}%` }}
-                        className="bg-rose-500"
-                      />
+
+                    {/* Card Footer CTA */}
+                    <div className="mt-4 flex gap-2">
+                      <Link
+                        href={`/resorts/${resort.slug}`}
+                        className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-charcoal px-4 py-2.5 text-xs font-semibold text-snow transition group-hover:bg-ice-deep group-hover:text-charcoal"
+                      >
+                        Trail Map & Guide <span aria-hidden>→</span>
+                      </Link>
+                      <a
+                        href={resort.trailMapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title="Open official trail map"
+                        className="inline-flex items-center justify-center rounded-xl border border-charcoal-light bg-charcoal px-3 py-2.5 text-xs font-semibold text-ice transition hover:border-ice"
+                      >
+                        🗺️
+                      </a>
                     </div>
                   </div>
-
-                  {/* Card Footer CTA */}
-                  <Link
-                    href={`/resorts/${resort.slug}`}
-                    className="mt-4 flex w-full items-center justify-center gap-1.5 rounded-xl bg-charcoal px-4 py-2.5 text-xs font-semibold text-snow transition group-hover:bg-ice-deep group-hover:text-charcoal"
-                  >
-                    View Mountain Guide <span aria-hidden>→</span>
-                  </Link>
                 </div>
               </article>
             );
