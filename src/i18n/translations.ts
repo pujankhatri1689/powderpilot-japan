@@ -192,14 +192,10 @@ export const UI_TEXT = {
       saved: "Saved",
       tabs: {
         overview: "🏔️ Overview",
-        overviewBadge: (v: number) => `${v}m Vert`,
         tickets: "🎟️ Tickets & Rentals",
         maps: "🗺️ Trail Maps & Runs",
-        mapsBadge: (n: number) => `${n} HD`,
         weather: "❄️ Weather & Webcams",
-        weatherBadge: "Forecast",
         onsen: "♨️ Onsen, Village & Access",
-        onsenBadge: (n: number) => `${n} Spots`,
       },
       overview: {
         eyebrow: "Mountain Profile & General Overview",
@@ -436,14 +432,10 @@ export const UI_TEXT = {
       saved: "保存済み",
       tabs: {
         overview: "🏔️ 基本情報・概要",
-        overviewBadge: (v: number) => `標高差${v}m`,
         tickets: "🎟️ リフト券・レンタル料金",
         maps: "🗺️ コースマップ・名物コース",
-        mapsBadge: (n: number) => `${n}枚`,
         weather: "❄️ 天気・降雪・ライブカメラ",
-        weatherBadge: "予報",
         onsen: "♨️ 温泉・周辺グルメ・アクセス",
-        onsenBadge: (n: number) => `${n}スポット`,
       },
       overview: {
         eyebrow: "マウンテンプロフィール ＆ ゲレンデ概要",
@@ -679,14 +671,10 @@ export const UI_TEXT = {
       saved: "已收藏",
       tabs: {
         overview: "🏔️ 雪场概况",
-        overviewBadge: (v: number) => `落差${v}m`,
         tickets: "🎟️ 缆车票与租赁价格",
         maps: "🗺️ 高清雪道图与名道",
-        mapsBadge: (n: number) => `${n}张高清`,
         weather: "❄️ 天气预报与实时监控",
-        weatherBadge: "预报",
         onsen: "♨️ 温泉、美食街与交通",
-        onsenBadge: (n: number) => `${n}个地点`,
       },
       overview: {
         eyebrow: "雪山档案 & 综合概况",
