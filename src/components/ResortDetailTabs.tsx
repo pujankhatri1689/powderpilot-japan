@@ -109,7 +109,7 @@ export default function ResortDetailTabs({
                 href={resort.officialUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-emerald-400/50 bg-charcoal/85 px-3 py-1 text-xs font-bold text-emerald-300 backdrop-blur-sm transition hover:border-emerald-300 hover:text-emerald-200"
+                className="hidden rounded-full border border-emerald-400/50 bg-charcoal/85 px-3 py-1 text-xs font-bold text-emerald-300 backdrop-blur-sm transition hover:border-emerald-300 hover:text-emerald-200 lg:inline-flex"
               >
                 {t.detail.verifiedSeason} <span aria-hidden>↗</span>
               </a>
