@@ -70,8 +70,13 @@ function parseSingleForecast(
 }
 
 function buildStormSimulation(resort: Resort, index: number): ResortWeather {
-  const baseDump =
-    resort.region === "Niigata" ? 18 : resort.region === "Nagano" ? 15 : 13;
+  // Sea-of-Japan-facing prefectures catch the heaviest lake-effect snow.
+  const heavyRegions: Resort["region"][] = ["Niigata", "Yamagata", "Aomori", "Akita", "Hokkaido"];
+  const baseDump = heavyRegions.includes(resort.region)
+    ? 18
+    : resort.region === "Nagano"
+    ? 15
+    : 13;
   const pattern = [1.4, 2.1, 0.8, 1.9, 1.2, 0.5, 1.6];
   const today = new Date();
 

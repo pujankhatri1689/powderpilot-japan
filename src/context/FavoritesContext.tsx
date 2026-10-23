@@ -23,6 +23,7 @@ export function FavoritesProvider({ children }: { children: React.ReactNode }) {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed)) {
+          // eslint-disable-next-line react-hooks/set-state-in-effect
           setFavorites(parsed);
         }
       }

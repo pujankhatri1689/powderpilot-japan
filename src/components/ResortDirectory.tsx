@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useFavorites } from "@/context/FavoritesContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { REGIONS, RESORTS, type Region } from "@/data/resorts";
@@ -17,15 +17,11 @@ export default function ResortDirectory() {
 
   const [selectedRegion, setSelectedRegion] = useState<Region | "All">("All");
   const [treeRunsOnly, setTreeRunsOnly] = useState(false);
-  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(
+    () => searchParams.get("favorites") === "true",
+  );
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortKey>("vertical");
-
-  useEffect(() => {
-    if (searchParams.get("favorites") === "true") {
-      setShowFavoritesOnly(true);
-    }
-  }, [searchParams]);
 
   const filteredResorts = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();

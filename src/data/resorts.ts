@@ -1,4 +1,14 @@
-export type Region = "Nagano" | "Niigata" | "Gunma";
+export type Region =
+  | "Nagano"
+  | "Niigata"
+  | "Gunma"
+  | "Fukushima"
+  | "Yamagata"
+  | "Aomori"
+  | "Iwate"
+  | "Akita"
+  | "Miyagi"
+  | "Hokkaido";
 
 export interface MapSlide {
   title: string;
@@ -1648,9 +1658,1704 @@ export const RESORTS: Resort[] = [
     bestFor: "Snowsurfers and carvers loving long, flowing top-to-bottom gondola laps",
     officialUrl: "https://www.marunuma.jp/winter/",
   },
+  {
+    slug: "madarao-kogen",
+    name: "Madarao Mountain Resort",
+    japaneseName: "斑尾高原スキー場",
+    region: "Nagano",
+    area: "Iiyama / Madarao",
+    description:
+      "Nicknamed 'Madapow', Madarao is Japan's undisputed capital of official lift-served tree riding. Located in the heavy-snow belt above Iiyama Station, it features over 13 groomed and gladed official tree-run courses, natural halfpipes (SAWA), and a bowl-shaped layout where every run funnels safely back to the main base.",
+    address: {
+      postalCode: "〒389-2257",
+      english: "11492-321 Madarao Kogen, Iiyama-shi, Nagano 389-2257, Japan",
+      japanese: "長野県飯山市斑尾高原11492-321",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Madarao+Mountain+Resort+Iiyama+Nagano+Japan",
+    },
+    heroImage: "/trail-maps/madarao-kogen-photo.jpg",
+    trailMapImage: "/trail-maps/madarao-kogen.jpg",
+    mapGallery: [
+      {
+        title: "Madarao Mountain Resort Official Map & Tree Run Guide",
+        caption:
+          "Official trail map detailing all 32 courses including NINJA, SAWA I–III Natural Pipes, Powder Theater, Crystal Bowl, and Tangram connection.",
+        imageUrl: "/trail-maps/madarao-kogen.jpg",
+        badge: "Official Tree Run Map",
+      },
+      {
+        title: "Madarao 3D Lift & Bowl Layout",
+        caption:
+          "Aerial overview of Madarao's natural bowl geometry and chairlift network.",
+        imageUrl: "/trail-maps/madarao-kogen-aerial.jpg",
+        badge: "3D Aerial Layout",
+      },
+      {
+        title: "Overlooking the Madarao Bowl on a Bluebird Day",
+        caption:
+          "Snowboarders taking in the view across Madarao's central bowl and gladed ridges.",
+        imageUrl: "/trail-maps/madarao-kogen-photo.jpg",
+        badge: "Slope Photo",
+      },
+    ],
+    trailMapUrl: "https://www.madarao.jp/ski/course",
+    webcamUrl: "https://www.madarao.jp/ski",
+    operatingHours: {
+      seasonWindow: "Mid December – Late March",
+      dayHours: "08:30 – 16:30",
+      nightSkiing: "16:30 – 21:00 (Select Saturdays & peak holiday dates)",
+      earlyBird: "Standard 08:30 Super Quad Lift start",
+      notes: "Optional Mt.3 Pass or Tangram All-Mountain pass unlocks the neighboring Tangram Ski Circus bowls.",
+    },
+    pricing: {
+      oneDayAdultYen: 6500,
+      halfDayYen: 5500,
+      twoDayYen: 12000,
+      nightPassYen: 2500,
+      childOneDayYen: 3500,
+      seniorOneDayYen: 6000,
+      seasonPassYen: 68000,
+      seasonPassName: "Madarao Mountain Pass",
+      fullBoardRentalDayYen: 5500,
+      wearRentalDayYen: 4500,
+      notes: "Upgrading to the Madarao + Tangram Common Pass (+¥500) opens 51 combined courses.",
+    },
+    snowboarderIntel: {
+      liftFleet: "1 High-Speed Hooded Super Quad + 3 Quads + 6 Pair Lifts",
+      terrainPark: "Free Ride Park + Natural Pipe (SAWA I/II/III) + NINJA 7m log rail feature",
+      flatSpotWarning: "Low — the natural amphitheater bowl funnels riders back to the base without flat cat-tracks, though the Tangram traverse requires speed.",
+      treeRunRules: "Gold Standard — 13+ official, named, patrolled gladed tree-run courses open to all riders without special registration.",
+    },
+    monthlySnowfallCm: {
+      dec: 210,
+      jan: 330,
+      feb: 280,
+      mar: 160,
+      apr: 30,
+      peakBaseCm: 340,
+    },
+    onsenAndVillage: [
+      {
+        name: "Madarao Kogen Hotel Onsen",
+        japaneseName: "斑尾高原ホテル 温泉",
+        category: "Onsen",
+        description:
+          "Alkaline simple thermal spring right at the base of the slopes, ideal for soothing sore legs after tree laps.",
+        info: "06:00 – 10:00 / 12:00 – 23:00 · ¥1,000 Day Use",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Madarao+Kogen+Hotel+Onsen+Nagano",
+      },
+      {
+        name: "Aki's Pub & Cafe / Heidi Restaurant",
+        japaneseName: "レストラン ハイジ・Aki's Pub",
+        category: "Food & Apres",
+        description:
+          "Classic slopeside burger, curry, and craft beer spots right at the bottom of the main quad lifts.",
+        info: "Slopeside at Base Area",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Restaurant+Heidi+Madarao+Kogen",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Powder Wave 2 & Powder Theater",
+        level: "Advanced",
+        note: "Spacious, perfectly spaced birch glades holding deep 'Madapow' stashes.",
+      },
+      {
+        name: "SAWA I / II / III Natural Pipe",
+        level: "Advanced",
+        note: "Natural gully terrain forming an organic snowsurf halfpipe through the trees.",
+      },
+      {
+        name: "Crystal Bowl",
+        level: "Advanced",
+        note: "Steep, sustained north-facing tree bowl served by Lift No. 13.",
+      },
+      {
+        name: "Paradise & Utopia",
+        level: "Beginner",
+        note: "Wide, forgiving groomers winding from the upper ridge to the base.",
+      },
+    ],
+    coordinates: { lat: 36.8519, lon: 138.2858 },
+    elevation: { base: 910, top: 1382, vertical: 472 },
+    terrain: {
+      beginner: 30,
+      intermediate: 35,
+      advanced: 35,
+      runs: 32,
+      lifts: 10,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 6500,
+    fromTokyo: {
+      durationMinutes: 130,
+      summary: "Hokuriku Shinkansen to Iiyama Station (100 mins) + 30-min direct community bus",
+      station: "Iiyama Station (飯山駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Iiyama+Station+Nagano+Japan",
+    },
+    vibeTags: ["#1 Tree Runs", "Madapow", "Natural Halfpipes"],
+    bestFor: "Snowboarders obsessed with accessible, patrolled tree runs and natural gullies",
+    officialUrl: "https://www.madarao.jp/ski/",
+  },
+  {
+    slug: "naeba",
+    name: "Naeba Ski Resort",
+    japaneseName: "苗場スキー場",
+    region: "Niigata",
+    area: "Yuzawa / Mt. Naeba",
+    description:
+      "One of Japan's most iconic flagship resorts, rising 889 vertical meters above the massive ski-in/ski-out Naeba Prince Hotel. Linked directly to Kagura via the 5.5km Dragondola (Japan's longest gondola), Naeba combines steep World Cup faces, Splash Bowl powder zones, and vibrant night skiing.",
+    address: {
+      postalCode: "〒949-6292",
+      english: "202 Mikuni, Yuzawa-machi, Minamiuonuma-gun, Niigata 949-6292, Japan",
+      japanese: "新潟県南魚沼郡湯沢町三国202",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Naeba+Ski+Resort+Yuzawa+Niigata+Japan",
+    },
+    heroImage: "/trail-maps/naeba-photo.jpg",
+    trailMapImage: "/trail-maps/naeba.jpg",
+    mapGallery: [
+      {
+        title: "Naeba Ski Resort 2025–2026 Official Course Map",
+        caption:
+          "Complete trail map showing Takenokoyama summit (1,789m), Prince 1st & 2nd Gondolas, Splash Bowl, and the 5,481m Dragondola link to Tashiro/Kagura.",
+        imageUrl: "/trail-maps/naeba.jpg",
+        badge: "2025–2026 Official Map",
+      },
+      {
+        title: "Naeba 3D Lift & Gondola Network",
+        caption:
+          "Aerial view of the Naeba valley, three gondolas, and high-speed quad network.",
+        imageUrl: "/trail-maps/naeba-aerial.jpg",
+        badge: "3D Aerial Layout",
+      },
+      {
+        title: "Frost-Covered Birch Trees on Upper Mt. Takenoko",
+        caption:
+          "Crisp winter morning at the top of the Prince Gondola.",
+        imageUrl: "/trail-maps/naeba-photo.jpg",
+        badge: "Slope Photo",
+      },
+    ],
+    trailMapUrl: "https://www.princehotels.co.jp/ski/naeba/winter/coursemap/",
+    webcamUrl: "https://www.princehotels.co.jp/ski/naeba/winter/",
+    operatingHours: {
+      seasonWindow: "Mid December – Early April",
+      dayHours: "08:00 – 17:00",
+      nightSkiing: "16:00 – 20:30 daily across the illuminated front face",
+      earlyBird: "08:00 daily start on main base lifts",
+      notes: "The Mt. Naeba Joint Pass unlocks the 5.5km Dragondola across to Tashiro & Kagura.",
+    },
+    pricing: {
+      oneDayAdultYen: 7200,
+      halfDayYen: 5700,
+      twoDayYen: 13800,
+      nightPassYen: 3000,
+      childOneDayYen: 0,
+      seniorOneDayYen: 6500,
+      seasonPassYen: 85000,
+      seasonPassName: "Mt. Naeba Season Pass",
+      fullBoardRentalDayYen: 6000,
+      wearRentalDayYen: 5000,
+      notes: "Kids (elementary school and under) ride FREE at all Prince Snow Resorts! Mt. Naeba Joint Pass (Naeba + Kagura) is ¥9,000.",
+    },
+    snowboarderIntel: {
+      liftFleet: "3 Gondolas (including 5,481m Dragondola + Prince No. 1 & No. 2 Gondolas) + 4 High-Speed Quads + 5 Pair Lifts",
+      terrainPark: "Naeba Snow Park (kickers, jibs, and banks along the No. 4 High-Speed Lift)",
+      flatSpotWarning: "Low on the main faces; moderate on the long beginner Dragondola Connector trail.",
+      treeRunRules: "Designated ungroomed Powder Fields (Splash Bowl, Men's & Women's Riesen, Takenokoyama) open inside the resort boundary; strictly obey red 'No Patrol / Ski Area Boundary' signs.",
+    },
+    monthlySnowfallCm: {
+      dec: 195,
+      jan: 310,
+      feb: 265,
+      mar: 170,
+      apr: 35,
+      peakBaseCm: 310,
+    },
+    onsenAndVillage: [
+      {
+        name: "Hiuchi no Yu Onsen (Naeba Prince Hotel)",
+        japaneseName: "火打の湯 (苗場プリンスホテル)",
+        category: "Onsen",
+        description:
+          "Natural indoor and outdoor hot spring baths located directly at the base of the slopes.",
+        info: "14:00 – 22:00 · ¥1,500 Day Use",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Naeba+Prince+Hotel+Onsen+Niigata",
+      },
+      {
+        name: "Naeba Onsen Village Dining Street",
+        japaneseName: "苗場温泉街 飲食店通り",
+        category: "Food & Apres",
+        description:
+          "Lively strip of izakayas, ramen shops, okonomiyaki joints, and craft beer bars a 5-minute walk from the South Gate.",
+        info: "5-min walk from Base",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Naeba+Ski+Resort+Restaurants",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Splash Bowl & Takenokoyama Face",
+        level: "Advanced",
+        note: "1,789m summit powder bowl and steep 32° ungroomed faces.",
+      },
+      {
+        name: "Men's Riesen Slalom (男子リーゼン)",
+        level: "Advanced",
+        note: "Famous steep, wide FIS World Cup pitch plummeting down toward the hotel.",
+      },
+      {
+        name: "筍平 (Takenokodaira) & Daishamen Cruiser",
+        level: "Intermediate",
+        note: "4,000m top-to-bottom combination from the upper romance lift to the base.",
+      },
+      {
+        name: "No. 4 & No. 5 Front Night Slopes",
+        level: "Beginner",
+        note: "Ultra-wide, brightly lit base runs open until 20:30 every night.",
+      },
+    ],
+    coordinates: { lat: 36.7911, lon: 138.7789 },
+    elevation: { base: 900, top: 1789, vertical: 889 },
+    terrain: {
+      beginner: 42,
+      intermediate: 25,
+      advanced: 33,
+      runs: 24,
+      lifts: 12,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 7200,
+    fromTokyo: {
+      durationMinutes: 125,
+      summary: "Joetsu Shinkansen to Echigo-Yuzawa Station (75 mins) + 45-min Express Bus to Naeba",
+      station: "Echigo-Yuzawa Station (越後湯沢駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Echigo-Yuzawa+Station+Niigata+Japan",
+    },
+    vibeTags: ["889m Vertical", "Dragondola Link", "Night Skiing"],
+    bestFor: "All-mountain riders wanting big vertical, 3 gondolas, and direct Kagura access",
+    officialUrl: "https://www.princehotels.co.jp/ski/naeba/winter/",
+  },
+  {
+    slug: "minakami-houdaigi",
+    name: "Gunma Minakami Hodaigi",
+    japaneseName: "群馬みなかみほうだいぎスキー場",
+    region: "Gunma",
+    area: "Minakami",
+    description:
+      "Perched high in the northern Minakami snowbelt with a 1,400m summit and north-facing slopes, Minakami Hodaigi catches heavy Sea of Japan storms spilling over the Tanigawa range. Featuring steep 40° powder faces, official tree-run zones, and wide family cruisers, it is Gunma's most balanced high-snowfall resort.",
+    address: {
+      postalCode: "〒379-1721",
+      english: "3839-1 Fujiwara, Minakami-machi, Tone-gun, Gunma 379-1721, Japan",
+      japanese: "群馬県利根郡みなかみ町藤原3839-1",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Gunma+Minakami+Hodaigi+Ski+Resort+Japan",
+    },
+    heroImage: "/trail-maps/minakami-houdaigi-photo.jpg",
+    trailMapImage: "/trail-maps/minakami-houdaigi-2.jpg",
+    mapGallery: [
+      {
+        title: "Gunma Minakami Hodaigi Official Labeled Course Map",
+        caption:
+          "Complete trail map showing all 16 courses, 40° Eagle face, uncompacted powder zones, Tree Run areas (Crest & Sanders), and Gravity Pipe.",
+        imageUrl: "/trail-maps/minakami-houdaigi-2.jpg",
+        badge: "Labeled Course Map",
+      },
+      {
+        title: "Hodaigi Mountain Panorama Illustration",
+        caption:
+          "Clean topographic artwork illustrating the north-facing bowl and ridge lines.",
+        imageUrl: "/trail-maps/minakami-houdaigi.jpg",
+        badge: "Mountain Panorama",
+      },
+      {
+        title: "Snowboarder Laying Down a Deep Carve at Hodaigi",
+        caption:
+          "Crisp inland Gunma snow on Hodaigi's wide intermediate groomers.",
+        imageUrl: "/trail-maps/minakami-houdaigi-photo.jpg",
+        badge: "Slope Photo",
+      },
+    ],
+    trailMapUrl: "https://hodaigi.jp/course/",
+    webcamUrl: "https://hodaigi.jp/",
+    operatingHours: {
+      seasonWindow: "Mid December – Late March",
+      dayHours: "08:30 – 16:30 (08:00 start on weekends & holidays)",
+      nightSkiing: "No night skiing",
+      earlyBird: "08:00 weekend & holiday lift opening",
+      notes: "Part of the Minakami area shuttle network from Jomo-Kogen and Minakami stations.",
+    },
+    pricing: {
+      oneDayAdultYen: 5900,
+      halfDayYen: 4900,
+      twoDayYen: 11000,
+      nightPassYen: null,
+      childOneDayYen: 3400,
+      seniorOneDayYen: 5300,
+      seasonPassYen: 55000,
+      seasonPassName: "Hodaigi Season Pass (or Powder5 Gunma)",
+      fullBoardRentalDayYen: 5200,
+      wearRentalDayYen: 4200,
+      notes: "Also eligible for the Powder5 Gunma time-ticket pass shared across 5 northern Gunma resorts.",
+    },
+    snowboarderIntel: {
+      liftFleet: "2 High-Speed Quad Lifts (No. 8 & No. 9 Quads) + 4 Pair Lifts",
+      terrainPark: "Main Park + Mini Park + Gravity Pipe + Continuous Wave track",
+      flatSpotWarning: "Low — upper mountain has strong pitch; only the No. 2 West Connector (0°–5°) requires carrying speed.",
+      treeRunRules: "Official designated Tree Run areas ('Crest' and 'Sanders') plus 5 uncompacted powder courses open during winter storms.",
+    },
+    monthlySnowfallCm: {
+      dec: 185,
+      jan: 295,
+      feb: 255,
+      mar: 165,
+      apr: 30,
+      peakBaseCm: 310,
+    },
+    onsenAndVillage: [
+      {
+        name: "Takaragawa Onsen Osenkaku",
+        japaneseName: "宝川温泉 汪泉閣",
+        category: "Onsen",
+        description:
+          "World-famous riverside giant rotenburo (open-air baths) nestled in the snowy Fujiwara gorge just 10 minutes below Hodaigi.",
+        info: "09:00 – 16:30 · ¥1,500 Day Use",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Takaragawa+Onsen+Osenkaku+Minakami+Gunma",
+      },
+      {
+        name: "Minakami Onsen Town",
+        japaneseName: "水上温泉街",
+        category: "Village Landmark",
+        description:
+          "ClassicTone River hot spring town with footbaths, craft beer (Octone Brewing), and cozy ryokans.",
+        info: "25 mins by bus",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Minakami+Onsen+Gunma+Japan",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Eagle Course (イーグル · 40° Max)",
+        level: "Advanced",
+        note: "Steepest ungroomed powder wall on the mountain at 40° maximum pitch.",
+      },
+      {
+        name: "Nandaira (成平 · 1,400m) & Crest Tree Run",
+        level: "Advanced",
+        note: "Long 1.4km powder ridge run flanking the Crest gladed tree zone.",
+      },
+      {
+        name: "No. 10 & No. 5 West Cruisers",
+        level: "Intermediate",
+        note: "1,050m–1,060m high-altitude groomers served by the No. 9 Quad.",
+      },
+      {
+        name: "Family Gelande & Tanpopo Course",
+        level: "Beginner",
+        note: "Over 1km of gentle 8°–11° wide slopes at the base.",
+      },
+    ],
+    coordinates: { lat: 36.8358, lon: 139.0789 },
+    elevation: { base: 830, top: 1400, vertical: 570 },
+    terrain: {
+      beginner: 30,
+      intermediate: 40,
+      advanced: 30,
+      runs: 16,
+      lifts: 6,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 5900,
+    fromTokyo: {
+      durationMinutes: 120,
+      summary: "Joetsu Shinkansen to Jomo-Kogen Station (66 mins) + 50-min bus to Hodaigi",
+      station: "Jomo-Kogen Station (上毛高原駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Jomo-Kogen+Station+Gunma+Japan",
+    },
+    vibeTags: ["40° Steep Face", "Tree Run Zones", "Takaragawa Onsen"],
+    bestFor: "Freeriders and families wanting uncrowded Minakami powder and riverside onsens",
+    officialUrl: "https://hodaigi.jp/",
+  },
+  {
+    slug: "nekoma-mountain",
+    name: "Hoshino Resorts NEKOMA Mountain",
+    japaneseName: "星野リゾート ネコマ マウンテン",
+    region: "Fukushima",
+    area: "Bandai / Urabandai",
+    description:
+      "One of Tohoku's largest and most dynamic snow resorts, created by uniting the sun-drenched South Area (formerly Alts Bandai overlooking Lake Inawashiro) with the ultra-cold, micro-fine powder North Area (formerly Nekoma) via the Nya-Alts connecting chairlift across Mt. Nekoma.",
+    address: {
+      postalCode: "〒969-3396",
+      english: "6838-68 Kiyohira, Sarashina, Bandai-machi, Yama-gun, Fukushima 969-3396, Japan",
+      japanese: "福島県耶麻郡磐梯町大字更科字清水平6838-68",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Hoshino+Resorts+NEKOMA+Mountain+Fukushima+Japan",
+    },
+    heroImage: "/trail-maps/nekoma-mountain-photo.jpg",
+    trailMapImage: "/trail-maps/nekoma-mountain.jpg",
+    mapGallery: [
+      {
+        title: "NEKOMA Mountain Official Dual-Peak Trail Map",
+        caption:
+          "Official illustrated map showing the South Gate (Bandai side), North Gate (Urabandai side), Connecting Lift, Tree Run Zones, and Freestyle Parks.",
+        imageUrl: "/trail-maps/nekoma-mountain.jpg",
+        badge: "Official Dual-Area Map",
+      },
+      {
+        title: "NEKOMA Mountain English Course & Tree Zone Guide",
+        caption:
+          "Detailed English brochure map with named runs (Deep, Excite, Devil, Frozen, White Valley, Black Valley) and Tree Run Zones A, B, and C.",
+        imageUrl: "/trail-maps/nekoma-mountain-2.jpg",
+        badge: "English Brochure Map",
+      },
+      {
+        title: "Slashing Micro-Fine Powder on NEKOMA North Area",
+        caption:
+          "Cold inland Urabandai powder preserved on the north-facing Nekoma slopes.",
+        imageUrl: "/trail-maps/nekoma-mountain-photo.jpg",
+        badge: "Powder Action",
+      },
+    ],
+    trailMapUrl: "https://www.nekoma.co.jp/en/",
+    webcamUrl: "https://www.nekoma.co.jp/",
+    operatingHours: {
+      seasonWindow: "Late November – Early May (5+ month season on North Area)",
+      dayHours: "08:30 – 16:00 (North Area opens 07:30 in spring)",
+      nightSkiing: "17:00 – 21:00 on selected Saturdays & holidays (South Area Night Park & lower slopes)",
+      earlyBird: "First Ride 08:15 (15 mins before general opening on select lifts)",
+      notes: "Check the Nya-Alts Chair connecting lift closing time (14:30–14:50) so you return to your starting base gate on time!",
+    },
+    pricing: {
+      oneDayAdultYen: 5700,
+      halfDayYen: 4900,
+      twoDayYen: 11000,
+      nightPassYen: 2200,
+      childOneDayYen: 2600,
+      seniorOneDayYen: 5200,
+      seasonPassYen: 61000,
+      seasonPassName: "NEKOMA Mountain Season Pass",
+      fullBoardRentalDayYen: 5500,
+      wearRentalDayYen: 4500,
+      notes: "Online advance purchase saves ¥400–¥800 off window ticket prices.",
+    },
+    snowboarderIntel: {
+      liftFleet: "13 Lifts (4 High-Speed Quad Lifts including Alts Express, Black Valley Express & Friendly Cat Express + 9 Pair Lifts)",
+      terrainPark: "Global Park (world-class slopestyle jumps), Step Up Park North & South, Flowing Banked Park & Night Park",
+      flatSpotWarning: "Low on main bowls; brief Snowtop walking route (200m) at the summit transition between South and North peaks.",
+      treeRunRules: "3 official designated 'At Your Own Risk' Tree Run Zones (A, B, and C) in the Frozen/Peak bowls plus the Devil hike-up powder zone.",
+    },
+    monthlySnowfallCm: {
+      dec: 190,
+      jan: 290,
+      feb: 250,
+      mar: 160,
+      apr: 40,
+      peakBaseCm: 310,
+    },
+    onsenAndVillage: [
+      {
+        name: "Bandaisan Onsen Hotel (Shuhokan)",
+        japaneseName: "星野リゾート 磐梯山温泉ホテル (朱嶺の湯)",
+        category: "Onsen",
+        description:
+          "Ski-in/ski-out Hoshino Resort hotel right at the South Gate featuring cypress baths fed by natural Mt. Bandai hot spring water.",
+        info: "Slopeside at South Area Base",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Hoshino+Resorts+Bandaisan+Onsen+Hotel+Fukushima",
+      },
+      {
+        name: "The Rider's Burger Stand & Bandai Salt Ramen",
+        japaneseName: "ザ・ライダーズ (山塩ラーメン・ハンバーガー)",
+        category: "Food & Apres",
+        description:
+          "Famous Urabandai Aizu mountain-salt ramen and craft burgers mid-mountain on the South & North slopes.",
+        info: "10:00 – 15:30 · Mid-mountain",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Nekoma+Mountain+Ski+Resort+Fukushima",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Deep 1 & Excite 1 (North Area)",
+        level: "Advanced",
+        note: "North-facing steeps holding ultra-light 'Micro-Fine Snow' well after storms.",
+      },
+      {
+        name: "Frozen 1–4 & Tree Run Zones A/B/C",
+        level: "Advanced",
+        note: "Gladed beech forest powder zones tucked into the high saddle between North and South.",
+      },
+      {
+        name: "Devil 1–3 & Step Up Park",
+        level: "Intermediate",
+        note: "Wide, consistent carving pitches and progressive freestyle park lanes.",
+      },
+      {
+        name: "White Valley & Panorama Line",
+        level: "Beginner",
+        note: "Scenic cruisers with sweeping views over Lake Inawashiro.",
+      },
+    ],
+    coordinates: { lat: 37.5992, lon: 140.0447 },
+    elevation: { base: 755, top: 1338, vertical: 583 },
+    terrain: {
+      beginner: 30,
+      intermediate: 40,
+      advanced: 30,
+      runs: 33,
+      lifts: 13,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 5700,
+    fromTokyo: {
+      durationMinutes: 145,
+      summary: "Tohoku Shinkansen to Koriyama Station + Ban'etsu West Line to Bandaimachi Station + free resort shuttle",
+      station: "Bandaimachi Station / Koriyama Station (磐梯町駅 / 郡山駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Bandaimachi+Station+Fukushima+Japan",
+    },
+    vibeTags: ["33 Courses", "North + South Peaks", "Pro Slopestyle Park"],
+    bestFor: "Freestyle snowboarders and powder hunters wanting a massive two-faced mountain",
+    officialUrl: "https://www.nekoma.co.jp/en/",
+  },
+  {
+    slug: "grandeco",
+    name: "EN RESORT Grandeco Snow Resort",
+    japaneseName: "EN RESORT グランデコスノーリゾート",
+    region: "Fukushima",
+    area: "Urabandai / Kitashiobara",
+    description:
+      "With a base elevation starting over 1,010m and a 1,590m summit in the frigid Urabandai plateau, Grandeco boasts some of Honshu's driest, most featherlight 'Kami-Snow' (divine powder). Every single lift on the mountain is either a 2.4km gondola or a high-speed hooded quad—meaning warm, fast laps all day.",
+    address: {
+      postalCode: "〒969-2701",
+      english: "荒砂沢山 (Arasunasawayama), Hibara, Kitashiobara-mura, Yama-gun, Fukushima 969-2701, Japan",
+      japanese: "福島県耶麻郡北塩原村桧原荒砂沢山",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=EN+RESORT+Grandeco+Snow+Resort+Fukushima+Japan",
+    },
+    heroImage: "/trail-maps/grandeco-photo.jpg",
+    trailMapImage: "/trail-maps/grandeco.jpg",
+    mapGallery: [
+      {
+        title: "EN RESORT Grandeco Official Trail Map",
+        caption:
+          "Official course map showing the 1,590m Trail Peak, 2,392m Gondola, Snow Surf Park, and named runs (The Rock, Powder, Tree, Main Street, Fall Line).",
+        imageUrl: "/trail-maps/grandeco.jpg",
+        badge: "Official Trail Map",
+      },
+      {
+        title: "Cruising Through Urabandai Birch Glades at Grandeco",
+        caption:
+          "1,000m+ base elevation keeps Grandeco's snow dry and chalky from late November to April.",
+        imageUrl: "/trail-maps/grandeco-photo.jpg",
+        badge: "Slope Photo",
+      },
+      {
+        title: "Grandeco Gondola & High-Altitude Groomers",
+        caption:
+          "All lifts at Grandeco are enclosed or hooded high-speed quads.",
+        imageUrl: "/trail-maps/grandeco-slope.jpg",
+        badge: "Mountain View",
+      },
+    ],
+    trailMapUrl: "https://resort.en-hotel.com/grandeco/snow/ja/course/",
+    webcamUrl: "https://resort.en-hotel.com/grandeco/snow/ja/",
+    operatingHours: {
+      seasonWindow: "Late November – Mid April",
+      dayHours: "08:30 – 16:00",
+      nightSkiing: "No night skiing",
+      earlyBird: "08:30 Gondola upload",
+      notes: "100% hooded high-speed quad and gondola fleet keeps snowboarders sheltered on windy storm days.",
+    },
+    pricing: {
+      oneDayAdultYen: 6500,
+      halfDayYen: 5500,
+      twoDayYen: 12000,
+      nightPassYen: null,
+      childOneDayYen: 4500,
+      seniorOneDayYen: 6100,
+      seasonPassYen: 65000,
+      seasonPassName: "Grandeco Season Pass",
+      fullBoardRentalDayYen: 5800,
+      wearRentalDayYen: 4800,
+      notes: "Weekday 1-Day Adult pass is discounted to ¥5,900.",
+    },
+    snowboarderIntel: {
+      liftFleet: "1 6-Passenger Gondola (2,392m) + 3 High-Speed Hooded Quad Lifts (100% high-speed covered fleet!)",
+      terrainPark: "Snow Surf Park (3D banked slalom & natural flow) + Free Ride Park",
+      flatSpotWarning: "Very Low — the 4,500m top-to-bottom run maintains a steady, surfy gradient all the way to the Gondola base.",
+      treeRunRules: "Designated 'Powder', 'The Rock', and 'Tree' courses offer patrolled gladed and uncompacted terrain off the top quad.",
+    },
+    monthlySnowfallCm: {
+      dec: 210,
+      jan: 310,
+      feb: 270,
+      mar: 175,
+      apr: 45,
+      peakBaseCm: 330,
+    },
+    onsenAndVillage: [
+      {
+        name: "EN RESORT Grandeco HotelBuna-rin Onsen",
+        japaneseName: "EN RESORT Grandeco Hotel ぶなの湯",
+        category: "Onsen",
+        description:
+          "Simple thermal indoor & outdoor rotenburo surrounded by beech forest right at the 1,040m base hotel.",
+        info: "12:00 – 21:00 · ¥1,200 Day Use",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=EN+RESORT+Grandeco+Hotel+Fukushima",
+      },
+      {
+        name: "Urabandai Goshikinuma & Lake Hibara",
+        japaneseName: "裏磐梯・桧原湖エリア",
+        category: "Village Landmark",
+        description:
+          "Highland lake plateau famous for snowshoeing, frozen lake views, and local Aizu sake.",
+        info: "15 mins from base",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Lake+Hibara+Urabandai+Fukushima",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "The Rock & Powder (1,590m Summit)",
+        level: "Advanced",
+        note: "High-alpine 26°–28° powder runs accessed from the top No. 3 Quad.",
+      },
+      {
+        name: "Main Street (2,500m) + Snow Surf Park",
+        level: "Intermediate",
+        note: "Silky, wide groomer with banked walls served directly by the Gondola.",
+      },
+      {
+        name: "Fall Line (33° Max)",
+        level: "Advanced",
+        note: "Punchy steep face dropping straight down to the base station.",
+      },
+      {
+        name: "Forest Course (3,500m)",
+        level: "Beginner",
+        note: "Gentle, scenic forest cruiser winding through Urabandai beech trees.",
+      },
+    ],
+    coordinates: { lat: 37.6947, lon: 140.1331 },
+    elevation: { base: 1010, top: 1590, vertical: 580 },
+    terrain: {
+      beginner: 40,
+      intermediate: 45,
+      advanced: 15,
+      runs: 13,
+      lifts: 4,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 6500,
+    fromTokyo: {
+      durationMinutes: 155,
+      summary: "Tohoku Shinkansen to Koriyama Station + Ban'etsu West Line to Inawashiro Station + 40-min free shuttle bus",
+      station: "Inawashiro Station (猪苗代駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Inawashiro+Station+Fukushima+Japan",
+    },
+    vibeTags: ["1,010m High Base", "100% Hooded Lifts", "Kami-Snow Powder"],
+    bestFor: "Riders wanting luxury hooded lifts, ultra-dry high-elevation snow, and long cruisers",
+    officialUrl: "https://resort.en-hotel.com/grandeco/snow/ja/",
+  },
+  {
+    slug: "inawashiro",
+    name: "Inawashiro Ski Resort",
+    japaneseName: "猪苗代スキー場",
+    region: "Fukushima",
+    area: "Mt. Bandai / Lake Inawashiro",
+    description:
+      "Spread across the southern flank of volcanic Mt. Bandai with jaw-dropping panoramic views directly over Lake Inawashiro, this 18-course resort combines wide beginner/intermediate cruisers in the Chuo Area with steep mogul and powder faces in the Minero Area—plus Japan's most famous free weekday lift pass club.",
+    address: {
+      postalCode: "〒969-3102",
+      english: "葉山 (Hayama) 7105, Inawashiro-machi, Yama-gun, Fukushima 969-3102, Japan",
+      japanese: "福島県耶麻郡猪苗代町字葉山7105",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Inawashiro+Ski+Resort+Fukushima+Japan",
+    },
+    heroImage: "/trail-maps/inawashiro-photo.jpg",
+    trailMapImage: "/trail-maps/inawashiro.jpg",
+    mapGallery: [
+      {
+        title: "Inawashiro Ski Resort Official English Course Map",
+        caption:
+          "Official 18-course trail map covering Base Area, Sky Area, and Minero Area, including non-groomed deep powder zones and night skiing slopes.",
+        imageUrl: "/trail-maps/inawashiro.jpg",
+        badge: "Official English Map",
+      },
+      {
+        title: "Inawashiro 3D Lift & Dual-Area Layout",
+        caption:
+          "Aerial view of the Base, Sky, and Minero sectors on the southern flank of Mt. Bandai.",
+        imageUrl: "/trail-maps/inawashiro-aerial.jpg",
+        badge: "3D Aerial Layout",
+      },
+      {
+        title: "Wide-Open Groomed Slopes Overlooking Lake Inawashiro",
+        caption:
+          "Bluebird cruising on Inawashiro's sunny southern face.",
+        imageUrl: "/trail-maps/inawashiro-photo.jpg",
+        badge: "Slope Photo",
+      },
+    ],
+    trailMapUrl: "https://www.inawashiro-ski.com/",
+    webcamUrl: "https://www.inawashiro-ski.com/",
+    operatingHours: {
+      seasonWindow: "Late December – Late March",
+      dayHours: "08:30 – 16:30",
+      nightSkiing: "16:30 – 22:00 on Friday, Saturday & holiday eves ('Inawashiro Night')",
+      earlyBird: "08:30 main quad lift opening",
+      notes: "Free Inawashiro Ski Club (いなスキ！クラブ) membership makes weekday lift passes ¥0 (free) and weekend passes 50% off!",
+    },
+    pricing: {
+      oneDayAdultYen: 5600,
+      halfDayYen: 4800,
+      twoDayYen: 10500,
+      nightPassYen: 2800,
+      childOneDayYen: 2800,
+      seniorOneDayYen: 5100,
+      seasonPassYen: 45000,
+      seasonPassName: "Inawashiro Season Pass",
+      fullBoardRentalDayYen: 5000,
+      wearRentalDayYen: 4000,
+      notes: "Register for the free 'Ina-Ski! Club' on your phone to get FREE weekday passes (¥0) and half-price weekend passes (¥2,800)!",
+    },
+    snowboarderIntel: {
+      liftFleet: "3 High-Speed Quad Lifts (including Minero No. 1 Covered Quad) + 6 Pair Lifts",
+      terrainPark: "Natural Wall Area & Banked features along Hayama Course",
+      flatSpotWarning: "Low — wide, consistent fall-line slopes; use the L9 lift or Minero-to-Base connector when switching areas.",
+      treeRunRules: "Designated 'Non-groomed Deep Powder' and 'Easy Powder' zones in the upper Sky Area (Ama no Niwa / Oumagaeshi) and Minero Area.",
+    },
+    monthlySnowfallCm: {
+      dec: 135,
+      jan: 225,
+      feb: 195,
+      mar: 115,
+      apr: 15,
+      peakBaseCm: 210,
+    },
+    onsenAndVillage: [
+      {
+        name: "Inawashiro Kanko Hotel Onsen",
+        japaneseName: "猪苗代観光ホテル 温泉",
+        category: "Onsen",
+        description:
+          "Relaxing hot spring bath directly at the West Slope base overlooking Lake Inawashiro.",
+        info: "Slopeside at Base Area",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Inawashiro+Kanko+Hotel+Fukushima",
+      },
+      {
+        name: "Taro Cafe & Lake Inawashiro Lakeside",
+        japaneseName: "TARO CAFE (猪苗代湖畔)",
+        category: "Food & Apres",
+        description:
+          "Beloved lakeside specialty coffee and dessert roastery on the shores of Lake Inawashiro.",
+        info: "15 mins toward Lake Inawashiro",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Taro+Cafe+Inawashiro+Fukushima",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Akahani / All-Japan Ski Competition Course",
+        level: "Advanced",
+        note: "Steep, iconic upper-mountain face on Mt. Bandai with deep ungroomed snow.",
+      },
+      {
+        name: "Ama no Niwa & Oumagaeshi (Sky Area)",
+        level: "Intermediate",
+        note: "High-altitude panoramic runs with adjacent non-groomed powder pockets.",
+      },
+      {
+        name: "Minero East & Central Line (1,200m)",
+        level: "Intermediate",
+        note: "Fast, rolling carving runs served by the Minero Covered Quad.",
+      },
+      {
+        name: "Central & Hayama Slopes",
+        level: "Beginner",
+        note: "Ultra-wide, sun-lit slopes facing Lake Inawashiro with night skiing until 22:00.",
+      },
+    ],
+    coordinates: { lat: 37.5819, lon: 140.0975 },
+    elevation: { base: 715, top: 1405, vertical: 690 },
+    terrain: {
+      beginner: 45,
+      intermediate: 35,
+      advanced: 20,
+      runs: 18,
+      lifts: 9,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 5600,
+    fromTokyo: {
+      durationMinutes: 135,
+      summary: "Tohoku Shinkansen to Koriyama Station + Ban'etsu West Line to Inawashiro Station + 15-min free shuttle bus",
+      station: "Inawashiro Station (猪苗代駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Inawashiro+Station+Fukushima+Japan",
+    },
+    vibeTags: ["Lake Panorama", "Free Weekday Club", "690m Vertical"],
+    bestFor: "Budget-savvy riders, carvers, and groups wanting Lake Inawashiro views and night skiing",
+    officialUrl: "https://www.inawashiro-ski.com/",
+  },
+  {
+    slug: "zao-onsen",
+    name: "Zao Onsen Ski Resort",
+    japaneseName: "蔵王温泉スキー場",
+    region: "Yamagata",
+    area: "Yamagata City / Mt. Zao",
+    description:
+      "One of Japan's most legendary and expansive mountain resorts. Famous worldwide for the surreal 'Juhyo' Snow Monsters (rime-ice covered fir trees) at the 1,661m Juhyo Kogen summit, Zao Onsen spans 305 hectares of interconnected terrain rising directly out of a 1,900-year-old sulfur hot spring village.",
+    address: {
+      postalCode: "〒990-2301",
+      english: "Zao Onsen, Yamagata-shi, Yamagata 990-2301, Japan",
+      japanese: "山形県山形市蔵王温泉",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Zao+Onsen+Ski+Resort+Yamagata+Japan",
+    },
+    heroImage: "/trail-maps/zao-onsen-photo.jpg",
+    trailMapImage: "/trail-maps/zao-onsen.jpg",
+    mapGallery: [
+      {
+        title: "Zao Onsen Official Full-Mountain Trail Map (26 Courses, 35 Lifts)",
+        caption:
+          "Official course map detailing Jizo Summit Station (1,661m), the 8km Juhyohara Course, Yokokura 38° Wall, Chuo Ropeway, and Sky Cable.",
+        imageUrl: "/trail-maps/zao-onsen.jpg",
+        badge: "Official Trail Map",
+      },
+      {
+        title: "Zao Onsen Ultra-HD Illustrated Map (3.7MB)",
+        caption:
+          "High-resolution illustrated map of all 14 interconnected gelande sectors and village access points.",
+        imageUrl: "/trail-maps/zao-onsen-2.png",
+        badge: "Ultra-HD Map",
+      },
+      {
+        title: "The Legendary 'Juhyo' Snow Monsters of Mt. Zao",
+        caption:
+          "Siberian winds and supercooled water droplets sculpt the Aomori Trelawney firs into giant snow monsters every January and February.",
+        imageUrl: "/trail-maps/zao-onsen-photo.jpg",
+        badge: "Juhyo Snow Monsters",
+      },
+    ],
+    trailMapUrl: "https://zaomountainresort.com/ski/",
+    webcamUrl: "https://www.zao-ski.or.jp/",
+    operatingHours: {
+      seasonWindow: "Early December – Early May",
+      dayHours: "08:30 – 17:00",
+      nightSkiing: "17:00 – 21:00 at Uwanodai Gelande (plus Juhyo Night Illumination Ropeway)",
+      earlyBird: "08:15 Ropeway boarding on peak weekends",
+      notes: "Take the two-stage Zao Ropeway (Sanroku Line + Sancho Line) to 1,661m to ride directly through the Juhyo Snow Monster field.",
+    },
+    pricing: {
+      oneDayAdultYen: 7500,
+      halfDayYen: 6300,
+      twoDayYen: 14800,
+      nightPassYen: 3000,
+      childOneDayYen: 3800,
+      seniorOneDayYen: 6700,
+      seasonPassYen: 75000,
+      seasonPassName: "Zao Onsen All-Mountain Season Pass",
+      fullBoardRentalDayYen: 5500,
+      wearRentalDayYen: 4500,
+      notes: "1-Day pass covers all 32 chairlifts, 2 ropeways, and 1 gondola across the entire mountain.",
+    },
+    snowboarderIntel: {
+      liftFleet: "3 Ropeways/Gondolas (Zao Ropeway Sanroku & Sancho Lines, Zao Chuo Ropeway, Zao Sky Cable) + 4 Quads + 25 Pair/Single Lifts",
+      terrainPark: "nakamori / Uwanodai freeride features & natural side-hits across 14 sectors",
+      flatSpotWarning: "Moderate — the upper section of the 8km Zangezaka / Juhyohara trail has gentle sections where you must carry speed, and traversing between distant base areas requires planning.",
+      treeRunRules: "Strictly stay on marked courses; riding among the fragile Juhyo snow monsters off-piste is prohibited to protect the trees and avoid hidden tree wells.",
+    },
+    monthlySnowfallCm: {
+      dec: 195,
+      jan: 310,
+      feb: 275,
+      mar: 180,
+      apr: 40,
+      peakBaseCm: 330,
+    },
+    onsenAndVillage: [
+      {
+        name: "Zao Dai-Rotenburo & Three Public Baths (Kamiyu, Shimoyu, Kawarayu)",
+        japaneseName: "蔵王温泉 大露天風呂・共同浴場 (上湯・下湯・川原湯)",
+        category: "Onsen",
+        description:
+          "Historic 1,900-year-old milky-white acidic sulfur springs steaming right in the middle of the ski village.",
+        info: "06:00 – 22:00 · ¥200 Public Baths",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Zao+Onsen+Public+Bath+Kamiyu+Yamagata",
+      },
+      {
+        name: "Sankoro / Zao Onsen Jingisukan (Lamb BBQ)",
+        japaneseName: "ジンギスカン・ろばた 蔵王温泉街",
+        category: "Food & Apres",
+        description:
+          "Zao Onsen is the birthplace of helmet-shaped cast-iron Jingisukan (grilled lamb BBQ) paired with local Yamagata sake.",
+        info: "Village Center · 3 mins from Ropeway",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Zao+Onsen+Jingisukan+Yamagata",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Zangezaka & Juhyohara Course (8,000m)",
+        level: "Intermediate",
+        note: "Iconic 8km descent starting at 1,661m right between the towering Juhyo Snow Monsters.",
+      },
+      {
+        name: "Yokokura no Kabe (横倉の壁 · 38° Wall)",
+        level: "Advanced",
+        note: "Zao's most famous sheer 38° expert face—deep powder after storms, towering moguls on clear days.",
+      },
+      {
+        name: "Kurohime Super Giant & Ohira Course",
+        level: "Intermediate",
+        note: "Long, wide high-speed carving runs on the quieter southern side of the resort.",
+      },
+      {
+        name: "Uwanodai Gelande",
+        level: "Beginner",
+        note: "Expansive village-front slope with night skiing right above the ryokan district.",
+      },
+    ],
+    coordinates: { lat: 38.1636, lon: 140.3997 },
+    elevation: { base: 780, top: 1661, vertical: 881 },
+    terrain: {
+      beginner: 40,
+      intermediate: 40,
+      advanced: 20,
+      runs: 26,
+      lifts: 35,
+      treeRunsAllowed: false,
+    },
+    dayPassYen: 7500,
+    fromTokyo: {
+      durationMinutes: 195,
+      summary: "Yamagata Shinkansen Tsubasa to Yamagata Station (155 mins) + 40-min direct bus to Zao Onsen",
+      station: "Yamagata Station (山形駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Yamagata+Station+Japan",
+    },
+    vibeTags: ["Juhyo Snow Monsters", "8km Summit Run", "1,900-Year Onsen"],
+    bestFor: "Bucket-list explorers wanting Snow Monsters, 881m vertical, and an authentic sulfur onsen village",
+    officialUrl: "https://www.zao-ski.or.jp/",
+  },
+  {
+    slug: "tengendai-kogen",
+    name: "Tengendai Kogen",
+    japaneseName: "天元台高原スキー場",
+    region: "Yamagata",
+    area: "Yonezawa / Mt. Nishi-Azuma",
+    description:
+      "Tucked high on the northern flank of Mt. Nishi-Azuma (one of Japan's 100 Famous Mountains) above Shirabu Onsen, Tengendai Kogen reaches a staggering 1,820m summit. Known for 'Honshu's finest powder', its main ski base sits at 1,350m—accessible only by ropeway—with a 6,000m valley run dropping 900m back to Yumoto Station.",
+    address: {
+      postalCode: "〒992-1461",
+      english: "Shirabu Onsen Tengendai, Yonezawa-shi, Yamagata 992-1461, Japan",
+      japanese: "山形県米沢市白布温泉天元台",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Tengendai+Kogen+Ski+Resort+Yonezawa+Yamagata+Japan",
+    },
+    heroImage: "/trail-maps/tengendai-kogen-photo.jpg",
+    trailMapImage: "/trail-maps/tengendai-kogen.jpg",
+    mapGallery: [
+      {
+        title: "Tengendai Kogen Official 1,820m Summit & Powder Zone Map",
+        caption:
+          "Official trail map showing the Yumoto Ropeway (920m→1,350m), Shirakaba, Shakunage & Tsugamori slopes (to 1,820m), Powder Zones, and the 6,000m Yunodaira downhill.",
+        imageUrl: "/trail-maps/tengendai-kogen.jpg",
+        badge: "Official Trail Map",
+      },
+      {
+        title: "Tengendai Kogen 3D Aerial Ropeway & Lift Layout",
+        caption:
+          "Aerial view showing the dramatic 900m vertical rise from Shirabu Onsen to the 1,820m alpine tree line.",
+        imageUrl: "/trail-maps/tengendai-kogen-aerial.jpg",
+        badge: "3D Aerial Layout",
+      },
+      {
+        title: "Shirakaba Romance Lift & High-Alpine Pension Village (1,350m)",
+        caption:
+          "The main ski base sits at 1,350m above sea level, accessible exclusively via the Tengendai Ropeway.",
+        imageUrl: "/trail-maps/tengendai-kogen-photo.jpg",
+        badge: "1,350m Plateau",
+      },
+    ],
+    trailMapUrl: "https://www.winter.tengendai.jp/",
+    webcamUrl: "https://www.winter.tengendai.jp/",
+    operatingHours: {
+      seasonWindow: "Late November – Early May (nearly 6-month natural snow season)",
+      dayHours: "08:20 – 16:00 (08:00 Ropeway start on weekends & holidays)",
+      nightSkiing: "No night skiing",
+      earlyBird: "08:00 weekend Ropeway upload from Yumoto Station",
+      notes: "Because the main slope base starts at 1,350m on a north-facing peak, diamond-dust powder stays cold and dry well into spring.",
+    },
+    pricing: {
+      oneDayAdultYen: 5500,
+      halfDayYen: 4400,
+      twoDayYen: 10000,
+      nightPassYen: null,
+      childOneDayYen: 3800,
+      seniorOneDayYen: 5000,
+      seasonPassYen: 55000,
+      seasonPassName: "Tengendai Kogen Season Pass",
+      fullBoardRentalDayYen: 4500,
+      wearRentalDayYen: 3500,
+      notes: "Includes unlimited rides on the Tengendai Ropeway and all 3 mountain pair lifts.",
+    },
+    snowboarderIntel: {
+      liftFleet: "1 41-Passenger Ropeway (Yumoto 920m → Kogen 1,350m) + 3 Pair Lifts (Shirakaba, Shakunage, Tsugamori to 1,820m)",
+      terrainPark: "Natural powder banks, tree pockets, and spring terrain features",
+      flatSpotWarning: "Low on the main 3 upper lifts; moderate narrow sections on the 3km Yunodaira forest valley trail down to the ropeway base.",
+      treeRunRules: "Official 'Tsugamori Powder Zone', 'Shakunage Powder Zone', and 'Shirakaba Powder Zone' open right alongside the main lifts!",
+    },
+    monthlySnowfallCm: {
+      dec: 240,
+      jan: 360,
+      feb: 310,
+      mar: 210,
+      apr: 70,
+      peakBaseCm: 420,
+    },
+    onsenAndVillage: [
+      {
+        name: "Shirabu Onsen (Higashiya / Nakaya / Nishiyama Ryokan)",
+        japaneseName: "白布温泉 (東屋・中屋・西屋)",
+        category: "Onsen",
+        description:
+          "700-year-old historic hot spring hamlet just 2 minutes below the Tengendai Ropeway base, famous for waterfall-fed wooden baths.",
+        info: "2 mins from Ropeway Base · ¥700–¥1,000",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Shirabu+Onsen+Yonezawa+Yamagata",
+      },
+      {
+        name: "Yonezawa Wagyu Beef Dining (Near Yonezawa Station)",
+        japaneseName: "米沢牛 焼肉・すき焼き (米沢駅前)",
+        category: "Food & Apres",
+        description:
+          "Celebrate a deep powder day with world-famous marbled Yonezawa Wagyu beef before catching the Shinkansen.",
+        info: "Yonezawa City",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Yonezawa+Beef+Restaurant+Yamagata",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Tsugamori & Shakunage Powder Zones (1,820m)",
+        level: "Advanced",
+        note: "Ultra-dry 'Honshu's Finest Powder' stashes at 1,820m elevation where diamond dust sparkles in the air.",
+      },
+      {
+        name: "6,000m Top-to-Bottom Valley Run (to Yumoto 920m)",
+        level: "Intermediate",
+        note: "Epic 6km, 900m vertical descent from the 1,820m top lift all the way to the bottom ropeway station.",
+      },
+      {
+        name: "Shirakaba & Shakunage Main Runs",
+        level: "Intermediate",
+        note: "Crisp, wide packed-powder groomers with zero lift lines.",
+      },
+    ],
+    coordinates: { lat: 37.7686, lon: 140.1428 },
+    elevation: { base: 920, top: 1820, vertical: 900 },
+    terrain: {
+      beginner: 30,
+      intermediate: 45,
+      advanced: 25,
+      runs: 7,
+      lifts: 4,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 5500,
+    fromTokyo: {
+      durationMinutes: 165,
+      summary: "Yamagata Shinkansen Tsubasa to Yonezawa Station (120 mins) + 40-min bus to Tengendai Ropeway",
+      station: "Yonezawa Station (米沢駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Yonezawa+Station+Yamagata+Japan",
+    },
+    vibeTags: ["1,820m Summit", "900m Vertical", "Honshu's Finest Powder"],
+    bestFor: "Purist powder hounds seeking ultra-cold high-elevation snow and historic Shirabu Onsen",
+    officialUrl: "https://www.winter.tengendai.jp/",
+  },
+  {
+    slug: "jangle-jungle",
+    name: "Kurobushi Kogen Snow Park Jangle Jungle",
+    japaneseName: "黒伏高原スノーパーク ジャングル・ジャングル",
+    region: "Yamagata",
+    area: "Higashine / Mt. Kurobushi",
+    description:
+      "Set against the dramatic sheer rock face of Mt. Kurobushi in Higashine, Jangle Jungle is Yamagata's premier snowboarder and freestyle playground. Powered by high-speed hooded quad lifts, a top-tier J-Park & Jungle Cross course, tree run zones, free daily parking, and late-night riding, it draws Tohoku's most progressive riders.",
+    address: {
+      postalCode: "〒999-3723",
+      english: "Numazawa,觀音寺 (Kannonji), Higashine-shi, Yamagata 999-3723, Japan",
+      japanese: "山形県東根市大字観音寺水無山3170-164",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Kurobushi+Kogen+Snow+Park+Jangle+Jungle+Yamagata+Japan",
+    },
+    heroImage: "/trail-maps/jangle-jungle-photo.jpg",
+    trailMapImage: "/trail-maps/jangle-jungle-2.jpg",
+    mapGallery: [
+      {
+        title: "Jangle Jungle Official Course & Tree Run Map",
+        caption:
+          "Official trail map showing East Express (1,300m), West Express (1,000m), Tree Run zone, J-Park, Jungle Cross, and night-lit W-2/W-1 slopes.",
+        imageUrl: "/trail-maps/jangle-jungle-2.jpg",
+        badge: "Official Course Map",
+      },
+      {
+        title: "Jangle Jungle 3D Aerial Lift Layout",
+        caption:
+          "Aerial view of the symmetrical East and West Express quad lifts below Mt. Kurobushi.",
+        imageUrl: "/trail-maps/jangle-jungle-aerial.jpg",
+        badge: "3D Aerial Layout",
+      },
+      {
+        title: "Riding Below the Dramatic Rock Face of Mt. Kurobushi",
+        caption:
+          "Snowboarders cruising the wide central slopes with Mt. Kurobushi towering behind.",
+        imageUrl: "/trail-maps/jangle-jungle-photo.jpg",
+        badge: "Slope Photo",
+      },
+    ],
+    trailMapUrl: "https://jxj.co.jp/",
+    webcamUrl: "https://jxj.co.jp/",
+    operatingHours: {
+      seasonWindow: "Mid December – Early April",
+      dayHours: "08:30 – 17:00",
+      nightSkiing: "17:30 – 22:00 on Fridays, Saturdays & holiday eves",
+      earlyBird: "08:30 Express Quad opening",
+      notes: "Parking is 100% FREE every day of the season right outside Jangle Plaza.",
+    },
+    pricing: {
+      oneDayAdultYen: 5400,
+      halfDayYen: 4400,
+      twoDayYen: 9800,
+      nightPassYen: 2600,
+      childOneDayYen: 3000,
+      seniorOneDayYen: 4500,
+      seasonPassYen: 46000,
+      seasonPassName: "Jangle Jungle Common Season Pass",
+      fullBoardRentalDayYen: 4500,
+      wearRentalDayYen: 3800,
+      notes: "Weekday 1-Day Adult pass is ¥4,500; early-bird online passes drop as low as ¥3,500.",
+    },
+    snowboarderIntel: {
+      liftFleet: "2 High-Speed Hooded Quad Lifts (East Express 1,300m & West Express 1,000m) + 1 Pair Lift (Jungle Pair 410m)",
+      terrainPark: "J-Park (multi-kicker & jib lanes) + Jungle Cross (banked boardercross course)",
+      flatSpotWarning: "Very Low — every course feeds directly back to the central Jangle Plaza base.",
+      treeRunRules: "Official central 'Tree Run' zone between E-1 and W-3 opens during mid-winter snowpack.",
+    },
+    monthlySnowfallCm: {
+      dec: 170,
+      jan: 280,
+      feb: 245,
+      mar: 155,
+      apr: 25,
+      peakBaseCm: 290,
+    },
+    onsenAndVillage: [
+      {
+        name: "Sakuranbo Higashine Onsen",
+        japaneseName: "さくらんぼ東根温泉",
+        category: "Onsen",
+        description:
+          "Warm amber sodium-chloride hot spring town 25 minutes from the slopes, famous for outdoor baths and Yamagata cherries.",
+        info: "25 mins toward Higashine",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Higashine+Onsen+Yamagata",
+      },
+      {
+        name: "Tendo Onsen & Yamagata Tori-Chuka Noodles",
+        japaneseName: "天童温泉・鳥中華",
+        category: "Food & Apres",
+        description:
+          "Stop in nearby Tendo for hot spring footbaths and steaming bowls of Yamagata's famous dashi-broth Tori-Chuka ramen.",
+        info: "30 mins from resort",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Tendo+Onsen+Yamagata",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "E-1 Active Burn & Central Tree Run",
+        level: "Advanced",
+        note: "Uncompacted natural terrain and gladed trees off the 1,030m East Express summit.",
+      },
+      {
+        name: "E-2 Jungle Cross & Freerun Course",
+        level: "Intermediate",
+        note: "Long outer perimeter cruiser featuring banked turns and views of Mt. Kurobushi.",
+      },
+      {
+        name: "W-1 & W-2 J-Park Line",
+        level: "Intermediate",
+        note: "High-speed lap track through J-Park and illuminated night riding until 22:00.",
+      },
+    ],
+    coordinates: { lat: 38.4395, lon: 140.5404 },
+    elevation: { base: 720, top: 1030, vertical: 310 },
+    terrain: {
+      beginner: 40,
+      intermediate: 40,
+      advanced: 20,
+      runs: 7,
+      lifts: 3,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 5400,
+    fromTokyo: {
+      durationMinutes: 200,
+      summary: "Yamagata Shinkansen Tsubasa to Sakuranbo-Higashine Station (165 mins) + 35-min taxi/shuttle",
+      station: "Sakuranbo-Higashine Station (さくらんぼ東根駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Sakuranbo-Higashine+Station+Yamagata+Japan",
+    },
+    vibeTags: ["Snowboarder Hotspot", "Hooded Quads", "Night Skiing to 22:00"],
+    bestFor: "Freestyle snowboarders and night-session riders wanting fast quad laps and parks",
+    officialUrl: "https://jxj.co.jp/",
+  },
+  {
+    slug: "aomori-spring",
+    name: "Aomori Spring Ski Resort",
+    japaneseName: "青森スプリング・スキーリゾート",
+    region: "Aomori",
+    area: "Ajigasawa / Mt. Iwaki",
+    description:
+      "Carved into the northern flank of 1,625m Mt. Iwaki overlooking the Sea of Japan and Tsugaru Peninsula, Aomori Spring combines deep Siberian sea-effect powder with Japan's most famous terrain parks and a 22-foot Olympic-spec superpipe. Starting in 2026, daily pass sales are capped at 1,200 guests per day to guarantee zero lift lines and untracked stashes.",
+    address: {
+      postalCode: "〒038-2793",
+      english: "Ajigasawa Kogen, Ajigasawa-machi, Nishitsugaru-gun, Aomori 038-2793, Japan",
+      japanese: "青森県西津軽郡鰺ヶ沢町鰺ヶ沢高原",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Aomori+Spring+Ski+Resort+Ajigasawa+Aomori+Japan",
+    },
+    heroImage: "/trail-maps/aomori-spring-photo.jpg",
+    trailMapImage: "/trail-maps/aomori-spring.jpg",
+    mapGallery: [
+      {
+        title: "Aomori Spring 2026 Official English Trail Map",
+        caption:
+          "Official 2026 trail map showing the 2,967m Gondola, Quad 1 & 2, Night Grooming Areas, and the 1,200-pass daily cap.",
+        imageUrl: "/trail-maps/aomori-spring.jpg",
+        badge: "2026 English Map",
+      },
+      {
+        title: "Aomori Spring Bilingual Tree Zone Map (DG-1 to GG-4)",
+        caption:
+          "Detailed bilingual map highlighting the 7 designated 'At Your Own Risk' tree zones (DG-1/2/3 & GG-1/2/3/4).",
+        imageUrl: "/trail-maps/aomori-spring-2.jpg",
+        badge: "Tree Zone Map",
+      },
+      {
+        title: "Mount Iwaki ('Tsugaru Fuji') Towering Above Aomori Spring",
+        caption:
+          "The 1,625m volcanic cone of Mt. Iwaki catches relentless Sea of Japan snowstorms.",
+        imageUrl: "/trail-maps/aomori-spring-photo.jpg",
+        badge: "Mt. Iwaki Peak",
+      },
+    ],
+    trailMapUrl: "https://www.aomorispring.com/",
+    webcamUrl: "https://www.aomorispring.com/",
+    operatingHours: {
+      seasonWindow: "Mid December – Early April",
+      dayHours: "08:30 – 16:30",
+      nightSkiing: "16:30 – 20:30 on Quad 1 (Sunshine, Paradise & Lower Wave courses)",
+      earlyBird: "08:30 Gondola opening",
+      notes: "Daily day-pass sales are capped at 1,200 tickets (Rockwood Hotel guests & season pass holders guaranteed entry)—book online in advance!",
+    },
+    pricing: {
+      oneDayAdultYen: 6600,
+      halfDayYen: 5200,
+      twoDayYen: 12600,
+      nightPassYen: 2800,
+      childOneDayYen: 3900,
+      seniorOneDayYen: 5500,
+      seasonPassYen: 68000,
+      seasonPassName: "Aomori Spring Season Pass",
+      fullBoardRentalDayYen: 5800,
+      wearRentalDayYen: 4800,
+      notes: "Includes the 2,967m Gondola, high-speed quads, and full terrain park access.",
+    },
+    snowboarderIntel: {
+      liftFleet: "1 6-Passenger Gondola (2,967m) + 2 High-Speed Quads (Quad 1 & Quad 2) + 1 Pair Lift (Diamond Lift)",
+      terrainPark: "World-renowned Snow Park + Pipe Dream (22ft superpipe used by Olympic pros)",
+      flatSpotWarning: "Very Low — long, continuous 3.4km Gondola runs with ocean views.",
+      treeRunRules: "7 clearly mapped 'At Your Own Risk' tree zones (GG-1 to GG-4 off the Gondola & DG-1 to DG-3 off Diamond Lift) open through mature beech forests.",
+    },
+    monthlySnowfallCm: {
+      dec: 220,
+      jan: 340,
+      feb: 295,
+      mar: 185,
+      apr: 35,
+      peakBaseCm: 360,
+    },
+    onsenAndVillage: [
+      {
+        name: "Rockwood Hotel & Spa Ajigasawa Onsen",
+        japaneseName: "ロックウッド・ホテル＆スパ 鰺ヶ沢温泉",
+        category: "Onsen",
+        description:
+          "Ski-in/ski-out resort hotel featuring fossil-seawater outdoor rotenburo looking straight out toward the Sea of Japan.",
+        info: "Slopeside Base · ¥1,200 Day Use",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Rockwood+Hotel+and+Spa+Aomori+Spring",
+      },
+      {
+        name: "Mountain Cafe & Ramen House (Base Village)",
+        japaneseName: "マウンテンカフェ＆ラーメンハウス",
+        category: "Food & Apres",
+        description:
+          "Steaming Aomori miso-curry-milk ramen, wood-fired pizza, and local apple cider right at the gondola base.",
+        info: "Gondola Base",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Aomori+Spring+Ski+Resort+Japan",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "The Corkscrew & Piste Off + GG-1/GG-2 Trees",
+        level: "Advanced",
+        note: "Steep ungroomed gondola faces flanked by spaced beech tree powder zones.",
+      },
+      {
+        name: "Sunshine & Upper/Lower Wave (Night Grooming Area)",
+        level: "Intermediate",
+        note: "Groomed late at night so overnight snowfall piles fresh powder directly onto corduroy.",
+      },
+      {
+        name: "Panorama & Skyline Course (3,400m)",
+        level: "Beginner",
+        note: "Sweeping 3.4km top-to-bottom cruiser with views of the Sea of Japan.",
+      },
+    ],
+    coordinates: { lat: 40.6952, lon: 140.2833 },
+    elevation: { base: 376, top: 921, vertical: 545 },
+    terrain: {
+      beginner: 55,
+      intermediate: 35,
+      advanced: 10,
+      runs: 22,
+      lifts: 4,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 6600,
+    fromTokyo: {
+      durationMinutes: 255,
+      summary: "Tohoku Shinkansen Hayabusa to Shin-Aomori Station (195 mins) + 60-min resort shuttle/bus",
+      station: "Shin-Aomori Station / Hirosaki Station (新青森駅 / 弘前駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Shin-Aomori+Station+Aomori+Japan",
+    },
+    vibeTags: ["1,200 Pass Cap", "Sea of Japan Views", "Beech Tree Glades"],
+    bestFor: "Freeriders and park riders wanting uncrowded Gondola tree laps and world-class jumps",
+    officialUrl: "https://www.aomorispring.com/",
+  },
+  {
+    slug: "hakkoda",
+    name: "Hakkoda Ropeway & Ski Area",
+    japaneseName: "八甲田ロープウェー・八甲田国際スキー場",
+    region: "Aomori",
+    area: "Aomori City / Mt. Hakkoda",
+    description:
+      "A sacred pilgrimage site for deep-powder snowboarders worldwide. Centered around a 101-passenger ropeway climbing to the 1,324m Tamoyachidake summit, Hakkoda has almost no groomed runs—instead offering 5km–7km descents through surreal Juhyo snow monsters, bottomless northern Tohoku powder, and vast guided backcountry routes.",
+    address: {
+      postalCode: "〒030-0188",
+      english: "1-12 Kansuizawa, Arakawa, Aomori-shi, Aomori 030-0188, Japan",
+      japanese: "青森県青森市荒川寒水沢1-12",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Hakkoda+Ropeway+Aomori+Japan",
+    },
+    heroImage: "/trail-maps/hakkoda-photo.jpg",
+    trailMapImage: "/trail-maps/hakkoda.jpg",
+    mapGallery: [
+      {
+        title: "Hakkoda Ropeway Official Course & Backcountry Route Map",
+        caption:
+          "Official route schematic showing the 1,324m Summit Park Station, Forest Course (5km), Direct Course (3.5km), and backcountry routes toward Sukayu & Jogakura Onsen.",
+        imageUrl: "/trail-maps/hakkoda.jpg",
+        badge: "Official Route Map",
+      },
+      {
+        title: "Hakkoda Ground & Base Lift Map",
+        caption:
+          "Detailed map of the Kunimizaka base pair lifts, Slalom Course, and Ropeway terminal.",
+        imageUrl: "/trail-maps/hakkoda-2.png",
+        badge: "Base Area Map",
+      },
+      {
+        title: "Drawing S-Turns Through Hakkoda's Juhyo Snow Monsters",
+        caption:
+          "Untracked powder fields between rime-crusted Aomori fir trees at the top of Hakkoda Ropeway.",
+        imageUrl: "/trail-maps/hakkoda-photo.jpg",
+        badge: "Hakkoda Powder",
+      },
+    ],
+    trailMapUrl: "https://www.hakkoda-ropeway.jp/ski/",
+    webcamUrl: "https://www.hakkoda-ropeway.jp/",
+    operatingHours: {
+      seasonWindow: "Early December – Mid May",
+      dayHours: "09:00 – 15:40 (16:20 from March to May)",
+      nightSkiing: "No night skiing",
+      earlyBird: "09:00 first Ropeway cabin (departs every 15–20 mins)",
+      notes: "High winds can pause the Ropeway during peak January blizzards, while the lower pair lifts keep spinning in the sheltered trees.",
+    },
+    pricing: {
+      oneDayAdultYen: 5900,
+      halfDayYen: 4500,
+      twoDayYen: 11000,
+      nightPassYen: null,
+      childOneDayYen: 3800,
+      seniorOneDayYen: 5900,
+      seasonPassYen: 62000,
+      seasonPassName: "Hakkoda Season Pass",
+      fullBoardRentalDayYen: 5500,
+      wearRentalDayYen: 4500,
+      notes: "Single Ropeway ticket (¥1,400) or 5-ride Ropeway coupon (¥5,600) is also popular for backcountry touring laps.",
+    },
+    snowboarderIntel: {
+      liftFleet: "1 101-Passenger Aerial Ropeway (2,459m length, 663m vertical in 10 mins) + 2 Base Pair Lifts",
+      terrainPark: "100% natural terrain — pillows, wind-lips, snow monsters, and birch glades",
+      flatSpotWarning: "High in deep powder on the lower run-outs of the 5km Forest Course — keep your board waxed and carry momentum through the lower flats!",
+      treeRunRules: "Entire upper mountain is an open, uncompacted natural snowfield marked by bamboo poles; carry beacon, probe, and shovel (and hire a local guide if venturing onto the Central/Sukayu routes).",
+    },
+    monthlySnowfallCm: {
+      dec: 260,
+      jan: 410,
+      feb: 360,
+      mar: 240,
+      apr: 80,
+      peakBaseCm: 480,
+    },
+    onsenAndVillage: [
+      {
+        name: "Sukayu Onsen (Hiba Sennin Buro 1,000-Person Bath)",
+        japaneseName: "酸ヶ湯温泉 (ヒバ千人風呂)",
+        category: "Onsen",
+        description:
+          "Iconic 300-year-old all-cypress bathhouse just 5 minutes from Hakkoda Ropeway—and the finish line of the famous Sukayu backcountry route.",
+        info: "07:00 – 17:30 · ¥1,000 Day Use",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Sukayu+Onsen+Aomori+Japan",
+      },
+      {
+        name: "Jogakura Onsen Hotel",
+        japaneseName: "ホテル城ヶ倉 (城ヶ倉温泉)",
+        category: "Onsen",
+        description:
+          "Luxury beech-forest hot spring hotel at the base of the Jogakura backcountry route.",
+        info: "11:30 – 16:00 · ¥1,000 Day Use",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Hotel+Jogakura+Aomori+Japan",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Direct Course (ダイレクトコース · 3,500m)",
+        level: "Advanced",
+        note: "Steep, uncompacted 30° fall-line descent through snow monsters and deep glades straight under the ropeway.",
+      },
+      {
+        name: "Forest Course (フォレストコース · 5,000m)",
+        level: "Intermediate",
+        note: "5km winding journey from the 1,324m summit through Juhyo fields and quiet birch forests.",
+      },
+      {
+        name: "Central & Sukayu Backcountry Routes",
+        level: "Advanced",
+        note: "Legendary guided backcountry routes dropping all the way to Sukayu Onsen.",
+      },
+    ],
+    coordinates: { lat: 40.679, lon: 140.8347 },
+    elevation: { base: 661, top: 1324, vertical: 663 },
+    terrain: {
+      beginner: 15,
+      intermediate: 35,
+      advanced: 50,
+      runs: 5,
+      lifts: 3,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 5900,
+    fromTokyo: {
+      durationMinutes: 245,
+      summary: "Tohoku Shinkansen Hayabusa to Shin-Aomori Station (185 mins) + 60-min JR Bus Mizuumi-go to Hakkoda Ropeway",
+      station: "Shin-Aomori Station / Aomori Station (新青森駅 / 青森駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Shin-Aomori+Station+Aomori+Japan",
+    },
+    vibeTags: ["480cm Base Depth", "Backcountry Mecca", "Sukayu Onsen"],
+    bestFor: "Advanced powder riders and backcountry splitboarders chasing Japan's deepest snow",
+    officialUrl: "https://www.hakkoda-ropeway.jp/",
+  },
+  {
+    slug: "owani-onsen",
+    name: "Owani Onsen Ski Resort",
+    japaneseName: "大鰐温泉スキー場",
+    region: "Aomori",
+    area: "Owani / Tsugaru",
+    description:
+      "Opened in 1923 as one of Tohoku's oldest and most storied ski mountains, Owani Onsen Ski Resort offers 525m of vertical drop on Mt. Ajara with zero crowds, a ¥4,000 lift pass, a 4.2km Panorama Course, and an 800-year-old hot spring town and JR train station right at the base.",
+    address: {
+      postalCode: "〒038-0211",
+      english: "Hikage-1-92 Owani, Owani-machi, Minamitsugaru-gun, Aomori 038-0211, Japan",
+      japanese: "青森県南津軽郡大鰐町大字大鰐字日影1-92",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Owani+Onsen+Ski+Resort+Aomori+Japan",
+    },
+    heroImage: "/trail-maps/owani-onsen-photo.jpg",
+    trailMapImage: "/trail-maps/owani-onsen.jpg",
+    mapGallery: [
+      {
+        title: "Owani Onsen Ski Resort Official English Trail Map",
+        caption:
+          "Official English map showing the 4,200m Amaike Panorama Course, 2,100m International Course, Off-Piste Course, and Pair Lift network.",
+        imageUrl: "/trail-maps/owani-onsen.jpg",
+        badge: "Official English Map",
+      },
+      {
+        title: "Owani Onsen 3D Aerial Mountain Layout",
+        caption:
+          "Aerial view of the 525m vertical drop from the Aomori Winery Hotel summit to the Amaike Ski Center.",
+        imageUrl: "/trail-maps/owani-onsen-aerial.jpg",
+        badge: "3D Aerial Layout",
+      },
+      {
+        title: "Amaike Ski Center Base at Owani Onsen",
+        caption:
+          "Friendly local Tsugaru atmosphere with zero lift lines and authentic Aomori snow.",
+        imageUrl: "/trail-maps/owani-onsen-photo.jpg",
+        badge: "Base Lodge",
+      },
+    ],
+    trailMapUrl: "https://www.owani-ski.com/",
+    webcamUrl: "https://www.owani-ski.com/",
+    operatingHours: {
+      seasonWindow: "Late December – Late March",
+      dayHours: "08:30 – 16:30",
+      nightSkiing: "No night skiing",
+      earlyBird: "08:30 Amaike Pair Lift opening",
+      notes: "Great storm-day backup when high winds close the upper lifts at Hakkoda or Aomori Spring!",
+    },
+    pricing: {
+      oneDayAdultYen: 4000,
+      halfDayYen: 2900,
+      twoDayYen: 7500,
+      nightPassYen: null,
+      childOneDayYen: 2100,
+      seniorOneDayYen: 2900,
+      seasonPassYen: 32000,
+      seasonPassName: "Owani Onsen Season Pass",
+      fullBoardRentalDayYen: 4000,
+      wearRentalDayYen: 3500,
+      notes: "At ¥4,000 for a full day (and ¥2,900 for seniors), Owani is one of the best-value 500m+ vertical mountains in Japan.",
+    },
+    snowboarderIntel: {
+      liftFleet: "3 Pair Lifts (Amaike Pair, International Family Lift, Pair Lift No. 3 to summit)",
+      terrainPark: "Natural side-hits, rollers, and old-school FIS competition fall-lines",
+      flatSpotWarning: "Low — steep, continuous pitch down the main International and Maehira courses.",
+      treeRunRules: "Official 'Off-piste Course' and uncompacted Kansawa/Takinosawa faces open off the top lift after snowfall.",
+    },
+    monthlySnowfallCm: {
+      dec: 160,
+      jan: 260,
+      feb: 225,
+      mar: 135,
+      apr: 15,
+      peakBaseCm: 250,
+    },
+    onsenAndVillage: [
+      {
+        name: "Wancome (鰐come) Owani Onsen Day Spa",
+        japaneseName: "大鰐温泉 地域交流センター 鰐come",
+        category: "Onsen",
+        description:
+          "Spacious cypress and stone outdoor hot spring complex right in front of JR Owani-Onsen Station.",
+        info: "09:00 – 22:00 · ¥600 Adult",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Wancome+Owani+Onsen+Aomori",
+      },
+      {
+        name: "Owani Onsen Moyashi Ramen (豆もやしラーメン)",
+        japaneseName: "大鰐温泉もやしラーメン",
+        category: "Food & Apres",
+        description:
+          "Local specialty ramen topped with crisp, geothermal-spring-grown Owani bean sprouts—a 400-year Tsugaru winter tradition.",
+        info: "Outside Owani-Onsen Station",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Owani+Onsen+Station+Aomori",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Off-Piste Course & Kansawa Course",
+        level: "Advanced",
+        note: "Steep, ungroomed upper-mountain powder pitch dropping from the summit lift.",
+      },
+      {
+        name: "Amaike International Course (2,100m)",
+        level: "Intermediate",
+        note: "Fast, sustained 2.1km competition cruiser from top to bottom.",
+      },
+      {
+        name: "Amaike Panorama Course (4,200m)",
+        level: "Beginner",
+        note: "Scenic 4.2km forest run winding gently from the summit to the base.",
+      },
+    ],
+    coordinates: { lat: 40.5076, lon: 140.5646 },
+    elevation: { base: 190, top: 715, vertical: 525 },
+    terrain: {
+      beginner: 35,
+      intermediate: 35,
+      advanced: 30,
+      runs: 9,
+      lifts: 3,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 4000,
+    fromTokyo: {
+      durationMinutes: 235,
+      summary: "Tohoku Shinkansen Hayabusa to Shin-Aomori Station + JR Ou Main Line to Owani-Onsen Station + 5-min bus/taxi",
+      station: "Owani-Onsen Station (大鰐温泉駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Owani-Onsen+Station+Aomori+Japan",
+    },
+    vibeTags: ["¥4,000 Day Pass", "525m Vertical", "800-Year Onsen Town"],
+    bestFor: "Soul riders and storm-chasing travellers wanting authentic Tsugaru culture and zero crowds",
+    officialUrl: "https://www.owani-ski.com/",
+  },
 ];
 
-export const REGIONS: Region[] = ["Nagano", "Niigata", "Gunma"];
+/** Display order for prefectures. Only prefectures that actually have resorts are shown. */
+const REGION_ORDER: Region[] = [
+  "Nagano",
+  "Niigata",
+  "Gunma",
+  "Fukushima",
+  "Yamagata",
+  "Miyagi",
+  "Akita",
+  "Iwate",
+  "Aomori",
+  "Hokkaido",
+];
+
+export const REGIONS: Region[] = REGION_ORDER.filter((region) =>
+  RESORTS.some((resort) => resort.region === region)
+);
 
 export function getResortBySlug(slug: string): Resort | undefined {
   return RESORTS.find((r) => r.slug === slug);

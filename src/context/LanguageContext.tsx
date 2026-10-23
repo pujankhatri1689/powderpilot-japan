@@ -37,6 +37,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     try {
       const saved = window.localStorage.getItem(STORAGE_KEY);
       if (saved === "en" || saved === "ja" || saved === "zh") {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setLangState(saved);
         document.documentElement.lang = saved;
       }

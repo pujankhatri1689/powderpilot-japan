@@ -42,6 +42,55 @@ export function translateRegion(
       jaPref: "群馬県",
       zhPref: "群马县",
     },
+    Fukushima: {
+      en: "Fukushima",
+      ja: "福島",
+      zh: "福岛",
+      jaPref: "福島県",
+      zhPref: "福岛县",
+    },
+    Yamagata: {
+      en: "Yamagata",
+      ja: "山形",
+      zh: "山形",
+      jaPref: "山形県",
+      zhPref: "山形县",
+    },
+    Aomori: {
+      en: "Aomori",
+      ja: "青森",
+      zh: "青森",
+      jaPref: "青森県",
+      zhPref: "青森县",
+    },
+    Iwate: {
+      en: "Iwate",
+      ja: "岩手",
+      zh: "岩手",
+      jaPref: "岩手県",
+      zhPref: "岩手县",
+    },
+    Akita: {
+      en: "Akita",
+      ja: "秋田",
+      zh: "秋田",
+      jaPref: "秋田県",
+      zhPref: "秋田县",
+    },
+    Miyagi: {
+      en: "Miyagi",
+      ja: "宮城",
+      zh: "宫城",
+      jaPref: "宮城県",
+      zhPref: "宫城县",
+    },
+    Hokkaido: {
+      en: "Hokkaido",
+      ja: "北海道",
+      zh: "北海道",
+      jaPref: "北海道",
+      zhPref: "北海道",
+    },
   };
   const item = map[region];
   if (withSuffix) {
@@ -314,7 +363,7 @@ export const UI_TEXT = {
       stormBtnOff: "Preview Peak-Season Storm Mode",
       preSeasonTitle: "Late-October Pre-Season Note:",
       preSeasonBody:
-        "Live summit temperatures are cooling down across Nagano, Niigata, and Gunma, with 0cm snowfall in the immediate 7-day window. Want to see how the radar ranks a real Sea of Japan storm?",
+        "Live summit temperatures are cooling down across Japan, with 0cm snowfall in the immediate 7-day window. Want to see how the radar ranks a real Sea of Japan storm?",
       simulateBtn: "Simulate January Dump ❄️",
       peakLabel: (m: number) => `Peak ${m}m`,
       fetching: "Fetching high-resolution summit forecast...",
@@ -813,7 +862,7 @@ export const UI_TEXT = {
       stormBtnOff: "预览1月深冬暴雪模式",
       preSeasonTitle: "10月下旬开板前提示：",
       preSeasonBody:
-        "目前正值雪季开始前夕；数值预报显示长野、新潟、群马山顶未来7天降雪为 0cm。想看看日本海寒流暴雪来袭时的排行榜效果吗？",
+        "目前正值雪季开始前夕；数值预报显示日本各地山顶未来7天降雪为 0cm。想看看日本海寒流暴雪来袭时的排行榜效果吗？",
       simulateBtn: "模拟1月日本海大暴雪 ❄️",
       peakLabel: (m: number) => `山顶 ${m}m`,
       fetching: "正在获取山顶气象数据...",
