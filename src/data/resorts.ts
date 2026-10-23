@@ -9,6 +9,8 @@ export interface Resort {
   description: string;
   /** Scenic mountain / snow photo URL */
   heroImage: string;
+  /** Local path to the actual official resort trail / course map image */
+  trailMapImage: string;
   /** Direct link to official trail / course map */
   trailMapUrl: string;
   /** Signature runs & powder zones to ride at this mountain */
@@ -58,6 +60,7 @@ export const RESORTS: Resort[] = [
       "The flagship resort of Hakuba Valley and host of the 1998 Winter Olympics. Famous for massive vertical drop, wide-open alpine bowls, and steep, high-elevation terrain.",
     heroImage:
       "https://images.unsplash.com/photo-1551524559-8af4e6624178?auto=format&fit=crop&w=1200&q=80",
+    trailMapImage: "/trail-maps/hakuba-happo-one.jpg",
     trailMapUrl: "https://www.happo-one.jp/en/gelande/",
     signatureRuns: [
       {
@@ -106,6 +109,7 @@ export const RESORTS: Resort[] = [
       "A legendary powder magnet at the northern tip of Hakuba Valley. Storms off the Sea of Japan hit Cortina first, dumping deep snow into steep, lift-accessed tree zones.",
     heroImage:
       "https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=1200&q=80",
+    trailMapImage: "/trail-maps/hakuba-cortina.jpg",
     trailMapUrl: "https://www.hgp.co.jp/cortina/ski/en/course/",
     signatureRuns: [
       {
@@ -154,6 +158,7 @@ export const RESORTS: Resort[] = [
       "One of Japan's best all-around resorts combining long snow-covered runs, official tree-riding zones, and a traditional Edo-period hot spring village with 13 free public Soto-yu bathhouses.",
     heroImage:
       "https://images.unsplash.com/photo-1605540436563-5bca919ae766?auto=format&fit=crop&w=1200&q=80",
+    trailMapImage: "/trail-maps/nozawa-onsen.jpg",
     trailMapUrl: "https://en.nozawaski.com/the-mountain/trail-map/",
     signatureRuns: [
       {
@@ -202,7 +207,8 @@ export const RESORTS: Resort[] = [
       "Japan's largest interconnected ski area and highest-elevation resort system. Cold, dry snow stays chalky and light long after storms pass, right next to the famous Jigokudani Snow Monkeys.",
     heroImage:
       "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?auto=format&fit=crop&w=1200&q=80",
-    trailMapUrl: "https://shigakogen-ski.or.jp/english/map/",
+    trailMapImage: "/trail-maps/shiga-kogen.jpg",
+    trailMapUrl: "https://shigakogen-ski.or.jp/english/",
     signatureRuns: [
       {
         name: "Olympic Course (Yakebitaiyama)",
@@ -252,6 +258,7 @@ export const RESORTS: Resort[] = [
       "Situated on the flank of Mt. Myoko, Suginohara gets some of the heaviest snowfall on earth (13m+ annually) and boasts an 8.5 km top-to-bottom run with a huge 1,124m vertical drop.",
     heroImage:
       "https://images.unsplash.com/photo-1548777123-e216912df7d8?auto=format&fit=crop&w=1200&q=80",
+    trailMapImage: "/trail-maps/myoko-suginohara.jpg",
     trailMapUrl: "https://www.princehotels.com/en/ski/myoko_kogen/",
     signatureRuns: [
       {
@@ -300,7 +307,8 @@ export const RESORTS: Resort[] = [
       "A freerider's paradise near the Sea of Japan coast. Most of the upper mountain consists of 14 designated avalanche-controlled off-piste freeride bowls and glades.",
     heroImage:
       "https://images.unsplash.com/photo-1522056615691-da7b8106c665?auto=format&fit=crop&w=1200&q=80",
-    trailMapUrl: "https://www.lottehotel.com/arai-resort/en/ski/map.html",
+    trailMapImage: "/trail-maps/lotte-arai.webp",
+    trailMapUrl: "https://www.lottehotel.com/arai-resort/en",
     signatureRuns: [
       {
         name: "Oonashi & Zendana Bowls",
@@ -348,6 +356,7 @@ export const RESORTS: Resort[] = [
       "Connected to Naeba via the Dragondola, Kagura sits high above Yuzawa so its snow stays cold and dry from late November through May. Beloved by Tokyo powder hounds for sidecountry and tree access.",
     heroImage:
       "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80",
+    trailMapImage: "/trail-maps/kagura.jpg",
     trailMapUrl: "https://www.princehotels.com/en/ski/kagura/",
     signatureRuns: [
       {
@@ -396,6 +405,7 @@ export const RESORTS: Resort[] = [
       "The only ski resort in the world with its own Shinkansen bullet train station right inside the base lodge. Step off the train from Tokyo and clip into your board in minutes.",
     heroImage:
       "https://images.unsplash.com/photo-1491002052546-bf38f186af56?auto=format&fit=crop&w=1200&q=80",
+    trailMapImage: "/trail-maps/gala-yuzawa.jpg",
     trailMapUrl: "https://gala.co.jp/winter/english/gelande/",
     signatureRuns: [
       {
@@ -446,7 +456,8 @@ export const RESORTS: Resort[] = [
       "Known simply as 'Tenjin' to hardcore riders. A ropeway lifts you into dramatic sub-alpine bowls and ridges that trap ridiculous amounts of snow funneling over the Mikuni Mountain Range.",
     heroImage:
       "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
-    trailMapUrl: "https://tanigawadake-joch.com/en/winter/",
+    trailMapImage: "/trail-maps/tanigawadake-tenjindaira.jpg",
+    trailMapUrl: "https://tanigawadake-joch.com/en/",
     signatureRuns: [
       {
         name: "Tenjin Pass Ridge & Side Bowls",
@@ -494,6 +505,7 @@ export const RESORTS: Resort[] = [
       "A high-elevation Gunma gem famous for its multi-story drive-in base complex, dry inland powder, top-tier terrain parks, and guided 'Off the Piste' tree-riding zones.",
     heroImage:
       "https://images.unsplash.com/photo-1517299321609-52687d1bc55a?auto=format&fit=crop&w=1200&q=80",
+    trailMapImage: "/trail-maps/kawaba.jpg",
     trailMapUrl: "https://www.kawaba.co.jp/snow/gelande/",
     signatureRuns: [
       {
@@ -542,7 +554,8 @@ export const RESORTS: Resort[] = [
       "Sitting at 2,000m on Mt. Nikko-Shirane, Marunuma offers a 4km gondola-served top-to-bottom run, super consistent cold snow, and famous banked slalom & surf-style snow parks.",
     heroImage:
       "https://images.unsplash.com/photo-1542224566-6e85f2e6772f?auto=format&fit=crop&w=1200&q=80",
-    trailMapUrl: "https://www.marunuma.jp/winter/gelande/",
+    trailMapImage: "/trail-maps/marunuma-kogen.webp",
+    trailMapUrl: "https://www.marunuma.jp/winter/course-map/",
     signatureRuns: [
       {
         name: "Silver Course",
