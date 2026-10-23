@@ -7,8 +7,7 @@ import { useFavorites } from "@/context/FavoritesContext";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/resorts", label: "Resorts" },
-  { href: "/conditions", label: "Conditions" },
-  { href: "/planner", label: "Planner" },
+  { href: "/conditions", label: "Live Snow & Radar" },
 ];
 
 export default function Navbar() {

@@ -301,22 +301,84 @@ export default function ResortWeatherWidget({ resort }: { resort: Resort }) {
               })}
             </div>
           </div>
+
+          {/* Historical Monthly Snowfall Averages */}
+          <div className="rounded-xl border border-charcoal-light bg-charcoal-light/25 p-4 sm:p-5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-ice">
+                  📊 Historical Monthly Snowfall Averages (10-Year Mean)
+                </h3>
+                <p className="mt-0.5 text-xs text-snow-muted">
+                  Average fresh snowfall per month & typical mid-winter peak base depth
+                </p>
+              </div>
+              <span className="rounded-lg bg-ice-deep/15 px-3 py-1 text-xs font-extrabold text-ice">
+                Peak Base Depth: ~{resort.monthlySnowfallCm.peakBaseCm} cm
+              </span>
+            </div>
+
+            <div className="mt-4 grid grid-cols-5 gap-2.5 text-center">
+              {(
+                [
+                  { label: "Dec", cm: resort.monthlySnowfallCm.dec },
+                  { label: "Jan", cm: resort.monthlySnowfallCm.jan },
+                  { label: "Feb", cm: resort.monthlySnowfallCm.feb },
+                  { label: "Mar", cm: resort.monthlySnowfallCm.mar },
+                  { label: "Apr", cm: resort.monthlySnowfallCm.apr },
+                ] as const
+              ).map((m) => {
+                const pct = Math.min(100, Math.round((m.cm / 500) * 100));
+                return (
+                  <div
+                    key={m.label}
+                    className="flex flex-col items-center rounded-xl border border-charcoal-light bg-charcoal p-3"
+                  >
+                    <span className="text-xs font-bold text-snow">
+                      {m.label}
+                    </span>
+                    <div className="my-2 flex h-20 w-6 items-end overflow-hidden rounded-full bg-charcoal-dark p-0.5">
+                      <div
+                        style={{ height: `${pct}%` }}
+                        className="w-full rounded-full bg-gradient-to-t from-ice-deep to-ice"
+                      />
+                    </div>
+                    <span className="text-xs font-extrabold text-ice">
+                      {m.cm}cm
+                    </span>
+                    <span className="text-[10px] text-snow-muted">
+                      ~{(m.cm / 100).toFixed(1)}m
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </>
       ) : null}
 
-      {/* External Verification Links (Google Weather, Snow-Forecast) */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-charcoal-light pt-4 text-xs text-snow-muted">
-        <span>
+      {/* Live Webcams & Google Weather Action Bar */}
+      <div className="flex flex-col gap-3 border-t border-charcoal-light pt-4 sm:flex-row sm:items-center sm:justify-between">
+        <span className="text-xs text-snow-muted">
           Source: Open-Meteo High-Resolution JMA MSM / GFS Weather Models
         </span>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2.5">
+          <a
+            href={resort.webcamUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-xl bg-ice-deep px-4 py-2 text-xs font-bold text-charcoal transition hover:bg-ice"
+          >
+            <span>📹 Watch Live Mountain Webcams</span>
+            <span aria-hidden>↗</span>
+          </a>
           <a
             href={googleWeatherSearchUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 rounded-lg border border-charcoal-light bg-charcoal-light/50 px-3 py-1.5 font-semibold text-ice transition hover:border-ice"
+            className="inline-flex items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-4 py-2 text-xs font-semibold text-ice transition hover:border-ice"
           >
-            <span>Check on Google Weather</span>
+            <span>🌤️ Check on Google Weather</span>
             <span aria-hidden>↗</span>
           </a>
         </div>
