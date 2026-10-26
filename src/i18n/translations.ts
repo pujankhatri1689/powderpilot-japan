@@ -1,6 +1,6 @@
 import type { Region } from "@/data/resorts";
 
-export type Language = "en" | "ja" | "zh";
+export type Language = "en" | "ja";
 
 export const LANGUAGE_OPTIONS: {
   code: Language;
@@ -9,7 +9,6 @@ export const LANGUAGE_OPTIONS: {
 }[] = [
   { code: "en", shortLabel: "EN", fullLabel: "English" },
   { code: "ja", shortLabel: "日本語", fullLabel: "日本語" },
-  { code: "zh", shortLabel: "中文", fullLabel: "中文" },
 ];
 
 export function translateRegion(
@@ -18,84 +17,63 @@ export function translateRegion(
   withSuffix = false
 ): string {
   if (region === "All") {
-    return lang === "ja" ? "すべて" : lang === "zh" ? "全部" : "All";
+    return lang === "ja" ? "すべて" : "All";
   }
-  const map: Record<Region, { en: string; ja: string; zh: string; jaPref: string; zhPref: string }> = {
+  const map: Record<Region, { en: string; ja: string; jaPref: string }> = {
     Nagano: {
       en: "Nagano",
       ja: "長野",
-      zh: "长野",
       jaPref: "長野県",
-      zhPref: "长野县",
     },
     Niigata: {
       en: "Niigata",
       ja: "新潟",
-      zh: "新潟",
       jaPref: "新潟県",
-      zhPref: "新潟县",
     },
     Gunma: {
       en: "Gunma",
       ja: "群馬",
-      zh: "群马",
       jaPref: "群馬県",
-      zhPref: "群马县",
     },
     Fukushima: {
       en: "Fukushima",
       ja: "福島",
-      zh: "福岛",
       jaPref: "福島県",
-      zhPref: "福岛县",
     },
     Yamagata: {
       en: "Yamagata",
       ja: "山形",
-      zh: "山形",
       jaPref: "山形県",
-      zhPref: "山形县",
     },
     Aomori: {
       en: "Aomori",
       ja: "青森",
-      zh: "青森",
       jaPref: "青森県",
-      zhPref: "青森县",
     },
     Iwate: {
       en: "Iwate",
       ja: "岩手",
-      zh: "岩手",
       jaPref: "岩手県",
-      zhPref: "岩手县",
     },
     Akita: {
       en: "Akita",
       ja: "秋田",
-      zh: "秋田",
       jaPref: "秋田県",
-      zhPref: "秋田县",
     },
     Miyagi: {
       en: "Miyagi",
       ja: "宮城",
-      zh: "宫城",
       jaPref: "宮城県",
-      zhPref: "宫城县",
     },
     Hokkaido: {
       en: "Hokkaido",
       ja: "北海道",
-      zh: "北海道",
       jaPref: "北海道",
-      zhPref: "北海道",
     },
   };
   const item = map[region];
   if (withSuffix) {
     if (lang === "ja") return item.jaPref;
-    if (lang === "zh") return item.zhPref;
     return `${item.en} Prefecture`;
   }
   return item[lang];
@@ -111,13 +89,6 @@ export function translateLevel(
       : level === "Intermediate"
       ? "中級"
       : "上級・パウダー";
-  }
-  if (lang === "zh") {
-    return level === "Beginner"
-      ? "初级"
-      : level === "Intermediate"
-      ? "中级"
-      : "高级 / 粉雪";
   }
   return level;
 }
@@ -602,241 +573,4 @@ export const UI_TEXT = {
     },
   },
 
-  zh: {
-    nav: {
-      home: "首页",
-      resorts: "滑雪场大全",
-      conditions: "实时降雪雷达",
-      allResorts: "全部滑雪场",
-      backToHome: "返回首页",
-      savedTooltip: "查看已收藏的滑雪场",
-      langLabel: "语言",
-    },
-    home: {
-      badge: "日本单板滑雪百科全书 & 实时粉雪指南",
-      titleLine1: "追逐最深厚的",
-      titleHighlight: "日本粉雪 (Japow)",
-      titleLine2: "掌握每一座雪山。",
-      subtitle:
-        "一键查看日本各地热门滑雪场的高清雪道图、缆车票与雪具租赁价格、单板滑手专属攻略、山顶实时摄像头、7天降雪预报以及温泉美食导航。",
-      browseBtn: "🏔️ 浏览全部滑雪场",
-      radarBtn: "❄️ 实时降雪 & 粉雪雷达",
-      resortsCount: (n: number) => `${n} 家滑雪场`,
-    },
-    directory: {
-      backToHome: "返回首页",
-      resortsShowing: (shown: number, total: number) =>
-        `显示 ${shown} / 共 ${total} 家滑雪场`,
-      regionsHeader: "日本全国单板滑雪场",
-      title: "日本滑雪场大全与对比",
-      subtitle:
-        "按地区（县）、是否开放树林野雪、从东京出发交通时间、垂直落差或缆车票价进行筛选。",
-      likedBtn: (count: number) => `已收藏 (${count})`,
-      treeRunsBtn: "允许滑树林 (Tree Runs)",
-      searchPlaceholder:
-        "搜索滑雪场名称、区域（如白马、汤泽）或特色标签...",
-      sortByLabel: "排序方式:",
-      sortVertical: "最大垂直落差 (m)",
-      sortTopElevation: "最高山顶海拔 (m)",
-      sortTravel: "距东京最快车程",
-      sortPrice: "最便宜一日缆车票 (¥)",
-      noMatchTitle: "没有符合筛选条件的滑雪场。",
-      noMatchSub: "请尝试清空搜索关键词或切换地区。",
-      resetFilters: "重置筛选条件",
-      treesOkBadge: "🌲 可滑树林",
-      hdMapsBadge: (count: number) => `🗺️ ${count} 张高清地图与实景`,
-      peakBadge: (m: number) => `山顶 ${m}m`,
-      verticalStat: "垂直落差",
-      fromTokyoStat: "东京出发",
-      dayPassStat: "一日票",
-      rentalLabel: "雪具租赁",
-      begShort: "初级",
-      intShort: "中级",
-      advShort: "高级",
-      cardCta: "高清雪道图 & 详细攻略",
-      openOfficialMap: "打开官方雪道图网页",
-    },
-    detail: {
-      allResorts: "全部滑雪场",
-      home: "首页",
-      treeRunsAllowed: "🌲 开放树林野雪区",
-      onPisteFocus: "机压雪道 / 高山雪碗为主",
-      verifiedSeason: "2025–2026 冬季雪季已核实",
-      googleMapsBtn: "📍 Google 地图",
-      prevResort: "← 上一家滑雪场",
-      nextResort: "下一家滑雪场 →",
-      snowRadarLabel: "全日本粉雪雷达",
-      snowRadarCta: "❄️ 对比 7 天降雪量排行榜",
-      save: "收藏",
-      saved: "已收藏",
-      tabs: {
-        overview: "🏔️ 雪场概况",
-        tickets: "🎟️ 缆车票与租赁价格",
-        maps: "🗺️ 高清雪道图与名道",
-        weather: "❄️ 天气预报与实时监控",
-        onsen: "♨️ 温泉、美食街与交通",
-      },
-      overview: {
-        eyebrow: "雪山档案 & 综合概况",
-        aboutTitle: (name: string, jp: string) => `关于 ${name} (${jp})`,
-        bestForLabel: "🎯 最适合人群",
-        verticalDrop: "最大垂直落差",
-        runsAndLifts: "雪道与缆车数量",
-        runsCount: (n: number) => `${n} 条雪道`,
-        liftsTotal: (n: number) => `共 ${n} 条缆车`,
-        oneDayPass: "成人一日缆车票",
-        rentalSetSub: (price: string) => `单板全套租赁: ¥${price}`,
-        fromTokyo: "从东京出发",
-        beginnerPct: (n: number) => `🟢 初级道 ${n}%`,
-        intermediatePct: (n: number) => `🔵 中级道 ${n}%`,
-        advancedPct: (n: number) => `⚫ 高级道 / 粉雪陡坡 ${n}%`,
-        locationEyebrow: "📍 地址与导航（英文 + 日文可复制）",
-        locationTitle: "滑雪场地址 & Google 地图定位",
-        locationSub:
-          "一键复制英文或日文地址，方便自驾导航、叫车或填写黑猫宅急便（Yamato）雪板寄送单。",
-        openGoogleMaps: "🗺️ 在 Google 地图中打开",
-        englishAddressLabel: "英文地址 (English Address)",
-        japaneseAddressLabel: "日文地址与邮编 (日本語住所)",
-        copyEn: "📋 复制英文地址",
-        copiedEn: "✓ 已复制!",
-        copyJp: "📋 复制日文地址",
-        copiedJp: "✓ 已复制!",
-        hoursEyebrow: "🕒 营业时间 & 雪季日程",
-        hoursTitle: "雪季开放日期 & 缆车运行时间",
-        seasonWindow: "📅 雪季开放月份",
-        dayHours: "🕗 日场缆车时间",
-        nightSkiing: "🌙 夜场滑雪 (Night Skiing)",
-        earlyBird: "🌅 早鸟顶门 / 首班缆车",
-        opsNote: "运营提示:",
-        intelEyebrow: "🏂 单板滑手专属情报 (Snowboarder Intel)",
-        intelTitle: "缆车配置、公园、平缓连接道提醒与树林规则",
-        liftFleet: "🚡 厢式缆车与吊椅配置",
-        terrainPark: "🛹 地形公园与U型池 (Park & Pipe)",
-        flatSpot: "⚡ 平路卡壳预警 (Flat Cat-Track Check)",
-        treeRules: "🌲 树林野雪与道外规定",
-      },
-      tickets: {
-        eyebrow: "缆车票 · 季卡 · 雪具租赁",
-        title: (name: string) => `${name} 缆车票与雪具租赁价格表 (日元 ¥)`,
-        breakdownHeading: "🎟️ 缆车票价格明细",
-        oneDayAdult: "成人一日券",
-        halfDay: "半日券（4小时 / 上午·下午）",
-        adultRate: "成人票价",
-        twoDay: "两日连滑券",
-        consecutiveDays: "连续2天有效",
-        nightPass: "夜场缆车券",
-        notOperated: "无夜场",
-        eveningFloodlit: "晚间灯光雪道",
-        childPass: "儿童一日券（小学生）",
-        freeChild: "免费 (¥0)",
-        oneDayChild: "儿童一日票",
-        seniorPass: "长者优惠券 (Senior)",
-        oneDayDiscounted: "长者一日优惠价",
-        seasonPassHeading: "🏆 全季卡 (Season Pass)",
-        breaksEven: (days: number) => `滑满 ${days} 天即可回本`,
-        rentalsHeading: "🏂 单板雪具 & 滑雪服租赁（1日）",
-        boardSet: "单板全套（雪板 + 雪鞋 + 固定器）",
-        wearSet: "滑雪服套装（上衣 + 雪裤）",
-        fullPackage: "全套打包参考价（雪板套装 + 雪服）",
-      },
-      onsen: {
-        eyebrow: "♨️ 温泉、滑后美食街 & 雪场小镇指南",
-        title: (name: string) => `${name} 周边最佳温泉与美食地标`,
-        subtitle:
-          "点击任意地点的“在 Google 地图中导航”，即可在手机上获取步行或接驳巴士路线。",
-        catOnsen: "♨️ 天然温泉浴场",
-        catFood: "🍜 美食、居酒屋与酒吧",
-        catLandmark: "🏮 必去地标景点",
-        navigateMaps: "📍 在 Google 地图中导航",
-        transitEyebrow: (dur: string) => `🚅 从东京出发交通方式（约 ${dur}）`,
-        transitTitle: "新干线 & 接驳巴士推荐路线",
-        openStationMaps: (st: string) => `🚉 在 Google 地图查看 ${st}`,
-        recommendedRoute: "推荐乘车路线",
-        nearestHub: "最近高铁 / 巴士枢纽站",
-        minsFromTokyo: (mins: number) => `从东京出发总耗时约 ${mins} 分钟`,
-      },
-    },
-    maps: {
-      galleryEyebrow: (cur: number, total: number) =>
-        `高清雪道图 & 雪山实景画廊 (第 ${cur} / ${total} 张)`,
-      fullResZoom: "🔍 全屏高清放大",
-      officialMapPage: "官方雪道图网页",
-      tapFullScreen: "🔍 点击打开全屏超清大图",
-      mapIndex: (n: number) => `图 ${n}:`,
-      swipeHint: "左右滑动或点击按钮切换不同区域的雪道图",
-      beginnerLegend: (n: number) => `初级 (${n}%)`,
-      intermediateLegend: (n: number) => `中级 (${n}%)`,
-      advancedLegend: (n: number) => `高级 / 粉雪 (${n}%)`,
-      elevationFooter: (base: number, top: number, vert: number, runs: number) =>
-        `山脚 ${base}m → 山顶 ${top}m（落差 ${vert}m）· 共 ${runs} 条雪道`,
-      prevMap: "‹ 上一张",
-      nextMap: "下一张 ›",
-      openRaw: "打开原始超清大图 ↗",
-      close: "✕ 关闭",
-    },
-    weather: {
-      eyebrow: (lat: number, lon: number) =>
-        `高分辨率数值预报 · Open-Meteo / 日本气象厅 JMA MSM · 北纬${lat}° 东经${lon}°`,
-      title: (name: string) => `${name} 天气与未来 7 天降雪预报`,
-      peakBtn: (m: number) => `山顶海拔 (${m}m)`,
-      baseBtn: (m: number) => `山脚基地 (${m}m)`,
-      stormDemoOn: "🌨️ 1月暴雪演示已开启",
-      stormDemoOff: "预览1月暴雪模式",
-      loading: (name: string) => `正在加载 ${name} 的实时气象数据...`,
-      conditionLabel: "当前天气",
-      atElevation: (m: number) => `海拔 ${m}m 处`,
-      tempLabel: "当前气温",
-      feelsLike: (c: number) => `体感温度 ${c}°C`,
-      sevenDaySnowLabel: "未来7天累计降雪",
-      baseDepth: (cm: number) => `当前积雪厚度: ${cm} cm`,
-      freezingLevelLabel: "零度结冰线高度",
-      allMountainSnow: "全山纯干粉雪",
-      upperPeakSnow: "山顶区域降雪",
-      warmPreSeason: "季前暖空气",
-      windHumidityLabel: "风速与湿度",
-      humidity: (pct: number) => `湿度 ${pct}%`,
-      dailyBreakdownHeading: (mode: "top" | "base", m: number) =>
-        `未来 7 天逐日降雪预报（${mode === "top" ? "山顶" : "山脚"} ${m}m）`,
-      snowUnit: "cm 降雪",
-      monthlyTitle: "📊 历史月均降雪量统计（近10年均值）",
-      monthlySub: "每月平均新雪降雪量与深冬最高积雪厚度参考",
-      peakBaseBadge: (cm: number) => `深冬巅峰积雪厚度: 约 ${cm} cm`,
-      months: ["12月", "1月", "2月", "3月", "4月"],
-      sourceNote:
-        "预报来源：Open-Meteo 高分辨率数值天气模型（日本气象厅 JMA MSM / GFS）。并非雪场官方雪况报告。",
-      watchWebcams: "📹 查看山顶实时摄像头 (Webcams)",
-      checkGoogleWeather: "🌤️ 在 Google 天气中查看",
-      codes: {
-        clear: "晴空万里 (Bluebird)",
-        partlyCloudy: "晴间多云",
-        fog: "山雾 / 大雾",
-        snowing: "正在降雪",
-        heavySnow: "鹅毛大雪 / 暴雪",
-        rainMixed: "雨夹雪 / 降雨",
-        rainShowers: "阵雨",
-        clouds: "高山多云",
-      },
-    },
-    conditionsPage: {
-      backToHome: "返回首页",
-      simLabel: "1月深冬暴雪模拟模式",
-      liveLabel: "高分辨率数值预报 · Open-Meteo / 日本气象厅 JMA MSM",
-      eyebrow: "山顶未来7天降雪预报 · 按降雪量排名",
-      title: "粉雪雷达 & 实时雪况排行榜",
-      subtitle:
-        "基于各大滑雪场山顶海拔的高分辨率数值预报，按未来7天预期降雪量进行排名。",
-      stormBtnOn: "正在显示1月暴雪演示（切回实时）",
-      stormBtnOff: "预览1月深冬暴雪模式",
-      preSeasonTitle: "10月下旬开板前提示：",
-      preSeasonBody:
-        "目前正值雪季开始前夕；数值预报显示日本各地山顶未来7天降雪为 0cm。想看看日本海寒流暴雪来袭时的排行榜效果吗？",
-      simulateBtn: "模拟1月日本海大暴雪 ❄️",
-      peakLabel: (m: number) => `山顶 ${m}m`,
-      fetching: "正在获取山顶气象数据...",
-      sevenDaySnow: "7天累计降雪",
-      next24h: "未来24小时",
-      peakTemp: "山顶气温",
-      freezingLevel: "结冰线高度",
-    },
-  },
 } as const;

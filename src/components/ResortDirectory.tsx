@@ -38,9 +38,8 @@ export default function ResortDirectory() {
       }
       if (!query) return true;
 
-      // Match search query against English, Japanese, and Chinese resort data!
+      // Match search query against English and Japanese resort data
       const jaResort = getLocalizedResort(resort, "ja");
-      const zhResort = getLocalizedResort(resort, "zh");
 
       return (
         resort.name.toLowerCase().includes(query) ||
@@ -50,10 +49,7 @@ export default function ResortDirectory() {
         resort.vibeTags.some((tag) => tag.toLowerCase().includes(query)) ||
         jaResort.name.toLowerCase().includes(query) ||
         jaResort.area.toLowerCase().includes(query) ||
-        jaResort.vibeTags.some((tag) => tag.toLowerCase().includes(query)) ||
-        zhResort.name.toLowerCase().includes(query) ||
-        zhResort.area.toLowerCase().includes(query) ||
-        zhResort.vibeTags.some((tag) => tag.toLowerCase().includes(query))
+        jaResort.vibeTags.some((tag) => tag.toLowerCase().includes(query))
       );
     }).sort((a, b) => {
       switch (sortBy) {

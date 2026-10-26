@@ -41,8 +41,7 @@ export default function ResortWeatherWidget({
   const targetElevation =
     elevationMode === "top" ? resort.elevation.top : resort.elevation.base;
 
-  const localeCode =
-    lang === "ja" ? "ja-JP" : lang === "zh" ? "zh-CN" : "en-US";
+  const localeCode = lang === "ja" ? "ja-JP" : "en-US";
 
   function describeWeatherCode(code: number): { label: string; icon: string } {
     if (code === 0) return { label: t.weather.codes.clear, icon: "☀️" };

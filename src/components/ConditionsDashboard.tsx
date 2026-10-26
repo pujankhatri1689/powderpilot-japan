@@ -116,8 +116,7 @@ export default function ConditionsDashboard() {
   const [selectedRegion, setSelectedRegion] = useState<Region | "All">("All");
   const [stormPreviewMode, setStormPreviewMode] = useState(false);
 
-  const localeCode =
-    lang === "ja" ? "ja-JP" : lang === "zh" ? "zh-CN" : "en-US";
+  const localeCode = lang === "ja" ? "ja-JP" : "en-US";
 
   useEffect(() => {
     let cancelled = false;
