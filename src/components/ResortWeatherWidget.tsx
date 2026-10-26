@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Resort } from "@/data/resorts";
@@ -471,7 +470,55 @@ export default function ResortWeatherWidget({
             </div>
           </div>
 
-          {/* ❄️ 7-Day Powder Radar & Storm Tracker */}
+          {/* 7-Day Daily Weather Forecast (First) */}
+          <div>
+            <h3 className="mb-2.5 text-xs font-bold uppercase tracking-wider text-snow-muted">
+              {t.weather.dailyBreakdownHeading(elevationMode, targetElevation)}
+            </h3>
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-7">
+              {displayData.daily.map((day) => {
+                const dayName = new Date(
+                  `${day.date}T00:00:00`
+                ).toLocaleDateString(localeCode, {
+                  weekday: "short",
+                  month: "short",
+                  day: "numeric",
+                });
+                const dayCond = describeWeatherCode(day.weatherCode);
+
+                return (
+                  <div
+                    key={day.date}
+                    className="flex flex-col items-center justify-between rounded-xl border border-charcoal-light bg-charcoal-light/25 p-3 text-center"
+                  >
+                    <span className="text-xs font-semibold text-snow">
+                      {dayName}
+                    </span>
+                    <span className="my-2 text-2xl" title={dayCond.label}>
+                      {dayCond.icon}
+                    </span>
+                    <span
+                      className={`rounded-md px-2 py-0.5 text-xs font-extrabold ${
+                        day.snowfallCm > 0
+                          ? "bg-ice-deep/20 text-ice"
+                          : "bg-charcoal-dark text-snow-muted"
+                      }`}
+                    >
+                      {day.snowfallCm} {t.weather.snowUnit}
+                    </span>
+                    <span className="mt-1.5 text-xs font-semibold text-snow">
+                      {day.tempMinC}° / {day.tempMaxC}°C
+                    </span>
+                    <span className="mt-0.5 text-[10px] text-snow-muted">
+                      💨 {day.windMaxKmh} km/h
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* ❄️ 7-Day Powder Radar & Storm Tracker (After Weather) */}
           <div className="rounded-2xl border border-ice/40 bg-gradient-to-br from-charcoal via-charcoal-light/30 to-charcoal p-5 sm:p-6 shadow-lg shadow-ice/5">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
               <div>
@@ -603,74 +650,6 @@ export default function ResortWeatherWidget({
                   );
                 })}
               </div>
-            </div>
-
-            {/* Seamless bridge link to Japan Powder Radar Leaderboard */}
-            <div className="mt-5">
-              <Link
-                href="/conditions"
-                className="group flex flex-col gap-1 rounded-xl border border-charcoal-light bg-charcoal-dark/60 p-3.5 transition hover:border-ice/60 hover:bg-charcoal-dark sm:flex-row sm:items-center sm:justify-between"
-              >
-                <div>
-                  <p className="text-xs font-bold text-ice group-hover:text-snow transition">
-                    {t.weather.viewRadarLeaderboard}
-                  </p>
-                  <p className="text-[11px] text-snow-muted">
-                    {t.weather.viewRadarLeaderboardDesc}
-                  </p>
-                </div>
-                <span className="inline-flex items-center gap-1 text-xs font-bold text-ice group-hover:translate-x-0.5 transition">
-                  Leaderboard ↗
-                </span>
-              </Link>
-            </div>
-          </div>
-
-          {/* 7-Day Daily Table / Cards */}
-          <div>
-            <h3 className="mb-2.5 text-xs font-bold uppercase tracking-wider text-snow-muted">
-              {t.weather.dailyBreakdownHeading(elevationMode, targetElevation)}
-            </h3>
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-7">
-              {displayData.daily.map((day) => {
-                const dayName = new Date(
-                  `${day.date}T00:00:00`
-                ).toLocaleDateString(localeCode, {
-                  weekday: "short",
-                  month: "short",
-                  day: "numeric",
-                });
-                const dayCond = describeWeatherCode(day.weatherCode);
-
-                return (
-                  <div
-                    key={day.date}
-                    className="flex flex-col items-center justify-between rounded-xl border border-charcoal-light bg-charcoal-light/25 p-3 text-center"
-                  >
-                    <span className="text-xs font-semibold text-snow">
-                      {dayName}
-                    </span>
-                    <span className="my-2 text-2xl" title={dayCond.label}>
-                      {dayCond.icon}
-                    </span>
-                    <span
-                      className={`rounded-md px-2 py-0.5 text-xs font-extrabold ${
-                        day.snowfallCm > 0
-                          ? "bg-ice-deep/20 text-ice"
-                          : "bg-charcoal-dark text-snow-muted"
-                      }`}
-                    >
-                      {day.snowfallCm} {t.weather.snowUnit}
-                    </span>
-                    <span className="mt-1.5 text-xs font-semibold text-snow">
-                      {day.tempMinC}° / {day.tempMaxC}°C
-                    </span>
-                    <span className="mt-0.5 text-[10px] text-snow-muted">
-                      💨 {day.windMaxKmh} km/h
-                    </span>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </>

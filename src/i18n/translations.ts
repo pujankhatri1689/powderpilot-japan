@@ -357,9 +357,6 @@ export const UI_TEXT = {
       freezingAnalysisMid: (top: number, base: number) =>
         `🏔️ Summit powder at ${top}m; damp or groomed at ${base}m base.`,
       freezingAnalysisWarm: "☀️ Warm pre-season / spring snow across mountain.",
-      viewRadarLeaderboard: "❄️ View All 49 Resorts on Live Powder Radar →",
-      viewRadarLeaderboardDesc:
-        "Compare this mountain's 7-day snowfall against Hakuba, Niseko, Myoko, and Tohoku",
       monthlyTitle: "📊 Historical Monthly Snowfall Averages (10-Year Mean)",
       monthlySub:
         "Average fresh snowfall per month & typical mid-winter peak base depth",
@@ -662,9 +659,6 @@ export const UI_TEXT = {
       freezingAnalysisMid: (top: number, base: number) =>
         `🏔️ 山頂（${top}m）はパウダー、山麓（${base}m）はやや重め雪・圧雪バーン`,
       freezingAnalysisWarm: "☀️ 気温高め（春雪・ウェットコンディション）",
-      viewRadarLeaderboard: "❄️ 全49スキー場の降雪ランキング（パウダーレーダー）を見る →",
-      viewRadarLeaderboardDesc:
-        "白馬、ニセコ、妙高、東北など全国の最新降雪ランキングと直接比較",
       monthlyTitle: "📊 月別平均降雪量データ（過去10年平均）",
       monthlySub: "各月の平均新雪降雪量とハイシーズン最大積雪深の目安",
       peakBaseBadge: (cm: number) => `ピーク時最大積雪深: 約${cm} cm`,
