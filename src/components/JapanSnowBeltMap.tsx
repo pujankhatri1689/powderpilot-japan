@@ -21,7 +21,7 @@ export interface SnowMapWeatherItem {
 }
 
 export type PinMetricMode = "elevation" | "snow" | "price";
-type MapTileStyle = "dark" | "topo";
+type MapTileStyle = "dark" | "satellite" | "topo";
 type SnowZoneKey = "all" | "hokkaido" | "tohoku" | "nagano" | "niigata" | "central";
 
 interface JapanSnowBeltMapProps {
@@ -73,6 +73,62 @@ function buildDisplayCoordinates(
   }
 
   return result;
+}
+
+/**
+ * Creates 100% free, reliable tile layers with zero API keys and zero watermarks.
+ * Supports dark canvas with native upscaling to zoom 18, high-res satellite imagery, and topographic contour maps.
+ */
+function createMapTileLayer(
+  L: typeof LeafletNamespace,
+  style: MapTileStyle
+): LeafletNamespace.LayerGroup {
+  const group = L.layerGroup();
+
+  if (style === "satellite") {
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      {
+        maxNativeZoom: 18,
+        maxZoom: 18,
+        attribution:
+          "Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics",
+      }
+    ).addTo(group);
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+      {
+        maxNativeZoom: 18,
+        maxZoom: 18,
+      }
+    ).addTo(group);
+  } else if (style === "topo") {
+    L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
+      maxNativeZoom: 17,
+      maxZoom: 18,
+      attribution:
+        'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | Style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
+    }).addTo(group);
+  } else {
+    // 100% Free Dark Radar: Esri World Dark Gray Base + Reference city/prefecture labels
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+      {
+        maxNativeZoom: 16,
+        maxZoom: 18,
+        attribution: "Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ",
+      }
+    ).addTo(group);
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}",
+      {
+        maxNativeZoom: 16,
+        maxZoom: 18,
+      }
+    ).addTo(group);
+  }
+
+  return group;
 }
 
 export default function JapanSnowBeltMap({
@@ -158,7 +214,7 @@ export default function JapanSnowBeltMap({
   // Leaflet imperative refs
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<LeafletNamespace.Map | null>(null);
-  const tileLayerRef = useRef<LeafletNamespace.TileLayer | null>(null);
+  const tileLayerRef = useRef<LeafletNamespace.LayerGroup | null>(null);
   const markersLayerRef = useRef<LeafletNamespace.LayerGroup | null>(null);
   const leafletLibRef = useRef<typeof LeafletNamespace | null>(null);
   const [mapReady, setMapReady] = useState(false);
@@ -179,25 +235,16 @@ export default function JapanSnowBeltMap({
         center: ZONE_CAMERA.all.center,
         zoom: ZONE_CAMERA.all.zoom,
         minZoom: 4,
-        maxZoom: 15,
+        maxZoom: 18,
         zoomControl: true,
         scrollWheelZoom: true,
       });
 
-      const darkTiles = L.tileLayer(
-        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          subdomains: "abcd",
-          maxZoom: 19,
-        }
-      ).addTo(map);
-
+      const initialTiles = createMapTileLayer(L, "dark").addTo(map);
       const markersGroup = L.layerGroup().addTo(map);
 
       mapInstanceRef.current = map;
-      tileLayerRef.current = darkTiles;
+      tileLayerRef.current = initialTiles;
       markersLayerRef.current = markersGroup;
       setMapReady(true);
     }
@@ -215,7 +262,7 @@ export default function JapanSnowBeltMap({
     };
   }, []);
 
-  // 2. Update tile layer when user switches between Dark Radar & Topo Terrain
+  // 2. Update tile layer when user switches between Dark Radar, Satellite & Topo Terrain
   useEffect(() => {
     const L = leafletLibRef.current;
     const map = mapInstanceRef.current;
@@ -225,24 +272,7 @@ export default function JapanSnowBeltMap({
       map.removeLayer(tileLayerRef.current);
     }
 
-    const nextTileLayer =
-      tileStyle === "topo"
-        ? L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
-            attribution:
-              'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>, SRTM | Style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
-            maxZoom: 17,
-          })
-        : L.tileLayer(
-            "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-            {
-              attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-              subdomains: "abcd",
-              maxZoom: 19,
-            }
-          );
-
-    nextTileLayer.addTo(map);
+    const nextTileLayer = createMapTileLayer(L, tileStyle).addTo(map);
     tileLayerRef.current = nextTileLayer;
   }, [tileStyle, mapReady]);
 
@@ -481,7 +511,7 @@ export default function JapanSnowBeltMap({
             </button>
           </div>
 
-          {/* Map Tile Style Selector */}
+          {/* Map Tile Style Selector (Zero API Key, Zero Watermarks) */}
           <div
             role="group"
             aria-label="Map tile style"
@@ -497,6 +527,17 @@ export default function JapanSnowBeltMap({
               }`}
             >
               {t.snowMap.styleDark}
+            </button>
+            <button
+              type="button"
+              onClick={() => setTileStyle("satellite")}
+              className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition ${
+                tileStyle === "satellite"
+                  ? "bg-charcoal-light text-ice font-bold"
+                  : "text-snow-muted hover:text-snow"
+              }`}
+            >
+              {t.snowMap.styleSatellite}
             </button>
             <button
               type="button"

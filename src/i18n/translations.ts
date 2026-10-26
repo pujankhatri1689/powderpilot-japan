@@ -219,6 +219,7 @@ export const UI_TEXT = {
       subtitle:
         "Click any mountain pin across Hokkaido, Tohoku, Nagano, Niigata, Gunma, and Central Japan to inspect terrain, Tokyo transit, and snow forecasts.",
       styleDark: "🌑 Dark Radar",
+      styleSatellite: "🛰️ Satellite",
       styleTopo: "🏔️ Topo Terrain",
       metricElevation: "⛰️ Peak (m)",
       metricSnow: "❄️ 7-Day Snow (cm)",
@@ -566,6 +567,7 @@ export const UI_TEXT = {
       subtitle:
         "北海道・東北・長野・新潟・群馬・岐阜・関西エリアのピンをタップすると、標高差、ツリーラン可否、東京からのアクセス、週間降雪予報を即座に比較できます。",
       styleDark: "🌑 ダークレーダー",
+      styleSatellite: "🛰️ 衛星写真",
       styleTopo: "🏔️ 地形・等高線マップ",
       metricElevation: "⛰️ 山頂標高 (m)",
       metricSnow: "❄️ 7日間降雪量 (cm)",
