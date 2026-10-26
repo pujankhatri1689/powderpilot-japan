@@ -145,6 +145,11 @@ export const UI_TEXT = {
       copyright: (year: number) =>
         `© ${year} PowderPilot Japan. All prices in ¥ JPY.`,
     },
+    offline: {
+      bannerText:
+        "Offline Mode · Mountain chairlift mode active. Cached trail maps & resort guides are available.",
+      dismiss: "Dismiss",
+    },
     statusPages: {
       notFoundEyebrow: "404 · Out of Bounds",
       notFoundTitle: "This run doesn’t exist",
@@ -446,6 +451,11 @@ export const UI_TEXT = {
       plannerLink: "トリップ＆予算プランナー",
       copyright: (year: number) =>
         `© ${year} PowderPilot Japan. 料金表示はすべて日本円（¥ JPY）。`,
+    },
+    offline: {
+      bannerText:
+        "オフラインモード · 電波の届かないリフト上でも保存済みマップ・ゲレンデ情報を閲覧できます。",
+      dismiss: "閉じる",
     },
     statusPages: {
       notFoundEyebrow: "404 · コース外・ページが見つかりません",

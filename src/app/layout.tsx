@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import Navbar from "@/components/Navbar";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
 import { FavoritesProvider } from "@/context/FavoritesContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { getSiteUrl } from "@/lib/siteUrl";
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="flex min-h-dvh flex-col bg-charcoal font-sans text-snow">
         <LanguageProvider>
           <FavoritesProvider>
+            <ServiceWorkerRegister />
             <Navbar />
             <main
               id="main-content"
