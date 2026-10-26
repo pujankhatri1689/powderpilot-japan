@@ -87,26 +87,12 @@ export default function ResortDetailTabs({
     <div className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
       {/* Top Surf Bar: Back + Quick Jump to Any Resort */}
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <Link
-            href="/resorts"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-3.5 py-2 text-xs font-semibold text-snow transition hover:border-ice hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm"
-          >
-            <span aria-hidden>←</span> {t.detail.allResorts}
-          </Link>
-          <Link
-            href="/conditions"
-            className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-charcoal-light bg-charcoal px-3 py-2 text-xs font-semibold text-ice transition hover:border-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm"
-          >
-            <span>❄️ {t.nav.conditions}</span>
-          </Link>
-          <Link
-            href="/"
-            className="inline-flex min-h-11 items-center rounded-xl border border-charcoal-light bg-charcoal px-3.5 py-2 text-xs font-medium text-snow-muted transition hover:border-ice hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm"
-          >
-            {t.detail.home}
-          </Link>
-        </div>
+        <Link
+          href="/resorts"
+          className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-3.5 py-2 text-xs font-semibold text-snow transition hover:border-ice hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm"
+        >
+          <span aria-hidden>←</span> {t.detail.allResorts}
+        </Link>
 
         {prevResort && nextResort && (
           <div className="flex items-center gap-2">

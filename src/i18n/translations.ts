@@ -174,8 +174,6 @@ export const UI_TEXT = {
     },
     directory: {
       backToHome: "Back to Home",
-      backToRadar: "❄️ 7-Day Powder Radar Leaderboard →",
-      resortsTag: "49 Verified Resorts · 11 Prefectures",
       resortsShowing: (shown: number, total: number) =>
         `${shown} of ${total} resorts`,
       regionsHeader: "Snowboard Resorts Across Japan",
@@ -395,7 +393,6 @@ export const UI_TEXT = {
     },
     conditionsPage: {
       backToHome: "Back to Home",
-      toResortsDirectory: "🏔️ All 49 Resorts Directory →",
       simLabel: "Peak Jan Storm Simulation",
       liveLabel: "High-Resolution Model Forecast · Open-Meteo / JMA MSM",
       eyebrow: "7-Day Summit Forecast · Ranked by Snowfall",
@@ -482,8 +479,6 @@ export const UI_TEXT = {
     },
     directory: {
       backToHome: "ホームへ戻る",
-      backToRadar: "❄️ 週間パウダーレーダーを見る →",
-      resortsTag: "全国11道県・49の厳選スキー場",
       resortsShowing: (shown: number, total: number) =>
         `全${total}件中 ${shown}件を表示`,
       regionsHeader: "日本全国のスノーボード・スキー場",
@@ -702,7 +697,6 @@ export const UI_TEXT = {
     },
     conditionsPage: {
       backToHome: "ホームへ戻る",
-      toResortsDirectory: "🏔️ 全49スキー場一覧へ →",
       simLabel: "1月寒波・大雪シミュレーション中",
       liveLabel: "高解像度数値予報 · Open-Meteo / 気象庁 JMA MSM",
       eyebrow: "山頂7日間降雪予報 · 降雪量ランキング",

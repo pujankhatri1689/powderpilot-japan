@@ -219,20 +219,12 @@ export default function ConditionsDashboard() {
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
       {/* Top breadcrumb */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 text-sm font-medium text-snow-muted transition hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
-          >
-            <span aria-hidden>←</span> {t.conditionsPage.backToHome}
-          </Link>
-          <Link
-            href="/resorts"
-            className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-charcoal-light bg-charcoal-light/40 px-3 py-1.5 text-xs font-semibold text-ice transition hover:border-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
-          >
-            {t.conditionsPage.toResortsDirectory}
-          </Link>
-        </div>
+        <Link
+          href="/"
+          className="inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-snow-muted transition hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
+        >
+          <span aria-hidden>←</span> {t.conditionsPage.backToHome}
+        </Link>
         <span className="text-xs font-medium uppercase tracking-wider text-snow-muted">
           {stormPreviewMode
             ? t.conditionsPage.simLabel
