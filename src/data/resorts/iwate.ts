@@ -23,13 +23,13 @@ export const IWATE_RESORTS: Resort[] = [
         title: "Geto Kogen 14 Tree Run Zones Map",
         caption:
           "Official trail map highlighting all 14 designated Tree Run areas and Gondolas 1 & 2.",
-        imageUrl: "/trail-maps/tanigawadake-tenjindaira.jpg",
+        imageUrl: "/trail-maps/geto-kogen.jpg",
         badge: "14 Tree Run Zones",
       },
       {
         title: "King of Snow Deep Powder Refills",
         caption: "Waist-deep powder spray inside the renowned Shooter tree course.",
-        imageUrl: "/trail-maps/tanigawadake-tenjindaira-2.jpg",
+        imageUrl: "/trail-maps/geto-kogen-photo.jpg",
         badge: "Heavy Snow Capital",
       },
     ],
@@ -141,13 +141,13 @@ export const IWATE_RESORTS: Resort[] = [
       {
         title: "Appi Kogen All-Mountain Trail Map",
         caption: "Shows Mt. Maemori, Mt. Nishimori, the 2 gondolas, and 8 Off-Piste Tree Run zones.",
-        imageUrl: "/trail-maps/zao-onsen.jpg",
+        imageUrl: "/trail-maps/appi-kogen.jpg",
         badge: "Official Map",
       },
       {
         title: "Appi Grand Hotel Base & North-Facing Slopes",
         caption: "Panoramic view of the golden Appi Grand tower and wide groomed cruisers.",
-        imageUrl: "/trail-maps/zao-onsen-photo.jpg",
+        imageUrl: "/trail-maps/appi-kogen-photo.jpg",
         badge: "Aspen of Japan",
       },
     ],
