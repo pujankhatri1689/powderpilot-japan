@@ -22,13 +22,13 @@ export const GIFU_RESORTS: Resort[] = [
       {
         title: "Takasu & Dynaland Interconnected Map",
         caption: "Shows the 15-person Gondola and the summit ridge connecting directly into Dynaland.",
-        imageUrl: "/trail-maps/kawaba.jpg",
+        imageUrl: "/trail-maps/takasu-snow-park.jpg",
         badge: "Dual-Mountain Map",
       },
       {
         title: "World-Class Halfpipe & Park Lines",
         caption: "Riders dropping into the Olympic-standard superpipe with the Oku-Mino peaks behind.",
-        imageUrl: "/trail-maps/kawaba-photo.jpg",
+        imageUrl: "/trail-maps/takasu-snow-park-photo.jpg",
         badge: "Snowboard Mecca",
       },
     ],
@@ -141,7 +141,7 @@ export const GIFU_RESORTS: Resort[] = [
       {
         title: "Dynaland Course & Night Skiing Map",
         caption: "Shows the 20 runs, Beta tree run, and the extended floodlit Yorudyna night slopes.",
-        imageUrl: "/trail-maps/marunuma-kogen.jpg",
+        imageUrl: "/trail-maps/dynaland.jpg",
         badge: "Official Map",
       },
       {
