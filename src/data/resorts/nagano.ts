@@ -338,7 +338,7 @@ export const NAGANO_RESORTS: Resort[] = [
         },
       ],
       trailMapUrl: "https://www.hgp.co.jp/cortina/ski/en/course/",
-      webcamUrl: "https://www.hgp.co.jp/cortina/ski/en/",
+      webcamUrl: "https://www.hgp.co.jp/cortina/ski/livecamera/index.html",
       operatingHours: {
         seasonWindow: "Mid-December – Late March",
         dayHours: "08:30 – 16:30",
@@ -633,7 +633,7 @@ export const NAGANO_RESORTS: Resort[] = [
         },
       ],
       trailMapUrl: "https://www.madarao.jp/ski/course",
-      webcamUrl: "https://www.madarao.jp/ski",
+      webcamUrl: "https://www.madarao.jp/ski/live-camera",
       operatingHours: {
         seasonWindow: "Mid December – Late March",
         dayHours: "08:30 – 16:30",

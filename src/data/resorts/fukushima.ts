@@ -184,8 +184,8 @@ export const FUKUSHIMA_RESORTS: Resort[] = [
           badge: "Mountain View",
         },
       ],
-      trailMapUrl: "https://resort.en-hotel.com/grandeco/snow/ja/course/",
-      webcamUrl: "https://resort.en-hotel.com/grandeco/snow/ja/",
+      trailMapUrl: "https://grandecoresort.co.jp/",
+      webcamUrl: "https://grandecoresort.co.jp/",
       operatingHours: {
         seasonWindow: "Late November – Mid April",
         dayHours: "08:30 – 16:00",
@@ -327,8 +327,8 @@ export const FUKUSHIMA_RESORTS: Resort[] = [
           badge: "Slope Photo",
         },
       ],
-      trailMapUrl: "https://www.inawashiro-ski.com/",
-      webcamUrl: "https://www.inawashiro-ski.com/",
+      trailMapUrl: "https://www.inawashiro-ski.com/gelande/",
+      webcamUrl: "https://www.inawashiro-ski.com/livecamera/",
       operatingHours: {
         seasonWindow: "Late December – Late March",
         dayHours: "08:30 – 16:30",

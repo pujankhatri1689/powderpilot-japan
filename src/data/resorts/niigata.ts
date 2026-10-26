@@ -42,7 +42,7 @@ export const NIIGATA_RESORTS: Resort[] = [
         },
       ],
       trailMapUrl: "https://www.princehotels.com/en/ski/myoko_kogen/",
-      webcamUrl: "https://www.princehotels.co.jp/ski/myoko/winter/",
+      webcamUrl: "https://www.princehotels.co.jp/ski/myoko/winter/store/livecamera.html",
       operatingHours: {
         seasonWindow: "Late December – Late March",
         dayHours: "08:30 – 16:00 (Suginohara Gondola opens 08:30)",
@@ -304,7 +304,7 @@ export const NIIGATA_RESORTS: Resort[] = [
         },
       ],
       trailMapUrl: "https://www.princehotels.com/en/ski/kagura/",
-      webcamUrl: "https://www.princehotels.co.jp/ski/kagura/winter/coursemap/",
+      webcamUrl: "https://www.princehotels.co.jp/ski/kagura/livecamera/",
       operatingHours: {
         seasonWindow: "Late November – Mid-May (Longest season in Niigata)",
         dayHours: "08:00 – 16:30 (Weekends open 07:30 at Mitsumata Ropeway)",
@@ -575,7 +575,7 @@ export const NIIGATA_RESORTS: Resort[] = [
         },
       ],
       trailMapUrl: "https://www.princehotels.co.jp/ski/naeba/winter/coursemap/",
-      webcamUrl: "https://www.princehotels.co.jp/ski/naeba/winter/",
+      webcamUrl: "https://www.princehotels.co.jp/ski/naeba/livecamera/",
       operatingHours: {
         seasonWindow: "Mid December – Early April",
         dayHours: "08:00 – 17:00",

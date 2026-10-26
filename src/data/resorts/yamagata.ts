@@ -42,7 +42,7 @@ export const YAMAGATA_RESORTS: Resort[] = [
         },
       ],
       trailMapUrl: "https://zaomountainresort.com/ski/",
-      webcamUrl: "https://www.zao-ski.or.jp/",
+      webcamUrl: "https://zaoropeway.co.jp/camera/",
       operatingHours: {
         seasonWindow: "Early December – Early May",
         dayHours: "08:30 – 17:00",
@@ -323,7 +323,7 @@ export const YAMAGATA_RESORTS: Resort[] = [
         },
       ],
       trailMapUrl: "https://jxj.co.jp/",
-      webcamUrl: "https://jxj.co.jp/",
+      webcamUrl: "https://surfsnow.jp/guide/htm/r0203s.htm",
       operatingHours: {
         seasonWindow: "Mid December – Early April",
         dayHours: "08:30 – 17:00",

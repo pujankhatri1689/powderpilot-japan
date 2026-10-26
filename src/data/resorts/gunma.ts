@@ -41,8 +41,8 @@ export const GUNMA_RESORTS: Resort[] = [
           badge: "Mountain Lodge",
         },
       ],
-      trailMapUrl: "https://tanigawadake-joch.com/en/",
-      webcamUrl: "https://tanigawadake-joch.com/en/",
+      trailMapUrl: "https://tanigawadake-joch.com/",
+      webcamUrl: "https://tanigawadake-joch.com/",
       operatingHours: {
         seasonWindow: "Early December – Early May",
         dayHours: "08:30 – 16:30 (Weekends open 07:00 in spring)",
@@ -459,7 +459,7 @@ export const GUNMA_RESORTS: Resort[] = [
         },
       ],
       trailMapUrl: "https://hodaigi.jp/course/",
-      webcamUrl: "https://hodaigi.jp/",
+      webcamUrl: "https://surfsnow.jp/guide/htm/r0340s.htm",
       operatingHours: {
         seasonWindow: "Mid December – Late March",
         dayHours: "08:30 – 16:30 (08:00 start on weekends & holidays)",

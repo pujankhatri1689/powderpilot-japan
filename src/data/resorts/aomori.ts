@@ -41,8 +41,8 @@ export const AOMORI_RESORTS: Resort[] = [
           badge: "Mt. Iwaki Peak",
         },
       ],
-      trailMapUrl: "https://www.aomorispring.com/",
-      webcamUrl: "https://www.aomorispring.com/",
+      trailMapUrl: "https://aomorispringresort.com/mountain-info/",
+      webcamUrl: "https://aomorispringresort.com/mountain-info/",
       operatingHours: {
         seasonWindow: "Mid December – Early April",
         dayHours: "08:30 – 16:30",
@@ -317,8 +317,8 @@ export const AOMORI_RESORTS: Resort[] = [
           badge: "Base Lodge",
         },
       ],
-      trailMapUrl: "https://www.owani-ski.com/",
-      webcamUrl: "https://www.owani-ski.com/",
+      trailMapUrl: "https://www.owani-ski.com/gelande/",
+      webcamUrl: "https://www.owani-ski.com/gelande/",
       operatingHours: {
         seasonWindow: "Late December – Late March",
         dayHours: "08:30 – 16:30",

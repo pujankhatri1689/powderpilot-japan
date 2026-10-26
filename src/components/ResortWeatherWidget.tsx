@@ -537,29 +537,52 @@ export default function ResortWeatherWidget({
         </div>
       </div>
 
-      {/* Live Webcams & Google Weather Action Bar */}
-      <div className="flex flex-col gap-3 border-t border-charcoal-light pt-4 sm:flex-row sm:items-center sm:justify-between">
-        <span className="text-xs text-snow-muted">{t.weather.sourceNote}</span>
-        <div className="flex flex-wrap gap-2.5">
-          <a
-            href={resort.webcamUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-ice-deep px-4 py-2 text-xs font-bold text-charcoal transition hover:bg-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
-          >
-            <span>{t.weather.watchWebcams}</span>
-            <span aria-hidden>↗</span>
-          </a>
-          <a
-            href={googleWeatherSearchUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-4 py-2 text-xs font-semibold text-ice transition hover:border-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
-          >
-            <span>{t.weather.checkGoogleWeather}</span>
-            <span aria-hidden>↗</span>
-          </a>
+      {/* Live Mountain Webcams Card */}
+      <div className="rounded-xl border border-charcoal-light bg-charcoal-light/20 p-4 sm:p-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500"></span>
+              </span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">
+                {t.weather.webcamHeading}
+              </span>
+            </div>
+            <p className="text-sm font-bold text-snow">
+              {rawResort.name} · {t.weather.webcamSub}
+            </p>
+            <p className="text-xs text-snow-muted">
+              {t.weather.webcamDesc}
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2.5 pt-1 sm:pt-0">
+            <a
+              href={resort.webcamUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-ice px-4 py-2 text-xs font-bold text-charcoal transition hover:bg-ice/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
+            >
+              <span>📹 {t.weather.watchWebcams}</span>
+              <span aria-hidden>↗</span>
+            </a>
+            <a
+              href={googleWeatherSearchUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-3.5 py-2 text-xs font-semibold text-ice transition hover:border-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
+            >
+              <span>{t.weather.checkGoogleWeather}</span>
+              <span aria-hidden>↗</span>
+            </a>
+          </div>
         </div>
+      </div>
+
+      {/* Model Forecast Disclaimer */}
+      <div className="text-center sm:text-left">
+        <p className="text-xs text-snow-muted">{t.weather.sourceNote}</p>
       </div>
     </div>
   );

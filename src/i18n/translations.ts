@@ -336,7 +336,11 @@ export const UI_TEXT = {
       months: ["Dec", "Jan", "Feb", "Mar", "Apr"],
       sourceNote:
         "Forecast source: Open-Meteo high-resolution numerical weather models (JMA MSM / GFS). Not an official resort snow report.",
-      watchWebcams: "📹 Watch Live Mountain Webcams",
+      webcamHeading: "Live Mountain Cameras",
+      webcamSub: "Real-Time Visibility & Snow Stakes",
+      webcamDesc:
+        "Check live summit weather, gondola base queues, and fresh snowfall accumulations on the official resort camera feed.",
+      watchWebcams: "Watch Live Mountain Cameras",
       checkGoogleWeather: "🌤️ Check on Google Weather",
       updatedAt: (timeStr: string) => `Updated ${timeStr} JST`,
       refreshBtn: "↻ Refresh",
@@ -615,7 +619,11 @@ export const UI_TEXT = {
       months: ["12月", "1月", "2月", "3月", "4月"],
       sourceNote:
         "予報データ: Open-Meteo 高解像度数値気象モデル（気象庁 JMA MSM / GFS）。スキー場公式の積雪情報ではありません。",
-      watchWebcams: "📹 公式ライブカメラを見る",
+      webcamHeading: "公式ライブカメラ",
+      webcamSub: "リアルタイム視界・ゲレンデ積雪状況",
+      webcamDesc:
+        "山頂の視界、ゴンドラ乗り場の混雑状況、降雪計のリアルタイム映像を公式カメラで確認できます。",
+      watchWebcams: "公式ライブカメラを開く",
       checkGoogleWeather: "🌤️ Google天気予報で確認",
       updatedAt: (timeStr: string) => `更新: ${timeStr} JST`,
       refreshBtn: "↻ 更新",
