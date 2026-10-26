@@ -167,8 +167,6 @@ export const UI_TEXT = {
         "Instant access to HD trail maps, lift ticket & rental prices, snowboarder terrain intel, live mountain webcams, and weather forecasts for snowboard resorts across Japan.",
       browseBtn: "🏔️ Browse All Resorts",
       radarBtn: "❄️ Powder Radar & Forecast",
-      liveRadarPulse:
-        "⚡ 7-Day Japow Radar: 49 resorts tracked with real-time snowfall modeling. View Radar Leaderboard →",
       resortsCount: (n: number) => `${n} resorts`,
       prefectureSectionTitle: "Explore by Prefecture",
       prefectureSectionSubtitle: "Pick your snow belt destination across 49 verified mountains",
@@ -477,8 +475,6 @@ export const UI_TEXT = {
         "日本各地の主要スキー場の高画質コースマップ、リフト券＆レンタル料金、スノーボーダー向けゲレンデ情報、ライブカメラ、天気予報をワンクリックでチェック。",
       browseBtn: "🏔️ すべてのスキー場を見る",
       radarBtn: "❄️ パウダーレーダー・週間予報",
-      liveRadarPulse:
-        "⚡ 週間JAPOWレーダー: 全国49スキー場の降雪量をリアルタイム予測中。パウダーレーダーを見る →",
       resortsCount: (n: number) => `${n} スキー場`,
       prefectureSectionTitle: "都道府県からゲレンデを探す",
       prefectureSectionSubtitle: "北は北海道から岐阜・静岡・滋賀まで、全国11エリア・49の厳選スノーリゾート",
