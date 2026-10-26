@@ -23,7 +23,7 @@ const siteUrl = getSiteUrl();
 const defaultTitle =
   "PowderPilot Japan | EN · 日本語 — Japan Snowboard & Powder Forecast Guide";
 const defaultDescription =
-  "Bilingual (English / 日本語) snowboard guide to 39 resorts across 9 Japanese prefectures: HD trail maps, lift ticket & rental prices in ¥ JPY, snowboarder terrain intel, and Open-Meteo / JMA MSM mountain weather forecasts.";
+  "Bilingual (English / 日本語) snowboard guide to 49 resorts across 11 Japanese prefectures: HD trail maps, lift ticket & rental prices in ¥ JPY, snowboarder terrain intel, and Open-Meteo / JMA MSM mountain weather forecasts.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/trail-maps/niseko-united-photo.jpg",
-        alt: "PowderPilot Japan — 39 Snowboard Resorts Across 9 Prefectures",
+        alt: "PowderPilot Japan — 49 Snowboard Resorts Across 11 Prefectures",
       },
     ],
   },

@@ -18,11 +18,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## 1. Tech Stack & Environment
 
-- **Framework**: Next.js **16.4.2** (App Router). Resort detail pages are prerendered with `generateStaticParams` (39 pages today). `next.config.ts` enables `cacheComponents: true`, `partialPrefetching: true`, and loads Tailwind v4 through `@tailwindcss/turbopack`.
+- **Framework**: Next.js **16.4.2** (App Router). Resort detail pages are prerendered with `generateStaticParams` (49 pages today). `next.config.ts` enables `cacheComponents: true`, `partialPrefetching: true`, and loads Tailwind v4 through `@tailwindcss/turbopack`.
 - **UI**: React **19.3.0**, TypeScript **5.9.3** (`strict: true`), Tailwind CSS **4**. Design tokens live in `tailwind.config.ts` and are pulled in from `src/app/globals.css` via `@config`. Keep the existing dark, premium, mobile-first look.
 - **Package manager**: npm (Node 24 on this Windows machine).
 - **Languages**: **English (`en`) and Japanese (`ja`) ONLY.** Chinese (`zh`) was intentionally removed — do **not** re-add it.
-- **Scale**: **39 resorts across 9 prefectures** — Hokkaido, Aomori, Iwate, Yamagata, Fukushima, Niigata, Nagano, Gunma, Gifu. Architecture is designed to scale to 200+ resorts.
+- **Scale**: **49 resorts across 11 prefectures** — Hokkaido, Aomori, Iwate, Yamagata, Fukushima, Niigata, Nagano, Gunma, Gifu, Shizuoka, Shiga. Architecture is designed to scale to 200+ resorts.
 - **Testing**: no test framework is configured. Verification = type-check + lint + build + manual browser check.
 
 ---
@@ -42,7 +42,7 @@ powderpilot-japan/
     │   ├── layout.tsx         # root layout: fonts, LanguageProvider, FavoritesProvider, Navbar, Footer, MobileBottomNav
     │   ├── page.tsx           # homepage: hero + 2-column prefecture grid
     │   ├── resorts/page.tsx   # directory page (Suspense wrapper) → ResortDirectory
-    │   ├── resorts/[slug]/page.tsx  # 39 prerendered resort pages (generateStaticParams + generateMetadata)
+    │   ├── resorts/[slug]/page.tsx  # 49 prerendered resort pages (generateStaticParams + generateMetadata)
     │   ├── conditions/page.tsx      # 7-day powder radar / snowfall leaderboard
     │   ├── planner/page.tsx         # trip planner
     │   ├── sitemap.ts               # dynamic XML sitemap (43 URLs)
@@ -69,8 +69,8 @@ powderpilot-japan/
     │   ├── resorts.ts           # re-export hub: types + resorts/index
     │   └── resorts/             # modular database, one file per prefecture
     │       ├── index.ts         # RESORTS, REGIONS, REGION_ORDER, getResortBySlug, getResortsByRegion
-    │       ├── hokkaido.ts (6)  aomori.ts (3)  iwate.ts (2)  yamagata.ts (3)
-    │       ├── fukushima.ts (3) niigata.ts (8) nagano.ts (8) gunma.ts (4) gifu.ts (2)
+    │       ├── hokkaido.ts (8)  aomori.ts (3)  iwate.ts (2)  yamagata.ts (3)
+    │       ├── fukushima.ts (4) niigata.ts (9) nagano.ts (11) gunma.ts (5) gifu.ts (2) shizuoka.ts (1) shiga.ts (1)
     └── i18n/
         ├── translations.ts      # UI dictionary — every visible UI string for en + ja
         └── resortTranslations.ts # Japanese resort copy (descriptions, hours, pricing notes…)

@@ -428,5 +428,147 @@ export const FUKUSHIMA_RESORTS: Resort[] = [
       vibeTags: ["Lake Panorama", "Free Weekday Club", "690m Vertical"],
       bestFor: "Budget-savvy riders, carvers, and groups wanting Lake Inawashiro views and night skiing",
       officialUrl: "https://www.inawashiro-ski.com/",
+    },
+
+    {
+      slug: "minowa",
+      name: "Minowa Ski Resort",
+      japaneseName: "箕輪スキー場",
+      region: "Fukushima",
+      area: "Inawashiro / Mt. Minowa",
+      description:
+        "Perched on the northern shoulder of Mt. Minowa along the Bandai-Azuma Lake Line, Minowa boasts the highest base elevation in Fukushima Prefecture at 1,050m and a summit reaching 1,500m. Because of its frigid altitude, it is famous for 'Crystal Powder'—featherlight, dry snow—plus high-speed hooded lift coverage and an early-to-late season running from November through April.",
+      address: {
+        postalCode: "〒969-2751",
+        english: "Yokomuki, Inawashiro-machi, Yama-gun, Fukushima 969-2751, Japan",
+        japanese: "福島県耶麻郡猪苗代町大字若宮字横向",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Minowa+Ski+Resort+Fukushima+Japan",
+      },
+      heroImage: "/trail-maps/minowa-photo.jpg",
+      trailMapImage: "/trail-maps/minowa.jpg",
+      mapGallery: [
+        {
+          title: "Minowa Ski Resort Official Course Map",
+          caption:
+            "Official trail map showing the 1,500m Mt. Minowa summit, high-speed hooded quads, Eagle course, and Angel cruisers.",
+          imageUrl: "/trail-maps/minowa.jpg",
+          badge: "Official Trail Map",
+        },
+        {
+          title: "Mt. Minowa Alpine Ridge & Cold Powder Slopes",
+          caption:
+            "Winter view across the Bandai-Azuma plateau and frost-covered fir glades.",
+          imageUrl: "/trail-maps/minowa-photo.jpg",
+          badge: "Mt. Minowa Ridge",
+        },
+      ],
+      trailMapUrl: "https://www.ski-minowa.jp/gelande/",
+      webcamUrl: "https://www.ski-minowa.jp/gelande/",
+      operatingHours: {
+        seasonWindow: "Late November – Early April",
+        dayHours: "08:30 – 16:30",
+        nightSkiing: "No night skiing",
+        earlyBird: "08:30 Lift opening",
+        notes:
+          "Highest base altitude in Fukushima guarantees powder preservation even during warmer spells.",
+      },
+      pricing: {
+        oneDayAdultYen: 5500,
+        halfDayYen: 4500,
+        twoDayYen: 10000,
+        nightPassYen: null,
+        childOneDayYen: 3200,
+        seniorOneDayYen: 4800,
+        seasonPassYen: 48000,
+        seasonPassName: "Minowa Season Pass",
+        fullBoardRentalDayYen: 5200,
+        wearRentalDayYen: 4200,
+        notes:
+          "Slopeside Hotel Premier Minowa offers ski-in/ski-out lodging packages.",
+      },
+      snowboarderIntel: {
+        liftFleet: "2 High-Speed Hooded Quads + 1 Pair Lift",
+        terrainPark: "Minowa Freestyle Park with rails, boxes, and kicker lines",
+        flatSpotWarning:
+          "Low — constant natural incline across all main courses",
+        treeRunRules:
+          "Side powder stashes permitted within boundary courses; boundary ropes strictly enforced.",
+      },
+      monthlySnowfallCm: {
+        dec: 170,
+        jan: 290,
+        feb: 260,
+        mar: 150,
+        apr: 30,
+        peakBaseCm: 290,
+      },
+      onsenAndVillage: [
+        {
+          name: "Yokomuki Onsen (Shimono-Yu)",
+          japaneseName: "横向温泉 下の湯",
+          category: "Onsen",
+          description:
+            "Centuries-old secluded thermal spring bath located in the valley right beneath Minowa.",
+          info: "10:00 – 16:00 · ¥600 Adult",
+          googleMapsUrl:
+            "https://www.google.com/maps/search/?api=1&query=Yokomuki+Onsen+Fukushima",
+        },
+        {
+          name: "Hotel Premier Minowa Restaurant",
+          japaneseName: "ホテル プレミア箕輪",
+          category: "Food & Apres",
+          description:
+            "French-alpine inspired cafeteria serving hot beef stew, Aizu pork katsudon, and fresh local bakery items.",
+          info: "Slopeside Base · 10:30 – 16:00",
+          googleMapsUrl:
+            "https://www.google.com/maps/search/?api=1&query=Hotel+Premier+Minowa",
+        },
+      ],
+      signatureRuns: [
+        {
+          name: "Eagle Course (イーグルコース)",
+          level: "Advanced",
+          note: "Steep 34° un-groomed peak run holding deep Fukushima Crystal Powder.",
+        },
+        {
+          name: "Angel Course (エンジェルコース)",
+          level: "Intermediate",
+          note: "2.8km scenic cruiser descending from 1,500m under high-speed hooded quads.",
+        },
+        {
+          name: "Maple Course (メイプルコース)",
+          level: "Beginner",
+          note: "Gentle, wide boulevard through protected birch trees ideal for relaxed carving.",
+        },
+      ],
+      coordinates: { lat: 37.6402, lon: 140.2608 },
+      elevation: { base: 1050, top: 1500, vertical: 450 },
+      terrain: {
+        beginner: 35,
+        intermediate: 45,
+        advanced: 20,
+        runs: 11,
+        lifts: 3,
+        treeRunsAllowed: true,
+      },
+      dayPassYen: 5500,
+      fromTokyo: {
+        durationMinutes: 125,
+        summary:
+          "Tohoku Shinkansen to Koriyama Station (~80m) + shuttle bus or 45-min taxi to Minowa base",
+        station: "JR Koriyama Station (郡山駅) / Inawashiro Station",
+        stationGoogleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Koriyama+Station+Fukushima+Japan",
+      },
+      vibeTags: [
+        "Highest Base in Fukushima (1,050m)",
+        "Crystal Powder",
+        "Hooded High-Speed Quads",
+        "Hotel Premier Slopeside",
+      ],
+      bestFor:
+        "Riders seeking reliable high-altitude dry snow, cold weather preservation, and sheltered hooded lifts",
+      officialUrl: "https://www.ski-minowa.jp/",
     }
 ];

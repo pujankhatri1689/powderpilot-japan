@@ -8,6 +8,8 @@ import { NIIGATA_RESORTS } from "./niigata";
 import { NAGANO_RESORTS } from "./nagano";
 import { GUNMA_RESORTS } from "./gunma";
 import { GIFU_RESORTS } from "./gifu";
+import { SHIZUOKA_RESORTS } from "./shizuoka";
+import { SHIGA_RESORTS } from "./shiga";
 
 export {
   HOKKAIDO_RESORTS,
@@ -19,6 +21,8 @@ export {
   NAGANO_RESORTS,
   GUNMA_RESORTS,
   GIFU_RESORTS,
+  SHIZUOKA_RESORTS,
+  SHIGA_RESORTS,
 };
 
 /** All active ski resorts in Japan */
@@ -32,6 +36,8 @@ export const RESORTS: Resort[] = [
   ...NAGANO_RESORTS,
   ...GUNMA_RESORTS,
   ...GIFU_RESORTS,
+  ...SHIZUOKA_RESORTS,
+  ...SHIGA_RESORTS,
 ];
 
 /** Fast O(1) slug lookup map */
@@ -50,6 +56,8 @@ export const REGION_ORDER: Region[] = [
   "Nagano",
   "Gunma",
   "Gifu",
+  "Shizuoka",
+  "Shiga",
   "Akita",
   "Miyagi",
 ];

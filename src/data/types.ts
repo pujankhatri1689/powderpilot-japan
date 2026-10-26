@@ -9,7 +9,9 @@ export type Region =
   | "Akita"
   | "Miyagi"
   | "Hokkaido"
-  | "Gifu";
+  | "Gifu"
+  | "Shizuoka"
+  | "Shiga";
 
 export interface MapSlide {
   title: string;

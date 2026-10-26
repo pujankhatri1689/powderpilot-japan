@@ -38,16 +38,18 @@ const prefectureFiles = [
   "nagano.ts",
   "gunma.ts",
   "gifu.ts",
+  "shizuoka.ts",
+  "shiga.ts",
 ];
 
 const foundFiles = fs.readdirSync(resortsPath).filter((f) => f.endsWith(".ts") && f !== "index.ts");
 
 console.log(`Checking ${foundFiles.length} prefecture data files...`);
-if (foundFiles.length !== 9) {
-  console.error(`❌ Expected exactly 9 prefecture files, found ${foundFiles.length}`);
+if (foundFiles.length !== 11) {
+  console.error(`❌ Expected exactly 11 prefecture files, found ${foundFiles.length}`);
   errors++;
 } else {
-  console.log(`✓ Verified 9 prefecture files match architecture`);
+  console.log(`✓ Verified 11 prefecture files match architecture`);
 }
 
 // Extract slugs from data files using regex to avoid ts-node runtime transpilation requirement
@@ -72,11 +74,11 @@ for (const file of foundFiles) {
 }
 
 console.log(`\nFound ${allSlugs.length} total resorts.`);
-if (allSlugs.length !== 39) {
-  console.error(`❌ Expected exactly 39 resorts, found ${allSlugs.length}`);
+if (allSlugs.length !== 49) {
+  console.error(`❌ Expected exactly 49 resorts, found ${allSlugs.length}`);
   errors++;
 } else {
-  console.log("✓ Verified exactly 39 resorts configured");
+  console.log("✓ Verified exactly 49 resorts configured");
 }
 
 // 2. Check slug uniqueness
@@ -92,7 +94,7 @@ for (const [slug, count] of slugCounts.entries()) {
   }
 }
 if (slugCounts.size === allSlugs.length) {
-  console.log("✓ Verified all 39 resort slugs are unique");
+  console.log(`✓ Verified all ${allSlugs.length} resort slugs are unique`);
 }
 
 // 3. Check image file existence

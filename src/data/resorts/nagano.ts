@@ -1089,4 +1089,428 @@ export const NAGANO_RESORTS: Resort[] = [
       "Riders wanting the most scenic mountain vibe in Hakuba with flowy terrain parks, banked slalom, and un-groomed powder bowls",
     officialUrl: "https://iwatake-mountain-resort.com/",
   },
+
+  {
+    slug: "karuizawa-prince",
+    name: "Karuizawa Prince Snow Resort",
+    japaneseName: "軽井沢プリンスホテルスキー場",
+    region: "Nagano",
+    area: "Karuizawa",
+    description:
+      "The premier bullet-train ski resort in Japan, located just 60 minutes from Tokyo Station via the Hokuriku Shinkansen. Opening early every November using advanced snowmaking on Mt. Yagasaki, Karuizawa Prince combines 16 scenic carving runs with slopeside luxury hotels, outdoor hot springs, and Japan's largest designer outlet shopping mall right at the lift base.",
+    address: {
+      postalCode: "〒389-0102",
+      english: "Karuizawa, Kitasaku-gun, Nagano 389-0102, Japan",
+      japanese: "長野県北佐久郡軽井沢町軽井沢",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Karuizawa+Prince+Hotel+Ski+Resort+Nagano+Japan",
+    },
+    heroImage: "/trail-maps/karuizawa-prince-photo.jpg",
+    trailMapImage: "/trail-maps/karuizawa-prince.jpg",
+    mapGallery: [
+      {
+        title: "Karuizawa Prince Full Course & Lift Map",
+        caption:
+          "Official trail map showing Mt. Yagasaki (1,155m), East & West High-Speed Quads, Panorama Course, and ski-in/ski-out hotel plazas.",
+        imageUrl: "/trail-maps/karuizawa-prince.jpg",
+        badge: "Official Trail Map",
+      },
+      {
+        title: "Mt. Asama & Karuizawa Slopes Panorama",
+        caption:
+          "Crisp bluebird morning view overlooking Mt. Asama and the Karuizawa highland basin.",
+        imageUrl: "/trail-maps/karuizawa-prince-photo.jpg",
+        badge: "Mt. Asama View",
+      },
+    ],
+    trailMapUrl: "https://www.princehotels.co.jp/ski/karuizawa/coursemap/",
+    webcamUrl: "https://www.princehotels.co.jp/ski/karuizawa/livecamera/",
+    operatingHours: {
+      seasonWindow: "Early November – Late March",
+      dayHours: "08:00 – 17:00",
+      nightSkiing: "16:00 – 20:00 (Select dates in peak season)",
+      earlyBird: "08:00 East Quad upload",
+      notes: "Kids 12 and under ski free all season (Prince Snow Kids program)!",
+    },
+    pricing: {
+      oneDayAdultYen: 8000,
+      halfDayYen: 6800,
+      twoDayYen: 14800,
+      nightPassYen: 2500,
+      childOneDayYen: 0,
+      seniorOneDayYen: 7000,
+      seasonPassYen: 75000,
+      seasonPassName: "Prince Snow Resort Pass",
+      fullBoardRentalDayYen: 6000,
+      wearRentalDayYen: 4500,
+      notes: "Prince Snow Kids Program: Elementary school students and younger ski 100% free.",
+    },
+    snowboarderIntel: {
+      liftFleet: "4 High-Speed Quads + 5 Pair Lifts",
+      terrainPark: "Snow Park with beginner to intermediate boxes, kickers, and wave lines",
+      flatSpotWarning: "Low — well-engineered continuous slope angles",
+      treeRunRules: "Strictly on-piste only. Tree areas are off-limits.",
+    },
+    monthlySnowfallCm: {
+      dec: 45,
+      jan: 65,
+      feb: 70,
+      mar: 55,
+      apr: 10,
+      peakBaseCm: 110,
+    },
+    onsenAndVillage: [
+      {
+        name: "Karuizawa Prince Hotel Hot Spring (Momiji-no-Yu)",
+        japaneseName: "もみじの湯",
+        category: "Onsen",
+        description:
+          "Indoor and open-air hot spring baths surrounded by native Karuizawa forest.",
+        info: "07:00 – 23:00 · Slopeside Hotel",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Momiji-no-yu+Karuizawa+Prince",
+      },
+      {
+        name: "Karuizawa Prince Shopping Plaza",
+        japaneseName: "軽井沢・プリンスショッピングプラザ",
+        category: "Food & Apres",
+        description:
+          "Japan's premier open-air resort outlet center with over 240 luxury brands, cafes, craft beer bars, and local Nagano restaurants directly adjacent to the slopes.",
+        info: "Slopeside · 10:00 – 19:00",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Karuizawa+Prince+Shopping+Plaza",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Panorama Course (パノラマコース)",
+        level: "Intermediate",
+        note: "1,000m cruiser with sweeping panoramic views of majestic Mt. Asama.",
+      },
+      {
+        name: "Aries & Asama Steeps",
+        level: "Advanced",
+        note: "Braced 30° natural pitch carved down the upper peak face.",
+      },
+      {
+        name: "Prince Gelande (プリンスゲレンデ)",
+        level: "Beginner",
+        note: "Spacious, gentle slope ideal for carving practice directly above the East base.",
+      },
+    ],
+    coordinates: {
+      lat: 36.3370,
+      lon: 138.6310,
+    },
+    elevation: {
+      base: 940,
+      top: 1155,
+      vertical: 215,
+    },
+    terrain: {
+      beginner: 50,
+      intermediate: 30,
+      advanced: 20,
+      runs: 16,
+      lifts: 9,
+      treeRunsAllowed: false,
+    },
+    dayPassYen: 8000,
+    fromTokyo: {
+      durationMinutes: 65,
+      summary:
+        "Hokuriku Shinkansen directly from Tokyo Station to Karuizawa Station (60 mins) + 1-min free shuttle or 10-min walk to base",
+      station: "JR Karuizawa Station (軽井沢駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Karuizawa+Station+Nagano+Japan",
+    },
+    vibeTags: ["60m from Tokyo", "Kids Ski Free", "Outlet Mall Slopeside", "November Opener"],
+    bestFor:
+      "Day-trippers from Tokyo wanting fast bullet-train convenience, early-season riding, and premier slopeside dining & shopping",
+    officialUrl: "https://www.princehotels.co.jp/ski/karuizawa/",
+  },
+
+  {
+    slug: "ryuoo-ski-park",
+    name: "Ryuoo Ski Park",
+    japaneseName: "竜王スキーパーク",
+    region: "Nagano",
+    area: "Yamanouchi / Kitashigakogen",
+    description:
+      "Perched high in the Kitashigakogen snowbelt, Ryuoo Ski Park boasts a colossal 1,080m vertical drop and the world-famous 166-passenger Sora Terrace Ropeway ascending to 1,930m. Renowned for its sea of clouds (Unkai) viewing deck and the legendary 'Kiotoshi' (木落し) course—a 36° un-groomed natural chute known for dumping waist-deep untracked powder.",
+    address: {
+      postalCode: "〒381-0405",
+      english: "11700 Yomase, Yamanouchi-machi, Shimotakai-gun, Nagano 381-0405, Japan",
+      japanese: "長野県下高井郡山ノ内町夜間瀬11700",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Ryuoo+Ski+Park+Nagano+Japan",
+    },
+    heroImage: "/trail-maps/ryuoo-ski-park-photo.jpg",
+    trailMapImage: "/trail-maps/ryuoo-ski-park.jpg",
+    mapGallery: [
+      {
+        title: "Ryuoo Ski Park Mountain Map & Kiotoshi Chutes",
+        caption:
+          "Official trail map showing the 166-passenger Ropeway, Sora Terrace (1,770m), Kiotoshi a–c courses, and high-altitude Skyland zone.",
+        imageUrl: "/trail-maps/ryuoo-ski-park.jpg",
+        badge: "Official Trail Map",
+      },
+      {
+        title: "View from Sora Terrace Above the Sea of Clouds",
+        caption:
+          "The 1,770m Sora Terrace looking across sunset clouds towards the Northern Japanese Alps.",
+        imageUrl: "/trail-maps/ryuoo-ski-park-photo.jpg",
+        badge: "Sora Terrace View",
+      },
+    ],
+    trailMapUrl: "https://ryuoo.com/winter/gelande/",
+    webcamUrl: "https://ryuoo.com/winter/livecam/",
+    operatingHours: {
+      seasonWindow: "Late November – Early May",
+      dayHours: "08:15 – 17:00",
+      nightSkiing: "17:00 – 21:00 on Valley Base area (Saturdays & holiday peaks)",
+      earlyBird: "08:00 Ropeway opening on weekends",
+      notes: "Helmets are mandatory on the steep Kiotoshi courses.",
+    },
+    pricing: {
+      oneDayAdultYen: 5600,
+      halfDayYen: 4600,
+      twoDayYen: 10200,
+      nightPassYen: 2500,
+      childOneDayYen: 2500,
+      seniorOneDayYen: 4800,
+      seasonPassYen: 52000,
+      seasonPassName: "Ryuoo Season Pass",
+      fullBoardRentalDayYen: 5200,
+      wearRentalDayYen: 4200,
+      notes: "Includes full Ropeway and high-speed quad access.",
+    },
+    snowboarderIntel: {
+      liftFleet:
+        "1 166-passenger Ropeway (Sora Terrace Ropeway) + 2 High-Speed Quads + 5 Pair Lifts",
+      terrainPark: "Ryuoo Snow Park with kickers, boxes, and hip jumps",
+      flatSpotWarning:
+        "Medium — lower connection between valley base and ropeway terminal requires maintaining glide",
+      treeRunRules:
+        "Kiotoshi courses offer extreme 36° powder freeriding within patrolled resort terrain.",
+    },
+    monthlySnowfallCm: {
+      dec: 190,
+      jan: 300,
+      feb: 260,
+      mar: 160,
+      apr: 40,
+      peakBaseCm: 320,
+    },
+    onsenAndVillage: [
+      {
+        name: "Ryuoo Sansou Onsen (Mitsumata-no-Yu)",
+        japaneseName: "三ケ野の湯",
+        category: "Onsen",
+        description:
+          "Hot natural mineral onsen right at the valley ropeway base terminal.",
+        info: "12:00 – 21:00 · ¥800 Adult",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Ryuoo+Onsen+Yamanouchi",
+      },
+      {
+        name: "Sora Terrace Cafe (1,770m)",
+        japaneseName: "SORA terrace cafe",
+        category: "Food & Apres",
+        description:
+          "Stylish alpine dining with panoramic cloud-deck views serving cloud soufflé pancakes, local venison curry, and craft lattes.",
+        info: "Ropeway Summit · 09:30 – 16:30",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Sora+Terrace+Cafe+Ryuoo",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Kiotoshi Course (木落しコース a/b/c)",
+        level: "Advanced",
+        note: "Notorious 36° maximum pitch un-groomed natural powder chute plunging 1,400m below the ropeway.",
+      },
+      {
+        name: "Skyland Dynamic Cruise",
+        level: "Intermediate",
+        note: "High-altitude rolling cruiser with dry powder snow above 1,700m.",
+      },
+      {
+        name: "Valley Gelande",
+        level: "Beginner",
+        note: "Spacious, gentle valley floor cruiser ideal for learning and night riding.",
+      },
+    ],
+    coordinates: {
+      lat: 36.7915,
+      lon: 138.4550,
+    },
+    elevation: {
+      base: 850,
+      top: 1930,
+      vertical: 1080,
+    },
+    terrain: {
+      beginner: 35,
+      intermediate: 40,
+      advanced: 25,
+      runs: 17,
+      lifts: 8,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 5600,
+    fromTokyo: {
+      durationMinutes: 140,
+      summary:
+        "Hokuriku Shinkansen to Nagano Station (~80m) + Nagano Dentetsu Express Train to Yudanaka Station (~45m) + 15-min free resort shuttle",
+      station: "Nagano Dentetsu Yudanaka Station (湯田中駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Yudanaka+Station+Nagano+Japan",
+    },
+    vibeTags: ["1,080m Vertical", "166-Person Ropeway", "Sea of Clouds (Unkai)", "36° Kiotoshi Chute"],
+    bestFor:
+      "Freeriders hunting steep untracked powder chutes paired with breathtaking Sora Terrace sea-of-clouds photography",
+    officialUrl: "https://ryuoo.com/",
+  },
+
+  {
+    slug: "togakushi",
+    name: "Togakushi Ski Resort",
+    japaneseName: "戸隠スキー場",
+    region: "Nagano",
+    area: "Togakushi / Nagano City",
+    description:
+      "Cradled beneath the jagged, mystical crags of Mt. Togakushi and surrounded by 400-year-old cryptomeria cedar forests, Togakushi Ski Resort is revered for its microclimate 'Magic Powder'—exceptionally dry, low-moisture snow shielded from maritime dampness. It delivers 19 varied runs including the challenging Men's Champion steep and peaceful glades.",
+    address: {
+      postalCode: "〒381-4101",
+      english: "3682-3 Togakushi, Nagano-shi, Nagano 381-4101, Japan",
+      japanese: "長野県長野市戸隠3682-3",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Togakushi+Ski+Resort+Nagano+Japan",
+    },
+    heroImage: "/trail-maps/togakushi-photo.jpg",
+    trailMapImage: "/trail-maps/togakushi.jpg",
+    mapGallery: [
+      {
+        title: "Togakushi Official Mountain & Course Map",
+        caption:
+          "Official trail map showing the 1,748m Menou mountain summit, 7 pair lifts, Champion steeps, and peaceful family glades.",
+        imageUrl: "/trail-maps/togakushi.jpg",
+        badge: "Official Trail Map",
+      },
+      {
+        title: "Dramatic Cliffs of Mt. Togakushi Above the Slopes",
+        caption:
+          "Winter view of the sacred Mt. Togakushi rock wall towering directly opposite the ski resort.",
+        imageUrl: "/trail-maps/togakushi-photo.jpg",
+        badge: "Mt. Togakushi View",
+      },
+    ],
+    trailMapUrl: "https://www.togakusi.com/ski/course/",
+    webcamUrl: "https://www.togakusi.com/ski/livecam/",
+    operatingHours: {
+      seasonWindow: "Mid December – Late March",
+      dayHours: "08:30 – 16:30",
+      nightSkiing: "No night skiing",
+      earlyBird: "08:30 Lift opening",
+      notes: "Renowned for genuine Togakushi Te-uchi soba served right in slopeside mountain huts!",
+    },
+    pricing: {
+      oneDayAdultYen: 5500,
+      halfDayYen: 4500,
+      twoDayYen: 9800,
+      nightPassYen: null,
+      childOneDayYen: 3000,
+      seniorOneDayYen: 4800,
+      seasonPassYen: 50000,
+      seasonPassName: "Togakushi Season Pass",
+      fullBoardRentalDayYen: 5000,
+      wearRentalDayYen: 4000,
+      notes: "Special discounts available when bundling authentic lunch vouchers.",
+    },
+    snowboarderIntel: {
+      liftFleet: "7 Double & Triple Lifts (well-maintained, efficient network)",
+      terrainPark: "Freestyle park with progressive boxes, rails, and jumps",
+      flatSpotWarning: "Low — natural mountain ridge lines flow directly back to bases",
+      treeRunRules:
+        "Sidecountry powder runs accessible via gated trails when conditions permit.",
+    },
+    monthlySnowfallCm: {
+      dec: 160,
+      jan: 270,
+      feb: 240,
+      mar: 140,
+      apr: 25,
+      peakBaseCm: 260,
+    },
+    onsenAndVillage: [
+      {
+        name: "Togakushi Kamitsurube Onsen",
+        japaneseName: "神告げ温泉",
+        category: "Onsen",
+        description:
+          "Cozy natural hot spring surrounded by cedar woods, 5 mins from the slopes.",
+        info: "10:00 – 19:30 · ¥650 Adult",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Kamitsuge+Onsen+Togakushi",
+      },
+      {
+        name: "Togakushi Soba Hut 'Menou'",
+        japaneseName: "レストラン メノー",
+        category: "Food & Apres",
+        description:
+          "World-famous handmade Togakushi soba served with crisp local vegetable tempura right on the mountain.",
+        info: "Slope Mid-Mountain · 10:30 – 15:30",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Togakushi+Ski+Resort+Restaurant",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Men's Champion Course (チャンピオンコース)",
+        level: "Advanced",
+        note: "Steep 31° maximum pitch fall-line slope holding deep powder stashes after storms.",
+      },
+      {
+        name: "Panorama Course (パノラマコース)",
+        level: "Intermediate",
+        note: "Long, flowing cruiser looking straight across at the iconic jagged crags of Mt. Togakushi.",
+      },
+      {
+        name: "Oshino Cruiser",
+        level: "Beginner",
+        note: "Gentle, wide boulevard through peaceful birch and larch forests.",
+      },
+    ],
+    coordinates: {
+      lat: 36.7562,
+      lon: 138.0818,
+    },
+    elevation: {
+      base: 1220,
+      top: 1748,
+      vertical: 528,
+    },
+    terrain: {
+      beginner: 30,
+      intermediate: 40,
+      advanced: 30,
+      runs: 19,
+      lifts: 7,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 5500,
+    fromTokyo: {
+      durationMinutes: 140,
+      summary:
+        "Hokuriku Shinkansen to Nagano Station (~80m) + Alpico Bus Togakushi Line (No. 70/73) directly to the ski resort (~60m)",
+      station: "JR Nagano Station (長野駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Nagano+Station+Nagano+Japan",
+    },
+    vibeTags: ["Magic Powder", "Sacred Mt. Togakushi", "Authentic Soba Slopeside", "1,748m Summit"],
+    bestFor:
+      "Snowboarders looking for authentic Japanese mountain culture, sacred shrine landscapes, and dry inland powder without crowds",
+    officialUrl: "https://www.togakusi.com/ski/",
+  },
 ];

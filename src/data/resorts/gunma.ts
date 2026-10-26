@@ -559,5 +559,150 @@ export const GUNMA_RESORTS: Resort[] = [
       vibeTags: ["40° Steep Face", "Tree Run Zones", "Takaragawa Onsen"],
       bestFor: "Freeriders and families wanting uncrowded Minakami powder and riverside onsens",
       officialUrl: "https://hodaigi.jp/",
+    },
+
+    {
+      slug: "kusatsu-onsen",
+      name: "Kusatsu Onsen Ski Resort",
+      japaneseName: "草津温泉スキー場",
+      region: "Gunma",
+      area: "Kusatsu Onsen",
+      description:
+        "Nestled directly above Japan's most celebrated hot spring village, Kusatsu Onsen Ski Resort combines centuries of onsen culture with newly expanded high-altitude freeride terrain. Centered around the iconic Tenguyama base and Pulse Gondola, the resort recently debuted the Banji Slope and R292 powder bowl, reaching 1,600m with natural powder stashes.",
+      address: {
+        postalCode: "〒377-1711",
+        english: "158 Kusatsu, Kusatsu-machi, Agatsuma-gun, Gunma 377-1711, Japan",
+        japanese: "群馬県吾妻郡草津町大字草津字白根国有林158林班",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Kusatsu+Onsen+Ski+Resort+Gunma+Japan",
+      },
+      heroImage: "/trail-maps/kusatsu-onsen-photo.jpg",
+      trailMapImage: "/trail-maps/kusatsu-onsen.jpg",
+      mapGallery: [
+        {
+          title: "Kusatsu Onsen Ski Resort Course & Pulse Gondola Map",
+          caption:
+            "Official trail map showing Tenguyama, the Banji powder expansion, Pulse Gondola, and the 4.3km R292 cruiser.",
+          imageUrl: "/trail-maps/kusatsu-onsen.jpg",
+          badge: "Official Trail Map",
+        },
+        {
+          title: "Mt. Kusatsu-Shirane Winter Alpine Panorama",
+          caption:
+            "Crisp alpine view of the volcanic Shirane ridge looking over the upper slopes of Kusatsu.",
+          imageUrl: "/trail-maps/kusatsu-onsen-photo.jpg",
+          badge: "Mt. Shirane Ridge",
+        },
+      ],
+      trailMapUrl: "https://www.932-onsen.com/winter/course",
+      webcamUrl: "https://www.932-onsen.com/winter/livecam",
+      operatingHours: {
+        seasonWindow: "Mid December – Early April",
+        dayHours: "08:30 – 17:00",
+        nightSkiing:
+          "17:00 – 21:00 on Tenguyama Main Slope (select weekends & peak dates)",
+        earlyBird: "08:30 Gondola start",
+        notes:
+          "Step right off the slopes into the historic thermal waters of Kusatsu's Yubatake village center.",
+      },
+      pricing: {
+        oneDayAdultYen: 5400,
+        halfDayYen: 4400,
+        twoDayYen: 9600,
+        nightPassYen: 2200,
+        childOneDayYen: 3200,
+        seniorOneDayYen: 4600,
+        seasonPassYen: 48000,
+        seasonPassName: "Kusatsu Onsen Season Pass",
+        fullBoardRentalDayYen: 5000,
+        wearRentalDayYen: 4000,
+        notes:
+          "Special discounts for guests staying at member Kusatsu Onsen ryokans.",
+      },
+      snowboarderIntel: {
+        liftFleet: "1 Pulse Gondola + 4 High-Speed Quad & Pair Lifts",
+        terrainPark:
+          "Tenguyama Snow Park with boxes, rails, and beginner bank features",
+        flatSpotWarning:
+          "Low — R292 course flows gently and continuously over 4.3km",
+        treeRunRules:
+          "Upper Banji area offers natural powder riding within patrolled bowl boundaries.",
+      },
+      monthlySnowfallCm: {
+        dec: 140,
+        jan: 230,
+        feb: 210,
+        mar: 130,
+        apr: 25,
+        peakBaseCm: 220,
+      },
+      onsenAndVillage: [
+        {
+          name: "Kusatsu Yubatake & Sainokawara Rotenburo",
+          japaneseName: "西の河原露天風呂",
+          category: "Onsen",
+          description:
+            "One of Japan's largest open-air hot spring baths (500 sq meters) steaming in the snowy valley just below Tenguyama.",
+          info: "09:00 – 20:00 · ¥700 Adult",
+          googleMapsUrl:
+            "https://www.google.com/maps/search/?api=1&query=Sainokawara+Rotenburo+Kusatsu",
+        },
+        {
+          name: "Tengu Rest House & Onsen Manju Shops",
+          japaneseName: "天狗山レストハウス",
+          category: "Food & Apres",
+          description:
+            "Freshly steamed hot spring onsen manju pastries, Joshu beef burgers, and hot miso soba at the base lodge.",
+          info: "Tenguyama Base · 09:00 – 17:00",
+          googleMapsUrl:
+            "https://www.google.com/maps/search/?api=1&query=Tenguyama+Rest+House+Kusatsu",
+        },
+      ],
+      signatureRuns: [
+        {
+          name: "Banji Powder Course (本白根コース)",
+          level: "Advanced",
+          note: "Newly expanded upper mountain steep holding dry, high-altitude volcanic powder.",
+        },
+        {
+          name: "R292 Scenic Cruiser (4,300m)",
+          level: "Beginner",
+          note: "Gentle, sweeping 4.3km continuous cruiser descending from 1,600m to Tenguyama base.",
+        },
+        {
+          name: "Tenguyama Dynamic Slopes",
+          level: "Intermediate",
+          note: "Wide carving boulevard with modern pulse gondola access and night illumination.",
+        },
+      ],
+      coordinates: { lat: 36.6340, lon: 138.5830 },
+      elevation: { base: 1245, top: 1600, vertical: 355 },
+      terrain: {
+        beginner: 50,
+        intermediate: 30,
+        advanced: 20,
+        runs: 10,
+        lifts: 5,
+        treeRunsAllowed: true,
+      },
+      dayPassYen: 5400,
+      fromTokyo: {
+        durationMinutes: 150,
+        summary:
+          "Hokuriku Shinkansen to Karuizawa Station (~65m) + Kusatsu Onsen Express Bus (~75m) directly to Kusatsu Onsen Bus Terminal",
+        station:
+          "Kusatsu Onsen Bus Terminal (草津温泉バスターミナル) / JR Naganohara-Kusatsuguchi Station",
+        stationGoogleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Kusatsu+Onsen+Bus+Terminal+Gunma+Japan",
+      },
+      vibeTags: [
+        "Historic #1 Onsen Town",
+        "Yubatake Hot Springs",
+        "4.3km Long Cruiser",
+        "Pulse Gondola",
+      ],
+      bestFor:
+        "Snowboarders who prioritize world-class natural thermal hot springs and relaxing alpine cruising over sheer mountain size",
+      officialUrl: "https://www.932-onsen.com/",
     }
 ];

@@ -1029,4 +1029,147 @@ export const NIIGATA_RESORTS: Resort[] = [
       "Beginners, intermediate carvers, and flat-ground freestyle riders (Guratori) who want massive open space and 85-min transit from Tokyo",
     officialUrl: "https://iwa-ppara.com/",
   },
+
+  {
+    slug: "joetsu-kokusai",
+    name: "Joetsu Kokusai Ski Resort",
+    japaneseName: "上越国際スキー場",
+    region: "Niigata",
+    area: "Minamiuonuma / Tokamachi",
+    description:
+      "One of Japan's largest single ski expanses, 'Jokoku' spans a massive 10 million square meters across four interconnected valley zones: Mother Zone, Panorama Zone, Active Zone, and Forest Zone. Directly accessed via its own dedicated train station (Joetsu Kokusai Ski-jomae), it offers 22 expansive courses, extensive night riding, and the castle-like Hotel Green Plaza at the base.",
+    address: {
+      postalCode: "〒949-6431",
+      english: "112 Yanakadaira, Minamiuonuma-shi, Niigata 949-6431, Japan",
+      japanese: "新潟県南魚沼市樺野沢112",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Joetsu+Kokusai+Ski+Resort+Niigata+Japan",
+    },
+    heroImage: "/trail-maps/joetsu-kokusai-photo.jpg",
+    trailMapImage: "/trail-maps/joetsu-kokusai.jpg",
+    mapGallery: [
+      {
+        title: "Joetsu Kokusai 4-Zone Mega Trail Map",
+        caption:
+          "Official trail map encompassing all 4 distinct areas: Mother, Active, Panorama, and Forest zones across 10 million square meters.",
+        imageUrl: "/trail-maps/joetsu-kokusai.jpg",
+        badge: "Official Trail Map",
+      },
+      {
+        title: "Hotel Green Plaza Joetsu & Ski-in/Ski-out Slopes",
+        caption:
+          "The iconic Tudor-style alpine resort hotel looking straight onto the illuminated Mother Zone pistes.",
+        imageUrl: "/trail-maps/joetsu-kokusai-photo.jpg",
+        badge: "Base Hotel & Slopes",
+      },
+    ],
+    trailMapUrl: "https://www.jkokusai.co.jp/ski/course/",
+    webcamUrl: "https://www.jkokusai.co.jp/ski/livecam/",
+    operatingHours: {
+      seasonWindow: "Early December – Late March",
+      dayHours: "08:00 – 17:00",
+      nightSkiing: "17:00 – 21:00 on Mother Zone main slopes",
+      earlyBird: "08:00 start on weekends",
+      notes: "Direct train access via JR Joetsu Line stopping right at the resort base station.",
+    },
+    pricing: {
+      oneDayAdultYen: 6000,
+      halfDayYen: 5000,
+      twoDayYen: 11000,
+      nightPassYen: 2500,
+      childOneDayYen: 3500,
+      seniorOneDayYen: 5000,
+      seasonPassYen: 58000,
+      seasonPassName: "Jokoku & Iwappara Joint Season Pass",
+      fullBoardRentalDayYen: 5500,
+      wearRentalDayYen: 4500,
+      notes: "Joint lift pass options include neighboring Iwappara Ski Resort.",
+    },
+    snowboarderIntel: {
+      liftFleet:
+        "25 Chairlifts (including high-speed quads and double lifts connecting all 4 valleys)",
+      terrainPark: "Kokusai Snow Park & SpongeBob Kids Park",
+      flatSpotWarning:
+        "Medium — valley transfer traverses between Panorama and Forest zones require keeping speed",
+      treeRunRules:
+        "Strictly on-piste only. Off-piste boundary zones strictly patrolled.",
+    },
+    monthlySnowfallCm: {
+      dec: 180,
+      jan: 310,
+      feb: 270,
+      mar: 140,
+      apr: 20,
+      peakBaseCm: 300,
+    },
+    onsenAndVillage: [
+      {
+        name: "Jokoku Onsen (Hotel Green Plaza Joetsu)",
+        japaneseName: "上国温泉",
+        category: "Onsen",
+        description:
+          "Hot soothing hot spring bathhouse inside Hotel Green Plaza looking out over snowy pine forests.",
+        info: "12:00 – 21:00 · Slopeside Hotel",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Hotel+Green+Plaza+Joetsu+Onsen",
+      },
+      {
+        name: "Restaurant Mont Blanc",
+        japaneseName: "レストラン モンブラン",
+        category: "Food & Apres",
+        description:
+          "Hearty Niigata Koshihikari rice bowls, Echigo pork cutlet curry, and piping hot ramen right on the slopes.",
+        info: "Mother Zone Base · 10:30 – 16:30",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Hotel+Green+Plaza+Joetsu+Dining",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Panorama Cruiser",
+        level: "Intermediate",
+        note: "Scenic 2.5km descent from the 1,017m peak with panoramic views of the Echigo mountain range.",
+      },
+      {
+        name: "Dan-par Slope (大別当ゲレンデ)",
+        level: "Advanced",
+        note: "Steep 38° natural pitch challenging mogul skiers and advanced riders.",
+      },
+      {
+        name: "Main Mother Gelande",
+        level: "Beginner",
+        note: "Gentle, wide, floodlit slope directly outside Hotel Green Plaza perfect for evening carving.",
+      },
+    ],
+    coordinates: {
+      lat: 37.0378,
+      lon: 138.8306,
+    },
+    elevation: {
+      base: 200,
+      top: 1017,
+      vertical: 817,
+    },
+    terrain: {
+      beginner: 30,
+      intermediate: 50,
+      advanced: 20,
+      runs: 22,
+      lifts: 25,
+      treeRunsAllowed: false,
+    },
+    dayPassYen: 6000,
+    fromTokyo: {
+      durationMinutes: 85,
+      summary:
+        "Joetsu Shinkansen to Echigo-Yuzawa (~70m) + JR Joetsu local train directly to Joetsu-Kokusai-Ski-Jomae Station (13m)",
+      station: "JR Joetsu-Kokusai-Ski-Jomae Station (上越国際スキー場前駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Joetsu-Kokusai-Ski-Jomae+Station+Niigata+Japan",
+    },
+    vibeTags: ["Direct Train Station", "4 Valley Mega-Resort", "Hotel Green Plaza", "Tudor Castle Base"],
+    bestFor:
+      "Families, intermediate cruisers, and train travelers wanting an immense connected mountain with direct station ski-in access",
+    officialUrl: "https://www.jkokusai.co.jp/",
+  },
 ];

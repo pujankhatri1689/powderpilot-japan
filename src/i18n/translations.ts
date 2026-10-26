@@ -75,6 +75,16 @@ export function translateRegion(
       ja: "岐阜",
       jaPref: "岐阜県",
     },
+    Shizuoka: {
+      en: "Shizuoka",
+      ja: "静岡",
+      jaPref: "静岡県",
+    },
+    Shiga: {
+      en: "Shiga",
+      ja: "滋賀",
+      jaPref: "滋賀県",
+    },
   };
   const item = map[region];
   if (withSuffix) {

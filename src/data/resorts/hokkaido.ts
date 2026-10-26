@@ -715,4 +715,285 @@ export const HOKKAIDO_RESORTS: Resort[] = [
       "Expert backcountry powder riders and splitboarders equipped with avalanche gear wanting raw, wild Hokkaido volcano powder",
     officialUrl: "https://asahidake.hokkaido.jp/en/",
   },
+
+  {
+    slug: "sapporo-teine",
+    name: "Sapporo Teine",
+    japaneseName: "サッポロテイネ",
+    region: "Hokkaido",
+    area: "Teine-ku, Sapporo",
+    description:
+      "Host of the 1972 Winter Olympic alpine events, Sapporo Teine features two distinct zones: Highland and Olympia, connected by the 8-passenger Rainbow Gondola. Perched 1,023m above Ishikari Bay with breathtaking ocean and Sapporo city skylines, Teine boasts the legendary 36° North Wall course and extensive gated tree-riding.",
+    address: {
+      postalCode: "〒006-0029",
+      english: "593 Teine-kanayama, Teine-ku, Sapporo, Hokkaido 006-0029, Japan",
+      japanese: "北海道札幌市手稲区手稲金山593",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Sapporo+Teine+Ski+Resort+Hokkaido+Japan",
+    },
+    heroImage: "/trail-maps/sapporo-teine-photo.jpg",
+    trailMapImage: "/trail-maps/sapporo-teine.jpg",
+    mapGallery: [
+      {
+        title: "Sapporo Teine Highland & Olympia Dual-Zone Map",
+        caption:
+          "Official trail map connecting Highland and Olympia via the Rainbow Gondola, covering the 36° North Wall and City View cruising runs.",
+        imageUrl: "/trail-maps/sapporo-teine.jpg",
+        badge: "Official Trail Map",
+      },
+      {
+        title: "Ocean & City Skyline Panorama from Mt. Teine Summit",
+        caption:
+          "View from 1,023m summit looking directly over Ishikari Bay and downtown Sapporo.",
+        imageUrl: "/trail-maps/sapporo-teine-photo.jpg",
+        badge: "Summit Ocean View",
+      },
+    ],
+    trailMapUrl: "https://sapporo-teine.com/snow/course/",
+    webcamUrl: "https://sapporo-teine.com/snow/camera/",
+    operatingHours: {
+      seasonWindow: "Late November – Early May",
+      dayHours: "09:00 – 17:00",
+      nightSkiing: "16:00 – 21:00 at Olympia Zone (Shirakaba & Sunfish slopes)",
+      earlyBird: "08:45 Highland lift upload on weekends",
+      notes: "Olympia Zone features Japan's historic 1972 Olympic Cauldron and floodlit night riding.",
+    },
+    pricing: {
+      oneDayAdultYen: 7500,
+      halfDayYen: 6200,
+      twoDayYen: 13800,
+      nightPassYen: 3200,
+      childOneDayYen: 4000,
+      seniorOneDayYen: 6500,
+      seasonPassYen: 78000,
+      seasonPassName: "K-Winter Pass (Teine / Rusutsu / Sahoro / Nakayama)",
+      fullBoardRentalDayYen: 6500,
+      wearRentalDayYen: 4800,
+      notes: "K-Winter Pass covers all 4 Kamori Kanko Hokkaido mountains.",
+    },
+    snowboarderIntel: {
+      liftFleet: "1 8-passenger Gondola (Rainbow Gondola) + 4 High-Speed Quads + 5 Pair Lifts",
+      terrainPark: "Teine Terrain Park at Olympia Zone with rail line, kickers, and wave courses",
+      flatSpotWarning: "Low — Rainbow course connector requires moderate speed",
+      treeRunRules: "North Wall sidecountry and designated BC gates open when avalanche conditions permit; registration required.",
+    },
+    monthlySnowfallCm: {
+      dec: 210,
+      jan: 310,
+      feb: 275,
+      mar: 180,
+      apr: 50,
+      peakBaseCm: 320,
+    },
+    onsenAndVillage: [
+      {
+        name: "Teine Onsen Honoka",
+        japaneseName: "ていね温泉 ほのか",
+        category: "Onsen",
+        description:
+          "Large natural thermal bathhouse with outdoor rotemburo and stone saunas, 10 mins from Teine Station.",
+        info: "24 Hours · ¥1,100 Adult",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Teine+Onsen+Honoka+Sapporo",
+      },
+      {
+        name: "Highland Ski Center Cafeteria",
+        japaneseName: "ハイランドスキーセンター",
+        category: "Food & Apres",
+        description:
+          "Hearty Hokkaido miso butter-corn ramen, soup curry, and Genghis Khan lamb bowls with Ishikari Bay views.",
+        info: "Highland Base · 10:00 - 16:30",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Sapporo+Teine+Highland+Ski+Center",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "North Wall Course (北壁)",
+        level: "Advanced",
+        note: "Historic 36° maximum pitch Olympic mogul and deep powder run from the summit.",
+      },
+      {
+        name: "City View Cruise",
+        level: "Intermediate",
+        note: "Wide, sweeping cruiser directly facing the glittering Sapporo skyline and sea.",
+      },
+      {
+        name: "Rainbow Course (5,700m)",
+        level: "Beginner",
+        note: "Long, scenic beginner course flowing from Highland summit all the way to Olympia base.",
+      },
+    ],
+    coordinates: {
+      lat: 43.0805,
+      lon: 141.2025,
+    },
+    elevation: {
+      base: 340,
+      top: 1023,
+      vertical: 683,
+    },
+    terrain: {
+      beginner: 35,
+      intermediate: 40,
+      advanced: 25,
+      runs: 15,
+      lifts: 10,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 7500,
+    fromTokyo: {
+      durationMinutes: 180,
+      summary:
+        "Fly Haneda to New Chitose (CTS ~95m) + JR Rapid Airport Train to Teine Station (~45m) + 15-min bus/taxi",
+      station: "JR Teine Station (手稲駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=JR+Teine+Station+Hokkaido+Japan",
+    },
+    vibeTags: ["1972 Olympic Slopes", "Ocean & City Skyline", "36° North Wall", "40m from Sapporo"],
+    bestFor:
+      "Snowboarders wanting Olympic-grade steeps and deep powder with immediate Sapporo city access",
+    officialUrl: "https://sapporo-teine.com/snow/",
+  },
+
+  {
+    slug: "kamui-ski-links",
+    name: "Kamui Ski Links",
+    japaneseName: "カムイスキーリンクス",
+    region: "Hokkaido",
+    area: "Asahikawa / Mt. Kamui",
+    description:
+      "Asahikawa's premier powder sanctuary, Kamui Ski Links offers 25 sprawling courses served by its iconic 6-passenger Gold Gondola. Nestled inland in the Daisetsuzan microclimate, temperatures stay bitterly cold, guaranteeing ultra-dry, chalky 'Silky Snow' through uncrowded 150m-wide cruisers and certified tree-riding glades.",
+    address: {
+      postalCode: "〒074-1181",
+      english: "112 Kamui-cho, Nishi-toyoushi, Asahikawa, Hokkaido 074-1181, Japan",
+      japanese: "北海道旭川市神居町西丘112",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Kamui+Ski+Links+Asahikawa+Hokkaido+Japan",
+    },
+    heroImage: "/trail-maps/kamui-ski-links-photo.jpg",
+    trailMapImage: "/trail-maps/kamui-ski-links.jpg",
+    mapGallery: [
+      {
+        title: "Kamui Ski Links 25-Course Official Layout",
+        caption:
+          "Official trail map featuring Gold Gondola, dynamic Deep Powder tree zones (Todomatsu & Shirakaba), and wide carving pistes.",
+        imageUrl: "/trail-maps/kamui-ski-links.jpg",
+        badge: "Official Trail Map",
+      },
+      {
+        title: "Kamui Ski Links Gold Gondola & Slopes",
+        caption:
+          "Winter scenery across the wide north-facing tree runs and base lodge.",
+        imageUrl: "/trail-maps/kamui-ski-links-photo.jpg",
+        badge: "Slope Scenery",
+      },
+    ],
+    trailMapUrl: "https://www.kamui-skilinks.com/gelande/",
+    webcamUrl: "https://www.kamui-skilinks.com/gelande/",
+    operatingHours: {
+      seasonWindow: "Early December – Late March",
+      dayHours: "09:00 – 16:30",
+      nightSkiing: "No night skiing (Day operations only)",
+      earlyBird: "09:00 Gold Gondola opening",
+      notes: "Unbeatable value at ¥4,500 for a full-mountain pass on authentic inland Hokkaido powder.",
+    },
+    pricing: {
+      oneDayAdultYen: 4500,
+      halfDayYen: 3500,
+      twoDayYen: 8000,
+      nightPassYen: null,
+      childOneDayYen: 2000,
+      seniorOneDayYen: 3800,
+      seasonPassYen: 45000,
+      seasonPassName: "Kamui Season Pass",
+      fullBoardRentalDayYen: 5000,
+      wearRentalDayYen: 4000,
+      notes: "Children under elementary age ride free.",
+    },
+    snowboarderIntel: {
+      liftFleet: "1 6-passenger Gondola (2,327m Gold Gondola) + 5 Pair Lifts",
+      terrainPark: "Snow Park with continuous box, rail, and wave features",
+      flatSpotWarning: "Very Low — consistent fall line on all main pistes",
+      treeRunRules:
+        "Designated ungroomed tree zones (Todomatsu, Shirakaba, Banyan) open for powder riding within resort boundaries.",
+    },
+    monthlySnowfallCm: {
+      dec: 180,
+      jan: 280,
+      feb: 240,
+      mar: 140,
+      apr: 30,
+      peakBaseCm: 290,
+    },
+    onsenAndVillage: [
+      {
+        name: "Takasago Onsen",
+        japaneseName: "高砂温泉",
+        category: "Onsen",
+        description:
+          "Traditional hot spring with 7 different mineral baths overlooking Asahikawa city, 20 mins from Kamui base.",
+        info: "06:00 – 23:00 · ¥700 Adult",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Takasago+Onsen+Asahikawa",
+      },
+      {
+        name: "Center House Restaurant & Ramen",
+        japaneseName: "センターハウス レストラン",
+        category: "Food & Apres",
+        description:
+          "Authentic Asahikawa soy sauce ramen with savory pork belly chashu, tonkatsu curry, and local soft serve.",
+        info: "Base Lodge · 10:30 – 15:30",
+        googleMapsUrl:
+          "https://www.google.com/maps/search/?api=1&query=Kamui+Ski+Links+Center+House",
+      },
+    ],
+    signatureRuns: [
+      {
+        name: "Gold Course (ゴールドコース)",
+        level: "Intermediate",
+        note: "Epic 150m-wide carving boulevard descending 2.5km directly off the Gondola.",
+      },
+      {
+        name: "Todomatsu Tree Run (トド松コース)",
+        level: "Advanced",
+        note: "Steep 32° ungroomed powder glade through native Hokkaido fir trees.",
+      },
+      {
+        name: "Banyan & Shirakaba Glades",
+        level: "Advanced",
+        note: "Playful natural pillow lines and spaced white birch powder riding.",
+      },
+    ],
+    coordinates: {
+      lat: 43.6845,
+      lon: 142.1894,
+    },
+    elevation: {
+      base: 150,
+      top: 751,
+      vertical: 601,
+    },
+    terrain: {
+      beginner: 32,
+      intermediate: 36,
+      advanced: 32,
+      runs: 25,
+      lifts: 6,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 4500,
+    fromTokyo: {
+      durationMinutes: 165,
+      summary:
+        "Fly Haneda to Asahikawa Airport (AKJ ~100m) + Kamui Ski Liner bus or 30-min taxi from Asahikawa city center",
+      station: "JR Asahikawa Station (旭川駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Asahikawa+Station+Hokkaido+Japan",
+    },
+    vibeTags: ["Gold Gondola", "150m-Wide Carving", "Inland Silky Powder", "¥4,500 Value"],
+    bestFor:
+      "Snowboarders seeking uncrowded, wide-open cruisers and pristine Hokkaido tree stashes on a budget",
+    officialUrl: "https://www.kamui-skilinks.com/",
+  },
 ];
