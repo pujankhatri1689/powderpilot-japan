@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import JapanSnowBeltMap from "@/components/JapanSnowBeltMap";
 import { useLanguage } from "@/context/LanguageContext";
 import { REGIONS, RESORTS, type Region, type Resort } from "@/data/resorts";
+
+type RadarViewMode = "leaderboard" | "map";
 
 interface DailySnow {
   date: string;
@@ -115,6 +118,7 @@ export default function ConditionsDashboard() {
   const [error, setError] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<Region | "All">("All");
   const [stormPreviewMode, setStormPreviewMode] = useState(false);
+  const [radarView, setRadarView] = useState<RadarViewMode>("leaderboard");
 
   const localeCode = lang === "ja" ? "ja-JP" : "en-US";
 
@@ -246,22 +250,55 @@ export default function ConditionsDashboard() {
           </p>
         </div>
 
-        {/* Storm Simulation Toggle */}
-        <button
-          type="button"
-          aria-pressed={stormPreviewMode}
-          onClick={() => setStormPreviewMode((v) => !v)}
-          className={`inline-flex min-h-11 items-center gap-2 self-start rounded-xl border px-4 py-2.5 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm ${
-            stormPreviewMode
-              ? "border-ice bg-ice-deep text-charcoal shadow-lg shadow-ice-deep/25"
-              : "border-charcoal-light bg-charcoal-light/60 text-snow hover:border-ice"
-          }`}
-        >
-          <span aria-hidden>🌨️</span>
-          {stormPreviewMode
-            ? t.conditionsPage.stormBtnOn
-            : t.conditionsPage.stormBtnOff}
-        </button>
+        {/* View Mode Switcher + Storm Simulation Toggle */}
+        <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+          <div
+            role="group"
+            aria-label="Radar display mode"
+            className="inline-flex rounded-xl border border-charcoal-light bg-charcoal-light/50 p-1"
+          >
+            <button
+              type="button"
+              aria-pressed={radarView === "leaderboard"}
+              onClick={() => setRadarView("leaderboard")}
+              className={`min-h-10 rounded-lg px-3.5 py-2 text-xs font-bold transition sm:text-sm ${
+                radarView === "leaderboard"
+                  ? "bg-ice-deep text-charcoal shadow-sm shadow-ice-deep/25"
+                  : "text-snow-muted hover:text-snow"
+              }`}
+            >
+              {t.conditionsPage.viewLeaderboard}
+            </button>
+            <button
+              type="button"
+              aria-pressed={radarView === "map"}
+              onClick={() => setRadarView("map")}
+              className={`min-h-10 rounded-lg px-3.5 py-2 text-xs font-bold transition sm:text-sm ${
+                radarView === "map"
+                  ? "bg-ice-deep text-charcoal shadow-sm shadow-ice-deep/25"
+                  : "text-snow-muted hover:text-snow"
+              }`}
+            >
+              {t.conditionsPage.viewRadarMap}
+            </button>
+          </div>
+
+          <button
+            type="button"
+            aria-pressed={stormPreviewMode}
+            onClick={() => setStormPreviewMode((v) => !v)}
+            className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 py-2.5 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm ${
+              stormPreviewMode
+                ? "border-ice bg-ice-deep text-charcoal shadow-lg shadow-ice-deep/25"
+                : "border-charcoal-light bg-charcoal-light/60 text-snow hover:border-ice"
+            }`}
+          >
+            <span aria-hidden>🌨️</span>
+            {stormPreviewMode
+              ? t.conditionsPage.stormBtnOn
+              : t.conditionsPage.stormBtnOff}
+          </button>
+        </div>
       </div>
 
       {/* Pre-season Banner if live snowfall is currently 0cm */}
@@ -329,7 +366,16 @@ export default function ConditionsDashboard() {
         </div>
       )}
 
-      {/* Leaderboard List */}
+      {/* Interactive Radar Map or Leaderboard List */}
+      {radarView === "map" ? (
+        <JapanSnowBeltMap
+          resorts={RESORTS.filter(
+            (r) => selectedRegion === "All" || r.region === selectedRegion
+          )}
+          weatherBySlug={weatherBySlug}
+          defaultPinMetric="snow"
+        />
+      ) : (
       <div className="space-y-4">
         {rankedResorts.map(({ resort, weather }, index) => {
           const maxDaily = Math.max(
@@ -478,6 +524,7 @@ export default function ConditionsDashboard() {
           );
         })}
       </div>
+      )}
     </div>
   );
 }

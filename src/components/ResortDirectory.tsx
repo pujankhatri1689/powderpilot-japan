@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
+import JapanSnowBeltMap from "@/components/JapanSnowBeltMap";
 import { useFavorites } from "@/context/FavoritesContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { REGIONS, RESORTS, type Region } from "@/data/resorts";
@@ -13,6 +14,7 @@ const BLUR_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDE2IDEwIj48cmVjdCB3aWR0aD0iMTYiIGhlaWdodD0iMTAiIGZpbGw9IiMxZTI5M2IiLz48L3N2Zz4=";
 
 type SortKey = "vertical" | "travel" | "price" | "topElevation";
+type DirectoryViewMode = "grid" | "map";
 
 export default function ResortDirectory() {
   const searchParams = useSearchParams();
@@ -32,8 +34,19 @@ export default function ResortDirectory() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortKey>("vertical");
   const [visibleLimit, setVisibleLimit] = useState(18);
+  const [viewMode, setViewMode] = useState<DirectoryViewMode>(() =>
+    searchParams.get("view") === "map" ? "map" : "grid"
+  );
 
-  // Sync selectedRegion & favorites if URL query param changes during client navigation
+  // Sync selectedRegion, favorites & viewMode if URL query param changes during client navigation
+  const [prevUrlView, setPrevUrlView] = useState(() => searchParams.get("view"));
+  const currentUrlView = searchParams.get("view");
+  if (prevUrlView !== currentUrlView) {
+    setPrevUrlView(currentUrlView);
+    if (currentUrlView === "map" || currentUrlView === "grid") {
+      setViewMode(currentUrlView);
+    }
+  }
   const [prevUrlRegion, setPrevUrlRegion] = useState(() => searchParams.get("region"));
   const currentUrlRegion = searchParams.get("region");
   if (prevUrlRegion !== currentUrlRegion) {
@@ -123,17 +136,51 @@ export default function ResortDirectory() {
 
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
-      {/* Page Header */}
-      <div className="mb-8">
-        <p className="text-xs font-semibold uppercase tracking-widest text-ice">
-          {t.directory.regionsHeader}
-        </p>
-        <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-snow sm:text-4xl">
-          {t.directory.title}
-        </h1>
-        <p className="mt-2 max-w-2xl text-sm text-snow-muted sm:text-base">
-          {t.directory.subtitle}
-        </p>
+      {/* Page Header + Grid / Snow Map Toggle */}
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-widest text-ice">
+            {t.directory.regionsHeader}
+          </p>
+          <h1 className="mt-1 text-3xl font-extrabold tracking-tight text-snow sm:text-4xl">
+            {t.directory.title}
+          </h1>
+          <p className="mt-2 max-w-2xl text-sm text-snow-muted sm:text-base">
+            {t.directory.subtitle}
+          </p>
+        </div>
+
+        {/* View Mode Switcher: Grid vs Interactive Snow Belt Map */}
+        <div
+          role="group"
+          aria-label="Directory view mode"
+          className="inline-flex self-start rounded-xl border border-charcoal-light bg-charcoal-light/50 p-1 sm:self-auto"
+        >
+          <button
+            type="button"
+            aria-pressed={viewMode === "grid"}
+            onClick={() => setViewMode("grid")}
+            className={`min-h-10 rounded-lg px-4 py-2 text-xs font-bold transition sm:text-sm ${
+              viewMode === "grid"
+                ? "bg-ice-deep text-charcoal shadow-sm shadow-ice-deep/25"
+                : "text-snow-muted hover:text-snow"
+            }`}
+          >
+            {t.directory.viewGrid}
+          </button>
+          <button
+            type="button"
+            aria-pressed={viewMode === "map"}
+            onClick={() => setViewMode("map")}
+            className={`min-h-10 rounded-lg px-4 py-2 text-xs font-bold transition sm:text-sm ${
+              viewMode === "map"
+                ? "bg-ice-deep text-charcoal shadow-sm shadow-ice-deep/25"
+                : "text-snow-muted hover:text-snow"
+            }`}
+          >
+            {t.directory.viewMap}
+          </button>
+        </div>
       </div>
 
       {/* Filter & Search Bar */}
@@ -247,7 +294,7 @@ export default function ResortDirectory() {
         </div>
       </div>
 
-      {/* Resort Grid */}
+      {/* Resort Grid or Interactive Japan Snow Belt Map */}
       {filteredResorts.length === 0 ? (
         <div className="rounded-2xl border border-charcoal-light bg-charcoal-light/20 p-12 text-center">
           <p className="text-base font-semibold text-snow">
@@ -269,6 +316,11 @@ export default function ResortDirectory() {
             {t.directory.resetFilters}
           </button>
         </div>
+      ) : viewMode === "map" ? (
+        <JapanSnowBeltMap
+          resorts={filteredResorts}
+          defaultPinMetric={sortBy === "price" ? "price" : "elevation"}
+        />
       ) : (
         <>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
