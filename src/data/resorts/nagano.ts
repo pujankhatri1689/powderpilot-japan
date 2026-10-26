@@ -874,13 +874,13 @@ export const NAGANO_RESORTS: Resort[] = [
       {
         title: "Tsugaike Full Trail Map & TSUGA POW DBD Gates",
         caption: "Shows the 4,120m Eve Gondola and the DBD avalanche-controlled powder gates.",
-        imageUrl: "/trail-maps/hakuba-cortina.jpg",
+        imageUrl: "/trail-maps/tsugaike-kogen.jpg",
         badge: "Official Map",
       },
       {
         title: "Tsuga Pow Deep Tree Glades",
         caption: "Chest-deep blower powder inside the gated Tsugaike DBD safety zone.",
-        imageUrl: "/trail-maps/cortina-photo.jpg",
+        imageUrl: "/trail-maps/tsugaike-kogen-photo.jpg",
         badge: "TSUGA POW DBD",
       },
     ],

@@ -23,14 +23,14 @@ export const HOKKAIDO_RESORTS: Resort[] = [
         title: "Niseko United All-Mountain Trail Map",
         caption:
           "Complete panoramic map connecting Grand Hirafu, Hanazono, Niseko Village, and Annupuri.",
-        imageUrl: "/trail-maps/shiga-kogen-all.jpg",
+        imageUrl: "/trail-maps/niseko-united.jpg",
         badge: "All-Mountain Map",
       },
       {
         title: "Mt. Yotei & Deep Hirafu Powder",
         caption:
           "Looking out toward the iconic Ezo Fuji (Mt. Yotei) while riding knee-to-waist deep champagne powder.",
-        imageUrl: "/trail-maps/nozawa-onsen-powder.jpg",
+        imageUrl: "/trail-maps/niseko-united-photo.jpg",
         badge: "World-Class Japow",
       },
     ],
@@ -145,13 +145,13 @@ export const HOKKAIDO_RESORTS: Resort[] = [
       {
         title: "Rusutsu 3-Peak Trail Map (West, East, Isola)",
         caption: "Huge layout covering 37 runs across West Mountain, East Mountain, and Mt. Isola.",
-        imageUrl: "/trail-maps/hakuba-happo-one.jpg",
+        imageUrl: "/trail-maps/rusutsu.jpg",
         badge: "3-Mountain Map",
       },
       {
         title: "Mt. Isola Untracked Tree Glades",
         caption: "Steep gladed trees and natural terrain features between Heavenly and Stream courses.",
-        imageUrl: "/trail-maps/hakuba-happo-one-riesen.jpg",
+        imageUrl: "/trail-maps/rusutsu-photo.jpg",
         badge: "Glade Heaven",
       },
     ],
@@ -265,13 +265,13 @@ export const HOKKAIDO_RESORTS: Resort[] = [
       {
         title: "Kiroro Course & Off-Piste Gate Map",
         caption: "Shows the 23 courses, Kiroro Gondola, and 5 designated Off-Piste tree areas.",
-        imageUrl: "/trail-maps/kagura.jpg",
+        imageUrl: "/trail-maps/kiroro.jpg",
         badge: "Official Map",
       },
       {
         title: "Asari Peak & Sea of Japan Cloudbreak",
         caption: "High-speed riding in deep feather-weight powder along the Asari ridge.",
-        imageUrl: "/trail-maps/kagura-photo.jpg",
+        imageUrl: "/trail-maps/kiroro-photo.jpg",
         badge: "17m Annual Snow",
       },
     ],
@@ -383,13 +383,13 @@ export const HOKKAIDO_RESORTS: Resort[] = [
       {
         title: "Furano Dual-Zone Trail Map (Furano & Kitanomine)",
         caption: "Shows the 100-person Ropeway on Furano Zone and the Gondola on Kitanomine Zone.",
-        imageUrl: "/trail-maps/myoko-suginohara.jpg",
+        imageUrl: "/trail-maps/furano.jpg",
         badge: "Dual-Zone Map",
       },
       {
         title: "Furano Peak & Tokachidake Mountain Range",
         caption: "Stunning clear winter view of the smoking Tokachi volcanic range across the valley.",
-        imageUrl: "/trail-maps/myoko-photo.jpg",
+        imageUrl: "/trail-maps/furano-photo.jpg",
         badge: "Diamond Dust",
       },
     ],
@@ -501,13 +501,13 @@ export const HOKKAIDO_RESORTS: Resort[] = [
       {
         title: "Hoshino Resorts Tomamu Full Trail Map",
         caption: "Shows Tomamu Mountain, Tower Mountain, and the dedicated Expert Powder zone.",
-        imageUrl: "/trail-maps/madarao-kogen.jpg",
+        imageUrl: "/trail-maps/tomamu.jpg",
         badge: "Official Map",
       },
       {
         title: "The Twin Towers & Silver Birch Glades",
         caption: "The iconic twin hotel towers rising above the frosted sub-zero birch powder glades.",
-        imageUrl: "/trail-maps/madarao-kogen-photo.jpg",
+        imageUrl: "/trail-maps/tomamu-photo.jpg",
         badge: "Sub-Zero Powder",
       },
     ],
@@ -619,13 +619,13 @@ export const HOKKAIDO_RESORTS: Resort[] = [
       {
         title: "Asahidake Ropeway & Alpine Trail Map",
         caption: "Shows the 4 marked maintenance courses and the vast wild alpine terrain.",
-        imageUrl: "/trail-maps/hakkoda.jpg",
+        imageUrl: "/trail-maps/asahidake.jpg",
         badge: "Alpine Wilderness",
       },
       {
         title: "Smoking Fumaroles & Waist-Deep Japow",
         caption: "Riding waist-deep featherweight powder beside steaming sulfur vents in Daisetsuzan National Park.",
-        imageUrl: "/trail-maps/hakkoda-photo.jpg",
+        imageUrl: "/trail-maps/asahidake-photo.jpg",
         badge: "Active Volcano",
       },
     ],

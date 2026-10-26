@@ -697,13 +697,13 @@ export const NIIGATA_RESORTS: Resort[] = [
       {
         title: "Akakura Onsen & Akakura Kanko Trail Map",
         caption: "Shows the 27 runs, Myoko Sky Cable Gondola, and steep upper powder bowls.",
-        imageUrl: "/trail-maps/myoko-suginohara.jpg",
+        imageUrl: "/trail-maps/akakura-onsen.jpg",
         badge: "Dual-Resort Map",
       },
       {
         title: "Mt. Myoko Powder Face & Historic Hotel",
         caption: "Chest-deep Japow overlooking the red roof of the classic Akakura Kanko Hotel.",
-        imageUrl: "/trail-maps/myoko-photo.jpg",
+        imageUrl: "/trail-maps/akakura-onsen-photo.jpg",
         badge: "Deep Myoko Snow",
       },
     ],
@@ -815,13 +815,13 @@ export const NIIGATA_RESORTS: Resort[] = [
       {
         title: "Maiko 3-Zone All-Mountain Map",
         caption: "Shows the Maiko Area, Nagazoe Area, and the high-elevation Okusoechi powder bowl.",
-        imageUrl: "/trail-maps/gala-yuzawa.jpg",
+        imageUrl: "/trail-maps/maiko.jpg",
         badge: "Official Map",
       },
       {
         title: "Okusoechi Natural Powder Bowl",
         caption: "Untracked deep snow in the north-facing Okusoechi bowl served by the gondola.",
-        imageUrl: "/trail-maps/gala-yuzawa-center.jpg",
+        imageUrl: "/trail-maps/maiko-photo.jpg",
         badge: "Powder Bowl",
       },
     ],
@@ -933,13 +933,13 @@ export const NIIGATA_RESORTS: Resort[] = [
       {
         title: "Iwappara Wide Slope Trail Map",
         caption: "Shows the 20 courses and the massive 600m wide open Main Gelande.",
-        imageUrl: "/trail-maps/naeba.jpg",
+        imageUrl: "/trail-maps/iwappara.jpg",
         badge: "Official Map",
       },
       {
         title: "600-Meter-Wide Main Slope & Night Laps",
         caption: "Unmatched wide open space for carving and flat-ground tricks with zero crowding.",
-        imageUrl: "/trail-maps/naeba-photo.jpg",
+        imageUrl: "/trail-maps/iwappara-photo.jpg",
         badge: "600m Wide Slope",
       },
     ],
