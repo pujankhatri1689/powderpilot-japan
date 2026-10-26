@@ -39,18 +39,24 @@ powderpilot-japan/
 ├── public/trail-maps/         # local HD resort photos + official-style trail maps
 └── src/
     ├── app/
-    │   ├── layout.tsx         # root layout: fonts, LanguageProvider, FavoritesProvider, Navbar
+    │   ├── layout.tsx         # root layout: fonts, LanguageProvider, FavoritesProvider, Navbar, Footer, MobileBottomNav
     │   ├── page.tsx           # homepage: hero + 2-column prefecture grid
     │   ├── resorts/page.tsx   # directory page (Suspense wrapper) → ResortDirectory
     │   ├── resorts/[slug]/page.tsx  # 39 prerendered resort pages (generateStaticParams + generateMetadata)
     │   ├── conditions/page.tsx      # 7-day powder radar / snowfall leaderboard
-    │   └── planner/page.tsx         # trip planner (not linked in navbar; direct URL only)
+    │   ├── planner/page.tsx         # trip planner
+    │   ├── sitemap.ts               # dynamic XML sitemap (43 URLs)
+    │   ├── robots.ts                # robots.txt metadata route
+    │   ├── not-found.tsx            # bilingual 404 page
+    │   └── error.tsx                # bilingual client error boundary
     ├── components/
-    │   ├── Navbar.tsx                # sticky nav, language switcher, favorites count
+    │   ├── Navbar.tsx                # sticky nav (--header-h ResizeObserver), language switcher, favorites count
+    │   ├── MobileBottomNav.tsx       # mobile-only (<sm) fixed bottom tab bar (Home, Resorts, Radar, Saved)
+    │   ├── Footer.tsx                # bilingual footer with Open-Meteo disclaimer, quick links & privacy note
     │   ├── ResortDirectory.tsx       # filters, search, sort, favorites, region deep-link
     │   ├── ResortDetailTabs.tsx      # hero + 4-tab resort page
     │   ├── MountainMapDiagram.tsx    # swipeable map/photo gallery + fullscreen zoom
-    │   ├── ResortWeatherWidget.tsx   # Open-Meteo peak/base forecast + demo storm toggle
+    │   ├── ResortWeatherWidget.tsx   # Open-Meteo peak/base forecast, 15m cache, JST timestamp & demo storm toggle
     │   ├── ConditionsDashboard.tsx   # leaderboard across all resorts
     │   ├── TripPlanner.tsx           # itinerary + ¥ budget + gear checklist (localStorage)
     │   ├── FavoriteButton.tsx        # heart toggle

@@ -100,24 +100,63 @@ export function translateLevel(
 
 export const UI_TEXT = {
   en: {
+    a11y: {
+      skipToContent: "Skip to main content",
+    },
     nav: {
       home: "Home",
       resorts: "Resorts",
-      conditions: "Live Snow & Radar",
+      conditions: "Powder Radar & Forecast",
       allResorts: "All Resorts",
       backToHome: "Back to Home",
       savedTooltip: "View your saved / favorited resorts",
       langLabel: "Language",
+      bottomNav: {
+        ariaLabel: "Mobile primary navigation",
+        home: "Home",
+        resorts: "Resorts",
+        radar: "Radar",
+        saved: "Saved",
+      },
+    },
+    footer: {
+      tagline:
+        "Japan Snowboard Encyclopedia & Powder Forecast Guide — 39 verified resorts across 9 prefectures.",
+      disclaimerTitle: "Forecast & Data Disclaimer",
+      disclaimerBody:
+        "Forecasts come from Open-Meteo / JMA MSM numerical weather model data, not official resort snow reports — always check each resort's official site for live lift status, avalanche advisories, and course openings.",
+      privacyNote:
+        "Favourites, language preferences, and trip plans are stored only in your browser (localStorage).",
+      quickLinksTitle: "Quick Links",
+      homeLink: "Home",
+      resortsLink: "All 39 Resorts",
+      radarLink: "7-Day Powder Radar",
+      plannerLink: "Trip & Budget Planner",
+      copyright: (year: number) =>
+        `© ${year} PowderPilot Japan. All prices in ¥ JPY.`,
+    },
+    statusPages: {
+      notFoundEyebrow: "404 · Out of Bounds",
+      notFoundTitle: "This run doesn’t exist",
+      notFoundBody:
+        "The mountain or page you’re looking for isn’t on the map. Head back to base or browse all 39 verified resorts across Japan.",
+      errorEyebrow: "Temporary Whiteout · Page Error",
+      errorTitle: "Something went wrong loading this view",
+      errorBody:
+        "Try refreshing the view or return to the resort directory.",
+      tryAgainBtn: "↻ Try Again",
+      backHomeBtn: "← Back to Home",
+      browseResortsBtn: "🏔️ Browse 39 Resorts",
     },
     home: {
-      badge: "Japan Snowboard Encyclopedia & Live Snow Guide",
+      badge: "Japan Snowboard Encyclopedia & Powder Forecast Guide",
       titleLine1: "Chase the deepest",
       titleHighlight: "Japow",
       titleLine2: "Know every mountain.",
       subtitle:
         "Instant access to HD trail maps, lift ticket & rental prices, snowboarder terrain intel, live mountain webcams, and weather forecasts for snowboard resorts across Japan.",
       browseBtn: "🏔️ Browse All Resorts",
-      radarBtn: "❄️ Live Snow & Powder Radar",
+      radarBtn: "❄️ Powder Radar & Forecast",
       resortsCount: (n: number) => `${n} resorts`,
       prefectureSectionTitle: "Explore by Prefecture",
       prefectureSectionSubtitle: "Pick your snow belt destination across 39 verified mountains",
@@ -299,6 +338,13 @@ export const UI_TEXT = {
         "Forecast source: Open-Meteo high-resolution numerical weather models (JMA MSM / GFS). Not an official resort snow report.",
       watchWebcams: "📹 Watch Live Mountain Webcams",
       checkGoogleWeather: "🌤️ Check on Google Weather",
+      updatedAt: (timeStr: string) => `Updated ${timeStr} JST`,
+      refreshBtn: "↻ Refresh",
+      refreshing: "Updating…",
+      errorTitle: "Could not load model forecast",
+      errorBody:
+        "The Open-Meteo forecast feed is temporarily unreachable. Retry below or check the official resort webcams.",
+      retryBtn: "↻ Retry Forecast",
       codes: {
         clear: "Bluebird Clear",
         partlyCloudy: "Partly Cloudy",
@@ -334,24 +380,63 @@ export const UI_TEXT = {
   },
 
   ja: {
+    a11y: {
+      skipToContent: "メインコンテンツへスキップ",
+    },
     nav: {
       home: "ホーム",
       resorts: "スキー場一覧",
-      conditions: "積雪・降雪レーダー",
+      conditions: "パウダーレーダー・降雪予報",
       allResorts: "スキー場一覧",
       backToHome: "ホームへ戻る",
       savedTooltip: "お気に入り登録したスキー場を表示",
       langLabel: "言語",
+      bottomNav: {
+        ariaLabel: "モバイルメインナビゲーション",
+        home: "ホーム",
+        resorts: "スキー場",
+        radar: "降雪レーダー",
+        saved: "お気に入り",
+      },
+    },
+    footer: {
+      tagline:
+        "日本スノーボード大図鑑＆パウダー降雪予報ガイド — 全国9道県・39の厳選スキー場を収録。",
+      disclaimerTitle: "予報・データに関する免責事項",
+      disclaimerBody:
+        "天気・降雪予報は Open-Meteo / 気象庁（JMA MSM）の数値気象モデルに基づく予測であり、スキー場公式の積雪発表ではありません。実際のリフト運行状況やコース規制は必ず各スキー場の公式サイトをご確認ください。",
+      privacyNote:
+        "お気に入り、言語設定、トリッププランはお使いのブラウザ内（localStorage）にのみ保存されます。",
+      quickLinksTitle: "クイックリンク",
+      homeLink: "ホーム",
+      resortsLink: "全39スキー場一覧",
+      radarLink: "週間パウダーレーダー",
+      plannerLink: "トリップ＆予算プランナー",
+      copyright: (year: number) =>
+        `© ${year} PowderPilot Japan. 料金表示はすべて日本円（¥ JPY）。`,
+    },
+    statusPages: {
+      notFoundEyebrow: "404 · コース外・ページが見つかりません",
+      notFoundTitle: "お探しのページが見つかりませんでした",
+      notFoundBody:
+        "お探しのスキー場またはページは移動または削除された可能性があります。トップページまたは全39スキー場一覧からお探しください。",
+      errorEyebrow: "一時的なエラーが発生しました",
+      errorTitle: "ページの読み込み中に問題が発生しました",
+      errorBody:
+        "再読み込みをお試しいただくか、スキー場一覧へお戻りください。",
+      tryAgainBtn: "↻ 再試行",
+      backHomeBtn: "← ホームへ戻る",
+      browseResortsBtn: "🏔️ 全39スキー場を見る",
     },
     home: {
-      badge: "日本スノーボード大図鑑 ＆ リアルタイム積雪ガイド",
+      badge: "日本スノーボード大図鑑 ＆ パウダー降雪予報ガイド",
       titleLine1: "最高の",
       titleHighlight: "JAPOW（極上パウダースノー）",
       titleLine2: "を追いかけよう。",
       subtitle:
         "日本各地の主要スキー場の高画質コースマップ、リフト券＆レンタル料金、スノーボーダー向けゲレンデ情報、ライブカメラ、天気予報をワンクリックでチェック。",
       browseBtn: "🏔️ すべてのスキー場を見る",
-      radarBtn: "❄️ リアルタイム降雪・パウダーレーダー",
+      radarBtn: "❄️ パウダーレーダー・週間予報",
       resortsCount: (n: number) => `${n} スキー場`,
       prefectureSectionTitle: "都道府県からゲレンデを探す",
       prefectureSectionSubtitle: "北は北海道から岐阜まで、全国9エリア・39の厳選スノーリゾート",
@@ -532,6 +617,13 @@ export const UI_TEXT = {
         "予報データ: Open-Meteo 高解像度数値気象モデル（気象庁 JMA MSM / GFS）。スキー場公式の積雪情報ではありません。",
       watchWebcams: "📹 公式ライブカメラを見る",
       checkGoogleWeather: "🌤️ Google天気予報で確認",
+      updatedAt: (timeStr: string) => `更新: ${timeStr} JST`,
+      refreshBtn: "↻ 更新",
+      refreshing: "更新中…",
+      errorTitle: "気象予報データを取得できませんでした",
+      errorBody:
+        "Open-Meteo の予報フィードに一時的に接続できません。再試行するか、公式ライブカメラをご確認ください。",
+      retryBtn: "↻ 再試行する",
       codes: {
         clear: "快晴（ブルーバード）",
         partlyCloudy: "晴れ時々曇り",

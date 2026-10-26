@@ -218,10 +218,10 @@ export default function ConditionsDashboard() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12">
       {/* Top breadcrumb */}
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-2">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-snow-muted transition hover:text-ice"
+          className="inline-flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm font-medium text-snow-muted transition hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
         >
           <span aria-hidden>←</span> {t.conditionsPage.backToHome}
         </Link>
@@ -249,8 +249,9 @@ export default function ConditionsDashboard() {
         {/* Storm Simulation Toggle */}
         <button
           type="button"
+          aria-pressed={stormPreviewMode}
           onClick={() => setStormPreviewMode((v) => !v)}
-          className={`inline-flex items-center gap-2 self-start rounded-xl border px-4 py-2.5 text-xs font-semibold transition sm:text-sm ${
+          className={`inline-flex min-h-11 items-center gap-2 self-start rounded-xl border px-4 py-2.5 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm ${
             stormPreviewMode
               ? "border-ice bg-ice-deep text-charcoal shadow-lg shadow-ice-deep/25"
               : "border-charcoal-light bg-charcoal-light/60 text-snow hover:border-ice"
@@ -275,7 +276,7 @@ export default function ConditionsDashboard() {
           <button
             type="button"
             onClick={() => setStormPreviewMode(true)}
-            className="shrink-0 rounded-xl bg-ice-deep px-3.5 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice"
+            className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl bg-ice-deep px-3.5 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
           >
             {t.conditionsPage.simulateBtn}
           </button>
@@ -283,7 +284,11 @@ export default function ConditionsDashboard() {
       )}
 
       {/* Region Filter Pills with live mountain count badges (thumb-scrollable on mobile) */}
-      <div className="mb-6 flex overflow-x-auto no-scrollbar items-center gap-2 pb-1 sm:flex-wrap sm:pb-0">
+      <div
+        role="group"
+        aria-label="Filter radar by prefecture"
+        className="mb-6 flex snap-x snap-mandatory scroll-px-2 items-center gap-2 overflow-x-auto pb-1 no-scrollbar sm:flex-wrap sm:pb-0"
+      >
         {(["All", ...REGIONS] as const).map((region) => {
           const active = selectedRegion === region;
           const count =
@@ -295,8 +300,9 @@ export default function ConditionsDashboard() {
             <button
               key={region}
               type="button"
+              aria-pressed={active}
               onClick={() => setSelectedRegion(region)}
-              className={`inline-flex shrink-0 items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold transition sm:px-4 sm:text-sm ${
+              className={`inline-flex min-h-11 shrink-0 snap-start items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:px-4 sm:text-sm ${
                 active
                   ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25 font-bold"
                   : "border border-charcoal-light bg-charcoal-light/40 text-snow-muted hover:text-snow"

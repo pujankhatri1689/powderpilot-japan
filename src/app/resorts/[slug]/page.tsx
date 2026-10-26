@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ResortDetailTabs from "@/components/ResortDetailTabs";
 import { RESORTS, getResortBySlug } from "@/data/resorts";
+import { getSiteUrl } from "@/lib/siteUrl";
+
+const siteUrl = getSiteUrl();
 
 export function generateStaticParams() {
   return RESORTS.map((resort) => ({ slug: resort.slug }));
@@ -17,9 +20,38 @@ export async function generateMetadata({
   if (!resort) {
     return { title: "Resort Not Found | PowderPilot Japan" };
   }
+
+  const title = `${resort.name} (${resort.japaneseName}) | PowderPilot Japan`;
+  const description = `${resort.name} in ${resort.region} (${resort.area}): ${resort.elevation.vertical}m vertical (${resort.elevation.base}m–${resort.elevation.top}m), ${resort.terrain.runs} runs, ¥${resort.dayPassYen.toLocaleString()} 1-day pass, HD trail maps, and 7-day Open-Meteo / JMA MSM mountain forecast.`;
+  const canonicalUrl = `${siteUrl}/resorts/${resort.slug}`;
+
   return {
-    title: `${resort.name} (${resort.japaneseName}) | PowderPilot Japan`,
-    description: resort.description,
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      siteName: "PowderPilot Japan",
+      locale: "en_US",
+      alternateLocale: ["ja_JP"],
+      type: "website",
+      images: [
+        {
+          url: resort.heroImage,
+          alt: `${resort.name} (${resort.japaneseName}) mountain view`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [resort.heroImage],
+    },
   };
 }
 

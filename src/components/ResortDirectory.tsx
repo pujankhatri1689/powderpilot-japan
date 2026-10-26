@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
@@ -7,6 +8,9 @@ import { useFavorites } from "@/context/FavoritesContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { REGIONS, RESORTS, type Region } from "@/data/resorts";
 import { getLocalizedResort } from "@/i18n/resortTranslations";
+
+const BLUR_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDE2IDEwIj48cmVjdCB3aWR0aD0iMTYiIGhlaWdodD0iMTAiIGZpbGw9IiMxZTI5M2IiLz48L3N2Zz4=";
 
 type SortKey = "vertical" | "travel" | "price" | "topElevation";
 
@@ -29,7 +33,7 @@ export default function ResortDirectory() {
   const [sortBy, setSortBy] = useState<SortKey>("vertical");
   const [visibleLimit, setVisibleLimit] = useState(18);
 
-  // Sync selectedRegion if URL query param changes during client navigation
+  // Sync selectedRegion & favorites if URL query param changes during client navigation
   const [prevUrlRegion, setPrevUrlRegion] = useState(() => searchParams.get("region"));
   const currentUrlRegion = searchParams.get("region");
   if (prevUrlRegion !== currentUrlRegion) {
@@ -37,6 +41,15 @@ export default function ResortDirectory() {
     if (currentUrlRegion && REGIONS.includes(currentUrlRegion as Region)) {
       setSelectedRegion(currentUrlRegion as Region);
     }
+  }
+
+  const [prevUrlFavorites, setPrevUrlFavorites] = useState(() =>
+    searchParams.get("favorites")
+  );
+  const currentUrlFavorites = searchParams.get("favorites");
+  if (prevUrlFavorites !== currentUrlFavorites) {
+    setPrevUrlFavorites(currentUrlFavorites);
+    setShowFavoritesOnly(currentUrlFavorites === "true");
   }
 
   // Reset pagination limit when filters change without cascading effect renders
@@ -127,7 +140,11 @@ export default function ResortDirectory() {
       <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-charcoal-light bg-charcoal-light/40 p-4 sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           {/* Region Pills with live mountain count badges (thumb-scrollable on mobile) */}
-          <div className="flex overflow-x-auto no-scrollbar items-center gap-2 pb-1 sm:flex-wrap sm:pb-0">
+          <div
+            role="group"
+            aria-label="Filter by prefecture"
+            className="flex snap-x snap-mandatory scroll-px-2 items-center gap-2 overflow-x-auto pb-1 no-scrollbar sm:flex-wrap sm:pb-0"
+          >
             {(["All", ...REGIONS] as const).map((region) => {
               const active = selectedRegion === region;
               const count =
@@ -139,8 +156,9 @@ export default function ResortDirectory() {
                 <button
                   key={region}
                   type="button"
+                  aria-pressed={active}
                   onClick={() => setSelectedRegion(region)}
-                  className={`inline-flex shrink-0 items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
+                  className={`inline-flex min-h-11 shrink-0 snap-start items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm ${
                     active
                       ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25 font-bold"
                       : "bg-charcoal text-snow-muted hover:text-snow"
@@ -165,22 +183,24 @@ export default function ResortDirectory() {
           <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
+              aria-pressed={showFavoritesOnly}
               onClick={() => setShowFavoritesOnly((v) => !v)}
-              className={`inline-flex items-center justify-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
+              className={`inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border px-3.5 py-2 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm ${
                 showFavoritesOnly
                   ? "border-rose-500 bg-rose-500/20 text-rose-300"
                   : "border-charcoal-light bg-charcoal text-snow-muted hover:text-snow"
               }`}
             >
-              <span>{showFavoritesOnly ? "❤️" : "🤍"}</span>
+              <span aria-hidden>{showFavoritesOnly ? "❤️" : "🤍"}</span>
               <span>{t.directory.likedBtn(favoritesCount)}</span>
             </button>
 
             {/* Tree Runs Toggle */}
             <button
               type="button"
+              aria-pressed={treeRunsOnly}
               onClick={() => setTreeRunsOnly((v) => !v)}
-              className={`inline-flex items-center justify-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
+              className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm ${
                 treeRunsOnly
                   ? "border-ice bg-ice/15 text-ice"
                   : "border-charcoal-light bg-charcoal text-snow-muted hover:text-snow"
@@ -199,7 +219,7 @@ export default function ResortDirectory() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t.directory.searchPlaceholder}
-              className="w-full rounded-xl border border-charcoal-light bg-charcoal px-4 py-2.5 text-base text-snow placeholder-snow-muted focus:border-ice focus:outline-none sm:text-sm"
+              className="min-h-11 w-full rounded-xl border border-charcoal-light bg-charcoal px-4 py-2.5 text-base text-snow placeholder-snow-muted focus:border-ice focus:outline-none sm:text-sm"
             />
           </div>
 
@@ -214,7 +234,7 @@ export default function ResortDirectory() {
               id="sort-resorts"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortKey)}
-              className="w-full rounded-xl border border-charcoal-light bg-charcoal px-3 py-2.5 text-sm text-snow focus:border-ice focus:outline-none sm:w-auto"
+              className="min-h-11 w-full rounded-xl border border-charcoal-light bg-charcoal px-3 py-2.5 text-sm text-snow focus:border-ice focus:outline-none sm:w-auto"
             >
               <option value="vertical">{t.directory.sortVertical}</option>
               <option value="topElevation">
@@ -244,7 +264,7 @@ export default function ResortDirectory() {
               setShowFavoritesOnly(false);
               setSearchQuery("");
             }}
-            className="mt-4 rounded-xl bg-ice-deep px-4 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice"
+            className="mt-4 inline-flex min-h-11 items-center justify-center rounded-xl bg-ice-deep px-4 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
           >
             {t.directory.resetFilters}
           </button>
@@ -270,19 +290,21 @@ export default function ResortDirectory() {
                   {/* Resort Photo Header */}
                   <Link
                     href={`/resorts/${resort.slug}`}
-                    className="relative block h-44 w-full overflow-hidden bg-charcoal-dark"
+                    className="relative block h-44 w-full overflow-hidden bg-charcoal-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                    <Image
                       src={resort.heroImage}
                       alt={`${resort.name} snow mountain view`}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      placeholder="blur"
+                      blurDataURL={BLUR_DATA_URL}
+                      className="object-cover transition duration-500 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/30 to-transparent" />
 
                     {/* Top Overlay Badges */}
-                    <div className="absolute inset-x-3 top-3 flex items-center justify-between gap-2">
+                    <div className="absolute inset-x-3 top-2.5 flex items-center justify-between gap-2">
                       <span className="rounded-full bg-charcoal/85 px-3 py-1 text-xs font-semibold text-ice backdrop-blur-sm">
                         {localizeRegion(resort.region)} · {resort.area}
                       </span>
@@ -293,18 +315,19 @@ export default function ResortDirectory() {
                             {t.directory.treesOkBadge}
                           </span>
                         )}
-                        {/* Quick Heart Button */}
+                        {/* Quick Heart Button (>=44x44 tap target) */}
                         <button
                           type="button"
                           onClick={(e) => toggleFavorite(resort.slug, e)}
                           aria-label="Toggle favorite"
-                          className={`flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-sm transition active:scale-90 sm:h-7 sm:w-7 ${
+                          aria-pressed={isFavorite(resort.slug)}
+                          className={`flex h-11 w-11 items-center justify-center rounded-full backdrop-blur-sm transition active:scale-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice ${
                             isFavorite(resort.slug)
                               ? "bg-white text-rose-500 shadow-md shadow-charcoal/30"
                               : "bg-charcoal/85 text-snow/70 hover:bg-charcoal hover:text-rose-400"
                           }`}
                         >
-                          <span className="text-xs">
+                          <span className="text-sm">
                             {isFavorite(resort.slug) ? "❤️" : "🤍"}
                           </span>
                         </button>
@@ -434,7 +457,7 @@ export default function ResortDirectory() {
                     <div className="mt-4 flex gap-2">
                       <Link
                         href={`/resorts/${resort.slug}`}
-                        className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-charcoal px-4 py-2.5 text-xs font-semibold text-snow transition group-hover:bg-ice-deep group-hover:text-charcoal"
+                        className="flex min-h-11 flex-1 items-center justify-center gap-1.5 rounded-xl bg-charcoal px-4 py-2.5 text-xs font-semibold text-snow transition group-hover:bg-ice-deep group-hover:text-charcoal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
                       >
                         {t.directory.cardCta} <span aria-hidden>→</span>
                       </Link>
@@ -443,9 +466,10 @@ export default function ResortDirectory() {
                         target="_blank"
                         rel="noopener noreferrer"
                         title={t.directory.openOfficialMap}
-                        className="inline-flex items-center justify-center rounded-xl border border-charcoal-light bg-charcoal px-3 py-2.5 text-xs font-semibold text-ice transition hover:border-ice"
+                        aria-label={t.directory.openOfficialMap}
+                        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-charcoal-light bg-charcoal px-3 py-2.5 text-xs font-semibold text-ice transition hover:border-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
                       >
-                        🗺️
+                        <span aria-hidden>🗺️</span>
                       </a>
                     </div>
                   </div>
@@ -466,7 +490,7 @@ export default function ResortDirectory() {
             <button
               type="button"
               onClick={() => setVisibleLimit((prev) => prev + 18)}
-              className="inline-flex items-center gap-2 rounded-xl border border-charcoal-light bg-charcoal-dark px-6 py-3 text-sm font-semibold text-snow transition hover:border-ice hover:text-ice"
+              className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-charcoal-light bg-charcoal-dark px-6 py-3 text-sm font-semibold text-snow transition hover:border-ice hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
             >
               <span>{lang === "ja" ? "さらにスキー場を読み込む" : "Load More Resorts"}</span>
               <span className="rounded-full bg-charcoal-light px-2 py-0.5 text-xs text-ice">

@@ -1,9 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Resort } from "@/data/resorts";
 import { translateLevel } from "@/i18n/translations";
+
+const BLUR_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDE2IDEwIj48cmVjdCB3aWR0aD0iMTYiIGhlaWdodD0iMTAiIGZpbGw9IiMxZTI5M2IiLz48L3N2Zz4=";
 
 /**
  * Multi-image touch-swipeable HD Trail Map & Mountain Photo Gallery
@@ -78,7 +82,7 @@ export default function MountainMapDiagram({
           <button
             type="button"
             onClick={() => setZoomed(true)}
-            className="inline-flex items-center gap-1.5 rounded-xl bg-ice-deep px-3.5 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-ice-deep px-3.5 py-2 text-xs font-semibold text-charcoal transition hover:bg-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
           >
             <span>{t.maps.fullResZoom}</span>
           </button>
@@ -86,7 +90,7 @@ export default function MountainMapDiagram({
             href={resort.trailMapUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-3.5 py-2 text-xs font-semibold text-snow transition hover:border-ice hover:text-ice"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-3.5 py-2 text-xs font-semibold text-snow transition hover:border-ice hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
           >
             <span>{t.maps.officialMapPage}</span>
             <span aria-hidden>↗</span>
@@ -103,14 +107,19 @@ export default function MountainMapDiagram({
         <button
           type="button"
           onClick={() => setZoomed(true)}
-          className="group relative block w-full cursor-zoom-in overflow-hidden"
+          className="group relative block w-full cursor-zoom-in overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
           title={t.maps.tapFullScreen}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             key={currentSlide.imageUrl}
             src={currentSlide.imageUrl}
             alt={currentSlide.title}
+            width={1600}
+            height={1060}
+            quality={90}
+            sizes="(max-width: 1024px) 100vw, 960px"
+            placeholder="blur"
+            blurDataURL={BLUR_DATA_URL}
             className="max-h-[640px] w-full bg-charcoal-dark object-contain transition duration-300"
           />
 
@@ -125,14 +134,14 @@ export default function MountainMapDiagram({
           </span>
         </button>
 
-        {/* Left / Right Swipe Arrows if multiple maps */}
+        {/* Left / Right Swipe Arrows if multiple maps (>=44x44 tap target) */}
         {slides.length > 1 && (
           <>
             <button
               type="button"
               onClick={prevSlide}
               aria-label="Previous map"
-              className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-charcoal-light bg-charcoal/90 text-base font-bold text-snow shadow-lg backdrop-blur-sm transition hover:border-ice hover:text-ice"
+              className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-charcoal-light bg-charcoal/90 text-base font-bold text-snow shadow-lg backdrop-blur-sm transition hover:border-ice hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
             >
               ‹
             </button>
@@ -140,7 +149,7 @@ export default function MountainMapDiagram({
               type="button"
               onClick={nextSlide}
               aria-label="Next map"
-              className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-charcoal-light bg-charcoal/90 text-base font-bold text-snow shadow-lg backdrop-blur-sm transition hover:border-ice hover:text-ice"
+              className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-charcoal-light bg-charcoal/90 text-base font-bold text-snow shadow-lg backdrop-blur-sm transition hover:border-ice hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
             >
               ›
             </button>
@@ -150,22 +159,39 @@ export default function MountainMapDiagram({
         {/* Thumbnail / Slide Selector Strip */}
         {slides.length > 1 && (
           <div className="flex flex-wrap items-center justify-between gap-2 border-t border-charcoal-light bg-charcoal/90 px-4 py-3">
-            <div className="flex flex-wrap gap-2">
+            <div
+              role="tablist"
+              aria-label="Trail map slides"
+              className="flex snap-x snap-mandatory scroll-px-2 gap-2 overflow-x-auto pb-1 no-scrollbar sm:flex-wrap sm:pb-0"
+            >
               {slides.map((slide, idx) => {
                 const active = idx === activeIndex;
                 return (
                   <button
                     key={slide.imageUrl}
                     type="button"
+                    role="tab"
+                    aria-selected={active}
                     onClick={() => setActiveIndex(idx)}
-                    className={`flex items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold transition ${
+                    className={`flex min-h-11 shrink-0 snap-start items-center gap-2 rounded-xl border px-3 py-1.5 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice ${
                       active
                         ? "border-ice bg-ice-deep/20 text-ice"
                         : "border-charcoal-light bg-charcoal text-snow-muted hover:text-snow"
                     }`}
                   >
+                    <span className="relative h-7 w-10 shrink-0 overflow-hidden rounded-md border border-charcoal-light bg-charcoal-dark">
+                      <Image
+                        src={slide.imageUrl}
+                        alt=""
+                        fill
+                        sizes="40px"
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
+                        className="object-cover"
+                      />
+                    </span>
                     <span>{t.maps.mapIndex(idx + 1)}</span>
-                    <span className="max-w-[180px] truncate">
+                    <span className="max-w-[160px] truncate">
                       {slide.badge ?? slide.title}
                     </span>
                   </button>
@@ -234,7 +260,7 @@ export default function MountainMapDiagram({
         })}
       </div>
 
-      {/* Fullscreen Lightbox Modal when user clicks the map */}
+      {/* Fullscreen Lightbox Modal when user clicks the map (Full-Resolution preserved) */}
       {zoomed && (
         <div
           role="dialog"
@@ -250,7 +276,7 @@ export default function MountainMapDiagram({
               </p>
               <p className="text-xs text-snow-muted">{currentSlide.caption}</p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {slides.length > 1 && (
                 <>
                   <button
@@ -259,7 +285,7 @@ export default function MountainMapDiagram({
                       e.stopPropagation();
                       prevSlide();
                     }}
-                    className="rounded-xl border border-charcoal-light bg-charcoal px-3 py-1.5 text-xs font-semibold text-snow hover:border-ice"
+                    className="inline-flex min-h-11 items-center rounded-xl border border-charcoal-light bg-charcoal px-3.5 py-2 text-xs font-semibold text-snow hover:border-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
                   >
                     {t.maps.prevMap}
                   </button>
@@ -269,7 +295,7 @@ export default function MountainMapDiagram({
                       e.stopPropagation();
                       nextSlide();
                     }}
-                    className="rounded-xl border border-charcoal-light bg-charcoal px-3 py-1.5 text-xs font-semibold text-snow hover:border-ice"
+                    className="inline-flex min-h-11 items-center rounded-xl border border-charcoal-light bg-charcoal px-3.5 py-2 text-xs font-semibold text-snow hover:border-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
                   >
                     {t.maps.nextMap}
                   </button>
@@ -280,14 +306,14 @@ export default function MountainMapDiagram({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="rounded-xl border border-charcoal-light bg-charcoal px-3 py-1.5 text-xs font-semibold text-ice hover:border-ice"
+                className="inline-flex min-h-11 items-center rounded-xl border border-charcoal-light bg-charcoal px-3.5 py-2 text-xs font-semibold text-ice hover:border-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
               >
                 {t.maps.openRaw}
               </a>
               <button
                 type="button"
                 onClick={() => setZoomed(false)}
-                className="rounded-xl bg-ice-deep px-3.5 py-1.5 text-xs font-bold text-charcoal hover:bg-ice"
+                className="inline-flex min-h-11 items-center rounded-xl bg-ice-deep px-4 py-2 text-xs font-bold text-charcoal hover:bg-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
               >
                 {t.maps.close}
               </button>
@@ -296,12 +322,15 @@ export default function MountainMapDiagram({
 
           <div
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[85vh] w-full max-w-6xl overflow-auto rounded-2xl border border-charcoal-light bg-charcoal-dark p-2"
+            className="max-h-[82dvh] w-full max-w-6xl overflow-auto rounded-2xl border border-charcoal-light bg-charcoal-dark p-2"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            {/* Full-resolution unoptimized image so fine trail map text stays 100% legible when zoomed */}
+            <Image
               src={currentSlide.imageUrl}
               alt={currentSlide.title}
+              width={2400}
+              height={1600}
+              unoptimized
               className="mx-auto h-auto max-w-none sm:max-w-full"
             />
           </div>
