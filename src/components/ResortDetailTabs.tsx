@@ -154,8 +154,8 @@ export default function ResortDetailTabs({
       {/* 5 Focused Section Tabs (Overview is Default) */}
       <div className="mt-4">
         {/* Sticky / Surfable Section Tab Bar */}
-        <div className="sticky top-[57px] z-30 -mx-2 rounded-2xl border border-charcoal-light bg-charcoal/95 p-2 shadow-xl backdrop-blur-md">
-          <div className="flex flex-wrap gap-1.5">
+        <div className="sticky top-[53px] z-30 -mx-2 rounded-2xl border border-charcoal-light bg-charcoal/95 p-1.5 shadow-xl backdrop-blur-md sm:top-[58px] sm:p-2">
+          <div className="flex overflow-x-auto no-scrollbar gap-1.5 pb-0.5 sm:flex-wrap sm:pb-0">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
@@ -163,7 +163,7 @@ export default function ResortDetailTabs({
                   key={tab.id}
                   type="button"
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex flex-1 items-center justify-center whitespace-nowrap rounded-xl px-3.5 py-2.5 text-xs font-bold transition sm:flex-initial sm:text-sm ${
+                  className={`flex shrink-0 items-center justify-center whitespace-nowrap rounded-xl px-3.5 py-2 text-xs font-bold transition sm:flex-initial sm:py-2.5 sm:text-sm ${
                     isActive
                       ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25"
                       : "bg-charcoal-light/40 text-snow-muted hover:bg-charcoal-light hover:text-snow"

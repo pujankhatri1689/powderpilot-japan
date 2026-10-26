@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useFavorites } from "@/context/FavoritesContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { REGIONS, RESORTS, type Region } from "@/data/resorts";
@@ -29,18 +29,23 @@ export default function ResortDirectory() {
   const [sortBy, setSortBy] = useState<SortKey>("vertical");
   const [visibleLimit, setVisibleLimit] = useState(18);
 
-  // Sync selectedRegion if URL query param changes
-  useEffect(() => {
-    const fromUrl = searchParams.get("region");
-    if (fromUrl && REGIONS.includes(fromUrl as Region)) {
-      setSelectedRegion(fromUrl as Region);
+  // Sync selectedRegion if URL query param changes during client navigation
+  const [prevUrlRegion, setPrevUrlRegion] = useState(() => searchParams.get("region"));
+  const currentUrlRegion = searchParams.get("region");
+  if (prevUrlRegion !== currentUrlRegion) {
+    setPrevUrlRegion(currentUrlRegion);
+    if (currentUrlRegion && REGIONS.includes(currentUrlRegion as Region)) {
+      setSelectedRegion(currentUrlRegion as Region);
     }
-  }, [searchParams]);
+  }
 
-  // Reset pagination limit when filters change
-  useEffect(() => {
+  // Reset pagination limit when filters change without cascading effect renders
+  const filterKey = `${selectedRegion}-${treeRunsOnly}-${showFavoritesOnly}-${searchQuery}-${sortBy}`;
+  const [prevFilterKey, setPrevFilterKey] = useState(filterKey);
+  if (prevFilterKey !== filterKey) {
+    setPrevFilterKey(filterKey);
     setVisibleLimit(18);
-  }, [selectedRegion, treeRunsOnly, showFavoritesOnly, searchQuery, sortBy]);
+  }
 
   const filteredResorts = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -121,8 +126,8 @@ export default function ResortDirectory() {
       {/* Filter & Search Bar */}
       <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-charcoal-light bg-charcoal-light/40 p-4 sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          {/* Region Pills with live mountain count badges */}
-          <div className="flex flex-wrap items-center gap-2">
+          {/* Region Pills with live mountain count badges (thumb-scrollable on mobile) */}
+          <div className="flex overflow-x-auto no-scrollbar items-center gap-2 pb-1 sm:flex-wrap sm:pb-0">
             {(["All", ...REGIONS] as const).map((region) => {
               const active = selectedRegion === region;
               const count =
@@ -135,7 +140,7 @@ export default function ResortDirectory() {
                   key={region}
                   type="button"
                   onClick={() => setSelectedRegion(region)}
-                  className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
+                  className={`inline-flex shrink-0 items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
                     active
                       ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25 font-bold"
                       : "bg-charcoal text-snow-muted hover:text-snow"
@@ -194,7 +199,7 @@ export default function ResortDirectory() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t.directory.searchPlaceholder}
-              className="w-full rounded-xl border border-charcoal-light bg-charcoal px-4 py-2.5 text-sm text-snow placeholder-snow-muted focus:border-ice focus:outline-none"
+              className="w-full rounded-xl border border-charcoal-light bg-charcoal px-4 py-2.5 text-base text-snow placeholder-snow-muted focus:border-ice focus:outline-none sm:text-sm"
             />
           </div>
 
@@ -292,7 +297,8 @@ export default function ResortDirectory() {
                         <button
                           type="button"
                           onClick={(e) => toggleFavorite(resort.slug, e)}
-                          className={`flex h-7 w-7 items-center justify-center rounded-full backdrop-blur-sm transition active:scale-90 ${
+                          aria-label="Toggle favorite"
+                          className={`flex h-8 w-8 items-center justify-center rounded-full backdrop-blur-sm transition active:scale-90 sm:h-7 sm:w-7 ${
                             isFavorite(resort.slug)
                               ? "bg-white text-rose-500 shadow-md shadow-charcoal/30"
                               : "bg-charcoal/85 text-snow/70 hover:bg-charcoal hover:text-rose-400"

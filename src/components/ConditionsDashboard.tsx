@@ -282,8 +282,8 @@ export default function ConditionsDashboard() {
         </div>
       )}
 
-      {/* Region Filter Pills with live mountain count badges */}
-      <div className="mb-6 flex flex-wrap gap-2">
+      {/* Region Filter Pills with live mountain count badges (thumb-scrollable on mobile) */}
+      <div className="mb-6 flex overflow-x-auto no-scrollbar items-center gap-2 pb-1 sm:flex-wrap sm:pb-0">
         {(["All", ...REGIONS] as const).map((region) => {
           const active = selectedRegion === region;
           const count =
@@ -296,7 +296,7 @@ export default function ConditionsDashboard() {
               key={region}
               type="button"
               onClick={() => setSelectedRegion(region)}
-              className={`inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold transition sm:text-sm ${
+              className={`inline-flex shrink-0 items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold transition sm:px-4 sm:text-sm ${
                 active
                   ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25 font-bold"
                   : "border border-charcoal-light bg-charcoal-light/40 text-snow-muted hover:text-snow"
@@ -406,24 +406,25 @@ export default function ConditionsDashboard() {
                 ) : null}
               </div>
 
-              {/* 7-Day Daily Snowfall Bar Chart */}
+              {/* 7-Day Daily Snowfall Bar Chart (responsive rail on mobile) */}
               {weather && (
                 <div className="mt-4 border-t border-charcoal-light pt-4">
-                  <div className="grid grid-cols-7 gap-2">
-                    {weather.daily.map((day) => {
-                      const heightPct = Math.min(
-                        100,
-                        Math.round((day.snowfallCm / maxDaily) * 100)
-                      );
-                      const dayLabel = new Date(
-                        `${day.date}T00:00:00`
-                      ).toLocaleDateString(localeCode, { weekday: "short" });
+                  <div className="overflow-x-auto no-scrollbar pb-1">
+                    <div className="grid min-w-[330px] grid-cols-7 gap-1.5 sm:min-w-0 sm:gap-2">
+                      {weather.daily.map((day) => {
+                        const heightPct = Math.min(
+                          100,
+                          Math.round((day.snowfallCm / maxDaily) * 100)
+                        );
+                        const dayLabel = new Date(
+                          `${day.date}T00:00:00`
+                        ).toLocaleDateString(localeCode, { weekday: "short" });
 
-                      return (
-                        <div
-                          key={day.date}
-                          className="flex flex-col items-center rounded-xl bg-charcoal/75 p-2 text-center"
-                        >
+                        return (
+                          <div
+                            key={day.date}
+                            className="flex flex-col items-center rounded-xl bg-charcoal/75 p-1.5 text-center sm:p-2"
+                          >
                           <span className="text-[11px] font-medium text-snow-muted">
                             {dayLabel}
                           </span>
@@ -465,7 +466,8 @@ export default function ConditionsDashboard() {
                     })}
                   </div>
                 </div>
-              )}
+              </div>
+            )}
             </div>
           );
         })}
