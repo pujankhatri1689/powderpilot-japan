@@ -30,25 +30,32 @@ export default function Home() {
           {t.home.subtitle}
         </p>
 
-        <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
-          <Link
-            href="/resorts"
-            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ice-deep px-6 py-3.5 text-base font-semibold text-charcoal shadow-lg shadow-ice-deep/30 transition hover:bg-ice active:scale-95"
-          >
-            {t.home.browseBtn}
-          </Link>
-          <Link
-            href="/resorts?view=map"
-            className="inline-flex min-h-12 items-center justify-center rounded-xl border border-ice/60 bg-ice/15 px-6 py-3.5 text-base font-semibold text-ice transition hover:bg-ice/25 hover:border-ice active:scale-95"
-          >
-            {t.home.mapBtn}
-          </Link>
-          <Link
-            href="/conditions"
-            className="inline-flex min-h-12 items-center justify-center rounded-xl border border-charcoal-light bg-charcoal-light/40 px-6 py-3.5 text-base font-semibold text-snow transition hover:border-ice hover:text-ice active:scale-95"
-          >
-            {t.home.radarBtn}
-          </Link>
+        <div className="mt-8 flex w-full flex-col items-center gap-3">
+          {/* Top Row: Browse All Resorts & Powder Radar */}
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+            <Link
+              href="/resorts"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ice-deep px-7 py-3.5 text-base font-semibold text-charcoal shadow-lg shadow-ice-deep/30 transition hover:bg-ice active:scale-95"
+            >
+              {t.home.browseBtn}
+            </Link>
+            <Link
+              href="/conditions"
+              className="inline-flex min-h-12 items-center justify-center rounded-xl border border-charcoal-light bg-charcoal-light/40 px-7 py-3.5 text-base font-semibold text-snow transition hover:border-ice hover:text-ice active:scale-95"
+            >
+              {t.home.radarBtn}
+            </Link>
+          </div>
+
+          {/* Second Row: Snow Belt Map centered directly in between */}
+          <div className="flex w-full justify-center sm:w-auto">
+            <Link
+              href="/resorts?view=map"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-xl border border-ice/60 bg-ice/15 px-8 py-3 text-base font-semibold text-ice shadow-md shadow-ice/10 transition hover:bg-ice/25 hover:border-ice active:scale-95 sm:w-auto"
+            >
+              {t.home.mapBtn}
+            </Link>
+          </div>
         </div>
 
         {/* 2-Column Prefecture Choices */}
