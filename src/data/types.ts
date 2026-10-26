@@ -88,8 +88,8 @@ export interface Resort {
     apr: number;
     peakBaseCm: number;
   };
-  /** Curated Onsen, food & village spots with direct Google Maps links */
-  onsenAndVillage: VillageSpot[];
+  /** Optional curated Onsen, food & village spots */
+  onsenAndVillage?: VillageSpot[];
   /** Signature runs & powder zones to ride at this mountain */
   signatureRuns: {
     name: string;

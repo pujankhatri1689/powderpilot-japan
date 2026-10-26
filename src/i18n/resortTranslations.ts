@@ -18,7 +18,7 @@ export interface LocalizedResortFields {
     name: string;
     note: string;
   }[];
-  onsenAndVillage: Pick<VillageSpot, "name" | "description" | "info">[];
+  onsenAndVillage?: Pick<VillageSpot, "name" | "description" | "info">[];
   fromTokyo: {
     summary: string;
     station: string;
@@ -1917,8 +1917,8 @@ export function getLocalizedResort(resort: Resort, lang: Language): Resort {
         note: locRun.note,
       };
     }),
-    onsenAndVillage: resort.onsenAndVillage.map((spot, idx) => {
-      const locSpot = loc.onsenAndVillage[idx];
+    onsenAndVillage: resort.onsenAndVillage?.map((spot, idx) => {
+      const locSpot = loc.onsenAndVillage?.[idx];
       if (!locSpot) return spot;
       return {
         ...spot,

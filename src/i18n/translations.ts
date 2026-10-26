@@ -110,7 +110,7 @@ export const UI_TEXT = {
       titleHighlight: "Japow",
       titleLine2: "Know every mountain.",
       subtitle:
-        "Instant access to HD trail maps, lift ticket & rental prices, snowboarder terrain intel, live mountain webcams, weather forecasts, and village onsen guides for snowboard resorts across Japan.",
+        "Instant access to HD trail maps, lift ticket & rental prices, snowboarder terrain intel, live mountain webcams, and weather forecasts for snowboard resorts across Japan.",
       browseBtn: "🏔️ Browse All Resorts",
       radarBtn: "❄️ Live Snow & Powder Radar",
       resortsCount: (n: number) => `${n} resorts`,
@@ -166,7 +166,6 @@ export const UI_TEXT = {
         tickets: "🎟️ Tickets & Rentals",
         maps: "🗺️ Trail Maps & Runs",
         weather: "❄️ Weather & Webcams",
-        onsen: "♨️ Onsen, Village & Access",
       },
       overview: {
         eyebrow: "Mountain Profile & General Overview",
@@ -232,15 +231,7 @@ export const UI_TEXT = {
         wearSet: "Jacket + Pants Outer Wear",
         fullPackage: "Full Package (Board Set + Wear)",
       },
-      onsen: {
-        eyebrow: "♨️ Hot Springs, Apres-Ski & Base Village Guide",
-        title: (name: string) => `Best Onsens & Spots Around ${name}`,
-        subtitle:
-          "Tap “Navigate in Google Maps” on any spot to get walking or shuttle directions on your phone.",
-        catOnsen: "♨️ Onsen Hot Spring",
-        catFood: "🍜 Food & Apres-Ski",
-        catLandmark: "🏮 Village Landmark",
-        navigateMaps: "📍 Navigate in Google Maps",
+      transit: {
         transitEyebrow: (dur: string) => `🚅 Getting Here from Tokyo (~${dur})`,
         transitTitle: "Shinkansen & Shuttle Bus Route",
         openStationMaps: (st: string) => `🚉 Open ${st} in Google Maps`,
@@ -350,7 +341,7 @@ export const UI_TEXT = {
       titleHighlight: "JAPOW（極上パウダースノー）",
       titleLine2: "を追いかけよう。",
       subtitle:
-        "日本各地の主要スキー場の高画質コースマップ、リフト券＆レンタル料金、スノーボーダー向けゲレンデ情報、ライブカメラ、天気予報、周辺温泉＆グルメをワンクリックでチェック。",
+        "日本各地の主要スキー場の高画質コースマップ、リフト券＆レンタル料金、スノーボーダー向けゲレンデ情報、ライブカメラ、天気予報をワンクリックでチェック。",
       browseBtn: "🏔️ すべてのスキー場を見る",
       radarBtn: "❄️ リアルタイム降雪・パウダーレーダー",
       resortsCount: (n: number) => `${n} スキー場`,
@@ -406,7 +397,6 @@ export const UI_TEXT = {
         tickets: "🎟️ リフト券・レンタル料金",
         maps: "🗺️ コースマップ・名物コース",
         weather: "❄️ 天気・降雪・ライブカメラ",
-        onsen: "♨️ 温泉・周辺グルメ・アクセス",
       },
       overview: {
         eyebrow: "マウンテンプロフィール ＆ ゲレンデ概要",
@@ -472,15 +462,7 @@ export const UI_TEXT = {
         wearSet: "上下スノーボードウェアセット",
         fullPackage: "手ぶらフルセット目安（ボード＋ウェア）",
       },
-      onsen: {
-        eyebrow: "♨️ 温泉・アフタースノー・ベースタウン案内",
-        title: (name: string) => `${name} 周辺のおすすめ温泉＆グルメスポット`,
-        subtitle:
-          "各スポットの「Googleマップでナビ開始」を押すと、現在地からの徒歩・バスルートを表示します。",
-        catOnsen: "♨️ 日帰り温泉・外湯",
-        catFood: "🍜 グルメ・居酒屋・お酒",
-        catLandmark: "🏮 観光・名所スポット",
-        navigateMaps: "📍 Googleマップでナビ開始",
+      transit: {
         transitEyebrow: (dur: string) => `🚅 東京からのアクセス（所要 約${dur}）`,
         transitTitle: "新幹線・シャトルバス推奨ルート",
         openStationMaps: (st: string) => `🚉 ${st} をGoogleマップで開く`,

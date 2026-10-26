@@ -8,7 +8,7 @@ import ResortWeatherWidget from "@/components/ResortWeatherWidget";
 import { useLanguage } from "@/context/LanguageContext";
 import { type Resort } from "@/data/resorts";
 
-type DetailTab = "overview" | "tickets" | "maps" | "weather" | "onsen";
+type DetailTab = "overview" | "tickets" | "maps" | "weather";
 
 export default function ResortDetailTabs({
   resort: rawResort,
@@ -47,7 +47,6 @@ export default function ResortDetailTabs({
     { id: "tickets", label: t.detail.tabs.tickets },
     { id: "maps", label: t.detail.tabs.maps },
     { id: "weather", label: t.detail.tabs.weather },
-    { id: "onsen", label: t.detail.tabs.onsen },
   ];
 
   return (
@@ -486,6 +485,57 @@ export default function ResortDetailTabs({
                 </div>
               </div>
             </div>
+
+            {/* Tokyo Shinkansen & Bus Transit Guide */}
+            <div className="rounded-2xl border border-charcoal-light bg-charcoal p-5 sm:p-6">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-ice">
+                    {t.detail.transit.transitEyebrow(durationLabel)}
+                  </p>
+                  <h3 className="mt-0.5 text-lg font-bold text-snow">
+                    {t.detail.transit.transitTitle}
+                  </h3>
+                </div>
+
+                <a
+                  href={resort.fromTokyo.stationGoogleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-4 py-2 text-xs font-bold text-ice transition hover:border-ice"
+                >
+                  <span>
+                    {t.detail.transit.openStationMaps(resort.fromTokyo.station)}
+                  </span>
+                  <span aria-hidden>↗</span>
+                </a>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                <div className="rounded-xl border border-charcoal-light bg-charcoal-light/30 p-4 sm:col-span-2">
+                  <p className="text-xs font-bold uppercase text-snow-muted">
+                    {t.detail.transit.recommendedRoute}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-snow">
+                    {resort.fromTokyo.summary}
+                  </p>
+                </div>
+
+                <div className="rounded-xl border border-charcoal-light bg-charcoal-light/30 p-4">
+                  <p className="text-xs font-bold uppercase text-snow-muted">
+                    {t.detail.transit.nearestHub}
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-ice">
+                    {resort.fromTokyo.station}
+                  </p>
+                  <p className="mt-0.5 text-xs text-snow-muted">
+                    {t.detail.transit.minsFromTokyo(
+                      resort.fromTokyo.durationMinutes
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -658,136 +708,6 @@ export default function ResortDetailTabs({
         {activeTab === "weather" && (
           <div className="mt-5">
             <ResortWeatherWidget resort={rawResort} />
-          </div>
-        )}
-
-        {/* ================= TAB 5: ONSEN, VILLAGE & ACCESS ================= */}
-        {activeTab === "onsen" && (
-          <div className="mt-5 space-y-6">
-            {/* Curated Onsen & Village Guide with Google Maps Pins */}
-            <div className="rounded-2xl border border-charcoal-light bg-charcoal p-5 sm:p-6">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-ice">
-                    {t.detail.onsen.eyebrow}
-                  </p>
-                  <h2 className="mt-0.5 text-xl font-bold text-snow">
-                    {t.detail.onsen.title(resort.name)}
-                  </h2>
-                  <p className="mt-0.5 text-xs text-snow-muted">
-                    {t.detail.onsen.subtitle}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                {resort.onsenAndVillage.map((spot) => {
-                  const badgeColor =
-                    spot.category === "Onsen"
-                      ? "border-rose-500/40 bg-rose-500/15 text-rose-300"
-                      : spot.category === "Food & Apres"
-                      ? "border-amber-400/40 bg-amber-400/15 text-amber-300"
-                      : "border-ice/40 bg-ice/15 text-ice";
-
-                  return (
-                    <div
-                      key={spot.japaneseName}
-                      className="flex flex-col justify-between rounded-xl border border-charcoal-light bg-charcoal-light/30 p-4"
-                    >
-                      <div>
-                        <div className="flex items-center justify-between gap-2">
-                          <span
-                            className={`rounded-md border px-2.5 py-0.5 text-[11px] font-bold ${badgeColor}`}
-                          >
-                            {spot.category === "Onsen"
-                              ? t.detail.onsen.catOnsen
-                              : spot.category === "Food & Apres"
-                              ? t.detail.onsen.catFood
-                              : t.detail.onsen.catLandmark}
-                          </span>
-                          <span className="text-xs font-semibold text-snow-muted">
-                            {spot.info}
-                          </span>
-                        </div>
-
-                        <h3 className="mt-2.5 text-base font-bold text-snow">
-                          {spot.name}
-                        </h3>
-                        <p className="text-xs text-snow-muted">
-                          {spot.japaneseName}
-                        </p>
-                        <p className="mt-2 text-xs leading-relaxed text-snow">
-                          {spot.description}
-                        </p>
-                      </div>
-
-                      <div className="mt-4 border-t border-charcoal-light pt-3">
-                        <a
-                          href={spot.googleMapsUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-charcoal px-3.5 py-2 text-xs font-bold text-ice transition hover:bg-ice-deep hover:text-charcoal"
-                        >
-                          <span>{t.detail.onsen.navigateMaps}</span>
-                          <span aria-hidden>↗</span>
-                        </a>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Tokyo Shinkansen & Bus Transit Guide */}
-            <div className="rounded-2xl border border-charcoal-light bg-charcoal p-5 sm:p-6">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-ice">
-                    {t.detail.onsen.transitEyebrow(durationLabel)}
-                  </p>
-                  <h3 className="mt-0.5 text-lg font-bold text-snow">
-                    {t.detail.onsen.transitTitle}
-                  </h3>
-                </div>
-
-                <a
-                  href={resort.fromTokyo.stationGoogleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-4 py-2 text-xs font-bold text-ice transition hover:border-ice"
-                >
-                  <span>
-                    {t.detail.onsen.openStationMaps(resort.fromTokyo.station)}
-                  </span>
-                  <span aria-hidden>↗</span>
-                </a>
-              </div>
-
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-xl border border-charcoal-light bg-charcoal-light/30 p-4 sm:col-span-2">
-                  <p className="text-xs font-bold uppercase text-snow-muted">
-                    {t.detail.onsen.recommendedRoute}
-                  </p>
-                  <p className="mt-1 text-sm font-semibold text-snow">
-                    {resort.fromTokyo.summary}
-                  </p>
-                </div>
-
-                <div className="rounded-xl border border-charcoal-light bg-charcoal-light/30 p-4">
-                  <p className="text-xs font-bold uppercase text-snow-muted">
-                    {t.detail.onsen.nearestHub}
-                  </p>
-                  <p className="mt-1 text-sm font-bold text-ice">
-                    {resort.fromTokyo.station}
-                  </p>
-                  <p className="mt-0.5 text-xs text-snow-muted">
-                    {t.detail.onsen.minsFromTokyo(
-                      resort.fromTokyo.durationMinutes
-                    )}
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         )}
       </div>
