@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import ResortDetailTabs from "@/components/ResortDetailTabs";
 import { RESORTS, getResortBySlug } from "@/data/resorts";
 import { getSiteUrl } from "@/lib/siteUrl";
@@ -73,10 +74,18 @@ export default async function ResortDetailPage({
   const nextResort = RESORTS[(currentIndex + 1) % RESORTS.length]!;
 
   return (
-    <ResortDetailTabs
-      resort={resort}
-      prevResort={prevResort}
-      nextResort={nextResort}
-    />
+    <Suspense
+      fallback={
+        <div className="mx-auto w-full max-w-5xl px-4 py-8 text-center text-snow-muted">
+          Loading mountain details...
+        </div>
+      }
+    >
+      <ResortDetailTabs
+        resort={resort}
+        prevResort={prevResort}
+        nextResort={nextResort}
+      />
+    </Suspense>
   );
 }

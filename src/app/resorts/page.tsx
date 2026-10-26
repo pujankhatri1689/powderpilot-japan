@@ -10,7 +10,16 @@ export const metadata: Metadata = {
 
 export default function ResortsPage() {
   return (
-    <Suspense fallback={<div className="p-12 text-center text-snow-muted">Loading resorts...</div>}>
+    <Suspense
+      fallback={
+        <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-12 animate-pulse">
+          <div className="h-6 w-48 rounded bg-charcoal-light/60 mb-2"></div>
+          <div className="h-10 w-72 rounded bg-charcoal-light/60 mb-3"></div>
+          <div className="h-5 w-96 rounded bg-charcoal-light/40 mb-8"></div>
+          <div className="h-28 w-full rounded-2xl bg-charcoal-light/30"></div>
+        </div>
+      }
+    >
       <ResortDirectory />
     </Suspense>
   );

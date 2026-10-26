@@ -45,6 +45,22 @@ export default function Home() {
           </Link>
         </div>
 
+        {/* Live Powder Radar Pulse Pill */}
+        <div className="mt-8">
+          <Link
+            href="/conditions"
+            className="group inline-flex items-center gap-2.5 rounded-full border border-ice/30 bg-charcoal-light/40 px-4 py-2 text-xs font-semibold text-snow transition hover:border-ice hover:bg-charcoal-light/70 sm:text-sm"
+          >
+            <span className="relative flex h-2 w-2 shrink-0">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ice opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-ice-deep"></span>
+            </span>
+            <span className="text-ice group-hover:text-snow transition">
+              {t.home.liveRadarPulse}
+            </span>
+          </Link>
+        </div>
+
         {/* 2-Column Prefecture Choices */}
         <div className="mt-16 w-full max-w-4xl text-left">
           <div className="mb-6 flex flex-col items-center text-center">

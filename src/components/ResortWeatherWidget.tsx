@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Resort } from "@/data/resorts";
@@ -243,7 +244,34 @@ export default function ResortWeatherWidget({
 
   const sevenDaySnow =
     displayData?.daily.reduce((s, d) => s + d.snowfallCm, 0) ?? 0;
+  const roundedSevenDay = Math.round(sevenDaySnow * 10) / 10;
   const condition = describeWeatherCode(displayData?.weatherCode ?? 1);
+
+  const bestDay = displayData?.daily.reduce(
+    (best, cur) => (cur.snowfallCm > (best?.snowfallCm ?? 0) ? cur : best),
+    null as DailyForecast | null
+  );
+
+  const bestDayName =
+    bestDay && bestDay.snowfallCm >= 1
+      ? new Date(`${bestDay.date}T00:00:00`).toLocaleDateString(localeCode, {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+        })
+      : null;
+
+  const maxDailySnow = Math.max(
+    15,
+    ...(displayData?.daily.map((d) => d.snowfallCm) ?? [15])
+  );
+
+  const freezingDiagnosis =
+    (displayData?.freezingLevelM ?? 1600) <= resort.elevation.base
+      ? t.weather.freezingAnalysisBase(resort.elevation.base)
+      : (displayData?.freezingLevelM ?? 1600) <= resort.elevation.top
+      ? t.weather.freezingAnalysisMid(resort.elevation.top, resort.elevation.base)
+      : t.weather.freezingAnalysisWarm;
 
   const googleWeatherSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(
     `${rawResort.name} ${rawResort.region} Japan weather snow forecast`
@@ -440,6 +468,161 @@ export default function ResortWeatherWidget({
               <p className="mt-0.5 text-xs text-snow-muted">
                 {t.weather.humidity(displayData.humidityPct)}
               </p>
+            </div>
+          </div>
+
+          {/* ❄️ 7-Day Powder Radar & Storm Tracker */}
+          <div className="rounded-2xl border border-ice/40 bg-gradient-to-br from-charcoal via-charcoal-light/30 to-charcoal p-5 sm:p-6 shadow-lg shadow-ice/5">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ice opacity-75"></span>
+                    <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-ice-deep"></span>
+                  </span>
+                  <p className="text-xs font-bold uppercase tracking-widest text-ice">
+                    {t.weather.radarTitle}
+                  </p>
+                </div>
+                <h3 className="mt-1 text-lg font-extrabold text-snow sm:text-xl">
+                  {rawResort.name} · {t.weather.radarSubtitle}
+                </h3>
+              </div>
+
+              {/* Dynamic Storm Radar Badge */}
+              <div className="shrink-0">
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-1.5 text-xs font-bold ${
+                    roundedSevenDay >= 30
+                      ? "border border-rose-500/50 bg-rose-500/20 text-rose-300 animate-pulse"
+                      : roundedSevenDay >= 10
+                      ? "border border-ice bg-ice/20 text-ice"
+                      : roundedSevenDay > 0
+                      ? "border border-ice-deep/50 bg-ice-deep/15 text-ice"
+                      : "border border-charcoal-light bg-charcoal-dark text-snow-muted"
+                  }`}
+                >
+                  {roundedSevenDay >= 30
+                    ? t.weather.radarDumpAlert(roundedSevenDay)
+                    : roundedSevenDay >= 10
+                    ? t.weather.radarCycleAlert(roundedSevenDay)
+                    : roundedSevenDay > 0
+                    ? t.weather.radarDustingAlert(roundedSevenDay)
+                    : t.weather.radarBluebirdAlert}
+                </span>
+              </div>
+            </div>
+
+            {/* Radar Insights Row: Best Day & Freezing Analysis */}
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-xl border border-charcoal-light bg-charcoal-dark/70 p-3.5">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-snow-muted">
+                  🏆 {t.weather.bestPowderDayLabel}
+                </p>
+                {bestDayName && bestDay ? (
+                  <p className="mt-1 text-sm font-extrabold text-ice">
+                    {t.weather.bestDayForecast(
+                      bestDayName,
+                      bestDay.snowfallCm,
+                      bestDay.tempMinC
+                    )}
+                  </p>
+                ) : (
+                  <p className="mt-1 text-xs text-snow-muted">
+                    {t.weather.bestPowderDayNone}
+                  </p>
+                )}
+              </div>
+
+              <div className="rounded-xl border border-charcoal-light bg-charcoal-dark/70 p-3.5">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-snow-muted">
+                  🌡️ {t.weather.freezingAnalysisLabel}
+                </p>
+                <p className="mt-1 text-xs font-medium text-snow">
+                  {freezingDiagnosis}
+                </p>
+              </div>
+            </div>
+
+            {/* Visual 7-Day Radar Snow Accumulation Chart */}
+            <div className="mt-5 border-t border-charcoal-light/60 pt-4">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-snow-muted">
+                ❄️ 7-Day Snow Accumulation Radar (Peak {targetElevation}m)
+              </p>
+              <div className="grid grid-cols-7 gap-1.5 sm:gap-2">
+                {displayData.daily.map((day) => {
+                  const dayLabel = new Date(
+                    `${day.date}T00:00:00`
+                  ).toLocaleDateString(localeCode, { weekday: "short" });
+                  const heightPct = Math.min(
+                    100,
+                    Math.round((day.snowfallCm / maxDailySnow) * 100)
+                  );
+                  const isPowderDay = day.snowfallCm >= 15;
+
+                  return (
+                    <div
+                      key={`radar-${day.date}`}
+                      className="flex flex-col items-center rounded-xl bg-charcoal-dark/90 p-2 text-center"
+                    >
+                      <span className="text-[11px] font-semibold text-snow-muted">
+                        {dayLabel}
+                      </span>
+
+                      {/* Bar container */}
+                      <div className="my-2 flex h-16 w-full items-end justify-center rounded-md bg-charcoal p-1">
+                        <div
+                          style={{
+                            height: `${
+                              day.snowfallCm > 0
+                                ? Math.max(heightPct, 15)
+                                : 4
+                            }%`,
+                          }}
+                          className={`w-full rounded-sm transition-all ${
+                            isPowderDay
+                              ? "bg-gradient-to-t from-ice to-white shadow-sm shadow-ice/50"
+                              : day.snowfallCm > 0
+                              ? "bg-ice-deep/80"
+                              : "bg-charcoal-light/40"
+                          }`}
+                        />
+                      </div>
+
+                      <span
+                        className={`text-xs font-bold ${
+                          day.snowfallCm > 0 ? "text-ice" : "text-snow-muted"
+                        }`}
+                      >
+                        {day.snowfallCm}cm
+                      </span>
+                      <span className="mt-0.5 text-[10px] text-snow-muted">
+                        {day.tempMinC}°/{day.tempMaxC}°
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Seamless bridge link to Japan Powder Radar Leaderboard */}
+            <div className="mt-5">
+              <Link
+                href="/conditions"
+                className="group flex flex-col gap-1 rounded-xl border border-charcoal-light bg-charcoal-dark/60 p-3.5 transition hover:border-ice/60 hover:bg-charcoal-dark sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div>
+                  <p className="text-xs font-bold text-ice group-hover:text-snow transition">
+                    {t.weather.viewRadarLeaderboard}
+                  </p>
+                  <p className="text-[11px] text-snow-muted">
+                    {t.weather.viewRadarLeaderboardDesc}
+                  </p>
+                </div>
+                <span className="inline-flex items-center gap-1 text-xs font-bold text-ice group-hover:translate-x-0.5 transition">
+                  Leaderboard ↗
+                </span>
+              </Link>
             </div>
           </div>
 

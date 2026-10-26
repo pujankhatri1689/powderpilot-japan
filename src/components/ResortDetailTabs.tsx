@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import FavoriteButton from "@/components/FavoriteButton";
 import MountainMapDiagram from "@/components/MountainMapDiagram";
@@ -23,13 +24,42 @@ export default function ResortDetailTabs({
   prevResort?: Resort;
   nextResort?: Resort;
 }) {
+  const searchParams = useSearchParams();
   const { t, localizeResort, localizeRegion } = useLanguage();
   const resort = localizeResort(rawResort);
   const prevResort = rawPrevResort ? localizeResort(rawPrevResort) : undefined;
   const nextResort = rawNextResort ? localizeResort(rawNextResort) : undefined;
 
-  const [activeTab, setActiveTab] = useState<DetailTab>("overview");
+  const validTabs: DetailTab[] = ["overview", "tickets", "maps", "weather"];
+  const currentTabParam = searchParams.get("tab") as DetailTab | null;
+  const initialTab =
+    currentTabParam && validTabs.includes(currentTabParam)
+      ? currentTabParam
+      : "overview";
+
+  const [activeTab, setActiveTab] = useState<DetailTab>(initialTab);
+  const [prevTabParam, setPrevTabParam] = useState(currentTabParam);
   const [copiedLang, setCopiedLang] = useState<"en" | "jp" | null>(null);
+
+  if (prevTabParam !== currentTabParam) {
+    setPrevTabParam(currentTabParam);
+    if (currentTabParam && validTabs.includes(currentTabParam)) {
+      setActiveTab(currentTabParam);
+    }
+  }
+
+  function handleTabChange(tab: DetailTab) {
+    setActiveTab(tab);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      if (tab === "overview") {
+        url.searchParams.delete("tab");
+      } else {
+        url.searchParams.set("tab", tab);
+      }
+      window.history.replaceState({}, "", url.toString());
+    }
+  }
 
   const hours = Math.floor(resort.fromTokyo.durationMinutes / 60);
   const mins = resort.fromTokyo.durationMinutes % 60;
@@ -63,6 +93,12 @@ export default function ResortDetailTabs({
             className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal-light/50 px-3.5 py-2 text-xs font-semibold text-snow transition hover:border-ice hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm"
           >
             <span aria-hidden>←</span> {t.detail.allResorts}
+          </Link>
+          <Link
+            href="/conditions"
+            className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-charcoal-light bg-charcoal px-3 py-2 text-xs font-semibold text-ice transition hover:border-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:text-sm"
+          >
+            <span>❄️ {t.nav.conditions}</span>
           </Link>
           <Link
             href="/"
@@ -181,7 +217,7 @@ export default function ResortDetailTabs({
                   role="tab"
                   aria-selected={isActive}
                   aria-controls={`panel-${tab.id}`}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => handleTabChange(tab.id)}
                   className={`flex min-h-11 shrink-0 snap-start items-center justify-center whitespace-nowrap rounded-xl px-3.5 py-2.5 text-xs font-bold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice sm:flex-initial sm:text-sm ${
                     isActive
                       ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25"

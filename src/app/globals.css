@@ -15,6 +15,7 @@
 html {
   color-scheme: dark;
   overflow-x: clip;
+  scroll-behavior: smooth;
 }
 
 body {

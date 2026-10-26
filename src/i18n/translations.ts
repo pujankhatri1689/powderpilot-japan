@@ -167,6 +167,8 @@ export const UI_TEXT = {
         "Instant access to HD trail maps, lift ticket & rental prices, snowboarder terrain intel, live mountain webcams, and weather forecasts for snowboard resorts across Japan.",
       browseBtn: "🏔️ Browse All Resorts",
       radarBtn: "❄️ Powder Radar & Forecast",
+      liveRadarPulse:
+        "⚡ 7-Day Japow Radar: 49 resorts tracked with real-time snowfall modeling. View Radar Leaderboard →",
       resortsCount: (n: number) => `${n} resorts`,
       prefectureSectionTitle: "Explore by Prefecture",
       prefectureSectionSubtitle: "Pick your snow belt destination across 49 verified mountains",
@@ -174,6 +176,8 @@ export const UI_TEXT = {
     },
     directory: {
       backToHome: "Back to Home",
+      backToRadar: "❄️ 7-Day Powder Radar Leaderboard →",
+      resortsTag: "49 Verified Resorts · 11 Prefectures",
       resortsShowing: (shown: number, total: number) =>
         `${shown} of ${total} resorts`,
       regionsHeader: "Snowboard Resorts Across Japan",
@@ -203,6 +207,7 @@ export const UI_TEXT = {
       intShort: "Int",
       advShort: "Adv",
       cardCta: "Trail Map & Guide",
+      cardWeatherCta: "❄️ Weather & Radar",
       openOfficialMap: "Open official trail map",
     },
     detail: {
@@ -339,6 +344,26 @@ export const UI_TEXT = {
       dailyBreakdownHeading: (mode: "top" | "base", m: number) =>
         `7-Day Daily Breakdown (${mode === "top" ? "Summit" : "Base"} ${m}m)`,
       snowUnit: "cm snow",
+      radarTitle: "7-Day Powder Radar & Storm Tracker",
+      radarSubtitle:
+        "Summit snowfall trajectory, storm dump windows, and snow quality diagnosis",
+      radarDumpAlert: (cm: number) => `🚨 Major Powder Alert: ${cm}cm 7-Day Dump`,
+      radarCycleAlert: (cm: number) => `❄️ Active Powder Cycle: ${cm}cm Forecasted`,
+      radarDustingAlert: (cm: number) => `🏔️ Fresh Dusting: ${cm}cm Forecasted`,
+      radarBluebirdAlert: "☀️ Bluebird Groomers / Stable High Pressure",
+      bestPowderDayLabel: "Best Powder Day Window",
+      bestPowderDayNone: "Cruiser snow / No heavy dumps this week",
+      bestDayForecast: (day: string, cm: number, temp: number) =>
+        `${day} · ${cm}cm fresh snow (${temp}°C)`,
+      freezingAnalysisLabel: "Freezing Level & Snow Quality",
+      freezingAnalysisBase: (m: number) =>
+        `❄️ 100% Powder down to base (${m}m). Ultra-dry Japow!`,
+      freezingAnalysisMid: (top: number, base: number) =>
+        `🏔️ Summit powder at ${top}m; damp or groomed at ${base}m base.`,
+      freezingAnalysisWarm: "☀️ Warm pre-season / spring snow across mountain.",
+      viewRadarLeaderboard: "❄️ View All 49 Resorts on Live Powder Radar →",
+      viewRadarLeaderboardDesc:
+        "Compare this mountain's 7-day snowfall against Hakuba, Niseko, Myoko, and Tohoku",
       monthlyTitle: "📊 Historical Monthly Snowfall Averages (10-Year Mean)",
       monthlySub:
         "Average fresh snowfall per month & typical mid-winter peak base depth",
@@ -372,6 +397,7 @@ export const UI_TEXT = {
     },
     conditionsPage: {
       backToHome: "Back to Home",
+      toResortsDirectory: "🏔️ All 49 Resorts Directory →",
       simLabel: "Peak Jan Storm Simulation",
       liveLabel: "High-Resolution Model Forecast · Open-Meteo / JMA MSM",
       eyebrow: "7-Day Summit Forecast · Ranked by Snowfall",
@@ -451,6 +477,8 @@ export const UI_TEXT = {
         "日本各地の主要スキー場の高画質コースマップ、リフト券＆レンタル料金、スノーボーダー向けゲレンデ情報、ライブカメラ、天気予報をワンクリックでチェック。",
       browseBtn: "🏔️ すべてのスキー場を見る",
       radarBtn: "❄️ パウダーレーダー・週間予報",
+      liveRadarPulse:
+        "⚡ 週間JAPOWレーダー: 全国49スキー場の降雪量をリアルタイム予測中。パウダーレーダーを見る →",
       resortsCount: (n: number) => `${n} スキー場`,
       prefectureSectionTitle: "都道府県からゲレンデを探す",
       prefectureSectionSubtitle: "北は北海道から岐阜・静岡・滋賀まで、全国11エリア・49の厳選スノーリゾート",
@@ -458,6 +486,8 @@ export const UI_TEXT = {
     },
     directory: {
       backToHome: "ホームへ戻る",
+      backToRadar: "❄️ 週間パウダーレーダーを見る →",
+      resortsTag: "全国11道県・49の厳選スキー場",
       resortsShowing: (shown: number, total: number) =>
         `全${total}件中 ${shown}件を表示`,
       regionsHeader: "日本全国のスノーボード・スキー場",
@@ -487,6 +517,7 @@ export const UI_TEXT = {
       intShort: "中級",
       advShort: "上級",
       cardCta: "コースマップ＆詳細ガイド",
+      cardWeatherCta: "❄️ 天気＆パウダーレーダー",
       openOfficialMap: "公式コースマップを開く",
     },
     detail: {
@@ -623,6 +654,26 @@ export const UI_TEXT = {
       dailyBreakdownHeading: (mode: "top" | "base", m: number) =>
         `週間天気・日別降雪予報（${mode === "top" ? "山頂" : "山麓"} ${m}m）`,
       snowUnit: "cm 降雪",
+      radarTitle: "週間パウダーレーダー ＆ 降雪解析",
+      radarSubtitle:
+        "山頂降雪シミュレーション、ストーム到来ピーク、雪質・凍結高度診断",
+      radarDumpAlert: (cm: number) => `🚨 大雪パウダー警報: 週間降雪量 ${cm}cm`,
+      radarCycleAlert: (cm: number) => `❄️ 活発なパウダーサイクル: 週間降雪量 ${cm}cm`,
+      radarDustingAlert: (cm: number) => `🏔️ 新雪予報: 週間降雪量 ${cm}cm`,
+      radarBluebirdAlert: "☀️ 快晴・グルーミング日和 / 安定した冬晴れ",
+      bestPowderDayLabel: "狙い目のベストパウダーデイ",
+      bestPowderDayNone: "今週は大雪の予報はありません（グルーミングバーン推奨）",
+      bestDayForecast: (day: string, cm: number, temp: number) =>
+        `${day} · 新雪 ${cm}cm (${temp}°C)`,
+      freezingAnalysisLabel: "凍結高度（0℃線）＆ 雪質診断",
+      freezingAnalysisBase: (m: number) =>
+        `❄️ 山麓（${m}m）まで全面ドライパウダー！極上JAPOW圏内`,
+      freezingAnalysisMid: (top: number, base: number) =>
+        `🏔️ 山頂（${top}m）はパウダー、山麓（${base}m）はやや重め雪・圧雪バーン`,
+      freezingAnalysisWarm: "☀️ 気温高め（春雪・ウェットコンディション）",
+      viewRadarLeaderboard: "❄️ 全49スキー場の降雪ランキング（パウダーレーダー）を見る →",
+      viewRadarLeaderboardDesc:
+        "白馬、ニセコ、妙高、東北など全国の最新降雪ランキングと直接比較",
       monthlyTitle: "📊 月別平均降雪量データ（過去10年平均）",
       monthlySub: "各月の平均新雪降雪量とハイシーズン最大積雪深の目安",
       peakBaseBadge: (cm: number) => `ピーク時最大積雪深: 約${cm} cm`,
@@ -655,6 +706,7 @@ export const UI_TEXT = {
     },
     conditionsPage: {
       backToHome: "ホームへ戻る",
+      toResortsDirectory: "🏔️ 全49スキー場一覧へ →",
       simLabel: "1月寒波・大雪シミュレーション中",
       liveLabel: "高解像度数値予報 · Open-Meteo / 気象庁 JMA MSM",
       eyebrow: "山頂7日間降雪予報 · 降雪量ランキング",
