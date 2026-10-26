@@ -33,9 +33,10 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Right: Navigation Links + Favorites + Language Selector */}
-        <div className="flex items-center gap-1 sm:gap-2.5">
-          <ul className="flex items-center gap-0.5 text-xs font-medium sm:gap-1 sm:text-sm">
+        {/* Right: Navigation Links (Desktop) + Favorites & Language Selector */}
+        <div className="flex items-center gap-1.5 sm:gap-3">
+          {/* Desktop-only Navigation Links */}
+          <ul className="hidden sm:flex items-center gap-1 text-sm font-medium">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
@@ -47,7 +48,7 @@ export default function Navbar() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`rounded-lg px-2 py-1.5 transition-colors sm:px-3 sm:py-1.5 ${
+                    className={`rounded-lg px-3 py-1.5 transition-colors ${
                       isActive
                         ? "bg-ice-deep/20 font-semibold text-ice"
                         : "text-snow-muted hover:bg-charcoal-light hover:text-snow"
@@ -58,23 +59,21 @@ export default function Navbar() {
                 </li>
               );
             })}
-
-            {/* Quick saved-resorts shortcut */}
-            <li>
-              <Link
-                href="/resorts?favorites=true"
-                className={`inline-flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs font-semibold transition sm:px-2.5 ${
-                  favoritesCount > 0
-                    ? "bg-rose-500/10 text-rose-400 hover:bg-rose-500/20"
-                    : "text-snow-muted hover:bg-charcoal-light hover:text-snow"
-                }`}
-                title={t.nav.savedTooltip}
-              >
-                <span>❤️</span>
-                <span className="text-[11px] sm:text-xs">{favoritesCount}</span>
-              </Link>
-            </li>
           </ul>
+
+          {/* Quick saved-resorts shortcut (Mobile & Desktop) */}
+          <Link
+            href="/resorts?favorites=true"
+            className={`inline-flex items-center gap-1.5 rounded-xl border border-charcoal-light px-2.5 py-1.5 text-xs font-semibold transition sm:border-transparent ${
+              favoritesCount > 0
+                ? "bg-rose-500/10 text-rose-400 hover:bg-rose-500/20"
+                : "bg-charcoal-dark text-snow-muted hover:bg-charcoal-light hover:text-snow"
+            }`}
+            title={t.nav.savedTooltip}
+          >
+            <span>❤️</span>
+            <span className="text-xs font-bold">{favoritesCount}</span>
+          </Link>
 
           {/* Compact Responsive Language Switcher */}
           <div
@@ -90,7 +89,7 @@ export default function Navbar() {
                   type="button"
                   onClick={() => setLang(opt.code)}
                   title={opt.fullLabel}
-                  className={`rounded-lg px-1.5 py-1 text-[11px] font-bold transition sm:px-2.5 sm:text-xs ${
+                  className={`rounded-lg px-2 py-1 text-[11px] font-bold transition sm:px-2.5 sm:text-xs ${
                     active
                       ? "bg-ice-deep text-charcoal shadow-sm shadow-ice-deep/30"
                       : "text-snow-muted hover:bg-charcoal-light hover:text-snow"
