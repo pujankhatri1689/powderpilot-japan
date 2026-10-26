@@ -4,7 +4,7 @@
  * PowderPilot Japan — Data & Asset Integrity Validator
  *
  * Verifies:
- * 1. Exactly 39 resorts across 9 prefectures
+ * 1. Exactly 49 resorts across 11 prefectures
  * 2. All resort slugs are unique
  * 3. Every referenced heroImage, trailMapImage, and mapGallery image exists on disk
  * 4. Image duplicate detection (flags shared image hashes)

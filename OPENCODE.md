@@ -42,12 +42,15 @@ You are working in **`C:\Users\pujan\.gemini\antigravity\scratch\powderpilot-jap
 5. Never invent snow, weather, lift status, hours or prices. JPY only, forecast ≠ official report.
 6. Verify from the project root:
    ```powershell
-   npx.cmd tsc --noEmit
+   cmd /c "npm run typecheck"   # runs next typegen, then tsc --noEmit
+   cmd /c "npm run validate"    # 49 resorts, images, EN/JA parity
    git diff --check
    git diff --stat
    ```
-   For larger changes also run `cmd /c "npm run build"`.
-   `npx.cmd eslint src` currently has **2 pre-existing** `react-hooks/set-state-in-effect` errors in `ResortDirectory.tsx`; do not attribute them to your change.
+   `next-env.d.ts` and route types are generated and gitignored — always let
+   `npm run typecheck` generate them before type-checking. For larger changes
+   also run `cmd /c "npm run build"`. Lint (`npx.cmd eslint src`) is currently
+   clean — keep it at 0 errors.
 7. Report to the user in plain language: files changed, checks passed, anything risky, and whether the work is **local only** or **pushed for Vercel**.
 
 ## 4. Commit / deploy rules

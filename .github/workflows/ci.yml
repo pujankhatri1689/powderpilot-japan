@@ -13,12 +13,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Install dependencies
@@ -27,8 +27,12 @@ jobs:
       - name: Validate data & asset integrity
         run: npm run validate
 
-      - name: TypeScript type-check
-        run: npx tsc --noEmit
+      # next-env.d.ts and Next.js route types (LayoutProps/PageProps etc.) are
+      # generated, gitignored artifacts. Generate them before type-checking or a
+      # fresh checkout fails with "Cannot find name 'LayoutProps'".
+      # `npm run typecheck` = `next typegen && tsc --noEmit`.
+      - name: Generate Next.js route types & type-check
+        run: npm run typecheck
 
       - name: ESLint
         run: npx eslint src

@@ -129,8 +129,13 @@ PowerShell execution policy blocks `npm.ps1`, so use `cmd /c` or the `.cmd` shim
   ```
 - **Type-check (required after every change)**
   ```bash
-  npx.cmd tsc --noEmit
+  cmd /c "npm run typecheck"
   ```
+  This runs `next typegen` first, because `next-env.d.ts` and route types
+  (`LayoutProps`, `PageProps`, …) are generated, gitignored artifacts. Running
+  plain `tsc --noEmit` on a fresh clone fails with "Cannot find name
+  'LayoutProps'". Prefer explicit prop types over generated helpers in shared
+  layouts when possible.
 - **Production build (required after larger changes)**
   ```bash
   cmd /c "npm run build"
@@ -139,7 +144,14 @@ PowerShell execution policy blocks `npm.ps1`, so use `cmd /c` or the `.cmd` shim
   ```bash
   npx.cmd eslint src
   ```
-  ⚠️ Baseline currently fails with **2 pre-existing** `react-hooks/set-state-in-effect` errors in `ResortDirectory.tsx` (~lines 36 and 42). They are unrelated to new work — don't "fix" them as part of an unrelated task.
+  Lint is currently clean — keep it at 0 errors.
+- **Data & asset validation**
+  ```bash
+  cmd /c "npm run validate"
+  ```
+  Verifies 49 resorts / 11 prefecture files, unique slugs, image paths, EN/JA
+  parity and duplicate-image warnings. Update its expected counts when adding
+  resorts.
 - **Diff hygiene**
   ```bash
   git diff --check
