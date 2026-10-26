@@ -282,22 +282,36 @@ export default function ConditionsDashboard() {
         </div>
       )}
 
-      {/* Region Filter Pills */}
+      {/* Region Filter Pills with live mountain count badges */}
       <div className="mb-6 flex flex-wrap gap-2">
         {(["All", ...REGIONS] as const).map((region) => {
           const active = selectedRegion === region;
+          const count =
+            region === "All"
+              ? RESORTS.length
+              : RESORTS.filter((r) => r.region === region).length;
+
           return (
             <button
               key={region}
               type="button"
               onClick={() => setSelectedRegion(region)}
-              className={`rounded-xl px-4 py-2 text-xs font-semibold transition sm:text-sm ${
+              className={`inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-xs font-semibold transition sm:text-sm ${
                 active
-                  ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25"
+                  ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25 font-bold"
                   : "border border-charcoal-light bg-charcoal-light/40 text-snow-muted hover:text-snow"
               }`}
             >
-              {localizeRegion(region)}
+              <span>{localizeRegion(region)}</span>
+              <span
+                className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                  active
+                    ? "bg-charcoal/20 text-charcoal"
+                    : "bg-charcoal-light/70 text-snow-muted"
+                }`}
+              >
+                {count}
+              </span>
             </button>
           );
         })}

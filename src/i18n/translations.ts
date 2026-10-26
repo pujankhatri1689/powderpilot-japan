@@ -119,6 +119,9 @@ export const UI_TEXT = {
       browseBtn: "🏔️ Browse All Resorts",
       radarBtn: "❄️ Live Snow & Powder Radar",
       resortsCount: (n: number) => `${n} resorts`,
+      prefectureSectionTitle: "Explore by Prefecture",
+      prefectureSectionSubtitle: "Pick your snow belt destination across 39 verified mountains",
+      viewMountains: (n: number) => `${n} Mountains →`,
     },
     directory: {
       backToHome: "Back to Home",
@@ -131,7 +134,7 @@ export const UI_TEXT = {
       likedBtn: (count: number) => `Liked (${count})`,
       treeRunsBtn: "Tree Runs Allowed",
       searchPlaceholder:
-        "Search resort, area (e.g. Hakuba, Yuzawa), or vibe in EN / 日本語 / 中文...",
+        "Search resort, area (e.g. Hakuba, Niseko, Yuzawa), or region in English / 日本語...",
       sortByLabel: "Sort by:",
       sortVertical: "Biggest Vertical (m)",
       sortTopElevation: "Highest Peak (m)",
@@ -350,6 +353,9 @@ export const UI_TEXT = {
       browseBtn: "🏔️ すべてのスキー場を見る",
       radarBtn: "❄️ リアルタイム降雪・パウダーレーダー",
       resortsCount: (n: number) => `${n} スキー場`,
+      prefectureSectionTitle: "都道府県からゲレンデを探す",
+      prefectureSectionSubtitle: "北は北海道から岐阜まで、全国9エリア・39の厳選スノーリゾート",
+      viewMountains: (n: number) => `${n} スキー場 →`,
     },
     directory: {
       backToHome: "ホームへ戻る",

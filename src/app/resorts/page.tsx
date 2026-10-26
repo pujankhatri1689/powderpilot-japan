@@ -5,7 +5,7 @@ import ResortDirectory from "@/components/ResortDirectory";
 export const metadata: Metadata = {
   title: "Resorts | PowderPilot Japan",
   description:
-    "Compare snowboard resorts across Nagano, Niigata, and Gunma by vertical drop, tree runs, lift pass price, and train time from Tokyo.",
+    "Compare 39 top snowboard resorts across Hokkaido, Nagano, Niigata, Iwate, Tohoku, Gunma, and Gifu by vertical drop, tree runs, lift pass price, and transit time.",
 };
 
 export default function ResortsPage() {

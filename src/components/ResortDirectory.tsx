@@ -15,7 +15,12 @@ export default function ResortDirectory() {
   const { isFavorite, toggleFavorite, favoritesCount } = useFavorites();
   const { lang, t, localizeResort, localizeRegion } = useLanguage();
 
-  const [selectedRegion, setSelectedRegion] = useState<Region | "All">("All");
+  const [selectedRegion, setSelectedRegion] = useState<Region | "All">(() => {
+    const fromUrl = searchParams.get("region");
+    return fromUrl && REGIONS.includes(fromUrl as Region)
+      ? (fromUrl as Region)
+      : "All";
+  });
   const [treeRunsOnly, setTreeRunsOnly] = useState(false);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(
     () => searchParams.get("favorites") === "true",
@@ -23,6 +28,14 @@ export default function ResortDirectory() {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortKey>("vertical");
   const [visibleLimit, setVisibleLimit] = useState(18);
+
+  // Sync selectedRegion if URL query param changes
+  useEffect(() => {
+    const fromUrl = searchParams.get("region");
+    if (fromUrl && REGIONS.includes(fromUrl as Region)) {
+      setSelectedRegion(fromUrl as Region);
+    }
+  }, [searchParams]);
 
   // Reset pagination limit when filters change
   useEffect(() => {
@@ -44,10 +57,22 @@ export default function ResortDirectory() {
       }
       if (!query) return true;
 
-      // Match search query against English and Japanese resort data
+      // Match search query against English and Japanese resort data + regional umbrellas
       const jaResort = getLocalizedResort(resort, "ja");
+      const matchesTohoku =
+        (query === "tohoku" || query === "東北") &&
+        ["Aomori", "Iwate", "Yamagata", "Fukushima"].includes(resort.region);
+      const matchesShinetsu =
+        (query === "shinetsu" || query === "信越" || query === "chubu" || query === "中部") &&
+        ["Nagano", "Niigata", "Gifu"].includes(resort.region);
+      const matchesKanto =
+        (query === "kanto" || query === "関東") &&
+        ["Gunma"].includes(resort.region);
 
       return (
+        matchesTohoku ||
+        matchesShinetsu ||
+        matchesKanto ||
         resort.name.toLowerCase().includes(query) ||
         resort.japaneseName.toLowerCase().includes(query) ||
         resort.area.toLowerCase().includes(query) ||
@@ -96,22 +121,36 @@ export default function ResortDirectory() {
       {/* Filter & Search Bar */}
       <div className="mb-8 flex flex-col gap-4 rounded-2xl border border-charcoal-light bg-charcoal-light/40 p-4 sm:p-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          {/* Region Pills */}
+          {/* Region Pills with live mountain count badges */}
           <div className="flex flex-wrap items-center gap-2">
             {(["All", ...REGIONS] as const).map((region) => {
               const active = selectedRegion === region;
+              const count =
+                region === "All"
+                  ? RESORTS.length
+                  : RESORTS.filter((r) => r.region === region).length;
+
               return (
                 <button
                   key={region}
                   type="button"
                   onClick={() => setSelectedRegion(region)}
-                  className={`rounded-xl px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
+                  className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-semibold transition sm:text-sm ${
                     active
-                      ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25"
+                      ? "bg-ice-deep text-charcoal shadow-md shadow-ice-deep/25 font-bold"
                       : "bg-charcoal text-snow-muted hover:text-snow"
                   }`}
                 >
-                  {localizeRegion(region)}
+                  <span>{localizeRegion(region)}</span>
+                  <span
+                    className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                      active
+                        ? "bg-charcoal/20 text-charcoal"
+                        : "bg-charcoal-light/70 text-snow-muted"
+                    }`}
+                  >
+                    {count}
+                  </span>
                 </button>
               );
             })}
