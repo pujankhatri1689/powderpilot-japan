@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useFavorites } from "@/context/FavoritesContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { REGIONS, RESORTS, type Region } from "@/data/resorts";
@@ -13,7 +13,7 @@ type SortKey = "vertical" | "travel" | "price" | "topElevation";
 export default function ResortDirectory() {
   const searchParams = useSearchParams();
   const { isFavorite, toggleFavorite, favoritesCount } = useFavorites();
-  const { t, localizeResort, localizeRegion } = useLanguage();
+  const { lang, t, localizeResort, localizeRegion } = useLanguage();
 
   const [selectedRegion, setSelectedRegion] = useState<Region | "All">("All");
   const [treeRunsOnly, setTreeRunsOnly] = useState(false);
@@ -22,6 +22,12 @@ export default function ResortDirectory() {
   );
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<SortKey>("vertical");
+  const [visibleLimit, setVisibleLimit] = useState(18);
+
+  // Reset pagination limit when filters change
+  useEffect(() => {
+    setVisibleLimit(18);
+  }, [selectedRegion, treeRunsOnly, showFavoritesOnly, searchQuery, sortBy]);
 
   const filteredResorts = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -200,9 +206,10 @@ export default function ResortDirectory() {
           </button>
         </div>
       ) : (
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredResorts.map((rawResort) => {
-            const resort = localizeResort(rawResort);
+        <>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredResorts.slice(0, visibleLimit).map((rawResort) => {
+              const resort = localizeResort(rawResort);
             const hours = Math.floor(resort.fromTokyo.durationMinutes / 60);
             const mins = resort.fromTokyo.durationMinutes % 60;
             const durationLabel =
@@ -402,7 +409,29 @@ export default function ResortDirectory() {
             );
           })}
         </div>
-      )}
-    </div>
-  );
+
+        {/* Load More Pagination for scaling to 200–300 resorts */}
+        {filteredResorts.length > visibleLimit && (
+          <div className="mt-10 flex flex-col items-center justify-center gap-3">
+            <p className="text-xs text-snow-muted">
+              {lang === "ja"
+                ? `${filteredResorts.length}件中 ${visibleLimit}件を表示中`
+                : `Showing ${visibleLimit} of ${filteredResorts.length} resorts`}
+            </p>
+            <button
+              type="button"
+              onClick={() => setVisibleLimit((prev) => prev + 18)}
+              className="inline-flex items-center gap-2 rounded-xl border border-charcoal-light bg-charcoal-dark px-6 py-3 text-sm font-semibold text-snow transition hover:border-ice hover:text-ice"
+            >
+              <span>{lang === "ja" ? "さらにスキー場を読み込む" : "Load More Resorts"}</span>
+              <span className="rounded-full bg-charcoal-light px-2 py-0.5 text-xs text-ice">
+                +{Math.min(18, filteredResorts.length - visibleLimit)}
+              </span>
+            </button>
+          </div>
+        )}
+      </>
+    )}
+  </div>
+);
 }

@@ -126,28 +126,39 @@ export default function ConditionsDashboard() {
         setLoading(true);
         setError(null);
 
-        const lats = RESORTS.map((r) => r.coordinates.lat).join(",");
-        const lons = RESORTS.map((r) => r.coordinates.lon).join(",");
-        const elevations = RESORTS.map((r) => r.elevation.top).join(",");
-
-        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&elevation=${elevations}&current=temperature_2m,wind_speed_10m,snow_depth,freezing_level_height&daily=snowfall_sum,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&forecast_days=7`;
-
-        const res = await fetch(url);
-        if (!res.ok) {
-          throw new Error(`Weather API returned ${res.status}`);
+        // Chunk coordinate queries in batches of 25 to avoid HTTP 414 URL-length limits when scaling to 300+ resorts
+        const BATCH_SIZE = 25;
+        const batches: (typeof RESORTS)[] = [];
+        for (let i = 0; i < RESORTS.length; i += BATCH_SIZE) {
+          batches.push(RESORTS.slice(i, i + BATCH_SIZE));
         }
 
-        const json: OpenMeteoResponse | OpenMeteoResponse[] = await res.json();
-        if (cancelled) return;
-
-        const list = Array.isArray(json) ? json : [json];
         const map: Record<string, ResortWeather> = {};
 
-        RESORTS.forEach((resort, idx) => {
-          const item = list[idx] ?? {};
-          map[resort.slug] = parseSingleForecast(resort, item);
-        });
+        await Promise.all(
+          batches.map(async (batch) => {
+            const lats = batch.map((r) => r.coordinates.lat).join(",");
+            const lons = batch.map((r) => r.coordinates.lon).join(",");
+            const elevations = batch.map((r) => r.elevation.top).join(",");
 
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&elevation=${elevations}&current=temperature_2m,wind_speed_10m,snow_depth,freezing_level_height&daily=snowfall_sum,temperature_2m_max,temperature_2m_min&timezone=Asia%2FTokyo&forecast_days=7`;
+
+            const res = await fetch(url);
+            if (!res.ok) {
+              throw new Error(`Weather API returned ${res.status}`);
+            }
+
+            const json: OpenMeteoResponse | OpenMeteoResponse[] = await res.json();
+            const list = Array.isArray(json) ? json : [json];
+
+            batch.forEach((resort, idx) => {
+              const item = list[idx] ?? {};
+              map[resort.slug] = parseSingleForecast(resort, item);
+            });
+          })
+        );
+
+        if (cancelled) return;
         setLiveData(map);
       } catch (err) {
         if (!cancelled) {
