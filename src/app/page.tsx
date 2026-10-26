@@ -30,16 +30,22 @@ export default function Home() {
           {t.home.subtitle}
         </p>
 
-        <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+        <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
           <Link
             href="/resorts"
-            className="rounded-xl bg-ice-deep px-8 py-4 text-base font-semibold text-charcoal shadow-lg shadow-ice-deep/30 transition hover:bg-ice active:scale-95"
+            className="inline-flex min-h-12 items-center justify-center rounded-xl bg-ice-deep px-6 py-3.5 text-base font-semibold text-charcoal shadow-lg shadow-ice-deep/30 transition hover:bg-ice active:scale-95"
           >
             {t.home.browseBtn}
           </Link>
           <Link
+            href="/resorts?view=map"
+            className="inline-flex min-h-12 items-center justify-center rounded-xl border border-ice/60 bg-ice/15 px-6 py-3.5 text-base font-semibold text-ice transition hover:bg-ice/25 hover:border-ice active:scale-95"
+          >
+            {t.home.mapBtn}
+          </Link>
+          <Link
             href="/conditions"
-            className="rounded-xl border border-charcoal-light bg-charcoal-light/40 px-8 py-4 text-base font-semibold text-snow transition hover:border-ice hover:text-ice"
+            className="inline-flex min-h-12 items-center justify-center rounded-xl border border-charcoal-light bg-charcoal-light/40 px-6 py-3.5 text-base font-semibold text-snow transition hover:border-ice hover:text-ice active:scale-95"
           >
             {t.home.radarBtn}
           </Link>

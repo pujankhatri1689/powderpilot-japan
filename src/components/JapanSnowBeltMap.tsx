@@ -31,16 +31,26 @@ interface JapanSnowBeltMapProps {
   initialSelectedSlug?: string;
 }
 
+/**
+ * Natural geographical bounding box framing the Japanese archipelago (Hokkaido to Kyushu)
+ * and its surrounding sea belts (Sea of Japan, Pacific Ocean, Sea of Okhotsk).
+ * Prevents panning off into other continents while keeping a comfortable buffer around Japan.
+ */
+const JAPAN_MAP_BOUNDS: [[number, number], [number, number]] = [
+  [24.0, 122.5], // Southwest: Kyushu & East China Sea margin
+  [47.5, 150.5], // Northeast: Hokkaido & Sea of Okhotsk margin
+];
+
 const ZONE_CAMERA: Record<
   SnowZoneKey,
   { center: [number, number]; zoom: number }
 > = {
-  all: { center: [38.6, 138.8], zoom: 5 },
-  hokkaido: { center: [43.15, 141.65], zoom: 7 },
-  tohoku: { center: [39.15, 140.45], zoom: 7 },
-  nagano: { center: [36.68, 138.18], zoom: 9 },
-  niigata: { center: [36.96, 138.58], zoom: 9 },
-  central: { center: [35.95, 137.45], zoom: 7 },
+  all: { center: [38.2, 137.6], zoom: 5.2 },
+  hokkaido: { center: [43.15, 142.1], zoom: 7.2 },
+  tohoku: { center: [39.15, 140.6], zoom: 7.2 },
+  nagano: { center: [36.68, 138.18], zoom: 9.2 },
+  niigata: { center: [36.96, 138.6], zoom: 9.2 },
+  central: { center: [35.95, 137.45], zoom: 7.5 },
 };
 
 /**
@@ -234,8 +244,21 @@ export default function JapanSnowBeltMap({
       const map = L.map(mapContainerRef.current, {
         center: ZONE_CAMERA.all.center,
         zoom: ZONE_CAMERA.all.zoom,
-        minZoom: 4,
-        maxZoom: 18,
+        minZoom: 4.6,
+        maxZoom: 16,
+        maxBounds: JAPAN_MAP_BOUNDS,
+        maxBoundsViscosity: 1.0, // Hard elastic barrier keeping map strictly focused on Japan
+        zoomSnap: 0.25, // Micro-step fractional zoom for ultra-smooth mousepad pinch
+        zoomDelta: 0.5,
+        wheelPxPerZoomLevel: 140, // Smooth mousepad gesture control (prevents violent over-zooming)
+        wheelDebounceTime: 40,
+        dragging: true,
+        inertia: true,
+        inertiaDeceleration: 2600, // Natural kinetic friction for trackpad / mouse drag
+        inertiaMaxSpeed: 1600,
+        easeLinearity: 0.2,
+        worldCopyJump: false,
+        bounceAtZoomLimits: true,
         zoomControl: true,
         scrollWheelZoom: true,
       });

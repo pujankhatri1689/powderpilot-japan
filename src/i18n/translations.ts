@@ -171,6 +171,7 @@ export const UI_TEXT = {
       subtitle:
         "Instant access to HD trail maps, lift ticket & rental prices, snowboarder terrain intel, live mountain webcams, and weather forecasts for snowboard resorts across Japan.",
       browseBtn: "🏔️ Browse All Resorts",
+      mapBtn: "🗺️ Snow Belt Map",
       radarBtn: "❄️ Powder Radar & Forecast",
       resortsCount: (n: number) => `${n} resorts`,
       prefectureSectionTitle: "Explore by Prefecture",
@@ -519,6 +520,7 @@ export const UI_TEXT = {
       subtitle:
         "日本各地の主要スキー場の高画質コースマップ、リフト券＆レンタル料金、スノーボーダー向けゲレンデ情報、ライブカメラ、天気予報をワンクリックでチェック。",
       browseBtn: "🏔️ すべてのスキー場を見る",
+      mapBtn: "🗺️ 全国スノーマップ",
       radarBtn: "❄️ パウダーレーダー・週間予報",
       resortsCount: (n: number) => `${n} スキー場`,
       prefectureSectionTitle: "都道府県からゲレンデを探す",
