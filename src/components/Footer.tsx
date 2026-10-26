@@ -40,7 +40,7 @@ export default function Footer() {
               {t.footer.tagline}
             </p>
             <p className="text-[11px] leading-relaxed text-snow-muted/90">
-              🔒 {t.footer.privacyNote}
+              {t.footer.privacyNote}
             </p>
           </div>
 

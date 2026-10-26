@@ -131,7 +131,7 @@ export const UI_TEXT = {
     },
     footer: {
       tagline:
-        "Japan Snowboard Encyclopedia & Powder Forecast Guide — 39 verified resorts across 9 prefectures.",
+        "Japan Snowboard Encyclopedia & Powder Forecast Guide — 49 verified resorts across 11 prefectures.",
       disclaimerTitle: "Forecast & Data Disclaimer",
       disclaimerBody:
         "Forecasts come from Open-Meteo / JMA MSM numerical weather model data, not official resort snow reports — always check each resort's official site for live lift status, avalanche advisories, and course openings.",
@@ -139,7 +139,7 @@ export const UI_TEXT = {
         "Favourites, language preferences, and trip plans are stored only in your browser (localStorage).",
       quickLinksTitle: "Quick Links",
       homeLink: "Home",
-      resortsLink: "All 39 Resorts",
+      resortsLink: "All 49 Resorts",
       radarLink: "7-Day Powder Radar",
       plannerLink: "Trip & Budget Planner",
       copyright: (year: number) =>
@@ -149,14 +149,14 @@ export const UI_TEXT = {
       notFoundEyebrow: "404 · Out of Bounds",
       notFoundTitle: "This run doesn’t exist",
       notFoundBody:
-        "The mountain or page you’re looking for isn’t on the map. Head back to base or browse all 39 verified resorts across Japan.",
+        "The mountain or page you’re looking for isn’t on the map. Head back to base or browse all 49 verified resorts across Japan.",
       errorEyebrow: "Temporary Whiteout · Page Error",
       errorTitle: "Something went wrong loading this view",
       errorBody:
         "Try refreshing the view or return to the resort directory.",
       tryAgainBtn: "↻ Try Again",
       backHomeBtn: "← Back to Home",
-      browseResortsBtn: "🏔️ Browse 39 Resorts",
+      browseResortsBtn: "🏔️ Browse 49 Resorts",
     },
     home: {
       badge: "Japan Snowboard Encyclopedia & Powder Forecast Guide",
@@ -169,7 +169,7 @@ export const UI_TEXT = {
       radarBtn: "❄️ Powder Radar & Forecast",
       resortsCount: (n: number) => `${n} resorts`,
       prefectureSectionTitle: "Explore by Prefecture",
-      prefectureSectionSubtitle: "Pick your snow belt destination across 39 verified mountains",
+      prefectureSectionSubtitle: "Pick your snow belt destination across 49 verified mountains",
       viewMountains: (n: number) => `${n} Mountains →`,
     },
     directory: {
@@ -415,7 +415,7 @@ export const UI_TEXT = {
     },
     footer: {
       tagline:
-        "日本スノーボード大図鑑＆パウダー降雪予報ガイド — 全国9道県・39の厳選スキー場を収録。",
+        "日本スノーボード大図鑑＆パウダー降雪予報ガイド — 全国11道県・49の厳選スキー場を収録。",
       disclaimerTitle: "予報・データに関する免責事項",
       disclaimerBody:
         "天気・降雪予報は Open-Meteo / 気象庁（JMA MSM）の数値気象モデルに基づく予測であり、スキー場公式の積雪発表ではありません。実際のリフト運行状況やコース規制は必ず各スキー場の公式サイトをご確認ください。",
@@ -423,7 +423,7 @@ export const UI_TEXT = {
         "お気に入り、言語設定、トリッププランはお使いのブラウザ内（localStorage）にのみ保存されます。",
       quickLinksTitle: "クイックリンク",
       homeLink: "ホーム",
-      resortsLink: "全39スキー場一覧",
+      resortsLink: "全49スキー場一覧",
       radarLink: "週間パウダーレーダー",
       plannerLink: "トリップ＆予算プランナー",
       copyright: (year: number) =>
@@ -433,14 +433,14 @@ export const UI_TEXT = {
       notFoundEyebrow: "404 · コース外・ページが見つかりません",
       notFoundTitle: "お探しのページが見つかりませんでした",
       notFoundBody:
-        "お探しのスキー場またはページは移動または削除された可能性があります。トップページまたは全39スキー場一覧からお探しください。",
+        "お探しのスキー場またはページは移動または削除された可能性があります。トップページまたは全49スキー場一覧からお探しください。",
       errorEyebrow: "一時的なエラーが発生しました",
       errorTitle: "ページの読み込み中に問題が発生しました",
       errorBody:
         "再読み込みをお試しいただくか、スキー場一覧へお戻りください。",
       tryAgainBtn: "↻ 再試行",
       backHomeBtn: "← ホームへ戻る",
-      browseResortsBtn: "🏔️ 全39スキー場を見る",
+      browseResortsBtn: "🏔️ 全49スキー場を見る",
     },
     home: {
       badge: "日本スノーボード大図鑑 ＆ パウダー降雪予報ガイド",
@@ -453,7 +453,7 @@ export const UI_TEXT = {
       radarBtn: "❄️ パウダーレーダー・週間予報",
       resortsCount: (n: number) => `${n} スキー場`,
       prefectureSectionTitle: "都道府県からゲレンデを探す",
-      prefectureSectionSubtitle: "北は北海道から岐阜まで、全国9エリア・39の厳選スノーリゾート",
+      prefectureSectionSubtitle: "北は北海道から岐阜・静岡・滋賀まで、全国11エリア・49の厳選スノーリゾート",
       viewMountains: (n: number) => `${n} スキー場 →`,
     },
     directory: {
