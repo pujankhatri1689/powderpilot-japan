@@ -70,6 +70,11 @@ export function translateRegion(
       ja: "北海道",
       jaPref: "北海道",
     },
+    Gifu: {
+      en: "Gifu",
+      ja: "岐阜",
+      jaPref: "岐阜県",
+    },
   };
   const item = map[region];
   if (withSuffix) {

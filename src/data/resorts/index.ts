@@ -1,28 +1,37 @@
 import type { Region, Resort } from "@/data/types";
-import { NAGANO_RESORTS } from "./nagano";
-import { NIIGATA_RESORTS } from "./niigata";
-import { GUNMA_RESORTS } from "./gunma";
-import { FUKUSHIMA_RESORTS } from "./fukushima";
-import { YAMAGATA_RESORTS } from "./yamagata";
+import { HOKKAIDO_RESORTS } from "./hokkaido";
 import { AOMORI_RESORTS } from "./aomori";
+import { IWATE_RESORTS } from "./iwate";
+import { YAMAGATA_RESORTS } from "./yamagata";
+import { FUKUSHIMA_RESORTS } from "./fukushima";
+import { NIIGATA_RESORTS } from "./niigata";
+import { NAGANO_RESORTS } from "./nagano";
+import { GUNMA_RESORTS } from "./gunma";
+import { GIFU_RESORTS } from "./gifu";
 
 export {
-  NAGANO_RESORTS,
-  NIIGATA_RESORTS,
-  GUNMA_RESORTS,
-  FUKUSHIMA_RESORTS,
-  YAMAGATA_RESORTS,
+  HOKKAIDO_RESORTS,
   AOMORI_RESORTS,
+  IWATE_RESORTS,
+  YAMAGATA_RESORTS,
+  FUKUSHIMA_RESORTS,
+  NIIGATA_RESORTS,
+  NAGANO_RESORTS,
+  GUNMA_RESORTS,
+  GIFU_RESORTS,
 };
 
 /** All active ski resorts in Japan */
 export const RESORTS: Resort[] = [
-  ...NAGANO_RESORTS,
-  ...NIIGATA_RESORTS,
-  ...GUNMA_RESORTS,
-  ...FUKUSHIMA_RESORTS,
-  ...YAMAGATA_RESORTS,
+  ...HOKKAIDO_RESORTS,
   ...AOMORI_RESORTS,
+  ...IWATE_RESORTS,
+  ...YAMAGATA_RESORTS,
+  ...FUKUSHIMA_RESORTS,
+  ...NIIGATA_RESORTS,
+  ...NAGANO_RESORTS,
+  ...GUNMA_RESORTS,
+  ...GIFU_RESORTS,
 ];
 
 /** Fast O(1) slug lookup map */
@@ -30,18 +39,19 @@ const RESORT_MAP = new Map<string, Resort>(
   RESORTS.map((resort) => [resort.slug, resort])
 );
 
-/** Display order for prefectures */
+/** Display order for prefectures (North to South) */
 export const REGION_ORDER: Region[] = [
-  "Nagano",
-  "Niigata",
-  "Gunma",
-  "Fukushima",
-  "Yamagata",
-  "Miyagi",
-  "Akita",
-  "Iwate",
-  "Aomori",
   "Hokkaido",
+  "Aomori",
+  "Iwate",
+  "Yamagata",
+  "Fukushima",
+  "Niigata",
+  "Nagano",
+  "Gunma",
+  "Gifu",
+  "Akita",
+  "Miyagi",
 ];
 
 /** Active regions that contain at least 1 resort */

@@ -675,5 +675,358 @@ export const NIIGATA_RESORTS: Resort[] = [
       vibeTags: ["889m Vertical", "Dragondola Link", "Night Skiing"],
       bestFor: "All-mountain riders wanting big vertical, 3 gondolas, and direct Kagura access",
       officialUrl: "https://www.princehotels.co.jp/ski/naeba/winter/",
-    }
+    },
+  {
+    slug: "akakura-onsen",
+    name: "Akakura Onsen & Kanko",
+    japaneseName: "赤倉温泉スキー場 ＆ 赤倉観光リゾート（赤カン）",
+    region: "Niigata",
+    area: "Myoko Kogen",
+    description:
+      "The historic heart of Mt. Myoko, legendary for deep snowfall often exceeding 13–15 meters per season. Interconnected with Akakura Kanko, it features 760m of vertical drop, the high-speed Myoko Sky Cable Gondola, steep powder bowls, and direct ski-in access to a 200-year-old hot spring village.",
+    address: {
+      postalCode: "〒949-2111",
+      english: "Akakura Onsen, Myoko-shi, Niigata 949-2111, Japan",
+      japanese: "新潟県妙高市大字赤倉",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Akakura+Onsen+Ski+Resort+Niigata+Japan",
+    },
+    heroImage: "/trail-maps/akakura-onsen-photo.jpg",
+    trailMapImage: "/trail-maps/akakura-onsen.jpg",
+    mapGallery: [
+      {
+        title: "Akakura Onsen & Akakura Kanko Trail Map",
+        caption: "Shows the 27 runs, Myoko Sky Cable Gondola, and steep upper powder bowls.",
+        imageUrl: "/trail-maps/myoko-suginohara.jpg",
+        badge: "Dual-Resort Map",
+      },
+      {
+        title: "Mt. Myoko Powder Face & Historic Hotel",
+        caption: "Chest-deep Japow overlooking the red roof of the classic Akakura Kanko Hotel.",
+        imageUrl: "/trail-maps/myoko-photo.jpg",
+        badge: "Deep Myoko Snow",
+      },
+    ],
+    trailMapUrl: "https://akakura-ski.com/gelande/",
+    webcamUrl: "https://akakura-ski.com/livecam/",
+    operatingHours: {
+      seasonWindow: "Mid December – Early May",
+      dayHours: "08:30 – 16:30",
+      nightSkiing: "17:00 – 21:00 (Floodlit Kumado slope in Akakura Onsen)",
+      earlyBird: "08:00 early morning gondola on peak season dates",
+      notes: "Akakura Onsen and Akakura Kanko share a joint all-mountain pass for seamless ridge crossings.",
+    },
+    pricing: {
+      oneDayAdultYen: 7000,
+      halfDayYen: 5600,
+      twoDayYen: 13200,
+      nightPassYen: 2800,
+      childOneDayYen: 3800,
+      seniorOneDayYen: 6000,
+      seasonPassYen: 78000,
+      seasonPassName: "Akakura Joint All-Mountain Season Pass",
+      fullBoardRentalDayYen: 5800,
+      wearRentalDayYen: 4000,
+      notes: "Night skiing requires a separate ticket or add-on onto all-mountain passes.",
+    },
+    snowboarderIntel: {
+      liftFleet:
+        "14 lifts including the 2,600m Myoko Sky Cable Gondola, 3 high-speed hooded quads, and double chairs.",
+      terrainPark: "Akakura Freestyle Park with beginner jump lines, boxes, and natural side hits.",
+      flatSpotWarning:
+        "The lateral connection run between Kanko and Onsen bases has a slight flat section—tuck early.",
+      treeRunRules:
+        "Natural side gullies and ungroomed courses (Champion course) are open for powder riding within boundaries. Ducking boundary ropes into unpatrolled zones is prohibited.",
+    },
+    monthlySnowfallCm: {
+      dec: 290,
+      jan: 380,
+      feb: 310,
+      mar: 170,
+      apr: 40,
+      peakBaseCm: 420,
+    },
+    signatureRuns: [
+      {
+        name: "Hotel Main Course (Kanko)",
+        level: "Intermediate",
+        note: "4,000m long continuous descent from Sky Cable summit straight to the resort base.",
+      },
+      {
+        name: "Champions Course (Onsen)",
+        level: "Advanced",
+        note: "Steep 38-degree un-groomed natural powder pitch with deep storm refills.",
+      },
+      {
+        name: "Kumado Slope (Night Skiing)",
+        level: "Beginner",
+        note: "Wide, gentle floodlit cruiser leading directly into the historic Onsen village streets.",
+      },
+    ],
+    coordinates: {
+      lat: 36.9011,
+      lon: 138.1967,
+    },
+    elevation: {
+      base: 740,
+      top: 1500,
+      vertical: 760,
+    },
+    terrain: {
+      beginner: 40,
+      intermediate: 40,
+      advanced: 20,
+      runs: 27,
+      lifts: 14,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 7000,
+    fromTokyo: {
+      durationMinutes: 140,
+      summary:
+        "Hokuriku Shinkansen to Nagano Station (~80m) + Echigo Tokimeki Railway to Myoko-Kogen Station (~45m) + 10-min bus",
+      station: "JR Myoko-Kogen Station (妙高高原駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Myoko-Kogen+Station+Niigata+Japan",
+    },
+    vibeTags: ["13m+ Annual Snow", "200-Year Onsen Village", "Sky Cable Gondola", "Night Skiing"],
+    bestFor:
+      "Riders seeking immense Myoko storm snowfall, authentic hot spring village atmosphere, and 4km long cruisers",
+    officialUrl: "https://akakura-ski.com/",
+  },
+  {
+    slug: "maiko",
+    name: "Maiko Snow Resort",
+    japaneseName: "舞子スノーリゾート",
+    region: "Niigata",
+    area: "Minamiuonuma / Yuzawa",
+    description:
+      "A massive three-zone resort located just 1 minute off the Shiozawa-Ishiuchi IC. Spanning Maiko, Nagazoe, and Okusoechi zones with 26 courses and the 2,800m Maiko Gondola, it delivers steep un-groomed natural powder bowls alongside extensive beginner terrain.",
+    address: {
+      postalCode: "〒949-6435",
+      english: "2056-108 Maiko, Minamiuonuma-shi, Niigata 949-6435, Japan",
+      japanese: "新潟県南魚沼市舞子2056-108",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Maiko+Snow+Resort+Niigata+Japan",
+    },
+    heroImage: "/trail-maps/maiko-photo.jpg",
+    trailMapImage: "/trail-maps/maiko.jpg",
+    mapGallery: [
+      {
+        title: "Maiko 3-Zone All-Mountain Map",
+        caption: "Shows the Maiko Area, Nagazoe Area, and the high-elevation Okusoechi powder bowl.",
+        imageUrl: "/trail-maps/gala-yuzawa.jpg",
+        badge: "Official Map",
+      },
+      {
+        title: "Okusoechi Natural Powder Bowl",
+        caption: "Untracked deep snow in the north-facing Okusoechi bowl served by the gondola.",
+        imageUrl: "/trail-maps/gala-yuzawa-center.jpg",
+        badge: "Powder Bowl",
+      },
+    ],
+    trailMapUrl: "https://www.maiko-resort.com/winter/course.html",
+    webcamUrl: "https://www.maiko-resort.com/winter/livecam.html",
+    operatingHours: {
+      seasonWindow: "Mid December – Early April",
+      dayHours: "08:30 – 16:30 (Weekends start 08:00)",
+      nightSkiing: "16:00 – 19:00 (Maiko base floodlit slopes)",
+      earlyBird: "08:00 early start on weekends and holidays",
+      notes: "The 2,800m Maiko Gondola ascends directly to the high-elevation Okusoechi powder zone.",
+    },
+    pricing: {
+      oneDayAdultYen: 6500,
+      halfDayYen: 5400,
+      twoDayYen: 12000,
+      nightPassYen: 1500,
+      childOneDayYen: 3500,
+      seniorOneDayYen: 5800,
+      seasonPassYen: 68000,
+      seasonPassName: "Maiko Season Pass",
+      fullBoardRentalDayYen: 5500,
+      wearRentalDayYen: 3800,
+      notes: "Online advance tickets offer substantial discounts via the web shop.",
+    },
+    snowboarderIntel: {
+      liftFleet:
+        "8 lifts headlined by the 2,800m Maiko Gondola, 4 high-speed quads, and beginner doubles.",
+      terrainPark: "Step Up Park in Nagazoe featuring beginner to advanced jump lines and rails.",
+      flatSpotWarning:
+        "The run-out cat-track connecting Okusoechi back down to Nagazoe requires steady gliding speed.",
+      treeRunRules:
+        "Okusoechi features 5 un-groomed steep powder courses (Gungun, Zozon, etc.) within resort boundaries.",
+    },
+    monthlySnowfallCm: {
+      dec: 220,
+      jan: 310,
+      feb: 260,
+      mar: 140,
+      apr: 30,
+      peakBaseCm: 330,
+    },
+    signatureRuns: [
+      {
+        name: "Gungun Course (Okusoechi)",
+        level: "Advanced",
+        note: "Steep 32-degree un-groomed natural powder face dropping off the gondola summit.",
+      },
+      {
+        name: "RunRun Course",
+        level: "Beginner",
+        note: "Ultra-wide, confidence-building 2,000m cruiser with great valley views.",
+      },
+      {
+        name: "Okusoechi Bowl Laps",
+        level: "Advanced",
+        note: "North-facing high-altitude natural bowl retaining soft, light Yuzawa snow.",
+      },
+    ],
+    coordinates: {
+      lat: 37.0142,
+      lon: 138.8353,
+    },
+    elevation: {
+      base: 260,
+      top: 920,
+      vertical: 660,
+    },
+    terrain: {
+      beginner: 40,
+      intermediate: 40,
+      advanced: 20,
+      runs: 26,
+      lifts: 8,
+      treeRunsAllowed: true,
+    },
+    dayPassYen: 6500,
+    fromTokyo: {
+      durationMinutes: 90,
+      summary:
+        "Joetsu Shinkansen to Echigo-Yuzawa Station (~75m) + free Maiko Resort Shuttle Bus (~20m) directly to the hotel base",
+      station: "JR Echigo-Yuzawa Station (越後湯沢駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Echigo-Yuzawa+Station+Niigata+Japan",
+    },
+    vibeTags: ["1 Min from Highway", "2,800m Gondola", "Okusoechi Powder", "Family Friendly"],
+    bestFor:
+      "Riders wanting the quickest, easiest travel from Tokyo with a high-speed gondola, steep powder bowls, and slope-side hotel baths",
+    officialUrl: "https://www.maiko-resort.com/",
+  },
+  {
+    slug: "iwappara",
+    name: "Iwappara Ski Area",
+    japaneseName: "岩原スキー場（いわっぱら）",
+    region: "Niigata",
+    area: "Yuzawa",
+    description:
+      "Home to the most legendary wide-open cruising slope in Japan: the Main Slope stretches an incredible 600 meters across! Highly famous for snowboard carving, ground trick (Guratori) freestyle culture, family safety, and beautiful floodlit night skiing.",
+    address: {
+      postalCode: "〒949-6103",
+      english: "731-79 Tsuchidaru, Yuzawa-machi, Minamiuonuma-gun, Niigata 949-6103, Japan",
+      japanese: "新潟県南魚沼郡湯沢町大字土樽731-79",
+      googleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Iwappara+Ski+Resort+Niigata+Japan",
+    },
+    heroImage: "/trail-maps/iwappara-photo.jpg",
+    trailMapImage: "/trail-maps/iwappara.jpg",
+    mapGallery: [
+      {
+        title: "Iwappara Wide Slope Trail Map",
+        caption: "Shows the 20 courses and the massive 600m wide open Main Gelande.",
+        imageUrl: "/trail-maps/naeba.jpg",
+        badge: "Official Map",
+      },
+      {
+        title: "600-Meter-Wide Main Slope & Night Laps",
+        caption: "Unmatched wide open space for carving and flat-ground tricks with zero crowding.",
+        imageUrl: "/trail-maps/naeba-photo.jpg",
+        badge: "600m Wide Slope",
+      },
+    ],
+    trailMapUrl: "https://iwa-ppara.com/course",
+    webcamUrl: "https://iwa-ppara.com/livecam",
+    operatingHours: {
+      seasonWindow: "Late December – Late March",
+      dayHours: "08:00 – 17:00 (Weekends start 08:00)",
+      nightSkiing: "17:00 – 20:00 (Extended to 21:00 on Saturdays)",
+      earlyBird: "08:00 start on Saturdays and holidays",
+      notes: "The wide open layout provides unmatched visibility during both day and night riding.",
+    },
+    pricing: {
+      oneDayAdultYen: 5800,
+      halfDayYen: 4800,
+      twoDayYen: 10800,
+      nightPassYen: 2000,
+      childOneDayYen: 3000,
+      seniorOneDayYen: 4800,
+      seasonPassYen: 58000,
+      seasonPassName: "Iwappara & Joetsu Kokusai Joint Season Pass",
+      fullBoardRentalDayYen: 5000,
+      wearRentalDayYen: 3500,
+      notes: "Long 1-day pass options cover day + night riding on the same ticket.",
+    },
+    snowboarderIntel: {
+      liftFleet: "9 lifts featuring high-speed hooded quads and wide-spaced double chairlifts.",
+      terrainPark: "Iwappara Snow Park featuring wave tracks, beginner bank turns, and jib boxes.",
+      flatSpotWarning:
+        "Zero scary choke points or narrow flat gullies—the entire mountain is a massive wide-open bowl.",
+      treeRunRules:
+        "Strictly an on-piste wide cruising resort. No tree riding allowed outside marked course boundaries.",
+    },
+    monthlySnowfallCm: {
+      dec: 190,
+      jan: 290,
+      feb: 240,
+      mar: 120,
+      apr: 20,
+      peakBaseCm: 300,
+    },
+    signatureRuns: [
+      {
+        name: "Main Gelande (600m Wide Slope)",
+        level: "Beginner",
+        note: "The signature slope of Yuzawa: up to 600 meters wide with gentle, consistent pitch.",
+      },
+      {
+        name: "Grand Course (Upper Carving)",
+        level: "Intermediate",
+        note: "Wide, undulating upper course with views of the Joetsu mountains and wide sweeping turns.",
+      },
+      {
+        name: "Corona Course",
+        level: "Advanced",
+        note: "Steeper natural pitch off the top ridge with natural rolls and ungroomed snow after storms.",
+      },
+    ],
+    coordinates: {
+      lat: 36.9367,
+      lon: 138.8258,
+    },
+    elevation: {
+      base: 400,
+      top: 985,
+      vertical: 585,
+    },
+    terrain: {
+      beginner: 40,
+      intermediate: 45,
+      advanced: 15,
+      runs: 20,
+      lifts: 9,
+      treeRunsAllowed: false,
+    },
+    dayPassYen: 5800,
+    fromTokyo: {
+      durationMinutes: 85,
+      summary:
+        "Joetsu Shinkansen from Tokyo to Echigo-Yuzawa Station (~70m) + free Iwappara Shuttle Bus (~10m)",
+      station: "JR Echigo-Yuzawa Station (越後湯沢駅)",
+      stationGoogleMapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Echigo-Yuzawa+Station+Niigata+Japan",
+    },
+    vibeTags: ["600m Wide Slope", "Guratori Paradise", "Night Skiing", "70m from Tokyo"],
+    bestFor:
+      "Beginners, intermediate carvers, and flat-ground freestyle riders (Guratori) who want massive open space and 85-min transit from Tokyo",
+    officialUrl: "https://iwa-ppara.com/",
+  },
 ];

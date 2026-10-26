@@ -8,7 +8,8 @@ export type Region =
   | "Iwate"
   | "Akita"
   | "Miyagi"
-  | "Hokkaido";
+  | "Hokkaido"
+  | "Gifu";
 
 export interface MapSlide {
   title: string;
