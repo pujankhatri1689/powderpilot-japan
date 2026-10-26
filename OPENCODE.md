@@ -1,95 +1,67 @@
-# OpenCode Agent Guide: PowderPilot Japan
+# OpenCode Guide: PowderPilot Japan
 
-Welcome to **PowderPilot Japan** (`powderpilot-japan`), a high-performance, mobile-first Next.js 15 ski and snowboard guide designed to help international and local riders find Japan's deepest powder snow.
+You are working in **`C:\Users\pujan\.gemini\antigravity\scratch\powderpilot-japan`** — a premium, mobile-first Next.js ski & snowboard guide for Japan's powder resorts.
 
----
+**Read `AGENTS.md` (same folder) first — it is the single source of truth for architecture, data rules, commands and deployment.** This file only adds OpenCode-specific setup and workflow.
 
-## 1. Project Overview & Tech Stack
-
-- **Framework**: Next.js 15 (App Router, Static Site Generation / SSG)
-- **Language**: TypeScript (`strict: true`)
-- **Styling**: Tailwind CSS
-- **Languages**: **Bilingual English (`en`) and Japanese (`ja`) ONLY**.
-  * *Note: Chinese (`zh`) was deliberately purged to optimize bundle size, keep layouts clean, and streamline maintenance. Do not re-add Chinese.*
-- **Current Scale**: 39 curated ski resorts across 9 prefectures, architected to scale to 200–300+ resorts.
+> Verified snapshot: 2026-10-26, `main` @ `cdaf8a9`. Type-check and production build pass. `README.md` is still the generic create-next-app boilerplate — ignore it.
 
 ---
 
-## 2. Directory & Architecture Map
+## 1. Opening / re-opening this project
 
-```
-powderpilot-japan/
-├── AGENTS.md                   # Universal agent instructions (OpenCode, Codex, Antigravity)
-├── OPENCODE.md                 # OpenCode project specification
-├── public/                     # Static assets (images, icons, flags)
-└── src/
-    ├── app/                    # Next.js App Router pages
-    │   ├── layout.tsx          # Root layout with LanguageProvider and fonts
-    │   ├── page.tsx            # Homepage with 2-column prefecture grid & live radar
-    │   ├── directory/          # Filterable & searchable resort directory
-    │   ├── radar/              # 24h/48h snowfall radar and mountain depth tracker
-    │   ├── resorts/[slug]/     # Prerendered resort detail pages (generateStaticParams)
-    │   ├── about/              # About page
-    │   ├── safety/             # Mountain & avalanche safety guide
-    │   ├── terms/              # Terms of Service
-    │   └── privacy/            # Privacy Policy
-    ├── components/             # Reusable UI components
-    │   ├── Header.tsx          # Sticky navigation & language selector
-    │   ├── Footer.tsx          # Global footer
-    │   ├── LanguageToggle.tsx  # EN / JA switch
-    │   ├── WeatherWidget.tsx   # Mountain weather & snow base display
-    │   └── LiveSnowTicker.tsx  # Real-time snowfall report marquee
-    ├── context/
-    │   └── LanguageContext.tsx # React Context handling 'en' | 'ja' locales
-    ├── data/
-    │   └── resorts/            # MODULAR RESORT DATABASE (Scalable architecture)
-    │       ├── index.ts        # Exports RESORTS array and O(1) RESORTS_BY_SLUG map
-    │       ├── hokkaido.ts     # Hokkaido resorts (10 resorts)
-    │       ├── nagano.ts       # Nagano & Hakuba Valley (10 resorts)
-    │       ├── niigata.ts      # Niigata & Myoko (10 resorts)
-    │       ├── tohoku.ts       # Aomori, Iwate, Yamagata, Fukushima (9 resorts)
-    │       └── kanto_chubu.ts  # Gunma, Gifu (4 resorts)
-    ├── i18n/
-    │   └── translations.ts     # Centralized UI dictionary for English & Japanese
-    └── types/
-        └── resort.ts           # TypeScript interfaces (ResortData, SnowReport, etc.)
-```
-
----
-
-## 3. Critical Rules & Design Decisions
-
-1. **Strictly Bilingual (EN & JA only)**:
-   - All resort descriptions, tabs, and UI strings must only supply `en` and `ja`.
-   - Never add Chinese (`zh`) or other languages.
-
-2. **Resort Detail Page Sections**:
-   - Tab layout: `Overview`, `Snow & Terrain`, `Lifts & Passes`, `Live Webcams & Weather`.
-   - *Note: The old "Onsen & Village" tab was removed to keep the interface fast and fluff-free. Transit details (e.g. from Tokyo/Haneda/Narita) live inside the `overview` section.*
-
-3. **How to Add or Edit Resorts**:
-   - Never paste resort data directly into `index.ts`.
-   - Add new resorts to the relevant prefecture/regional file in `src/data/resorts/` (or create a new regional file like `tohoku.ts`).
-   - Every resort must adhere to the `ResortData` interface in `src/types/resort.ts`.
-   - Re-export the array in `src/data/resorts/index.ts`. The `RESORTS_BY_SLUG` map automatically indexes it for $O(1)$ lookups.
-
-4. **Search & Regional Filtering**:
-   - The Directory (`src/app/directory/page.tsx`) supports regional search queries (e.g., searching "Tohoku" returns Aomori, Iwate, Yamagata, and Fukushima; "Hakuba" returns all Hakuba Valley mountains; "Shinetsu" returns Nagano/Niigata borders).
-
----
-
-## 4. Execution & Build Verification
-
-On this Windows machine, PowerShell script execution policy restricts `npm.ps1`. Always run npm/node commands through `cmd /c`:
-
-- **Run Dev Server**:
-  ```bash
-  cmd /c "npm run dev"
+- **OpenCode Desktop**: `Open Project` → choose the exact folder `powderpilot-japan` (not its parent, not the DSH workspace). Start a **new session** afterwards so `AGENTS.md` + `OPENCODE.md` are loaded.
+- **Bundled CLI** (installed with the desktop app):
+  ```powershell
+  & "$env:APPDATA\ai.opencode.desktop\cli\2.1.4-x64\opencode-cli.exe" "C:\Users\pujan\.gemini\antigravity\scratch\powderpilot-japan"
   ```
-- **Run Production Build (Must verify with 0 errors before finishing tasks)**:
-  ```bash
-  cmd /c "npm run build"
-  ```
-- **Git Remote**:
-  - `origin`: `https://github.com/pujankhatri1689/powderpilot-japan.git`
-  - Default branch: `main`
+  Use `--auto` only for low-risk, fully-scoped work; otherwise review permission prompts.
+- The project folder is a **git repo** (`main`, remote `pujankhatri1689/powderpilot-japan`). Never work from a copy — the live site deploys from this repo.
+
+---
+
+## 2. What this project is (current, verified)
+
+- **Next.js 16.4.2** App Router, React 19.3.0, TypeScript 5.9.3 (`strict`), Tailwind CSS 4, npm.
+- **39 resorts across 9 prefectures** (Hokkaido, Aomori, Iwate, Yamagata, Fukushima, Niigata, Nagano, Gunma, Gifu).
+- **Bilingual EN + JA only** — Chinese was deliberately removed, do not re-add it.
+- **Routes (only these exist)**: `/`, `/resorts`, `/resorts/[slug]` (39 prerendered), `/conditions`, `/planner`.
+- **Resort page tabs (4)**: Overview · Tickets & Rentals · Trail Maps & Runs · Weather & Webcams. No Onsen/Village tab.
+- **Data**: `src/data/resorts/` (one file per prefecture) re-exported through `src/data/resorts.ts`; types in `src/data/types.ts`.
+- **State**: `LanguageContext` + `FavoritesContext` + trip planner, all `localStorage` — no backend.
+- **Weather**: Open-Meteo / JMA MSM model **forecasts** (peak/base elevation), not official resort reports. The January "storm" toggle is a labelled simulation.
+
+---
+
+## 3. Workflow for every request
+
+1. `git status --short --branch` — check for other agents' uncommitted work. **Never discard, reset, overwrite or reformat it.**
+2. Read the files you are about to change (and their neighbours) before editing.
+3. Make the **smallest correct edit**; stay inside the request. Keep the dark premium design and mobile layout.
+4. If visible text changes, update **both** `en` and `ja` in `src/i18n/translations.ts` (and Japanese resort copy in `resortTranslations.ts` when applicable).
+5. Never invent snow, weather, lift status, hours or prices. JPY only, forecast ≠ official report.
+6. Verify from the project root:
+   ```powershell
+   npx.cmd tsc --noEmit
+   git diff --check
+   git diff --stat
+   ```
+   For larger changes also run `cmd /c "npm run build"`.
+   `npx.cmd eslint src` currently has **2 pre-existing** `react-hooks/set-state-in-effect` errors in `ResortDirectory.tsx`; do not attribute them to your change.
+7. Report to the user in plain language: files changed, checks passed, anything risky, and whether the work is **local only** or **pushed for Vercel**.
+
+## 4. Commit / deploy rules
+
+- Local edits do **not** update the Vercel site.
+- **Only commit/push when the user explicitly asks.** Then: `git add` only your files, clear commit message, `git push origin main`, and confirm the commit hash + clean tree.
+- Never commit `.env*`, credentials, tokens or other secrets. Never force-push.
+
+---
+
+## 5. Known gotchas
+
+- `npm.ps1` is blocked by Windows execution policy → use `cmd /c "npm run dev"` / `npx.cmd`.
+- `next dev` rewrites the Next.js rules block at the top of `AGENTS.md`; keep it.
+- `tsc` must run **inside the project folder** — `npx` from a parent directory downloads the wrong `tsc` package.
+- The trip planner seeds state from `localStorage` inside `useState` (potential hydration mismatch) — verify in a browser if you touch it.
+- Old docs mention `/directory`, `/radar`, `/about`, `/safety`, `/terms`, `/privacy`, `Header.tsx`, `Footer.tsx`, `LanguageToggle.tsx`, `WeatherWidget.tsx`, `LiveSnowTicker.tsx`, `RESORTS_BY_SLUG` and `src/types/resort.ts`. **None of those exist** — the app uses `Navbar.tsx`, `ConditionsDashboard.tsx`, `resorts/`, `src/data/types.ts` and `getResortBySlug()`.
