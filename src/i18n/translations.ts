@@ -447,11 +447,11 @@ export const UI_TEXT = {
       title: "Powder Radar & Conditions",
       subtitle:
         "High-resolution model forecasts at each resort's peak elevation, ranked by expected snowfall over the next seven days.",
-      stormBtnOn: "Showing Jan Storm Demo (Switch to Live)",
+      stormBtnOn: "Showing Jan Storm Demo (Switch to Forecast)",
       stormBtnOff: "Preview Peak-Season Storm Mode",
       preSeasonTitle: "Late-October Pre-Season Note:",
       preSeasonBody:
-        "Live summit temperatures are cooling down across Japan, with 0cm snowfall in the immediate 7-day window. Want to see how the radar ranks a real Sea of Japan storm?",
+        "Forecast summit temperatures are cooling down across Japan, with 0cm snowfall in the immediate 7-day window. Want to see how the radar ranks a real Sea of Japan storm?",
       simulateBtn: "Simulate January Dump ❄️",
       peakLabel: (m: number) => `Peak ${m}m`,
       fetching: "Fetching high-resolution summit forecast...",
@@ -801,7 +801,7 @@ export const UI_TEXT = {
       title: "パウダーレーダー ＆ 積雪コンディション",
       subtitle:
         "各スキー場の山頂標高における高解像度数値予報をもとに、今後7日間の予想降雪量をランキング表示します。",
-      stormBtnOn: "1月大雪デモ表示中（ライブに戻す）",
+      stormBtnOn: "1月大雪デモ表示中（予報に戻す）",
       stormBtnOff: "ハイシーズン大雪モードをプレビュー",
       preSeasonTitle: "プレシーズン（10月下旬）のお知らせ:",
       preSeasonBody:

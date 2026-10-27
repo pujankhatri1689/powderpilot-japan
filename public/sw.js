@@ -1,7 +1,7 @@
 // PowderPilot Japan Service Worker (Offline Mountain PWA)
 // Enables offline access to resort trail maps, slope guides, and navigation when cell signal drops on chairlifts.
 
-const CACHE_VERSION = "v1.0.0";
+const CACHE_VERSION = "v1.1.0";
 const CORE_CACHE = `powderpilot-core-${CACHE_VERSION}`;
 const IMAGE_CACHE = `powderpilot-images-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `powderpilot-runtime-${CACHE_VERSION}`;
@@ -49,6 +49,40 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+/**
+ * Image requests: cache-first with a background revalidation
+ * ("stale-while-revalidate"). Served instantly from cache, then refreshed in
+ * the background so updated resort photos / trail maps reach returning users.
+ *
+ * Note: `event.waitUntil` must be called synchronously during dispatch, so the
+ * background refresh promise is created and registered before any await.
+ */
+function handleImageRequest(event) {
+  const networkUpdate = fetch(event.request)
+    .then((response) => {
+      if (response && response.status === 200) {
+        return caches
+          .open(IMAGE_CACHE)
+          .then((cache) => cache.put(event.request, response.clone()))
+          .then(() => response);
+      }
+      return response;
+    })
+    .catch(() => null);
+
+  // Keep the worker alive while the background refresh completes.
+  event.waitUntil(networkUpdate.then(() => undefined));
+
+  event.respondWith(
+    caches.open(IMAGE_CACHE).then(async (cache) => {
+      const cached = await cache.match(event.request);
+      if (cached) return cached;
+      const fresh = await networkUpdate;
+      return fresh || Response.error();
+    })
+  );
+}
+
 // Fetch routing strategies
 self.addEventListener("fetch", (event) => {
   const { request } = event;
@@ -58,29 +92,16 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(request.url);
 
-  // 1. Trail maps, photos, and static icons -> Cache First, fallback to Network
+  // 1. Trail maps, resort photos, icons AND Next.js optimized images -> Cache First + revalidate
+  //    `/_next/image` must be handled here: it has no file extension in the path,
+  //    so previously the optimized hero/card images were never cached and broke offline.
   if (
+    url.pathname === "/_next/image" ||
     url.pathname.startsWith("/trail-maps/") ||
     url.pathname.startsWith("/icons/") ||
-    /\.(jpg|jpeg|png|webp|svg|ico)$/i.test(url.pathname)
+    /\.(jpg|jpeg|png|webp|avif|svg|ico)$/i.test(url.pathname)
   ) {
-    event.respondWith(
-      caches.open(IMAGE_CACHE).then(async (cache) => {
-        const cached = await cache.match(request);
-        if (cached) return cached;
-
-        try {
-          const networkResponse = await fetch(request);
-          if (networkResponse && networkResponse.status === 200) {
-            cache.put(request, networkResponse.clone());
-          }
-          return networkResponse;
-        } catch {
-          // If offline and not in cache, return undefined
-          return cached;
-        }
-      })
-    );
+    event.respondWith(handleImageRequest(event));
     return;
   }
 
@@ -98,14 +119,25 @@ self.addEventListener("fetch", (event) => {
           }
           return networkResponse;
         } catch {
-          return cached;
+          return Response.error();
         }
       })
     );
     return;
   }
 
-  // 3. Open-Meteo Weather API -> Network First, fallback to cached weather data
+  // 3. Web app manifest -> serve precached copy (install precaches it), else network
+  if (url.pathname === "/manifest.webmanifest") {
+    event.respondWith(
+      caches
+        .match(request)
+        .then((cached) => cached || fetch(request))
+        .catch(() => Response.error())
+    );
+    return;
+  }
+
+  // 4. Open-Meteo Weather API -> Network First, fallback to cached weather data
   if (url.hostname.includes("open-meteo.com")) {
     event.respondWith(
       caches.open(RUNTIME_CACHE).then(async (cache) => {
@@ -125,7 +157,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // 4. HTML Navigation requests -> Network First with Cache fallback
+  // 5. HTML Navigation requests -> Network First with Cache fallback
   if (request.mode === "navigate" || request.headers.get("accept")?.includes("text/html")) {
     event.respondWith(
       caches.open(RUNTIME_CACHE).then(async (cache) => {
