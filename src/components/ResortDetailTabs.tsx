@@ -186,7 +186,7 @@ export default function ResortDetailTabs({
         {/* Sticky / Surfable Section Tab Bar */}
         <div
           style={{ top: "var(--header-h, 56px)" }}
-          className="sticky z-30 -mx-2 rounded-2xl border border-charcoal-light bg-charcoal/95 p-1.5 shadow-xl backdrop-blur-md sm:p-2"
+          className="relative sticky z-30 -mx-2 rounded-2xl border border-charcoal-light bg-charcoal/95 p-1.5 shadow-xl backdrop-blur-md sm:p-2"
         >
           <div
             role="tablist"
@@ -214,6 +214,17 @@ export default function ResortDetailTabs({
                 </button>
               );
             })}
+          </div>
+          {/* Subtle right-edge fade + chevron so the off-screen 4th tab is discoverable on mobile */}
+          <div
+            aria-hidden
+            style={{
+              backgroundImage:
+                "linear-gradient(to left, rgba(15,23,42,0.98), rgba(15,23,42,0.82) 45%, rgba(15,23,42,0))",
+            }}
+            className="pointer-events-none absolute inset-y-1.5 right-1.5 z-10 flex w-12 items-center justify-end rounded-r-xl pr-1.5 sm:hidden"
+          >
+            <span className="text-sm font-bold leading-none text-ice/70">›</span>
           </div>
         </div>
 

@@ -144,6 +144,22 @@ export const UI_TEXT = {
       plannerLink: "Trip & Budget Planner",
       copyright: (year: number) =>
         `© ${year} PowderPilot Japan. All prices in ¥ JPY.`,
+      imageCredits: "Image credits",
+    },
+    credits: {
+      backHome: "← Back to Home",
+      eyebrow: "Attribution",
+      title: "Image & Map Credits",
+      intro:
+        "PowderPilot keeps its resort photos and trail maps on the site itself so they still work offline on the mountain. Photo authors and licenses are listed below.",
+      photosHeading: "Photos · Wikimedia Commons",
+      sourceLabel: "Source",
+      mapsHeading: "Trail maps",
+      mapsBody:
+        "Course maps are collected from Snowline's course-map listings, which mirror each resort's official map. Copyright remains with each resort — contact the resort before commercial reuse.",
+      mapsSourceLabel: "Snowline course maps ↗",
+      licenseNote:
+        "CC BY and CC BY-SA photos require attribution when reused. The full record (file names, authors, licenses, sources) is kept in docs/IMAGE_CREDITS.md in the project repository.",
     },
     offline: {
       bannerText:
@@ -499,6 +515,22 @@ export const UI_TEXT = {
       plannerLink: "トリップ＆予算プランナー",
       copyright: (year: number) =>
         `© ${year} PowderPilot Japan. 料金表示はすべて日本円（¥ JPY）。`,
+      imageCredits: "画像クレジット",
+    },
+    credits: {
+      backHome: "← ホームへ戻る",
+      eyebrow: "クレジット",
+      title: "画像・コースマップのクレジット",
+      intro:
+        "当サイトでは、山頂でもオフラインで閲覧できるよう、各スキー場の写真とコースマップをローカルに保存しています。写真の著作者・ライセンスは以下のとおりです。",
+      photosHeading: "写真 · Wikimedia Commons",
+      sourceLabel: "出典",
+      mapsHeading: "コースマップ",
+      mapsBody:
+        "コースマップは Snowline のコースマップ一覧（各スキー場の公式マップを掲載）から取得しています。著作権は各スキー場に帰属します。商用利用の際は各スキー場へお問い合わせください。",
+      mapsSourceLabel: "Snowline コースマップ ↗",
+      licenseNote:
+        "CC BY / CC BY-SA の写真を再利用する場合は著作者表示が必要です。ファイル名・著作者・ライセンス・出典の完全な記録は、リポジトリ内の docs/IMAGE_CREDITS.md にあります。",
     },
     offline: {
       bannerText:

@@ -45,7 +45,8 @@ powderpilot-japan/
     │   ├── resorts/[slug]/page.tsx  # 49 prerendered resort pages (generateStaticParams + generateMetadata)
     │   ├── conditions/page.tsx      # 7-day powder radar / snowfall leaderboard
     │   ├── planner/page.tsx         # trip planner
-    │   ├── sitemap.ts               # dynamic XML sitemap (43 URLs)
+    │   ├── credits/page.tsx         # photo & trail-map attribution (/credits)
+    │   ├── sitemap.ts               # dynamic XML sitemap (54 URLs)
     │   ├── robots.ts                # robots.txt metadata route
     │   ├── not-found.tsx            # bilingual 404 page
     │   └── error.tsx                # bilingual client error boundary

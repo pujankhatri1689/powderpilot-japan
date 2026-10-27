@@ -26,6 +26,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    {
+      url: `${siteUrl}/credits`,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 
   const resortRoutes: MetadataRoute.Sitemap = RESORTS.map((resort) => ({

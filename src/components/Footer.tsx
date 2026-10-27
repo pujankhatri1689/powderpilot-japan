@@ -74,8 +74,14 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-charcoal-light/60 pt-4 text-center text-[11px] text-snow-muted sm:text-left">
-          {t.footer.copyright(currentYear)}
+        <div className="flex flex-col items-center justify-between gap-1 border-t border-charcoal-light/60 pt-4 text-center text-[11px] text-snow-muted sm:flex-row sm:text-left">
+          <span>{t.footer.copyright(currentYear)}</span>
+          <Link
+            href="/credits"
+            className="rounded-lg px-2 py-1 font-medium transition hover:text-ice focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice"
+          >
+            {t.footer.imageCredits}
+          </Link>
         </div>
       </div>
     </footer>
