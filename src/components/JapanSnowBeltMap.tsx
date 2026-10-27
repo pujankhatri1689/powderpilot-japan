@@ -21,7 +21,7 @@ export interface SnowMapWeatherItem {
 }
 
 export type PinMetricMode = "elevation" | "snow" | "price";
-type MapTileStyle = "dark" | "satellite" | "topo";
+type MapTileStyle = "dark" | "satellite";
 type SnowZoneKey = "all" | "hokkaido" | "tohoku" | "nagano" | "niigata" | "central";
 
 interface JapanSnowBeltMapProps {
@@ -87,7 +87,7 @@ function buildDisplayCoordinates(
 
 /**
  * Creates 100% free, reliable tile layers with zero API keys and zero watermarks.
- * Supports dark canvas with native upscaling to zoom 18, high-res satellite imagery, and topographic contour maps.
+ * Supports dark radar canvas and high-res satellite imagery.
  */
 function createMapTileLayer(
   L: typeof LeafletNamespace,
@@ -105,20 +105,6 @@ function createMapTileLayer(
           "Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics",
       }
     ).addTo(group);
-    L.tileLayer(
-      "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
-      {
-        maxNativeZoom: 18,
-        maxZoom: 18,
-      }
-    ).addTo(group);
-  } else if (style === "topo") {
-    L.tileLayer("https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png", {
-      maxNativeZoom: 17,
-      maxZoom: 18,
-      attribution:
-        'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, SRTM | Style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a>',
-    }).addTo(group);
   } else {
     // 100% Free Dark Radar: Esri World Dark Gray Base + Reference city/prefecture labels
     L.tileLayer(
@@ -159,6 +145,7 @@ export default function JapanSnowBeltMap({
     hasWeather ? defaultPinMetric : "elevation"
   );
   const [showBorders, setShowBorders] = useState(true);
+  const [showLegend, setShowLegend] = useState(false);
   const [activeZone, setActiveZone] = useState<SnowZoneKey>("all");
   const [selectedSlug, setSelectedSlug] = useState<string>(() => {
     if (
@@ -270,10 +257,10 @@ export default function JapanSnowBeltMap({
         minZoom: 4.6,
         maxZoom: 16,
         maxBounds: JAPAN_MAP_BOUNDS,
-        maxBoundsViscosity: 1.0, // Hard elastic barrier keeping map strictly focused on Japan
-        zoomSnap: 0.25, // Micro-step fractional zoom for ultra-smooth mousepad pinch
+        maxBoundsViscosity: 0.9, // Smooth elastic damping at bounds for phone drag and mousepads
+        zoomSnap: 0.25, // Micro-step fractional zoom for ultra-smooth pinch & scroll
         zoomDelta: 0.5,
-        wheelPxPerZoomLevel: 140, // Smooth mousepad gesture control (prevents violent over-zooming)
+        wheelPxPerZoomLevel: 150, // Smooth gesture control preventing sudden over-zooming
         wheelDebounceTime: 40,
         dragging: true,
         inertia: true,
@@ -357,33 +344,36 @@ export default function JapanSnowBeltMap({
         const prefName = (feature?.properties?.name ?? "") as string;
         const isSelectedPrefecture = prefName === selectedRegionName;
         const hasResorts = (countByPref[prefName] ?? 0) > 0;
+        const isSatellite = tileStyle === "satellite";
 
         if (isSelectedPrefecture) {
           return {
-            color: "#38bdf8", // Ultra-bright glowing cyan highlight
-            weight: 2.6,
+            color: "#38bdf8", // Ultra-bright crisp neon highlight
+            weight: 2.2,
             opacity: 1.0,
             fillColor: "#38bdf8",
-            fillOpacity: 0.14,
+            fillOpacity: isSatellite ? 0.08 : 0.12,
             className: "powderpilot-prefecture-boundary",
           };
         }
 
         if (hasResorts) {
           return {
-            color: "#0ea5e9", // Vivid highlighted boundary line for snow belt prefectures
-            weight: 1.6,
-            opacity: 0.8,
+            color: "#38bdf8", // Crisp electric cyan boundary line for snow belt prefectures
+            weight: 1.4,
+            opacity: isSatellite ? 0.8 : 0.7,
+            dashArray: "3, 5",
             fillColor: "#0284c7",
-            fillOpacity: 0.04,
+            fillOpacity: isSatellite ? 0.02 : 0.03,
             className: "powderpilot-prefecture-boundary",
           };
         }
 
         return {
-          color: "#64748b", // Clean border line for other prefectures
-          weight: 1.1,
-          opacity: 0.45,
+          color: isSatellite ? "#94a3b8" : "#475569",
+          weight: 1.0,
+          opacity: 0.35,
+          dashArray: "2, 4",
           fillColor: "transparent",
           fillOpacity: 0,
           className: "powderpilot-prefecture-boundary",
@@ -429,7 +419,14 @@ export default function JapanSnowBeltMap({
         bordersLayerRef.current = null;
       }
     };
-  }, [mapReady, prefectureGeoJson, showBorders, selectedRawResort?.region, t]);
+  }, [
+    mapReady,
+    prefectureGeoJson,
+    showBorders,
+    selectedRawResort?.region,
+    tileStyle,
+    t,
+  ]);
 
   // 3. Render custom pill markers whenever resorts, selectedSlug, pinMetric, or weather changes
   useEffect(() => {
@@ -681,7 +678,7 @@ export default function JapanSnowBeltMap({
             </button>
           </div>
 
-          {/* Map Tile Style Selector (Zero API Key, Zero Watermarks) */}
+          {/* Map Tile Style Selector: Radar vs Satellite only */}
           <div
             role="group"
             aria-label="Map tile style"
@@ -709,17 +706,6 @@ export default function JapanSnowBeltMap({
             >
               {t.snowMap.styleSatellite}
             </button>
-            <button
-              type="button"
-              onClick={() => setTileStyle("topo")}
-              className={`rounded-lg px-2.5 py-1 text-xs font-semibold transition ${
-                tileStyle === "topo"
-                  ? "bg-charcoal-light text-ice font-bold"
-                  : "text-snow-muted hover:text-snow"
-              }`}
-            >
-              {t.snowMap.styleTopo}
-            </button>
           </div>
         </div>
       </div>
@@ -741,37 +727,65 @@ export default function JapanSnowBeltMap({
             <button
               type="button"
               onClick={() => handleZoneJump("all")}
-              className="pointer-events-auto rounded-xl border border-charcoal-light bg-charcoal/90 px-3 py-1.5 text-xs font-semibold text-snow transition hover:border-ice hover:text-ice backdrop-blur-md"
+              className="pointer-events-auto rounded-xl border border-charcoal-light bg-charcoal/90 px-3 py-1.5 text-xs font-semibold text-snow transition hover:border-ice hover:text-ice backdrop-blur-md active:scale-95"
             >
               {t.snowMap.resetView}
             </button>
           </div>
 
-          {/* Floating Bottom-Left Legend */}
-          <div className="pointer-events-none absolute bottom-3 left-3 z-[400] flex flex-wrap items-center gap-2 rounded-xl border border-charcoal-light bg-charcoal/90 px-3 py-1.5 text-[11px] font-medium text-snow-muted backdrop-blur-md">
-            {showBorders && (
-              <span className="inline-flex items-center gap-1.5 text-ice">
-                <span className="h-1.5 w-3.5 rounded-full bg-ice shadow-[0_0_8px_#38bdf8]" />
-                {t.snowMap.bordersToggle}
-              </span>
-            )}
-            <span className="inline-flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-              {t.snowMap.legendTreeOk}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-slate-400" />
-              {t.snowMap.legendAlpine}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-ice" />
-              {t.snowMap.legendSelected}
-            </span>
-            {pinMetric === "snow" && (
-              <span className="inline-flex items-center gap-1.5 text-ice">
-                <span className="h-2.5 w-2.5 rounded-full bg-sky-500 ring-2 ring-ice/40" />
-                {t.snowMap.legendHeavySnow}
-              </span>
+          {/* Floating Bottom-Left Decluttered Legend (Collapsible) */}
+          <div className="absolute bottom-3 left-3 z-[400]">
+            {showLegend ? (
+              <div className="flex flex-col gap-2 rounded-2xl border border-charcoal-light bg-charcoal/95 p-3 text-xs shadow-2xl backdrop-blur-md sm:max-w-xs animate-in fade-in duration-150">
+                <div className="flex items-center justify-between gap-4 border-b border-charcoal-light pb-1.5">
+                  <span className="font-bold text-snow">
+                    {t.snowMap.legendBtn}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowLegend(false)}
+                    aria-label={t.snowMap.legendClose}
+                    className="flex h-5 w-5 items-center justify-center rounded-md text-xs font-bold text-snow-muted hover:bg-charcoal-light hover:text-snow"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div className="flex flex-col gap-1.5 text-[11px] text-snow-muted">
+                  {showBorders && (
+                    <span className="inline-flex items-center gap-2 text-ice">
+                      <span className="h-0.5 w-3.5 border-b-2 border-dashed border-ice" />
+                      {t.snowMap.bordersToggle}
+                    </span>
+                  )}
+                  <span className="inline-flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                    {t.snowMap.legendTreeOk}
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-slate-400" />
+                    {t.snowMap.legendAlpine}
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-ice" />
+                    {t.snowMap.legendSelected}
+                  </span>
+                  {pinMetric === "snow" && (
+                    <span className="inline-flex items-center gap-2 text-ice">
+                      <span className="h-2.5 w-2.5 rounded-full bg-sky-500 ring-2 ring-ice/40" />
+                      {t.snowMap.legendHeavySnow}
+                    </span>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShowLegend(true)}
+                className="inline-flex items-center gap-1.5 rounded-xl border border-charcoal-light bg-charcoal/90 px-3 py-1.5 text-xs font-semibold text-snow-muted shadow-lg backdrop-blur-md transition hover:border-ice/60 hover:text-snow active:scale-95"
+              >
+                <span aria-hidden>ℹ️</span>
+                <span>{t.snowMap.legendBtn}</span>
+              </button>
             )}
           </div>
         </div>

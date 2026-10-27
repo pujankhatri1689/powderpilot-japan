@@ -104,14 +104,16 @@ body {
   border-top-color: rgba(56, 189, 248, 0.45) !important;
 }
 
-/* Custom glowing highlight lines for Japan prefecture borders */
+/* Custom seamless glowing highlight lines for Japan prefecture borders */
 .powderpilot-prefecture-boundary {
-  filter: drop-shadow(0 0 2.5px rgba(56, 189, 248, 0.85));
-  transition: stroke 200ms ease, stroke-width 200ms ease, fill-opacity 200ms ease;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 1.5px rgba(56, 189, 248, 0.75));
+  transition: stroke 150ms ease, stroke-width 150ms ease, fill-opacity 150ms ease;
   pointer-events: auto;
 }
 .powderpilot-prefecture-boundary:hover {
-  filter: drop-shadow(0 0 5px rgba(56, 189, 248, 1)) drop-shadow(0 0 10px rgba(56, 189, 248, 0.5));
+  filter: drop-shadow(0 0 4px rgba(56, 189, 248, 0.95));
 }
 .powderpilot-pref-tooltip {
   background: rgba(15, 23, 42, 0.95) !important;
