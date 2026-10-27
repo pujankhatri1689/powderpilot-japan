@@ -158,6 +158,7 @@ export default function JapanSnowBeltMap({
   const [pinMetric, setPinMetric] = useState<PinMetricMode>(
     hasWeather ? defaultPinMetric : "elevation"
   );
+  const [showBorders, setShowBorders] = useState(true);
   const [activeZone, setActiveZone] = useState<SnowZoneKey>("all");
   const [selectedSlug, setSelectedSlug] = useState<string>(() => {
     if (
@@ -226,8 +227,30 @@ export default function JapanSnowBeltMap({
   const mapInstanceRef = useRef<LeafletNamespace.Map | null>(null);
   const tileLayerRef = useRef<LeafletNamespace.LayerGroup | null>(null);
   const markersLayerRef = useRef<LeafletNamespace.LayerGroup | null>(null);
+  const bordersLayerRef = useRef<LeafletNamespace.GeoJSON | null>(null);
   const leafletLibRef = useRef<typeof LeafletNamespace | null>(null);
   const [mapReady, setMapReady] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [prefectureGeoJson, setPrefectureGeoJson] = useState<any>(null);
+
+  // Load simplified Japan administrative boundaries once asynchronously
+  useEffect(() => {
+    let active = true;
+    fetch("/data/japan-prefectures.json")
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        if (active) setPrefectureGeoJson(data);
+      })
+      .catch((err) => {
+        console.warn("Could not load prefecture boundary data", err);
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   // 1. Initialize Leaflet map once on client mount
   useEffect(() => {
@@ -263,6 +286,13 @@ export default function JapanSnowBeltMap({
         scrollWheelZoom: true,
       });
 
+      // Custom pane for prefecture boundaries to keep them below pins (z-index 600) and above tiles (z-index 200)
+      map.createPane("prefectureBordersPane");
+      const bordersPane = map.getPane("prefectureBordersPane");
+      if (bordersPane) {
+        bordersPane.style.zIndex = "350";
+      }
+
       const initialTiles = createMapTileLayer(L, "dark").addTo(map);
       const markersGroup = L.layerGroup().addTo(map);
 
@@ -281,6 +311,7 @@ export default function JapanSnowBeltMap({
         mapInstanceRef.current = null;
         tileLayerRef.current = null;
         markersLayerRef.current = null;
+        bordersLayerRef.current = null;
       }
     };
   }, []);
@@ -298,6 +329,107 @@ export default function JapanSnowBeltMap({
     const nextTileLayer = createMapTileLayer(L, tileStyle).addTo(map);
     tileLayerRef.current = nextTileLayer;
   }, [tileStyle, mapReady]);
+
+  // 3. Render glowing prefecture border highlight layer
+  useEffect(() => {
+    const L = leafletLibRef.current;
+    const map = mapInstanceRef.current;
+    if (!mapReady || !L || !map) return;
+
+    if (bordersLayerRef.current) {
+      map.removeLayer(bordersLayerRef.current);
+      bordersLayerRef.current = null;
+    }
+
+    if (!showBorders || !prefectureGeoJson) return;
+
+    // Count catalog ski resorts by prefecture name
+    const countByPref: Record<string, number> = {};
+    RESORTS.forEach((r) => {
+      countByPref[r.region] = (countByPref[r.region] ?? 0) + 1;
+    });
+
+    const selectedRegionName = selectedRawResort?.region;
+
+    const geoLayer = L.geoJSON(prefectureGeoJson, {
+      pane: "prefectureBordersPane",
+      style: (feature) => {
+        const prefName = (feature?.properties?.name ?? "") as string;
+        const isSelectedPrefecture = prefName === selectedRegionName;
+        const hasResorts = (countByPref[prefName] ?? 0) > 0;
+
+        if (isSelectedPrefecture) {
+          return {
+            color: "#38bdf8", // Ultra-bright glowing cyan highlight
+            weight: 2.6,
+            opacity: 1.0,
+            fillColor: "#38bdf8",
+            fillOpacity: 0.14,
+            className: "powderpilot-prefecture-boundary",
+          };
+        }
+
+        if (hasResorts) {
+          return {
+            color: "#0ea5e9", // Vivid highlighted boundary line for snow belt prefectures
+            weight: 1.6,
+            opacity: 0.8,
+            fillColor: "#0284c7",
+            fillOpacity: 0.04,
+            className: "powderpilot-prefecture-boundary",
+          };
+        }
+
+        return {
+          color: "#64748b", // Clean border line for other prefectures
+          weight: 1.1,
+          opacity: 0.45,
+          fillColor: "transparent",
+          fillOpacity: 0,
+          className: "powderpilot-prefecture-boundary",
+        };
+      },
+      onEachFeature: (feature, layer) => {
+        const name = feature.properties?.name ?? "";
+        const nameJa = feature.properties?.nameJa ?? "";
+        const count = countByPref[name] ?? 0;
+        const tooltipText = `${name} (${nameJa}) · ${t.snowMap.prefectureBadge(count)}`;
+
+        layer.bindTooltip(tooltipText, {
+          sticky: true,
+          direction: "top",
+          offset: [0, -10],
+          className: "powderpilot-pref-tooltip",
+        });
+
+        layer.on({
+          mouseover: (e) => {
+            const l = e.target;
+            l.setStyle({
+              color: "#ffffff",
+              weight: 2.6,
+              opacity: 1,
+              fillColor: "#38bdf8",
+              fillOpacity: 0.2,
+            });
+          },
+          mouseout: (e) => {
+            geoLayer.resetStyle(e.target);
+          },
+        });
+      },
+    });
+
+    geoLayer.addTo(map);
+    bordersLayerRef.current = geoLayer;
+
+    return () => {
+      if (bordersLayerRef.current && map) {
+        map.removeLayer(bordersLayerRef.current);
+        bordersLayerRef.current = null;
+      }
+    };
+  }, [mapReady, prefectureGeoJson, showBorders, selectedRawResort?.region, t]);
 
   // 3. Render custom pill markers whenever resorts, selectedSlug, pinMetric, or weather changes
   useEffect(() => {
@@ -489,8 +621,23 @@ export default function JapanSnowBeltMap({
           })}
         </div>
 
-        {/* Right Controls: Pin Metric Mode + Tile Style */}
+        {/* Right Controls: Borders Toggle + Pin Metric Mode + Tile Style */}
         <div className="flex flex-wrap items-center gap-2">
+          {/* Highlighted Prefecture Borders Toggle */}
+          <button
+            type="button"
+            aria-pressed={showBorders}
+            onClick={() => setShowBorders((v) => !v)}
+            className={`inline-flex min-h-8 items-center rounded-xl border px-3 py-1.5 text-xs font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ice ${
+              showBorders
+                ? "border-ice/60 bg-ice/15 text-ice font-bold shadow-sm shadow-ice/20"
+                : "border-charcoal-light bg-charcoal text-snow-muted hover:border-ice/40 hover:text-snow"
+            }`}
+          >
+            <span aria-hidden className="mr-1.5">🗾</span>
+            <span>{showBorders ? t.snowMap.bordersOn : t.snowMap.bordersOff}</span>
+          </button>
+
           {/* Pin Metric Selector */}
           <div
             role="group"
@@ -602,6 +749,12 @@ export default function JapanSnowBeltMap({
 
           {/* Floating Bottom-Left Legend */}
           <div className="pointer-events-none absolute bottom-3 left-3 z-[400] flex flex-wrap items-center gap-2 rounded-xl border border-charcoal-light bg-charcoal/90 px-3 py-1.5 text-[11px] font-medium text-snow-muted backdrop-blur-md">
+            {showBorders && (
+              <span className="inline-flex items-center gap-1.5 text-ice">
+                <span className="h-1.5 w-3.5 rounded-full bg-ice shadow-[0_0_8px_#38bdf8]" />
+                {t.snowMap.bordersToggle}
+              </span>
+            )}
             <span className="inline-flex items-center gap-1.5">
               <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
               {t.snowMap.legendTreeOk}

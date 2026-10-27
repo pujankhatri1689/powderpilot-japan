@@ -250,6 +250,11 @@ export const UI_TEXT = {
       legendAlpine: "🏔️ Alpine / Groomers",
       legendSelected: "🎯 Selected Mountain",
       legendHeavySnow: "❄️ 30cm+ 7-Day Dump",
+      bordersToggle: "🗾 Borders",
+      bordersOn: "Borders ON",
+      bordersOff: "Borders OFF",
+      prefectureBadge: (count: number) =>
+        count > 0 ? `${count} ski resorts` : "No resorts in catalog",
     },
     detail: {
       allResorts: "All Resorts",
@@ -599,6 +604,11 @@ export const UI_TEXT = {
       legendAlpine: "🏔️ 圧雪・アルペン",
       legendSelected: "🎯 選択中のスキー場",
       legendHeavySnow: "❄️ 週間30cm以上の大雪予報",
+      bordersToggle: "🗾 県境ライン",
+      bordersOn: "県境 ON",
+      bordersOff: "県境 OFF",
+      prefectureBadge: (count: number) =>
+        count > 0 ? `${count} スキー場` : "収録スキー場なし",
     },
     detail: {
       allResorts: "スキー場一覧",
